@@ -1,0 +1,39 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - 'v*.*.*'
+  pull_request:
+
+env:
+  node_version: 12.x
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.node_version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.node_version }}
+    - run: npm install
+    - name: Lint openapi specifications
+      run: npm run lint
+
+  # build:
+  #   needs: [lint]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Use Node.js ${{ env.node_version }}
+  #     uses: actions/setup-node@v1
+  #     with:
+  #       node-version: ${{ env.node_version }}
+  #   - run: npm install
+    # There is a but that makes gh-openapi-docs fail on PR
+    # - name: Run gh-openapi-docs
+    #   run: npx gh-openapi-docs
