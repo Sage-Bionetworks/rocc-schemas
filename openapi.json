@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "version": "1.0.0",
-    "title": "Challenges API",
+    "title": "Challenge API",
     "termsOfService": "https://example.com/terms/",
     "contact": {
       "email": "contact@example.com",
@@ -195,7 +195,7 @@
           "User"
         ],
         "summary": "Get user by user name",
-        "description": "Some description of the operation. \nYou can use `markdown` here.\n",
+        "description": "Some description of the operation.\nYou can use `markdown` here.\n",
         "operationId": "getUserByName",
         "parameters": [
           {
@@ -214,16 +214,6 @@
             "schema": {
               "type": "boolean"
             }
-          }
-        ],
-        "security": [
-          {
-            "main_auth": [
-              "read:users"
-            ]
-          },
-          {
-            "api_key": []
           }
         ],
         "responses": {
@@ -265,13 +255,6 @@
             "schema": {
               "type": "string"
             }
-          }
-        ],
-        "security": [
-          {
-            "main_auth": [
-              "write:users"
-            ]
           }
         ],
         "responses": {
