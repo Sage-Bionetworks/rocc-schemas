@@ -1,7 +1,8 @@
 {
   "name": "challenges",
   "version": "1.0.0",
-  "dependencies": {
+  "devDependencies": {
+    "@ga4gh/gh-openapi-docs": "^0.2.1",
     "@redocly/openapi-cli": "^1.0.0-beta.14"
   },
   "private": true,
