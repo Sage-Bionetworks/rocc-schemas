@@ -1,4 +1,4 @@
-# Challenges OpenAPI Definition
+# Challenge Schemas
 
 ## Working on your OpenAPI Definition
 
