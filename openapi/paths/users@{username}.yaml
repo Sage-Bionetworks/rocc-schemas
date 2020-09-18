@@ -9,7 +9,7 @@ get:
     - User
   summary: Get user by user name
   description: |
-    Some description of the operation. 
+    Some description of the operation.
     You can use `markdown` here.
   operationId: getUserByName
   parameters:
@@ -24,10 +24,10 @@ get:
       description: Filter users without email
       schema:
         type: boolean
-  security:
-    - main_auth:
-        - 'read:users'
-    - api_key: []
+  # security:
+  #   - main_auth:
+  #       - 'read:users'
+  #   - api_key: []
   responses:
     '200':
       description: Success
@@ -55,9 +55,9 @@ put:
       required: true
       schema:
         type: string
-  security:
-    - main_auth:
-        - 'write:users'
+  # security:
+  #   - main_auth:
+  #       - 'write:users'
   responses:
     '200':
       description: OK
