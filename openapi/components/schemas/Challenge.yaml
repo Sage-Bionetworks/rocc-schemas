@@ -1,0 +1,10 @@
+type: object
+description: A challenge
+properties:
+  title:
+    description: The challenge title
+    type: string
+required:
+  - title
+allOf:
+- $ref: Entity.yaml

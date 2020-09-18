@@ -16,4 +16,11 @@ properties:
     minLength: 1
     example: Smith
   email:
-    $ref: ./Email.yaml
+    $ref: Email.yaml
+required:
+  - username
+  - firstName
+  - lastName
+  - email
+allOf:
+  - $ref: Entity.yaml
