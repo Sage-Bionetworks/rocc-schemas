@@ -1,11 +1,14 @@
 name: ci
 
 on:
+  schedule:
+    - cron: '0 10 * * *' # everyday at 10am
   push:
     branches:
-      - '**'
+      - main
+      - develop
     tags:
-      - 'v*.*.*'
+      - '*.*.*'
   pull_request:
 
 env:
