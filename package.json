@@ -1,6 +1,6 @@
 {
   "name": "challenges",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "devDependencies": {
     "@redocly/openapi-cli": "^1.0.0-beta.14",
     "gh-openapi-docs-ts": "^0.3.4"
