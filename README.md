@@ -5,6 +5,14 @@
 
 The OpenAPI specification implemented by Challenge Registries.
 
+## Releases
+
+- https://sage-bionetworks.github.io/challenge-schemas/latest/docs/
+- https://sage-bionetworks.github.io/challenge-schemas/0.1.0/docs/
+- https://sage-bionetworks.github.io/challenge-schemas/0.1/docs/
+- https://sage-bionetworks.github.io/challenge-schemas/0/docs/
+- https://sage-bionetworks.github.io/challenge-schemas/edge/docs/
+
 ## Working on your OpenAPI Definition
 
 ### Install
