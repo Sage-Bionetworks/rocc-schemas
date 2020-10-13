@@ -72,16 +72,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ env.node_version }}
-    - name: Create .spec-docs.json
-      run: |
-        printf "%s\n" \
-        '{' \
-        '"apiSpecPath": "openapi/openapi.yaml",' \
-        '"docsRoot": "docs",' \
-        '"defaultBranch": "",' \
-        '"branchPathBase": "preview"' \
-        '}' | tee -a .spec-docs.json >/dev/null
-        cat .spec-docs.json
     - run: npm install
     - name: Create openapi docs
       run: npx gh-openapi-docs-ts
