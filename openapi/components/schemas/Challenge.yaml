@@ -1,10 +1,43 @@
 type: object
 description: A challenge
 properties:
-  title:
-    description: The challenge title
+  id:
+    description: challenge ID
     type: string
+    format: uuid
+  name:
+    description: challenge name
+    type: string
+  startDate:
+    description: challenge launch date
+    type: string
+    format: date-time
+  endDate:
+    description: challenge ending date
+    type: string
+    format: date-time
+  website:
+    description: challenge website
+    type: string
+    format: url
+  status:
+    description: current status of challenge
+    type: string
+    enum:
+      - upcoming
+      - open
+      - closed
+  tags:
+    description: challenge metadata/area of expertise
+    type: array
+    items:
+      type: string
+  grant:
+    description: monetary/resources sponsorship for challenge
+    $ref: Grant.yaml
 required:
-  - title
-allOf:
-- $ref: Entity.yaml
+  - id
+  - name
+  - startDate
+  - endDate
+  - status

@@ -5,15 +5,15 @@ get:
   description: Returns the challenges
   operationId: "notes.read_all"
   responses:
-      '200':
-        description: Success
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: ../components/schemas/Challenge.yaml
-      '403':
-        description: Forbidden
-      '404':
-        description: Challenge not found
+    "200":
+      description: Success
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../components/schemas/Challenge.yaml
+    "403":
+      description: Forbidden
+    "404":
+      description: Challenge not found

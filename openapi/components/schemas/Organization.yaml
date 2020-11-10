@@ -1,0 +1,9 @@
+type: object
+description: Organization that manages grant funding
+properties:
+  name:
+    type: string
+  url:
+    type: string
+required:
+  - name

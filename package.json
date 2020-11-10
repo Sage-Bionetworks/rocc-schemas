@@ -7,8 +7,8 @@
   },
   "private": true,
   "scripts": {
-    "start": "openapi preview-docs",
-    "build": "openapi bundle -o dist",
-    "lint": "openapi lint"
+    "start": "./node_modules/.bin/openapi preview-docs",
+    "build": "./node_modules/.bin/openapi bundle -o dist openapi/openapi.yaml",
+    "lint": "./node_modules/.bin/openapi lint openapi/openapi.yaml"
   }
 }

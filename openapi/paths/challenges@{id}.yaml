@@ -1,26 +1,26 @@
+parameters:
+  - name: id
+    in: path
+    description: Updates the challenge for a given ID
+    required: true
+    schema:
+      type: string
 get:
   tags:
     - Challenge
   summary: Get a challenge by ID
   description: Returns the challenge for a given ID
   operationId: "challenges.read"
-  parameters:
-    - name: id
-      in: path
-      description: The ID of the challenge to fetch
-      required: true
-      schema:
-        type: string
   responses:
-    '200':
+    "200":
       description: Success
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Challenge.yaml
-    '403':
+    "403":
       description: Forbidden
-    '404':
+    "404":
       description: Challenge not found
 put:
   tags:
@@ -28,23 +28,6 @@ put:
   summary: Update a challenge by ID
   description: This can only be done by the logged in user.
   operationId: "challenges.update"
-  parameters:
-    - name: id
-      in: path
-      description: Updates the challenge for a given ID
-      required: true
-      schema:
-        type: string
-  # security:
-  #   - main_auth:
-  #       - 'write:challenge'
-  responses:
-    '200':
-      description: OK
-    '400':
-      description: Invalid challenge supplied
-    '404':
-      description: Challenge not found
   requestBody:
     content:
       application/json:
@@ -52,3 +35,10 @@ put:
           $ref: ../components/schemas/Challenge.yaml
     description: Updated challenge
     required: true
+  responses:
+    "200":
+      description: OK
+    "400":
+      description: Invalid challenge supplied
+    "404":
+      description: Challenge not found

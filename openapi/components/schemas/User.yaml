@@ -22,5 +22,3 @@ required:
   - firstName
   - lastName
   - email
-allOf:
-  - $ref: Entity.yaml

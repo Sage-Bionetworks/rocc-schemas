@@ -1,0 +1,19 @@
+type: object
+description: Information about monetary resources for challenge
+properties:
+  name:
+    type: string
+  description:
+    type: string
+  sponsor:
+    $ref: Organization.yaml
+  amount:
+    type: integer
+  # poc:
+  #   description: Point of contact for challenge regarding grant
+  #   $ref: "#/components/schemas/User"
+  url:
+    type: string
+required:
+  - name
+  - sponsor
