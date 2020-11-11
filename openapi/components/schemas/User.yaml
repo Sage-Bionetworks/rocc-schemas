@@ -1,10 +1,18 @@
 type: object
 properties:
+  id:
+    type: integer
+    format: int32
+    readOnly: true
   username:
-    description: User supplied username
     type: string
     minLength: 4
     example: John78
+  password:
+    type: string
+    format: password
+    minLength: 3
+    writeOnly: true
   firstName:
     description: User first name
     type: string
@@ -17,6 +25,12 @@ properties:
     example: Smith
   email:
     $ref: Email.yaml
+  organizer:
+    type: boolean
+    default: false
+  admin:
+    type: boolean
+    default: false
 required:
   - username
   - firstName

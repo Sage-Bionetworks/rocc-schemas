@@ -1,14 +1,17 @@
+# Parameter(s) used by all operations of this path
 parameters:
   - name: id
     in: path
-    description: Updates the challenge for a given ID
+    description: challenge ID
     required: true
     schema:
       type: string
+      pattern: '^CH\d{7}$'
+
 get:
   tags:
     - Challenge
-  summary: Get a challenge by ID
+  summary: Get a given challenge
   description: Returns the challenge for a given ID
   operationId: "challenges.read"
   responses:
@@ -18,27 +21,61 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Challenge.yaml
-    "403":
-      description: Forbidden
+    "400":
+      description: Invalid challenge ID
     "404":
       description: Challenge not found
+
 put:
   tags:
     - Challenge
-  summary: Update a challenge by ID
-  description: This can only be done by the logged in user.
-  operationId: "challenges.update"
+  summary: Update all details of a given challenge
+  description: This can only be done by a Challenge Organizer
+  operationId: "challenges.update_all"
   requestBody:
+    required: true
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Challenge.yaml
-    description: Updated challenge
-    required: true
   responses:
     "200":
       description: OK
     "400":
-      description: Invalid challenge supplied
+      description: Invalid challenge ID
+    "403":
+      description: Forbidden
     "404":
+      description: Challenge not found
+
+patch:
+  tags:
+    - Challenge
+  summary: Update select details of a given challenge
+  description: This can only be done by a Challenge Organizer
+  operationId: "challenges.update"
+  responses:
+    "200":
+      description: OK
+    "400":
+      description: Invalid challenge ID
+    "403":
+      description: Forbidden
+    "422":
+      description: Challenge not found
+
+delete:
+  tags:
+    - Challenge
+  summary: Remove a given challenge
+  description: This can only be done by a Challenge Organizer
+  operationId: "challenges.delete"
+  responses:
+    "204":
+      description: Challenge removed
+    "400":
+      description: Invalid challenge ID
+    "403":
+      description: Forbidden
+    "422":
       description: Challenge not found

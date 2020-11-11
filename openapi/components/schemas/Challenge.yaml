@@ -2,42 +2,61 @@ type: object
 description: A challenge
 properties:
   id:
-    description: challenge ID
+    description: Challenge ID
     type: string
-    format: uuid
+    pattern: '^CH\d{7}$'
+    readOnly: true
   name:
-    description: challenge name
+    description: Name of challenge
     type: string
   startDate:
-    description: challenge launch date
+    description: Starting date (when submissions are accepted)
     type: string
-    format: date-time
+    format: date
   endDate:
-    description: challenge ending date
+    description: Ending date (when submissions are no longer accepted)
     type: string
-    format: date-time
+    format: date
   website:
-    description: challenge website
+    description: URL to challenge website
     type: string
     format: url
   status:
-    description: current status of challenge
+    description: Current status of challenge
     type: string
     enum:
       - upcoming
       - open
       - closed
   tags:
-    description: challenge metadata/area of expertise
+    description: Domains/area of expertise, e.g. "Breast Cancer", "Machine Learning"
     type: array
     items:
       type: string
+    minItems: 1
   grant:
-    description: monetary/resources sponsorship for challenge
-    $ref: Grant.yaml
+    description: Monetary/resources sponsorship for challenge
+    type: array
+    items:
+      $ref: Grant.yaml
+  organizers:
+    description: Organizations involved, e.g. data providers
+    type: array
+    items:
+      $ref: Organization.yaml
 required:
   - id
   - name
   - startDate
   - endDate
   - status
+example:
+  id: CH1234567
+  name: Sample Challenge
+  startDate: "2020-11-10"
+  endDate: "2020-12-31"
+  website: www.rocc.com/challenges/CH1234567
+  status: closed
+  tags: ["Machine Learning"]
+  grant: []
+  organizers: ["Organization1"]
