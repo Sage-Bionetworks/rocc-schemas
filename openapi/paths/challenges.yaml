@@ -1,7 +1,7 @@
 post:
   tags:
     - Challenge
-  summary: Add a challenge
+  summary: Adds a challenge
   description: This can only be done by a Challenge Organizer
   operationId: "challenges.create"
   requestBody:
@@ -25,7 +25,7 @@ post:
 get:
   tags:
     - Challenge
-  summary: Get all challenges
+  summary: Lists all challenges
   operationId: "challenges.read_all"
   responses:
     "200":

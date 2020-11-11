@@ -38,7 +38,7 @@ servers:
         default: https
       environment:
         enum:
-          - api # production
+          - api     # production
           - api.dev # development
         default: api.dev
 

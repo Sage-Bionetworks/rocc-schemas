@@ -6,12 +6,11 @@ parameters:
     required: true
     schema:
       type: string
-      pattern: '^CH\d{7}$'
 
 get:
   tags:
     - Challenge
-  summary: Get a given challenge
+  summary: Lists one challenge
   description: Returns the challenge for a given ID
   operationId: "challenges.read"
   responses:
@@ -29,8 +28,11 @@ get:
 put:
   tags:
     - Challenge
-  summary: Update all details of a given challenge
-  description: This can only be done by a Challenge Organizer
+  summary: Updates all details of a challenge
+  description: |
+    Updates the name, starting and ending dates, and status of a challenge.
+  
+    This action can only be done by a Challenge Organizer.
   operationId: "challenges.update_all"
   requestBody:
     required: true
@@ -51,9 +53,16 @@ put:
 patch:
   tags:
     - Challenge
-  summary: Update select details of a given challenge
+  summary: Updates selected details of a challenge
   description: This can only be done by a Challenge Organizer
   operationId: "challenges.update"
+  # TODO: add requestBody for PATCH request
+  # requestBody:
+  #   required: true
+  #   content:
+  #     application/json:
+  #       schema:
+  #         $ref: ../components/schemas/Challenge.yaml
   responses:
     "200":
       description: OK
@@ -67,7 +76,7 @@ patch:
 delete:
   tags:
     - Challenge
-  summary: Remove a given challenge
+  summary: Removes a challenge
   description: This can only be done by a Challenge Organizer
   operationId: "challenges.delete"
   responses:

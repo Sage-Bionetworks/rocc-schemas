@@ -44,7 +44,6 @@ properties:
     items:
       $ref: Organization.yaml
 required:
-  - id
   - name
   - startDate
   - endDate
