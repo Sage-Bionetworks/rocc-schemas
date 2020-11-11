@@ -24,12 +24,12 @@ properties:
     example: Smith
   email:
     $ref: Email.yaml
-  organizer:
-    type: boolean
-    default: false
-  admin:
-    type: boolean
-    default: false
+  role:
+    type: string
+    enum:
+      - user
+      - admin
+    default: user
 required:
   - username
   - firstName
