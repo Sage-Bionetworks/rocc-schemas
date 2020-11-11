@@ -2,8 +2,7 @@ type: object
 description: Information about monetary resources for challenge
 properties:
   id:
-    type: integer
-    format: int32
+    type: string
     readOnly: true
   name:
     type: string

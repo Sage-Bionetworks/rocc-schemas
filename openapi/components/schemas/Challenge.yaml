@@ -4,7 +4,6 @@ properties:
   id:
     description: Challenge ID
     type: string
-    pattern: '^CH\d{7}$'
     readOnly: true
   name:
     description: Name of challenge
