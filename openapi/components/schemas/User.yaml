@@ -6,7 +6,6 @@ properties:
   username:
     type: string
     minLength: 4
-    example: John78
   password:
     type: string
     format: password
@@ -16,12 +15,10 @@ properties:
     description: User first name
     type: string
     minLength: 1
-    example: John
   lastName:
     description: User last name
     type: string
     minLength: 1
-    example: Smith
   email:
     $ref: Email.yaml
   role:
@@ -30,8 +27,19 @@ properties:
       - user
       - admin
     default: user
-  organization:
-    $ref: Organization.yaml
+  organizations:
+    type: array
+    items:
+      $ref: Organization.yaml
 required:
   - username
   - email
+example:
+  id: 1
+  username: John78
+  firstName: John
+  lastName: Smith
+  email: john.smith@example.com
+  organizations:
+    - id: 1
+      name: Organization1
