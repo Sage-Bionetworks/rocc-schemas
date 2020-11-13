@@ -9,11 +9,11 @@ properties:
     description: Name of challenge
     type: string
   startDate:
-    description: Starting date (when submissions are accepted)
+    description: Starting date (when submissions are accepted) in YYYY-MM-DD format
     type: string
     format: date
   endDate:
-    description: Ending date (when submissions are no longer accepted)
+    description: Ending date (when submissions are no longer accepted) in YYYY-MM-DD format
     type: string
     format: date
   website:
@@ -39,10 +39,10 @@ properties:
     items:
       $ref: Grant.yaml
   organizers:
-    description: Organizations involved, e.g. data providers
+    description: Persons involved with the challenge, e.g. clinical leads, data providers, governance
     type: array
     items:
-      $ref: Organization.yaml
+      $ref: User.yaml
 required:
   - name
   - startDate
@@ -55,6 +55,12 @@ example:
   endDate: "2020-12-31"
   website: www.rocc.com/challenges/CH1234567
   status: closed
-  tags: ["Machine Learning"]
-  grant: []
-  organizers: ["Organization1"]
+  tags:
+    - "Machine Learning"
+  organizers:
+    - id: 1
+      username: user1
+      email: user1@example.org
+      organization:
+        id: 1
+        name: Organization1

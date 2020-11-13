@@ -29,7 +29,7 @@ get:
   #       - 'read:users'
   #   - api_key: []
   responses:
-    '200':
+    "200":
       description: Success
       content:
         application/json:
@@ -38,9 +38,9 @@ get:
           example:
             username: user1
             email: user@example.com
-    '403':
+    "403":
       description: Forbidden
-    '404':
+    "404":
       description: User not found
 put:
   tags:
@@ -59,11 +59,11 @@ put:
   #   - main_auth:
   #       - 'write:users'
   responses:
-    '200':
+    "200":
       description: OK
-    '400':
+    "400":
       description: Invalid user supplied
-    '404':
+    "404":
       description: User not found
   requestBody:
     content:

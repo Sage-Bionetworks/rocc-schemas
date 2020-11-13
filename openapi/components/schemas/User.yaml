@@ -30,8 +30,8 @@ properties:
       - user
       - admin
     default: user
+  organization:
+    $ref: Organization.yaml
 required:
   - username
-  - firstName
-  - lastName
   - email
