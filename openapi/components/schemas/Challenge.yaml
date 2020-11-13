@@ -42,7 +42,7 @@ properties:
     description: Persons involved with the challenge, e.g. clinical leads, data providers, governance
     type: array
     items:
-      $ref: User.yaml
+      $ref: Person.yaml
 required:
   - name
   - startDate
@@ -59,8 +59,10 @@ example:
     - "Machine Learning"
   organizers:
     - id: 1
-      username: user1
-      email: user1@example.org
-      organization:
-        id: 1
-        name: Organization1
+      firstName: John
+      lastName: Smith
+      email: john.smith@example.org
+    - id: 2
+      firstName: J
+      lastName: Doe
+      email: jane.doe@example.org
