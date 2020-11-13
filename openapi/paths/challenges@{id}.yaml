@@ -22,7 +22,7 @@ get:
             $ref: ../components/schemas/Challenge.yaml
     "400":
       description: Invalid challenge ID
-    "404":
+    "422":
       description: Challenge not found
 
 put:
@@ -47,7 +47,7 @@ put:
       description: Invalid challenge ID
     "403":
       description: Forbidden
-    "404":
+    "422":
       description: Challenge not found
 
 patch:
