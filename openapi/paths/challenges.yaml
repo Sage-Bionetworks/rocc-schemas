@@ -1,9 +1,32 @@
+post:
+  tags:
+    - Challenge
+  summary: Adds a challenge
+  description: This can only be done by a Challenge Organizer
+  operationId: "challenges.create"
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Challenge.yaml
+        example:
+          id: CH1234567
+          name: Sample Challenge
+          startDate: "2020-11-10"
+          endDate: "2020-12-31"
+          status: open
+  responses:
+    "201":
+      description: Challenge created
+    "403":
+      description: Forbidden
+
 get:
   tags:
     - Challenge
-  summary: Get all challenges
-  description: Returns the challenges
-  operationId: "notes.read_all"
+  summary: Lists all challenges
+  operationId: "challenges.read_all"
   responses:
     "200":
       description: Success
@@ -13,7 +36,5 @@ get:
             type: array
             items:
               $ref: ../components/schemas/Challenge.yaml
-    "403":
-      description: Forbidden
     "404":
-      description: Challenge not found
+      description: Request not available

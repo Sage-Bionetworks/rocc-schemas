@@ -1,6 +1,9 @@
 type: object
 description: Information about monetary resources for challenge
 properties:
+  id:
+    type: string
+    readOnly: true
   name:
     type: string
   description:
@@ -9,9 +12,7 @@ properties:
     $ref: Organization.yaml
   amount:
     type: integer
-  # poc:
-  #   description: Point of contact for challenge regarding grant
-  #   $ref: "#/components/schemas/User"
+    format: float
   url:
     type: string
 required:

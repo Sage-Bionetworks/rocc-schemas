@@ -2,43 +2,53 @@ openapi: 3.0.2
 info:
   version: 0.1.0
   title: Challenge API
-  termsOfService: 'https://example.com/terms/'
+  termsOfService: "https://example.com/terms/"
   contact:
     email: contact@example.com
-    url: 'http://example.com/contact'
+    url: "http://example.com/contact"
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
   x-logo:
-    url: 'https://redocly.github.io/openapi-template/logo.png'
+    url: "rocc_logo_black.png"
   description: >
     The OpenAPI specification implemented by the Challenge Registries.
 
     # Introduction
 
     TBA
+
 # externalDocs:
 #   description: Find out how to create a GitHub repo for your OpenAPI definition.
 #   url: 'https://github.com/Rebilly/generator-openapi-repo'
+
 tags:
   - name: Challenge
     description: Challenge operations
-  - name: Health
-    description: Health operations
   - name: User
     description: User operations
+
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: "{protocol}://rocc.com/{environment}/v1"
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
+      environment:
+        enum:
+          - api     # production
+          - api.dev # development
+        default: api.dev
+
 paths:
   /challenges:
     $ref: paths/challenges.yaml
   /challenges/{id}:
-    $ref: 'paths/challenges@{id}.yaml'
-  /health:
-    $ref: paths/health.yaml
+    $ref: "paths/challenges@{id}.yaml"
   /users/{username}:
-    $ref: 'paths/users@{username}.yaml'
+    $ref: "paths/users@{username}.yaml"
 # components:
 #   securitySchemes:
 #     main_auth:
@@ -49,10 +59,10 @@ paths:
 #           scopes:
 #             'read:users': read users info
 #             'write:users': modify or remove users
-    # api_key:
-    #   type: apiKey
-    #   in: header
-    #   name: api_key
-    # basic_auth:
-    #   type: http
-    #   scheme: basic
+# api_key:
+#   type: apiKey
+#   in: header
+#   name: api_key
+# basic_auth:
+#   type: http
+#   scheme: basic

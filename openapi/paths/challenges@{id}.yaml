@@ -1,14 +1,16 @@
+# Parameter(s) used by all operations of this path
 parameters:
   - name: id
     in: path
-    description: Updates the challenge for a given ID
+    description: challenge ID
     required: true
     schema:
       type: string
+
 get:
   tags:
     - Challenge
-  summary: Get a challenge by ID
+  summary: Lists one challenge
   description: Returns the challenge for a given ID
   operationId: "challenges.read"
   responses:
@@ -18,27 +20,77 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Challenge.yaml
-    "403":
-      description: Forbidden
-    "404":
+    "400":
+      description: Invalid challenge ID
+    "422":
       description: Challenge not found
+
 put:
   tags:
     - Challenge
-  summary: Update a challenge by ID
-  description: This can only be done by the logged in user.
-  operationId: "challenges.update"
+  summary: Updates all details of a challenge
+  description: |
+    Updates all details of the given challenge ID.
+
+    This action can only be done by a Challenge Organizer.
+  operationId: "challenges.update_all"
   requestBody:
+    required: true
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Challenge.yaml
-    description: Updated challenge
-    required: true
   responses:
     "200":
       description: OK
     "400":
-      description: Invalid challenge supplied
-    "404":
+      description: Invalid challenge ID
+    "403":
+      description: Forbidden
+    "422":
+      description: Challenge not found
+
+patch:
+  tags:
+    - Challenge
+  summary: Updates selected details of a challenge
+  description: |
+    Updates and/or adds one or more details of the given challenge ID.
+
+    This action can only be done by a Challenge Organizer.
+  operationId: "challenges.update"
+  # TODO: add requestBody for PATCH request
+  # requestBody:
+  #   required: true
+  #   content:
+  #     application/json:
+  #       schema:
+  #         $ref: ../components/schemas/Challenge.yaml
+  responses:
+    "200":
+      description: OK
+    "400":
+      description: Invalid challenge ID
+    "403":
+      description: Forbidden
+    "422":
+      description: Challenge not found
+
+delete:
+  tags:
+    - Challenge
+  summary: Removes a challenge
+  description: |
+    Removes the challenge of the given ID
+
+    This action can only be done by a Challenge Organizer.
+  operationId: "challenges.delete"
+  responses:
+    "204":
+      description: Challenge removed
+    "400":
+      description: Invalid challenge ID
+    "403":
+      description: Forbidden
+    "422":
       description: Challenge not found

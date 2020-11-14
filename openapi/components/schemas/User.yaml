@@ -1,24 +1,45 @@
 type: object
 properties:
+  id:
+    type: string
+    readOnly: true
   username:
-    description: User supplied username
     type: string
     minLength: 4
-    example: John78
+  password:
+    type: string
+    format: password
+    minLength: 3
+    writeOnly: true
   firstName:
     description: User first name
     type: string
     minLength: 1
-    example: John
   lastName:
     description: User last name
     type: string
     minLength: 1
-    example: Smith
   email:
     $ref: Email.yaml
+  role:
+    type: string
+    enum:
+      - user
+      - admin
+    default: user
+  organizations:
+    type: array
+    items:
+      $ref: Organization.yaml
 required:
   - username
-  - firstName
-  - lastName
   - email
+example:
+  id: 1
+  username: John78
+  firstName: John
+  lastName: Smith
+  email: john.smith@example.com
+  organizations:
+    - id: 1
+      name: Organization1
