@@ -13,7 +13,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
     "x-logo": {
-      "url": "https://redocly.github.io/openapi-template/logo.png"
+      "url": "rocc_logo_black.png"
     },
     "description": "The OpenAPI specification implemented by the Challenge Registries.\n# Introduction\nTBA\n"
   },
@@ -23,31 +23,72 @@
       "description": "Challenge operations"
     },
     {
-      "name": "Health",
-      "description": "Health operations"
-    },
-    {
       "name": "User",
       "description": "User operations"
     }
   ],
   "servers": [
     {
-      "url": "http://example.com/api/v1"
-    },
-    {
-      "url": "https://example.com/api/v1"
+      "url": "{protocol}://rocc.com/{environment}/v1",
+      "variables": {
+        "protocol": {
+          "enum": [
+            "http",
+            "https"
+          ],
+          "default": "https"
+        },
+        "environment": {
+          "enum": [
+            "api",
+            "api.dev"
+          ],
+          "default": "api.dev"
+        }
+      }
     }
   ],
   "paths": {
     "/challenges": {
+      "post": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Adds a challenge",
+        "description": "This can only be done by a Challenge Organizer",
+        "operationId": "challenges.create",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Challenge"
+              },
+              "example": {
+                "id": "CH1234567",
+                "name": "Sample Challenge",
+                "startDate": "2020-11-10",
+                "endDate": "2020-12-31",
+                "status": "open"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Challenge created"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
       "get": {
         "tags": [
           "Challenge"
         ],
-        "summary": "Get all challenges",
-        "description": "Returns the challenges",
-        "operationId": "notes.read_all",
+        "summary": "Lists all challenges",
+        "operationId": "challenges.read_all",
         "responses": {
           "200": {
             "description": "Success",
@@ -62,11 +103,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden"
-          },
           "404": {
-            "description": "Challenge not found"
+            "description": "Request not available"
           }
         }
       }
@@ -76,7 +114,7 @@
         {
           "name": "id",
           "in": "path",
-          "description": "Updates the challenge for a given ID",
+          "description": "challenge ID",
           "required": true,
           "schema": {
             "type": "string"
@@ -87,7 +125,7 @@
         "tags": [
           "Challenge"
         ],
-        "summary": "Get a challenge by ID",
+        "summary": "Lists one challenge",
         "description": "Returns the challenge for a given ID",
         "operationId": "challenges.read",
         "responses": {
@@ -101,10 +139,10 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden"
+          "400": {
+            "description": "Invalid challenge ID"
           },
-          "404": {
+          "422": {
             "description": "Challenge not found"
           }
         }
@@ -113,57 +151,75 @@
         "tags": [
           "Challenge"
         ],
-        "summary": "Update a challenge by ID",
-        "description": "This can only be done by the logged in user.",
-        "operationId": "challenges.update",
+        "summary": "Updates all details of a challenge",
+        "description": "Updates all details of the given challenge ID.\n\nThis action can only be done by a Challenge Organizer.\n",
+        "operationId": "challenges.update_all",
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Challenge"
               }
             }
-          },
-          "description": "Updated challenge",
-          "required": true
+          }
         },
         "responses": {
           "200": {
             "description": "OK"
           },
           "400": {
-            "description": "Invalid challenge supplied"
-          },
-          "404": {
-            "description": "Challenge not found"
-          }
-        }
-      }
-    },
-    "/health": {
-      "get": {
-        "tags": [
-          "Health"
-        ],
-        "summary": "Get Health",
-        "description": "Get the health of the service",
-        "operationId": "health",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Health"
-                }
-              }
-            }
+            "description": "Invalid challenge ID"
           },
           "403": {
             "description": "Forbidden"
           },
-          "404": {
-            "description": "Health not found"
+          "422": {
+            "description": "Challenge not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Updates selected details of a challenge",
+        "description": "Updates and/or adds one or more details of the given challenge ID.\n\nThis action can only be done by a Challenge Organizer.\n",
+        "operationId": "challenges.update",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Invalid challenge ID"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Challenge not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Removes a challenge",
+        "description": "Removes the challenge of the given ID\n\nThis action can only be done by a Challenge Organizer.\n",
+        "operationId": "challenges.delete",
+        "responses": {
+          "204": {
+            "description": "Challenge removed"
+          },
+          "400": {
+            "description": "Invalid challenge ID"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Challenge not found"
           }
         }
       }
@@ -280,8 +336,12 @@
     "schemas": {
       "Organization": {
         "type": "object",
-        "description": "Organization that manages grant funding",
+        "description": "Organization",
         "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true
+          },
           "name": {
             "type": "string"
           },
@@ -297,6 +357,10 @@
         "type": "object",
         "description": "Information about monetary resources for challenge",
         "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true
+          },
           "name": {
             "type": "string"
           },
@@ -307,7 +371,8 @@
             "$ref": "#/components/schemas/Organization"
           },
           "amount": {
-            "type": "integer"
+            "type": "integer",
+            "format": "float"
           },
           "url": {
             "type": "string"
@@ -318,99 +383,25 @@
           "sponsor"
         ]
       },
-      "Challenge": {
-        "type": "object",
-        "description": "A challenge",
-        "properties": {
-          "id": {
-            "description": "challenge ID",
-            "type": "string",
-            "format": "uuid"
-          },
-          "name": {
-            "description": "challenge name",
-            "type": "string"
-          },
-          "startDate": {
-            "description": "challenge launch date",
-            "type": "string",
-            "format": "date-time"
-          },
-          "endDate": {
-            "description": "challenge ending date",
-            "type": "string",
-            "format": "date-time"
-          },
-          "website": {
-            "description": "challenge website",
-            "type": "string",
-            "format": "url"
-          },
-          "status": {
-            "description": "current status of challenge",
-            "type": "string",
-            "enum": [
-              "upcoming",
-              "open",
-              "closed"
-            ]
-          },
-          "tags": {
-            "description": "challenge metadata/area of expertise",
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "grant": {
-            "description": "monetary/resources sponsorship for challenge",
-            "$ref": "#/components/schemas/Grant"
-          }
-        },
-        "required": [
-          "id",
-          "name",
-          "startDate",
-          "endDate",
-          "status"
-        ]
-      },
-      "Health": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "description": "Health status",
-            "type": "string",
-            "enum": [
-              "pass",
-              "warn"
-            ]
-          }
-        }
-      },
       "Email": {
         "description": "User email address",
         "type": "string",
         "format": "test",
         "example": "john.smith@example.com"
       },
-      "User": {
+      "Person": {
         "type": "object",
         "properties": {
-          "username": {
-            "description": "User supplied username",
+          "id": {
             "type": "string",
-            "minLength": 4,
-            "example": "John78"
+            "readOnly": true
           },
           "firstName": {
-            "description": "User first name",
             "type": "string",
             "minLength": 1,
             "example": "John"
           },
           "lastName": {
-            "description": "User last name",
             "type": "string",
             "minLength": 1,
             "example": "Smith"
@@ -420,11 +411,164 @@
           }
         },
         "required": [
-          "username",
           "firstName",
-          "lastName",
           "email"
         ]
+      },
+      "Challenge": {
+        "type": "object",
+        "description": "A challenge",
+        "properties": {
+          "id": {
+            "description": "Challenge ID",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Name of challenge",
+            "type": "string"
+          },
+          "startDate": {
+            "description": "Starting date (when submissions are accepted) in YYYY-MM-DD format",
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "description": "Ending date (when submissions are no longer accepted) in YYYY-MM-DD format",
+            "type": "string",
+            "format": "date"
+          },
+          "website": {
+            "description": "URL to challenge website",
+            "type": "string",
+            "format": "url"
+          },
+          "status": {
+            "description": "Current status of challenge",
+            "type": "string",
+            "enum": [
+              "upcoming",
+              "open",
+              "closed"
+            ]
+          },
+          "tags": {
+            "description": "Domains/area of expertise, e.g. \"Breast Cancer\", \"Machine Learning\"",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "grant": {
+            "description": "Monetary/resources sponsorship for challenge",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Grant"
+            }
+          },
+          "organizers": {
+            "description": "Persons involved with the challenge, e.g. clinical leads, data providers, governance",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Person"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "startDate",
+          "endDate",
+          "status"
+        ],
+        "example": {
+          "id": "CH1234567",
+          "name": "Sample Challenge",
+          "startDate": "2020-11-10",
+          "endDate": "2020-12-31",
+          "website": "www.rocc.com/challenges/CH1234567",
+          "status": "closed",
+          "tags": [
+            "Machine Learning"
+          ],
+          "organizers": [
+            {
+              "id": 1,
+              "firstName": "John",
+              "lastName": "Smith",
+              "email": "john.smith@example.org"
+            },
+            {
+              "id": 2,
+              "firstName": "J",
+              "lastName": "Doe",
+              "email": "jane.doe@example.org"
+            }
+          ]
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true
+          },
+          "username": {
+            "type": "string",
+            "minLength": 4
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "minLength": 3,
+            "writeOnly": true
+          },
+          "firstName": {
+            "description": "User first name",
+            "type": "string",
+            "minLength": 1
+          },
+          "lastName": {
+            "description": "User last name",
+            "type": "string",
+            "minLength": 1
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "admin"
+            ],
+            "default": "user"
+          },
+          "organizations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Organization"
+            }
+          }
+        },
+        "required": [
+          "username",
+          "email"
+        ],
+        "example": {
+          "id": 1,
+          "username": "John78",
+          "firstName": "John",
+          "lastName": "Smith",
+          "email": "john.smith@example.com",
+          "organizations": [
+            {
+              "id": 1,
+              "name": "Organization1"
+            }
+          ]
+        }
       }
     }
   }
