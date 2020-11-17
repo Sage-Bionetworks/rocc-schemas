@@ -1,6 +1,9 @@
 type: object
-description: Organization that manages grant funding
+description: Organization
 properties:
+  id:
+    type: string
+    readOnly: true
   name:
     type: string
   url:
