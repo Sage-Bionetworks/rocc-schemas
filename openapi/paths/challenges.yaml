@@ -3,19 +3,13 @@ post:
     - Challenge
   summary: Adds a challenge
   description: This can only be done by a Challenge Organizer
-  operationId: "challenges.create"
+  operationId: "createChallenge"
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Challenge.yaml
-        example:
-          id: CH1234567
-          name: Sample Challenge
-          startDate: "2020-11-10"
-          endDate: "2020-12-31"
-          status: open
   responses:
     "201":
       description: Challenge created

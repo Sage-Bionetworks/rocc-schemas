@@ -53,7 +53,7 @@ example:
   name: Sample Challenge
   startDate: "2020-11-10"
   endDate: "2020-12-31"
-  website: www.rocc.com/challenges/CH1234567
+  website: https://rocc.org/challenges/CH1234567
   status: closed
   tags:
     - "Machine Learning"
