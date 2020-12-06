@@ -9,7 +9,7 @@ get:
   tags:
     - Challenge
   summary: Get a challenge
-  description: Returns the challenge for a given ID
+  description: Returns the challenge specified
   operationId: getChallenge
   responses:
     '200':
@@ -18,34 +18,34 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Challenge.yaml
-    '400':
-      description: Invalid challenge ID
-    '422':
-      description: Challenge not found
-put:
-  tags:
-    - Challenge
-  summary: Updates all details of a challenge
-  description: |
-    Updates all details of the given challenge ID.
-
-    This action can only be done by a Challenge Organizer.
-  operationId: updateChallenge
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: ../components/schemas/Challenge.yaml
-  responses:
-    '200':
-      description: OK
-    '400':
-      description: Invalid challenge ID
     '403':
-      description: Forbidden
-    '422':
-      description: Challenge not found
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+# put:
+#   tags:
+#     - Challenge
+#   summary: Updates all details of a challenge
+#   description: |
+#     Updates all details of the given challenge ID.
+
+#     This action can only be done by a Challenge Organizer.
+#   operationId: updateChallenge
+#   requestBody:
+#     required: true
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/Challenge.yaml
+#   responses:
+#     '200':
+#       description: OK
+#     '400':
+#       description: Invalid challenge ID
+#     '403':
+#       description: Forbidden
+#     '422':
+#       description: Challenge not found
 # patch:
 #   tags:
 #     - Challenge
@@ -74,18 +74,17 @@ put:
 delete:
   tags:
     - Challenge
-  summary: Removes a challenge
-  description: |
-    Removes the challenge of the given ID
-
-    This action can only be done by a Challenge Organizer.
+  summary: Delete a challenge
+  description: Deletes the challenge specified
   operationId: deleteChallenge
   responses:
-    '204':
-      description: Challenge removed
-    '400':
-      description: Invalid challenge ID
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Challenge.yaml
     '403':
-      description: Forbidden
-    '422':
-      description: Challenge not found
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

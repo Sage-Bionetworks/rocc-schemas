@@ -5,6 +5,7 @@ properties:
     description: Challenge ID
     type: string
     readOnly: true
+    example: 507f1f77bcf86cd799439011
   name:
     description: Name of challenge
     type: string
