@@ -1,16 +1,16 @@
 openapi: 3.0.2
 info:
   version: 0.1.0
-  title: Challenge API
-  termsOfService: "https://example.com/terms/"
+  title: Registry of Open Community Challenge API
   contact:
-    email: contact@example.com
-    url: "http://example.com/contact"
+    name: The ROCC Team
+    email: thomas.schaffter@sagebionetworks.org
+    url: "https://Sage-Bionetworks.github.io/rocc-schemas"
   license:
     name: Apache 2.0
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    url: "https://Sage-Bionetworks.github.io/rocc-schemas"
   x-logo:
-    url: "rocc_logo_black.png"
+    url: "https://Sage-Bionetworks.github.io/rocc-schemas/logo.png"
   description: >
     The OpenAPI specification implemented by the Challenge Registries.
 
