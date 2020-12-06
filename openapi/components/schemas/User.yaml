@@ -35,11 +35,11 @@ required:
   - username
   - email
 example:
-  id: 1
+  id: 507f1f77bcf86cd799439011
   username: John78
   firstName: John
   lastName: Smith
   email: john.smith@example.com
   organizations:
-    - id: 1
+    - id: 507f1f77bcf86cd799439012
       name: Organization1

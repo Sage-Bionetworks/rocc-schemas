@@ -58,11 +58,11 @@ example:
   tags:
     - "Machine Learning"
   organizers:
-    - id: 1
+    - id: 507f1f77bcf86cd799439011
       firstName: John
       lastName: Smith
       email: john.smith@example.org
-    - id: 2
+    - id: 507f1f77bcf86cd799439016
       firstName: J
       lastName: Doe
       email: jane.doe@example.org

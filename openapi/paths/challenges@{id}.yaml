@@ -1,30 +1,27 @@
-# Parameter(s) used by all operations of this path
 parameters:
   - name: id
     in: path
-    description: challenge ID
+    description: The ID of the challenge
     required: true
     schema:
       type: string
-
 get:
   tags:
     - Challenge
-  summary: Lists one challenge
+  summary: Get a challenge
   description: Returns the challenge for a given ID
-  operationId: "challenges.read"
+  operationId: getChallenge
   responses:
-    "200":
+    '200':
       description: Success
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Challenge.yaml
-    "400":
+    '400':
       description: Invalid challenge ID
-    "422":
+    '422':
       description: Challenge not found
-
 put:
   tags:
     - Challenge
@@ -33,7 +30,7 @@ put:
     Updates all details of the given challenge ID.
 
     This action can only be done by a Challenge Organizer.
-  operationId: "challenges.update_all"
+  operationId: updateChallenge
   requestBody:
     required: true
     content:
@@ -41,24 +38,23 @@ put:
         schema:
           $ref: ../components/schemas/Challenge.yaml
   responses:
-    "200":
+    '200':
       description: OK
-    "400":
+    '400':
       description: Invalid challenge ID
-    "403":
+    '403':
       description: Forbidden
-    "422":
+    '422':
       description: Challenge not found
+# patch:
+#   tags:
+#     - Challenge
+#   summary: Updates selected details of a challenge
+#   description: |
+#     Updates and/or adds one or more details of the given challenge ID.
 
-patch:
-  tags:
-    - Challenge
-  summary: Updates selected details of a challenge
-  description: |
-    Updates and/or adds one or more details of the given challenge ID.
-
-    This action can only be done by a Challenge Organizer.
-  operationId: "challenges.update"
+#     This action can only be done by a Challenge Organizer.
+#   operationId: "challenges.update"
   # TODO: add requestBody for PATCH request
   # requestBody:
   #   required: true
@@ -66,16 +62,15 @@ patch:
   #     application/json:
   #       schema:
   #         $ref: ../components/schemas/Challenge.yaml
-  responses:
-    "200":
-      description: OK
-    "400":
-      description: Invalid challenge ID
-    "403":
-      description: Forbidden
-    "422":
-      description: Challenge not found
-
+  # responses:
+  #   "200":
+  #     description: OK
+  #   "400":
+  #     description: Invalid challenge ID
+  #   "403":
+  #     description: Forbidden
+  #   "422":
+  #     description: Challenge not found
 delete:
   tags:
     - Challenge
@@ -84,13 +79,13 @@ delete:
     Removes the challenge of the given ID
 
     This action can only be done by a Challenge Organizer.
-  operationId: "challenges.delete"
+  operationId: deleteChallenge
   responses:
-    "204":
+    '204':
       description: Challenge removed
-    "400":
+    '400':
       description: Invalid challenge ID
-    "403":
+    '403':
       description: Forbidden
-    "422":
+    '422':
       description: Challenge not found
