@@ -1,5 +1,5 @@
 type: object
-description: Organization
+description: An organization
 properties:
   id:
     description: The ID of the organization
@@ -17,3 +17,4 @@ properties:
     example: https://sagebionetworks.org/
 required:
   - name
+  - url
