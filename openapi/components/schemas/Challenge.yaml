@@ -39,7 +39,7 @@ properties:
     items:
       type: string
     minItems: 1
-    tags:
+    example:
       - "Machine Learning"
       - "Breast Cancer"
   grant:
