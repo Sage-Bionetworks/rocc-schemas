@@ -23,18 +23,13 @@ tags:
   - name: User
     description: Operations about users
 servers:
-  - url: "{protocol}://rocc.org/{environment}/v1"
+  - url: "{protocol}://rocc.org/api/v1"
     variables:
       protocol:
         enum:
           - http
           - https
         default: https
-      environment:
-        enum:
-          - api
-          - api.dev
-        default: api.dev
 paths:
   /challenges:
     $ref: paths/challenges.yaml
