@@ -1,93 +1,109 @@
 openapi: 3.0.2
 info:
   version: 0.1.0
-  title: Challenge API
-  termsOfService: 'https://example.com/terms/'
+  title: Registry of Open Community Challenge API
   contact:
-    email: contact@example.com
-    url: 'http://example.com/contact'
+    name: The ROCC Team
+    email: thomas.schaffter@sagebionetworks.org
+    url: 'https://Sage-Bionetworks.github.io/rocc-schemas'
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: 'https://Sage-Bionetworks.github.io/rocc-schemas'
   x-logo:
-    url: rocc_logo_black.png
+    url: 'https://Sage-Bionetworks.github.io/rocc-schemas/logo.png'
   description: |
     The OpenAPI specification implemented by the Challenge Registries.
     # Introduction
     TBA
 tags:
   - name: Challenge
-    description: Challenge operations
+    description: Operations about challenges
   - name: User
-    description: User operations
+    description: Operations about users
 servers:
-  - url: '{protocol}://rocc.com/{environment}/v1'
+  - url: '{protocol}://rocc.org/api/v1'
     variables:
       protocol:
         enum:
           - http
           - https
         default: https
-      environment:
-        enum:
-          - api
-          - api.dev
-        default: api.dev
 paths:
   /challenges:
     post:
       tags:
         - Challenge
-      summary: Adds a challenge
-      description: This can only be done by a Challenge Organizer
-      operationId: challenges.create
+      summary: Add a challenge
+      description: Adds a challenge
+      operationId: createChallenge
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Challenge'
-            example:
-              id: CH1234567
-              name: Sample Challenge
-              startDate: '2020-11-10'
-              endDate: '2020-12-31'
-              status: open
-      responses:
-        '201':
-          description: Challenge created
-        '403':
-          description: Forbidden
-    get:
-      tags:
-        - Challenge
-      summary: Lists all challenges
-      operationId: challenges.read_all
       responses:
         '200':
-          description: Success
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Challenge'
+                $ref: '#/components/schemas/Challenge'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
         '404':
-          description: Request not available
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    get:
+      tags:
+        - Challenge
+      summary: List all the challenges
+      description: Returns all the challenges
+      operationId: listChallenges
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 10
+            maximum: 100
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfChallenges'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/challenges/{id}':
     parameters:
       - name: id
         in: path
-        description: challenge ID
+        description: The ID of the challenge
         required: true
         schema:
           type: string
     get:
       tags:
         - Challenge
-      summary: Lists one challenge
-      description: Returns the challenge for a given ID
-      operationId: challenges.read
+      summary: Get a challenge
+      description: Returns the challenge specified
+      operationId: getChallenge
       responses:
         '200':
           description: Success
@@ -95,97 +111,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Challenge'
-        '400':
-          description: Invalid challenge ID
-        '422':
-          description: Challenge not found
-    put:
-      tags:
-        - Challenge
-      summary: Updates all details of a challenge
-      description: |
-        Updates all details of the given challenge ID.
-
-        This action can only be done by a Challenge Organizer.
-      operationId: challenges.update_all
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Challenge'
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Invalid challenge ID
         '403':
-          description: Forbidden
-        '422':
-          description: Challenge not found
-    patch:
-      tags:
-        - Challenge
-      summary: Updates selected details of a challenge
-      description: |
-        Updates and/or adds one or more details of the given challenge ID.
-
-        This action can only be done by a Challenge Organizer.
-      operationId: challenges.update
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Invalid challenge ID
-        '403':
-          description: Forbidden
-        '422':
-          description: Challenge not found
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
     delete:
       tags:
         - Challenge
-      summary: Removes a challenge
-      description: |
-        Removes the challenge of the given ID
-
-        This action can only be done by a Challenge Organizer.
-      operationId: challenges.delete
+      summary: Delete a challenge
+      description: Deletes the challenge specified
+      operationId: deleteChallenge
       responses:
-        '204':
-          description: Challenge removed
-        '400':
-          description: Invalid challenge ID
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Challenge'
         '403':
-          description: Forbidden
-        '422':
-          description: Challenge not found
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
   '/users/{username}':
-    parameters:
-      - name: pretty_print
-        in: query
-        description: Pretty print response
-        schema:
-          type: boolean
     get:
       tags:
         - User
       summary: Get user by user name
-      description: |
-        Some description of the operation.
-        You can use `markdown` here.
+      description: Gets the user with the specified name
       operationId: getUserByName
       parameters:
         - name: username
           in: path
-          description: The name that needs to be fetched
+          description: The username of the user who needs to be fetched
           required: true
           schema:
             type: string
-        - name: with_email
-          in: query
-          description: Filter users without email
-          schema:
-            type: boolean
       responses:
         '200':
           description: Success
@@ -193,95 +153,103 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-              example:
-                username: user1
-                email: user@example.com
         '403':
-          description: Forbidden
+          $ref: '#/components/responses/Unauthorized'
         '404':
-          description: User not found
-    put:
-      tags:
-        - User
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-        - name: username
-          in: path
-          description: The name that needs to be updated
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Invalid user supplied
-        '404':
-          description: User not found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
-        description: Updated user object
-        required: true
+          $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ResponsePageMetadata:
+      type: object
+      description: A page of results
+      properties:
+        offset:
+          description: Index of the first result that must be returned
+          type: integer
+        limit:
+          description: Maximum number of results returned
+          type: integer
+        links:
+          description: Links to navigate to different pages of results
+          type: object
+          properties:
+            next:
+              description: Link to the next page of results
+              type: string
+              format: uri
+      required:
+        - offset
+        - limit
+        - links
     Organization:
       type: object
-      description: Organization
+      description: An organization
       properties:
         id:
+          description: The ID of the organization
           type: string
           readOnly: true
+          example: 507f1f77bcf86cd799439011
         name:
+          description: The organization name
           type: string
+          example: Sage Bionetworks
         url:
+          description: The URL to the homepage of the organization
           type: string
+          format: uri
+          example: 'https://sagebionetworks.org/'
       required:
         - name
+        - url
     Grant:
       type: object
       description: Information about monetary resources for challenge
       properties:
         id:
+          description: The ID of the grant
           type: string
           readOnly: true
+          example: 507f1f77bcf86cd799439011
         name:
+          description: The grant name
           type: string
         description:
+          description: A description of the grant
           type: string
         sponsor:
           $ref: '#/components/schemas/Organization'
         amount:
+          description: The amount of the grant in USD
           type: integer
-          format: float
         url:
+          description: The URL to the grant
           type: string
+          format: uri
       required:
         - name
         - sponsor
     Email:
-      description: User email address
+      description: An email address
       type: string
-      format: test
+      format: email
       example: john.smith@example.com
     Person:
       type: object
+      description: A person
       properties:
         id:
+          description: The ID of a person
           type: string
           readOnly: true
+          example: 507f1f77bcf86cd799439011
         firstName:
+          description: The first name of a person
           type: string
           minLength: 1
           example: John
         lastName:
+          description: The last name of a Person
           type: string
           minLength: 1
           example: Smith
@@ -295,48 +263,53 @@ components:
       description: A challenge
       properties:
         id:
-          description: Challenge ID
+          description: The ID of the challenge
           type: string
           readOnly: true
+          example: 507f1f77bcf86cd799439011
         name:
-          description: Name of challenge
+          description: The challenge name
           type: string
+          example: Sample Challenge
         startDate:
-          description: Starting date (when submissions are accepted) in YYYY-MM-DD format
+          description: When the challenge started
           type: string
           format: date
+          example: '2020-11-10'
         endDate:
-          description: >-
-            Ending date (when submissions are no longer accepted) in YYYY-MM-DD
-            format
+          description: When the challenge ended
           type: string
           format: date
-        website:
-          description: URL to challenge website
+          example: '2020-12-31'
+        url:
+          description: The URL to the challenge website
           type: string
-          format: url
+          format: uri
+          example: 'https://synapse.org/sample-challenge'
         status:
-          description: Current status of challenge
+          description: The status of challenge
           type: string
           enum:
             - upcoming
             - open
             - closed
+          example: open
         tags:
-          description: 'Domains/area of expertise, e.g. "Breast Cancer", "Machine Learning"'
+          description: The tags associated to the challenge
           type: array
           items:
             type: string
           minItems: 1
+          example:
+            - Machine Learning
+            - Breast Cancer
         grant:
-          description: Monetary/resources sponsorship for challenge
+          description: The grants supporting this challenge
           type: array
           items:
             $ref: '#/components/schemas/Grant'
         organizers:
-          description: >-
-            Persons involved with the challenge, e.g. clinical leads, data
-            providers, governance
+          description: The organizers of the challenge
           type: array
           items:
             $ref: '#/components/schemas/Person'
@@ -345,67 +318,103 @@ components:
         - startDate
         - endDate
         - status
-      example:
-        id: CH1234567
-        name: Sample Challenge
-        startDate: '2020-11-10'
-        endDate: '2020-12-31'
-        website: www.rocc.com/challenges/CH1234567
-        status: closed
-        tags:
-          - Machine Learning
-        organizers:
-          - id: 1
-            firstName: John
-            lastName: Smith
-            email: john.smith@example.org
-          - id: 2
-            firstName: J
-            lastName: Doe
-            email: jane.doe@example.org
+    PageOfChallenges:
+      type: object
+      description: A page of Challenges
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            challenges:
+              description: An array of Challenges
+              type: array
+              items:
+                $ref: '#/components/schemas/Challenge'
+    Error:
+      type: object
+      description: Problem details (tools.ietf.org/html/rfc7807)
+      properties:
+        title:
+          type: string
+          description: A human readable documentation for the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: >-
+            A human readable explanation specific to this occurrence of the
+            problem
+        type:
+          type: string
+          description: An absolute URI that identifies the problem type
+      required:
+        - title
+        - status
     User:
       type: object
+      description: A user of the API
       properties:
         id:
+          description: The ID of the user
           type: string
           readOnly: true
+          example: 507f1f77bcf86cd799439011
         username:
+          description: The username of the user
           type: string
           minLength: 4
+          example: John78
         password:
+          description: The password of the user
           type: string
           format: password
           minLength: 3
           writeOnly: true
         firstName:
-          description: User first name
+          description: The first name of the user
           type: string
           minLength: 1
+          example: John
         lastName:
-          description: User last name
+          description: The last name of the user
           type: string
           minLength: 1
+          example: Smith
         email:
           $ref: '#/components/schemas/Email'
         role:
+          description: The role of the user
           type: string
           enum:
             - user
             - admin
           default: user
+          example: user
         organizations:
+          description: The organizations the user belongs to
           type: array
           items:
             $ref: '#/components/schemas/Organization'
       required:
         - username
         - email
-      example:
-        id: 1
-        username: John78
-        firstName: John
-        lastName: Smith
-        email: john.smith@example.com
-        organizations:
-          - id: 1
-            name: Organization1
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: The request conflicts with current state of the target resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
