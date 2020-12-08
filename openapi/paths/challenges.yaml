@@ -1,40 +1,60 @@
 post:
   tags:
     - Challenge
-  summary: Adds a challenge
-  description: This can only be done by a Challenge Organizer
-  operationId: "challenges.create"
+  summary: Add a challenge
+  description: Adds a challenge
+  operationId: createChallenge
   requestBody:
     required: true
     content:
       application/json:
         schema:
           $ref: ../components/schemas/Challenge.yaml
-        example:
-          id: CH1234567
-          name: Sample Challenge
-          startDate: "2020-11-10"
-          endDate: "2020-12-31"
-          status: open
   responses:
-    "201":
-      description: Challenge created
-    "403":
-      description: Forbidden
-
-get:
-  tags:
-    - Challenge
-  summary: Lists all challenges
-  operationId: "challenges.read_all"
-  responses:
-    "200":
-      description: Success
+    '200':
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: ../components/schemas/Challenge.yaml
-    "404":
-      description: Request not available
+            $ref: ../components/schemas/Challenge.yaml
+      description: Success
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+get:
+  tags:
+    - Challenge
+  summary: List all the challenges
+  description: Returns all the challenges
+  operationId: listChallenges
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 10
+        maximum: 100
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PageOfChallenges.yaml
+      description: Success
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

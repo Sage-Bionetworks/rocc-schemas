@@ -1,12 +1,20 @@
 type: object
-description: Organization
+description: An organization
 properties:
   id:
+    description: The ID of the organization
     type: string
     readOnly: true
+    example: 507f1f77bcf86cd799439011
   name:
+    description: The organization name
     type: string
+    example: Sage Bionetworks
   url:
+    description: The URL to the homepage of the organization
     type: string
+    format: uri
+    example: https://sagebionetworks.org/
 required:
   - name
+  - url

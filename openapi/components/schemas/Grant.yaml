@@ -2,19 +2,25 @@ type: object
 description: Information about monetary resources for challenge
 properties:
   id:
+    description: The ID of the grant
     type: string
     readOnly: true
+    example: 507f1f77bcf86cd799439011
   name:
+    description: The grant name
     type: string
   description:
+    description: A description of the grant
     type: string
   sponsor:
     $ref: Organization.yaml
   amount:
+    description: The amount of the grant in USD
     type: integer
-    format: float
   url:
+    description: The URL to the grant
     type: string
+    format: uri
 required:
   - name
   - sponsor

@@ -1,64 +1,60 @@
-# Parameter(s) used by all operations of this path
 parameters:
   - name: id
     in: path
-    description: challenge ID
+    description: The ID of the challenge
     required: true
     schema:
       type: string
-
 get:
   tags:
     - Challenge
-  summary: Lists one challenge
-  description: Returns the challenge for a given ID
-  operationId: "challenges.read"
+  summary: Get a challenge
+  description: Returns the challenge specified
+  operationId: getChallenge
   responses:
-    "200":
+    '200':
       description: Success
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Challenge.yaml
-    "400":
-      description: Invalid challenge ID
-    "422":
-      description: Challenge not found
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+# put:
+#   tags:
+#     - Challenge
+#   summary: Updates all details of a challenge
+#   description: |
+#     Updates all details of the given challenge ID.
 
-put:
-  tags:
-    - Challenge
-  summary: Updates all details of a challenge
-  description: |
-    Updates all details of the given challenge ID.
+#     This action can only be done by a Challenge Organizer.
+#   operationId: updateChallenge
+#   requestBody:
+#     required: true
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/Challenge.yaml
+#   responses:
+#     '200':
+#       description: OK
+#     '400':
+#       description: Invalid challenge ID
+#     '403':
+#       description: Forbidden
+#     '422':
+#       description: Challenge not found
+# patch:
+#   tags:
+#     - Challenge
+#   summary: Updates selected details of a challenge
+#   description: |
+#     Updates and/or adds one or more details of the given challenge ID.
 
-    This action can only be done by a Challenge Organizer.
-  operationId: "challenges.update_all"
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          $ref: ../components/schemas/Challenge.yaml
-  responses:
-    "200":
-      description: OK
-    "400":
-      description: Invalid challenge ID
-    "403":
-      description: Forbidden
-    "422":
-      description: Challenge not found
-
-patch:
-  tags:
-    - Challenge
-  summary: Updates selected details of a challenge
-  description: |
-    Updates and/or adds one or more details of the given challenge ID.
-
-    This action can only be done by a Challenge Organizer.
-  operationId: "challenges.update"
+#     This action can only be done by a Challenge Organizer.
+#   operationId: "challenges.update"
   # TODO: add requestBody for PATCH request
   # requestBody:
   #   required: true
@@ -66,31 +62,29 @@ patch:
   #     application/json:
   #       schema:
   #         $ref: ../components/schemas/Challenge.yaml
-  responses:
-    "200":
-      description: OK
-    "400":
-      description: Invalid challenge ID
-    "403":
-      description: Forbidden
-    "422":
-      description: Challenge not found
-
+  # responses:
+  #   "200":
+  #     description: OK
+  #   "400":
+  #     description: Invalid challenge ID
+  #   "403":
+  #     description: Forbidden
+  #   "422":
+  #     description: Challenge not found
 delete:
   tags:
     - Challenge
-  summary: Removes a challenge
-  description: |
-    Removes the challenge of the given ID
-
-    This action can only be done by a Challenge Organizer.
-  operationId: "challenges.delete"
+  summary: Delete a challenge
+  description: Deletes the challenge specified
+  operationId: deleteChallenge
   responses:
-    "204":
-      description: Challenge removed
-    "400":
-      description: Invalid challenge ID
-    "403":
-      description: Forbidden
-    "422":
-      description: Challenge not found
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Challenge.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

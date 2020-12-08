@@ -2,44 +2,53 @@ type: object
 description: A challenge
 properties:
   id:
-    description: Challenge ID
+    description: The ID of the challenge
     type: string
     readOnly: true
+    example: 507f1f77bcf86cd799439011
   name:
-    description: Name of challenge
+    description: The challenge name
     type: string
+    example: Sample Challenge
   startDate:
-    description: Starting date (when submissions are accepted) in YYYY-MM-DD format
+    description: When the challenge started
     type: string
     format: date
+    example: "2020-11-10"
   endDate:
-    description: Ending date (when submissions are no longer accepted) in YYYY-MM-DD format
+    description: When the challenge ended
     type: string
     format: date
-  website:
-    description: URL to challenge website
+    example: "2020-12-31"
+  url:
+    description: The URL to the challenge website
     type: string
-    format: url
+    format: uri
+    example: https://synapse.org/sample-challenge
   status:
-    description: Current status of challenge
+    description: The status of challenge
     type: string
     enum:
       - upcoming
       - open
       - closed
+    example: open
   tags:
-    description: Domains/area of expertise, e.g. "Breast Cancer", "Machine Learning"
+    description: The tags associated to the challenge
     type: array
     items:
       type: string
     minItems: 1
+    example:
+      - "Machine Learning"
+      - "Breast Cancer"
   grant:
-    description: Monetary/resources sponsorship for challenge
+    description: The grants supporting this challenge
     type: array
     items:
       $ref: Grant.yaml
   organizers:
-    description: Persons involved with the challenge, e.g. clinical leads, data providers, governance
+    description: The organizers of the challenge
     type: array
     items:
       $ref: Person.yaml
@@ -48,21 +57,3 @@ required:
   - startDate
   - endDate
   - status
-example:
-  id: CH1234567
-  name: Sample Challenge
-  startDate: "2020-11-10"
-  endDate: "2020-12-31"
-  website: www.rocc.com/challenges/CH1234567
-  status: closed
-  tags:
-    - "Machine Learning"
-  organizers:
-    - id: 1
-      firstName: John
-      lastName: Smith
-      email: john.smith@example.org
-    - id: 2
-      firstName: J
-      lastName: Doe
-      email: jane.doe@example.org

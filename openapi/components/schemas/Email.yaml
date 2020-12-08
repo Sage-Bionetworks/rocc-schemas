@@ -1,4 +1,4 @@
-description: User email address
+description: An email address
 type: string
-format: test
+format: email
 example: john.smith@example.com

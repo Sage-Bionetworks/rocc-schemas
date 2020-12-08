@@ -17,52 +17,23 @@ info:
     # Introduction
 
     TBA
-
-# externalDocs:
-#   description: Find out how to create a GitHub repo for your OpenAPI definition.
-#   url: 'https://github.com/Rebilly/generator-openapi-repo'
-
 tags:
   - name: Challenge
-    description: Challenge operations
+    description: Operations about challenges
   - name: User
-    description: User operations
-
+    description: Operations about users
 servers:
-  - url: "{protocol}://rocc.com/{environment}/v1"
+  - url: "{protocol}://rocc.org/api/v1"
     variables:
       protocol:
         enum:
           - http
           - https
         default: https
-      environment:
-        enum:
-          - api     # production
-          - api.dev # development
-        default: api.dev
-
 paths:
   /challenges:
     $ref: paths/challenges.yaml
   /challenges/{id}:
-    $ref: "paths/challenges@{id}.yaml"
+    $ref: paths/challenges@{id}.yaml
   /users/{username}:
-    $ref: "paths/users@{username}.yaml"
-# components:
-#   securitySchemes:
-#     main_auth:
-#       type: oauth2
-#       flows:
-#         implicit:
-#           authorizationUrl: 'http://example.com/api/oauth/dialog'
-#           scopes:
-#             'read:users': read users info
-#             'write:users': modify or remove users
-# api_key:
-#   type: apiKey
-#   in: header
-#   name: api_key
-# basic_auth:
-#   type: http
-#   scheme: basic
+    $ref: paths/users@{username}.yaml
