@@ -20,7 +20,7 @@ properties:
     type: string
     format: date
     example: "2020-12-31"
-  website:
+  url:
     description: The URL to the challenge website
     type: string
     format: url
