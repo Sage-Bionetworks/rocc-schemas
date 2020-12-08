@@ -23,7 +23,7 @@ properties:
   url:
     description: The URL to the challenge website
     type: string
-    format: url
+    format: uri
     example: https://synapse.org/sample-challenge
   status:
     description: The status of challenge
