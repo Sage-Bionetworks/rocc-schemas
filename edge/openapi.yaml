@@ -194,6 +194,10 @@ components:
           description: The organization name
           type: string
           example: Sage Bionetworks
+        shortName:
+          description: The organization short name
+          type: string
+          example: Sage
         url:
           description: The URL to the homepage of the organization
           type: string
@@ -219,16 +223,13 @@ components:
           type: string
         sponsor:
           $ref: '#/components/schemas/Organization'
-        amount:
-          description: The amount of the grant in USD
-          type: integer
         url:
           description: The URL to the grant
           type: string
           format: uri
       required:
         - name
-        - sponsor
+        - url
     Email:
       description: An email address
       type: string
@@ -313,6 +314,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Person'
+        organizations:
+          description: The organizations sponsoring this challenge
+          type: array
+          items:
+            $ref: '#/components/schemas/Organization'
       required:
         - name
         - startDate

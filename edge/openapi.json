@@ -286,6 +286,11 @@
             "type": "string",
             "example": "Sage Bionetworks"
           },
+          "shortName": {
+            "description": "The organization short name",
+            "type": "string",
+            "example": "Sage"
+          },
           "url": {
             "description": "The URL to the homepage of the organization",
             "type": "string",
@@ -319,10 +324,6 @@
           "sponsor": {
             "$ref": "#/components/schemas/Organization"
           },
-          "amount": {
-            "description": "The amount of the grant in USD",
-            "type": "integer"
-          },
           "url": {
             "description": "The URL to the grant",
             "type": "string",
@@ -331,7 +332,7 @@
         },
         "required": [
           "name",
-          "sponsor"
+          "url"
         ]
       },
       "Email": {
@@ -438,6 +439,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Person"
+            }
+          },
+          "organizations": {
+            "description": "The organizations sponsoring this challenge",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Organization"
             }
           }
         },
