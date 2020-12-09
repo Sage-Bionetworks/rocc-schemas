@@ -14,13 +14,10 @@ properties:
     type: string
   sponsor:
     $ref: Organization.yaml
-  amount:
-    description: The amount of the grant in USD
-    type: integer
   url:
     description: The URL to the grant
     type: string
     format: uri
 required:
   - name
-  - sponsor
+  - url

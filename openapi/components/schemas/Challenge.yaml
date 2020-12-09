@@ -52,6 +52,11 @@ properties:
     type: array
     items:
       $ref: Person.yaml
+  organizations:
+    description: The organizations sponsoring this challenge
+    type: array
+    items:
+      $ref: Organization.yaml
 required:
   - name
   - startDate
