@@ -10,6 +10,10 @@ properties:
     description: The organization name
     type: string
     example: Sage Bionetworks
+  shortName:
+    description: The organization short name
+    type: string
+    example: Sage
   url:
     description: The URL to the homepage of the organization
     type: string
