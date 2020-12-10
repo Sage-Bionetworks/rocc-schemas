@@ -9,7 +9,7 @@ properties:
   name:
     description: The challenge name
     type: string
-    example: Sample Challenge
+    example: Awesome Challenge
   startDate:
     description: When the challenge started
     type: string
@@ -24,7 +24,7 @@ properties:
     description: The URL to the challenge website
     type: string
     format: uri
-    example: https://synapse.org/sample-challenge
+    example: https://synapse.org/awesome-challenge
   status:
     description: The status of challenge
     type: string
@@ -37,11 +37,7 @@ properties:
     description: The tags associated to the challenge
     type: array
     items:
-      type: string
-    minItems: 1
-    example:
-      - "Machine Learning"
-      - "Breast Cancer"
+      $ref: Tag.yaml#/properties/id
   grant:
     description: The grants supporting this challenge
     type: array
