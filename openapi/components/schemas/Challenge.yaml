@@ -38,21 +38,21 @@ properties:
     type: array
     items:
       $ref: Tag.yaml#/properties/id
-  grant:
-    description: The grants supporting this challenge
+  organizations:
+    description: The organizations sponsoring this challenge
     type: array
     items:
-      $ref: Grant.yaml
+      $ref: Organization.yaml#/properties/id
   organizers:
     description: The organizers of the challenge
     type: array
     items:
       $ref: Person.yaml
-  organizations:
-    description: The organizations sponsoring this challenge
+  grant:
+    description: The grants supporting this challenge
     type: array
     items:
-      $ref: Organization.yaml
+      $ref: Grant.yaml#/properties/id
 required:
   - name
   - startDate
