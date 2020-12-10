@@ -10,11 +10,7 @@ post:
       description: The ID of the organization that is being created
       required: true
       schema:
-        type: string
-        minLength: 3
-        maxLength: 60
-        pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-        example: awesome-organization
+        $ref: ../components/schemas/OrganizationId.yaml
   requestBody:
     content:
       application/json:
