@@ -20,8 +20,8 @@ info:
 tags:
   - name: Challenge
     description: Operations about challenges
-  - name: User
-    description: Operations about users
+  # - name: User
+  #   description: Operations about users
 servers:
   - url: "{protocol}://rocc.org/api/v1"
     variables:
@@ -35,5 +35,5 @@ paths:
     $ref: paths/challenges.yaml
   /challenges/{id}:
     $ref: paths/challenges@{id}.yaml
-  /users/{username}:
-    $ref: paths/users@{username}.yaml
+  # /users/{username}:
+  #   $ref: paths/users@{username}.yaml
