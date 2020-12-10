@@ -18,8 +18,10 @@ info:
 
     TBA
 tags:
-  - name: Challenge
-    description: Operations about challenges
+  # - name: Challenge
+  #   description: Operations about challenges
+  - name: Organization
+    description: Operations about organizations
   # - name: User
   #   description: Operations about users
 servers:
@@ -31,9 +33,11 @@ servers:
           - https
         default: https
 paths:
-  /challenges:
-    $ref: paths/challenges.yaml
-  /challenges/{id}:
-    $ref: paths/challenges@{id}.yaml
+  /organizations:
+    $ref: paths/organizations.yaml
+  # /challenges:
+  #   $ref: paths/challenges.yaml
+  # /challenges/{id}:
+  #   $ref: paths/challenges@{id}.yaml
   # /users/{username}:
   #   $ref: paths/users@{username}.yaml
