@@ -22,6 +22,8 @@ tags:
   #   description: Operations about challenges
   - name: Organization
     description: Operations about organizations
+  - name: Tag
+    description: Operations about tags
   # - name: User
   #   description: Operations about users
 servers:
@@ -37,6 +39,8 @@ paths:
     $ref: paths/organizations.yaml
   /organizations/{organizationId}:
     $ref: paths/organizations@{organizationId}.yaml
+  /tags:
+    $ref: paths/tags.yaml
   # /challenges:
   #   $ref: paths/challenges.yaml
   # /challenges/{id}:

@@ -1,27 +1,27 @@
 post:
   tags:
-    - Organization
-  summary: Create an organization
-  description: Create an organization with the specified name
-  operationId: "createOrganization"
+    - Tag
+  summary: Create a tag
+  description: Create a tag with the specified name
+  operationId: "createTag"
   parameters:
     - in: query
-      name: organizationId
-      description: The ID of the organization that is being created
+      name: tagId
+      description: The ID of the tag that is being created
       required: true
       schema:
-        $ref: ../components/schemas/OrganizationId.yaml
+        $ref: ../components/schemas/TagId.yaml
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Organization.yaml
+          $ref: ../components/schemas/Tag.yaml
   responses:
     '200':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Organization.yaml
+            $ref: ../components/schemas/Tag.yaml
       description: Success
     '403':
       $ref: ../components/responses/Unauthorized.yaml
@@ -31,10 +31,10 @@ post:
       $ref: ../components/responses/Conflict.yaml
 get:
   tags:
-    - Organization
-  summary: Get all organizations
-  description: Returns the organizations
-  operationId: "listOrganizations"
+    - Tag
+  summary: Get all tags
+  description: Returns the tags
+  operationId: "listTags"
   parameters:
     - in: query
       name: limit
@@ -58,7 +58,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PageOfOrganizations.yaml
+            $ref: ../components/schemas/PageOfTags.yaml
       description: Success
     '403':
       $ref: ../components/responses/Unauthorized.yaml

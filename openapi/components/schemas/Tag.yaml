@@ -3,12 +3,3 @@ description: A tag that can be assigned to a resource
 properties:
   tagId:
     $ref: TagId.yaml
-  name:
-    description: The tag name
-    type: string
-    minLength: 1
-    maxLength: 30
-    pattern: ^[a-z0-9\-]+$
-    example: "machine-learning"
-required:
-  - name
