@@ -20,6 +20,8 @@ info:
 tags:
   # - name: Challenge
   #   description: Operations about challenges
+  - name: Grant
+    description: Operations about grants
   - name: Organization
     description: Operations about organizations
   - name: Tag
@@ -35,6 +37,10 @@ servers:
           - https
         default: https
 paths:
+  /grants:
+    $ref: paths/grants.yaml
+  /grants/{grantId}:
+    $ref: paths/grants@{grantId}.yaml
   /organizations:
     $ref: paths/organizations.yaml
   /organizations/{organizationId}:
