@@ -1,0 +1,41 @@
+parameters:
+  - in: path
+    name: tagId
+    description: The ID of the tag that is being created
+    required: true
+    schema:
+      $ref: ../components/schemas/TagId.yaml
+get:
+  tags:
+    - Tag
+  summary: Get a tag by ID
+  description: Returns the tag for a given ID
+  operationId: "getTag"
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Tag.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Tag
+  summary: Delete a tag by ID
+  description: Deletes the tag for a given ID
+  operationId: "deleteTag"
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Tag.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

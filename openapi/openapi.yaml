@@ -41,6 +41,8 @@ paths:
     $ref: paths/organizations@{organizationId}.yaml
   /tags:
     $ref: paths/tags.yaml
+  /tags/{tagId}:
+    $ref: paths/tags@{tagId}.yaml
   # /challenges:
   #   $ref: paths/challenges.yaml
   # /challenges/{id}:
