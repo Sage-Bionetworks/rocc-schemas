@@ -1,11 +1,8 @@
 type: object
 description: A challenge
 properties:
-  id:
-    description: The ID of the challenge
-    type: string
-    readOnly: true
-    example: 507f1f77bcf86cd799439011
+  challengeId:
+    $ref: ChallengeId.yaml
   name:
     description: The challenge name
     type: string
@@ -53,8 +50,8 @@ properties:
   #   type: array
   #   items:
   #     $ref: Grant.yaml
-required:
-  - name
-  - startDate
-  - endDate
-  - status
+# required:
+#   - name
+#   - startDate
+#   - endDate
+#   - status

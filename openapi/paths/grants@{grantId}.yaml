@@ -8,9 +8,9 @@ parameters:
 get:
   tags:
     - Grant
-  summary: Get a grant by ID
-  description: Returns the grant for a given ID
-  operationId: "getGrant"
+  summary: Get a grant
+  description: Returns the grant specified
+  operationId: getGrant
   responses:
     '200':
       description: Success
@@ -25,9 +25,9 @@ get:
 delete:
   tags:
     - Grant
-  summary: Delete a grant by ID
-  description: Deletes the grant for a given ID
-  operationId: "deleteGrant"
+  summary: Delete a grant
+  description: Deletes the grant specified
+  operationId: deleteGrant
   responses:
     '200':
       description: Success

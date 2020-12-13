@@ -20,6 +20,6 @@ properties:
     type: array
     items:
       $ref: OrganizationId.yaml
-required:
-  - firstName
-  - lastName
+# required:
+#   - firstName
+#   - lastName

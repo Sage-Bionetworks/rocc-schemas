@@ -18,8 +18,8 @@ info:
 
     TBA
 tags:
-  # - name: Challenge
-  #   description: Operations about challenges
+  - name: Challenge
+    description: Operations about challenges
   - name: Grant
     description: Operations about grants
   - name: Organization
@@ -37,6 +37,10 @@ servers:
           - https
         default: https
 paths:
+  /challenges:
+    $ref: paths/challenges.yaml
+  /challenges/{id}:
+    $ref: paths/challenges@{challengeId}.yaml
   /grants:
     $ref: paths/grants.yaml
   /grants/{grantId}:
@@ -49,9 +53,5 @@ paths:
     $ref: paths/tags.yaml
   /tags/{tagId}:
     $ref: paths/tags@{tagId}.yaml
-  # /challenges:
-  #   $ref: paths/challenges.yaml
-  # /challenges/{id}:
-  #   $ref: paths/challenges@{id}.yaml
   # /users/{username}:
   #   $ref: paths/users@{username}.yaml

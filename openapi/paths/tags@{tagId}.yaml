@@ -1,16 +1,16 @@
 parameters:
   - in: path
     name: tagId
-    description: The ID of the tag that is being created
+    description: The ID of the tag
     required: true
     schema:
       $ref: ../components/schemas/TagId.yaml
 get:
   tags:
     - Tag
-  summary: Get a tag by ID
-  description: Returns the tag for a given ID
-  operationId: "getTag"
+  summary: Get a tag
+  description: Returns the tag specified
+  operationId: getTag
   responses:
     '200':
       description: Success
@@ -25,9 +25,9 @@ get:
 delete:
   tags:
     - Tag
-  summary: Delete a tag by ID
-  description: Deletes the tag for a given ID
-  operationId: "deleteTag"
+  summary: Delete a tag
+  description: Deletes the tag specified
+  operationId: deleteTag
   responses:
     '200':
       description: Success

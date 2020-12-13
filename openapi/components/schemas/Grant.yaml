@@ -9,9 +9,9 @@ properties:
   description:
     description: A description of the grant
     type: string
-  organizationId:
-    $ref: OrganizationId.yaml
   url:
     description: The URL to the grant
     type: string
     format: uri
+  # organizationId:
+  #   $ref: OrganizationId.yaml
