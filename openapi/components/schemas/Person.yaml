@@ -15,6 +15,11 @@ properties:
     example: Smith
   email:
     $ref: Email.yaml
+  organizations:
+    description: The organizations the person belongs to
+    type: array
+    items:
+      $ref: OrganizationId.yaml
 required:
   - firstName
   - lastName
