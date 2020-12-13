@@ -22,55 +22,6 @@ get:
       $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
-# put:
-#   tags:
-#     - Challenge
-#   summary: Updates all details of a challenge
-#   description: |
-#     Updates all details of the given challenge ID.
-
-#     This action can only be done by a Challenge Organizer.
-#   operationId: updateChallenge
-#   requestBody:
-#     required: true
-#     content:
-#       application/json:
-#         schema:
-#           $ref: ../components/schemas/Challenge.yaml
-#   responses:
-#     '200':
-#       description: OK
-#     '400':
-#       description: Invalid challenge ID
-#     '403':
-#       description: Forbidden
-#     '422':
-#       description: Challenge not found
-# patch:
-#   tags:
-#     - Challenge
-#   summary: Updates selected details of a challenge
-#   description: |
-#     Updates and/or adds one or more details of the given challenge ID.
-
-#     This action can only be done by a Challenge Organizer.
-#   operationId: "challenges.update"
-  # TODO: add requestBody for PATCH request
-  # requestBody:
-  #   required: true
-  #   content:
-  #     application/json:
-  #       schema:
-  #         $ref: ../components/schemas/Challenge.yaml
-  # responses:
-  #   "200":
-  #     description: OK
-  #   "400":
-  #     description: Invalid challenge ID
-  #   "403":
-  #     description: Forbidden
-  #   "422":
-  #     description: Challenge not found
 delete:
   tags:
     - Challenge
