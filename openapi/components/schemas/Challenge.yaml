@@ -40,6 +40,19 @@ properties:
   #   type: array
   #   items:
   #     $ref: Organization.yaml
+  # challengePlatform:
+  #   type: string
+  #   enum:
+  #     - synapse
+  #     - challengeplatform2.0
+  #     - kaggle
+  # organizingGroup:
+  #   type: string
+  #   enum:
+  #     - dream
+  #     - kaggle
+  #     - casp
+  #     - cagi
   # organizers:
   #   description: The organizers of the challenge
   #   type: array
@@ -55,3 +68,4 @@ properties:
 #   - startDate
 #   - endDate
 #   - status
+    # - challengePlatform
