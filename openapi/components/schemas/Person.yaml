@@ -2,7 +2,9 @@ type: object
 description: A person
 properties:
   personId:
-    $ref: PersonId.yaml
+    readOnly: true
+    allOf:
+      - $ref: PersonId.yaml
   firstName:
     description: The first name of the person
     type: string

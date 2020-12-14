@@ -24,6 +24,8 @@ tags:
     description: Operations about grants
   - name: Organization
     description: Operations about organizations
+  - name: Person
+    description: Operations about persons
   - name: Tag
     description: Operations about tags
   # - name: User
@@ -39,7 +41,7 @@ servers:
 paths:
   /challenges:
     $ref: paths/challenges.yaml
-  /challenges/{id}:
+  /challenges/{challengeId}:
     $ref: paths/challenges@{challengeId}.yaml
   /grants:
     $ref: paths/grants.yaml
@@ -49,6 +51,10 @@ paths:
     $ref: paths/organizations.yaml
   /organizations/{organizationId}:
     $ref: paths/organizations@{organizationId}.yaml
+  /persons:
+    $ref: paths/persons.yaml
+  /persons/{personId}:
+    $ref: paths/persons@{personId}.yaml
   /tags:
     $ref: paths/tags.yaml
   /tags/{tagId}:

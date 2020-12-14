@@ -1,0 +1,60 @@
+post:
+  tags:
+    - Person
+  summary: Create a person
+  description: Create a person with the specified name
+  operationId: "createPerson"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Person.yaml
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Person.yaml
+      description: Success
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+get:
+  tags:
+    - Person
+  summary: Get all persons
+  description: Returns the persons
+  operationId: "listPersons"
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 10
+        maximum: 100
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PageOfPersons.yaml
+      description: Success
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+
