@@ -6,12 +6,10 @@ properties:
   firstName:
     description: The first name of the person
     type: string
-    minLength: 1
     example: John
   lastName:
     description: The last name of the person
     type: string
-    minLength: 1
     example: Smith
   email:
     $ref: Email.yaml
