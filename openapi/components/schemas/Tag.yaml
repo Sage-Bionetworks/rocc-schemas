@@ -2,9 +2,7 @@ type: object
 description: A tag that can be assigned to a resource
 properties:
   tagId:
-    readOnly: true
-    allOf:
-      - $ref: TagId.yaml
+    $ref: TagId.yaml
   description:
     description: A short description of the tag
     type: string
