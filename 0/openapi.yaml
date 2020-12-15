@@ -1,65 +1,115 @@
 openapi: 3.0.2
 info:
-  version: 0.1.0
-  title: Challenge API
-  termsOfService: 'https://example.com/terms/'
+  version: 0.1.1
+  title: Registry of Open Community Challenge API
   contact:
-    email: contact@example.com
-    url: 'http://example.com/contact'
+    name: The ROCC Team
+    email: thomas.schaffter@sagebionetworks.org
+    url: 'https://Sage-Bionetworks.github.io/rocc-schemas'
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: 'https://Sage-Bionetworks.github.io/rocc-schemas'
   x-logo:
-    url: 'https://redocly.github.io/openapi-template/logo.png'
+    url: 'https://Sage-Bionetworks.github.io/rocc-schemas/logo.png'
   description: |
     The OpenAPI specification implemented by the Challenge Registries.
     # Introduction
     TBA
 tags:
   - name: Challenge
-    description: Challenge operations
-  - name: Health
-    description: Health operations
-  - name: User
-    description: User operations
+    description: Operations about challenges
+  - name: Grant
+    description: Operations about grants
+  - name: Organization
+    description: Operations about organizations
+  - name: Person
+    description: Operations about persons
+  - name: Tag
+    description: Operations about tags
 servers:
-  - url: 'http://example.com/api/v1'
-  - url: 'https://example.com/api/v1'
+  - url: '{protocol}://rocc.org/api/v1'
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: https
 paths:
   /challenges:
-    get:
+    post:
       tags:
         - Challenge
-      summary: Get all challenges
-      description: Returns the challenges
-      operationId: notes.read_all
+      summary: Add a challenge
+      description: Adds a challenge
+      operationId: createChallenge
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Challenge'
       responses:
         '200':
-          description: Success
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Challenge'
+                $ref: '#/components/schemas/Challenge'
+          description: Success
         '403':
-          description: Forbidden
+          $ref: '#/components/responses/Unauthorized'
         '404':
-          description: Challenge not found
-  '/challenges/{id}':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
     get:
       tags:
         - Challenge
-      summary: Get a challenge by ID
-      description: Returns the challenge for a given ID
-      operationId: challenges.read
+      summary: List all the challenges
+      description: Returns all the challenges
+      operationId: listChallenges
       parameters:
-        - name: id
-          in: path
-          description: The ID of the challenge to fetch
-          required: true
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
           schema:
-            type: string
+            type: integer
+            default: 10
+            minimum: 10
+            maximum: 100
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfChallenges'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/challenges/{challengeId}':
+    parameters:
+      - in: path
+        name: challengeId
+        description: The ID of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeId'
+    get:
+      tags:
+        - Challenge
+      summary: Get a challenge
+      description: Returns the challenge specified
+      operationId: getChallenge
       responses:
         '200':
           description: Success
@@ -68,198 +118,708 @@ paths:
               schema:
                 $ref: '#/components/schemas/Challenge'
         '403':
-          description: Forbidden
+          $ref: '#/components/responses/Unauthorized'
         '404':
-          description: Challenge not found
-    put:
+          $ref: '#/components/responses/NotFound'
+    delete:
       tags:
         - Challenge
-      summary: Update a challenge by ID
-      description: This can only be done by the logged in user.
-      operationId: challenges.update
-      parameters:
-        - name: id
-          in: path
-          description: Updates the challenge for a given ID
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Invalid challenge supplied
-        '404':
-          description: Challenge not found
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Challenge'
-        description: Updated challenge
-        required: true
-  /health:
-    get:
-      tags:
-        - Health
-      summary: Get Health
-      description: Get the health of the service
-      operationId: health
+      summary: Delete a challenge
+      description: Deletes the challenge specified
+      operationId: deleteChallenge
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Health'
+                $ref: '#/components/schemas/Challenge'
         '403':
-          description: Forbidden
+          $ref: '#/components/responses/Unauthorized'
         '404':
-          description: Health not found
-  '/users/{username}':
+          $ref: '#/components/responses/NotFound'
+  /grants:
+    post:
+      tags:
+        - Grant
+      summary: Create a grant
+      description: Create a grant with the specified name
+      operationId: createGrant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Grant'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grant'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    get:
+      tags:
+        - Grant
+      summary: Get all grants
+      description: Returns the grants
+      operationId: listGrants
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 10
+            maximum: 100
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfGrants'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/grants/{grantId}':
     parameters:
-      - name: pretty_print
-        in: query
-        description: Pretty print response
+      - in: path
+        name: grantId
+        description: The ID of the grant that is being created
+        required: true
         schema:
-          type: boolean
+          $ref: '#/components/schemas/GrantId'
     get:
       tags:
-        - User
-      summary: Get user by user name
-      description: |
-        Some description of the operation.
-        You can use `markdown` here.
-      operationId: getUserByName
-      parameters:
-        - name: username
-          in: path
-          description: The name that needs to be fetched
-          required: true
-          schema:
-            type: string
-        - name: with_email
-          in: query
-          description: Filter users without email
-          schema:
-            type: boolean
+        - Grant
+      summary: Get a grant
+      description: Returns the grant specified
+      operationId: getGrant
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
-              example:
-                username: user1
-                email: user@example.com
+                $ref: '#/components/schemas/Grant'
         '403':
-          description: Forbidden
+          $ref: '#/components/responses/Unauthorized'
         '404':
-          description: User not found
-    put:
+          $ref: '#/components/responses/NotFound'
+    delete:
       tags:
-        - User
-      summary: Updated user
-      description: This can only be done by the logged in user.
-      operationId: updateUser
-      parameters:
-        - name: username
-          in: path
-          description: The name that needs to be updated
-          required: true
-          schema:
-            type: string
+        - Grant
+      summary: Delete a grant
+      description: Deletes the grant specified
+      operationId: deleteGrant
       responses:
         '200':
-          description: OK
-        '400':
-          description: Invalid user supplied
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Grant'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
         '404':
-          description: User not found
+          $ref: '#/components/responses/NotFound'
+  /organizations:
+    post:
+      tags:
+        - Organization
+      summary: Create an organization
+      description: Create an organization with the specified name
+      operationId: createOrganization
+      parameters:
+        - in: query
+          name: organizationId
+          description: The ID of the organization that is being created
+          required: true
+          schema:
+            $ref: '#/components/schemas/OrganizationId'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
-        description: Updated user object
+              $ref: '#/components/schemas/Organization'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    get:
+      tags:
+        - Organization
+      summary: Get all organizations
+      description: Returns the organizations
+      operationId: listOrganizations
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 10
+            maximum: 100
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfOrganizations'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/organizations/{organizationId}':
+    parameters:
+      - in: path
+        name: organizationId
+        description: The ID of the organization
         required: true
+        schema:
+          $ref: '#/components/schemas/OrganizationId'
+    get:
+      tags:
+        - Organization
+      summary: Get an organization
+      description: Returns the organization specified
+      operationId: getOrganization
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - Organization
+      summary: Delete an organization
+      description: Deletes the organization specified
+      operationId: deleteOrganization
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /persons:
+    post:
+      tags:
+        - Person
+      summary: Create a person
+      description: Create a person with the specified name
+      operationId: createPerson
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    get:
+      tags:
+        - Person
+      summary: Get all persons
+      description: Returns the persons
+      operationId: listPersons
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 10
+            maximum: 100
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfPersons'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/persons/{personId}':
+    parameters:
+      - in: path
+        name: personId
+        description: The ID of the person
+        required: true
+        schema:
+          $ref: '#/components/schemas/PersonId'
+    get:
+      tags:
+        - Person
+      summary: Get a person
+      description: Returns the person specified
+      operationId: getPerson
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - Person
+      summary: Delete a person
+      description: Deletes the person specified
+      operationId: deletePerson
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /tags:
+    post:
+      tags:
+        - Tag
+      summary: Create a tag
+      description: Create a tag with the specified name
+      operationId: createTag
+      parameters:
+        - in: query
+          name: tagId
+          description: The ID of the tag that is being created
+          required: true
+          schema:
+            $ref: '#/components/schemas/TagId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+    get:
+      tags:
+        - Tag
+      summary: Get all tags
+      description: Returns the tags
+      operationId: listTags
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 10
+            maximum: 100
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfTags'
+          description: Success
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  '/tags/{tagId}':
+    parameters:
+      - in: path
+        name: tagId
+        description: The ID of the tag
+        required: true
+        schema:
+          $ref: '#/components/schemas/TagId'
+    get:
+      tags:
+        - Tag
+      summary: Get a tag
+      description: Returns the tag specified
+      operationId: getTag
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      tags:
+        - Tag
+      summary: Delete a tag
+      description: Deletes the tag specified
+      operationId: deleteTag
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        '403':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Entity:
+    ResponsePageMetadata:
       type: object
+      description: A page of results
       properties:
-        id:
-          description: ID
+        offset:
+          description: Index of the first result that must be returned
           type: integer
-        createdBy:
-          description: The User who created this entity
-          $ref: '#/components/schemas/User'
-        createdAt:
-          description: When the entity has been created
-          type: string
-          format: date-time
-        updatedBy:
-          description: The User who update this entity
-          $ref: '#/components/schemas/User'
-        updatedAt:
-          description: When the entity has been updated
-          type: string
-          format: date-time
+        limit:
+          description: Maximum number of results returned
+          type: integer
+        links:
+          description: Links to navigate to different pages of results
+          type: object
+          properties:
+            next:
+              description: Link to the next page of results
+              type: string
+              format: uri
       required:
-        - id
-    Email:
-      description: User email address
+        - offset
+        - limit
+        - links
+    ChallengeId:
+      description: The ID of the challenge
       type: string
-      format: test
-      example: john.smith@example.com
-    User:
-      type: object
-      properties:
-        username:
-          description: User supplied username
-          type: string
-          minLength: 4
-          example: John78
-        firstName:
-          description: User first name
-          type: string
-          minLength: 1
-          example: John
-        lastName:
-          description: User last name
-          type: string
-          minLength: 1
-          example: Smith
-        email:
-          $ref: '#/components/schemas/Email'
-      required:
-        - username
-        - firstName
-        - lastName
-        - email
-      allOf:
-        - $ref: '#/components/schemas/Entity'
+      example: 507f1f77bcf86cd799439011
+    TagId:
+      description: The ID of the tag
+      type: string
+      minLength: 1
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-tag
     Challenge:
       type: object
       description: A challenge
       properties:
-        title:
-          description: The challenge title
+        challengeId:
+          $ref: '#/components/schemas/ChallengeId'
+        name:
+          description: The challenge name
           type: string
-      required:
-        - title
-      allOf:
-        - $ref: '#/components/schemas/Entity'
-    Health:
-      type: object
-      properties:
+          example: Awesome Challenge
+        startDate:
+          description: When the challenge started
+          type: string
+          format: date
+          example: '2020-11-10'
+        endDate:
+          description: When the challenge ended
+          type: string
+          format: date
+          example: '2020-12-31'
+        url:
+          description: The URL to the challenge website
+          type: string
+          format: uri
+          example: 'https://synapse.org/awesome-challenge'
         status:
-          description: Health status
+          description: The status of challenge
           type: string
           enum:
-            - pass
-            - warn
+            - upcoming
+            - open
+            - closed
+          example: open
+        tags:
+          description: The tags associated to the challenge
+          type: array
+          items:
+            $ref: '#/components/schemas/TagId'
+    PageOfChallenges:
+      type: object
+      description: A page of Challenges
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            challenges:
+              description: An array of Challenges
+              type: array
+              items:
+                $ref: '#/components/schemas/Challenge'
+    Error:
+      type: object
+      description: Problem details (tools.ietf.org/html/rfc7807)
+      properties:
+        title:
+          type: string
+          description: A human readable documentation for the problem type
+        status:
+          type: integer
+          description: The HTTP status code
+        detail:
+          type: string
+          description: >-
+            A human readable explanation specific to this occurrence of the
+            problem
+        type:
+          type: string
+          description: An absolute URI that identifies the problem type
+      required:
+        - title
+        - status
+    GrantId:
+      description: The ID of the grant
+      type: string
+      example: 507f1f77bcf86cd799439011
+    Grant:
+      type: object
+      description: Information about monetary resources for challenge
+      properties:
+        grantId:
+          $ref: '#/components/schemas/GrantId'
+        name:
+          description: The grant name
+          type: string
+        description:
+          description: A description of the grant
+          type: string
+        url:
+          description: The URL to the grant
+          type: string
+          format: uri
+    PageOfGrants:
+      type: object
+      description: A page of Grants
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            grants:
+              description: An array of Grants
+              type: array
+              items:
+                $ref: '#/components/schemas/Grant'
+    OrganizationId:
+      description: The ID of the organization
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-organization
+    Organization:
+      type: object
+      description: An organization
+      properties:
+        organizationId:
+          $ref: '#/components/schemas/OrganizationId'
+        name:
+          description: The organization name
+          type: string
+        shortName:
+          description: The organization short name
+          type: string
+        url:
+          description: The URL to the homepage of the organization
+          type: string
+          format: uri
+    PageOfOrganizations:
+      type: object
+      description: A page of Organizations
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            organizations:
+              description: An array of Organizations
+              type: array
+              items:
+                $ref: '#/components/schemas/Organization'
+    PersonId:
+      description: The ID of the person
+      type: string
+      example: 507f1f77bcf86cd799439011
+    Email:
+      description: An email address
+      type: string
+      format: email
+      example: john.smith@example.com
+    Person:
+      type: object
+      description: A person
+      properties:
+        personId:
+          $ref: '#/components/schemas/PersonId'
+        firstName:
+          description: The first name of the person
+          type: string
+          example: John
+        lastName:
+          description: The last name of the person
+          type: string
+          example: Smith
+        email:
+          $ref: '#/components/schemas/Email'
+        organizations:
+          description: The organizations the person belongs to
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationId'
+    PageOfPersons:
+      type: object
+      description: A page of Persons
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            persons:
+              description: An array of Persons
+              type: array
+              items:
+                $ref: '#/components/schemas/Person'
+    Tag:
+      type: object
+      description: A tag that can be assigned to a resource
+      properties:
+        tagId:
+          $ref: '#/components/schemas/TagId'
+        description:
+          description: A short description of the tag
+          type: string
+    PageOfTags:
+      type: object
+      description: A page of Tags
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            tags:
+              description: An array of Tags
+              type: array
+              items:
+                $ref: '#/components/schemas/Tag'
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Conflict:
+      description: The request conflicts with current state of the target resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
