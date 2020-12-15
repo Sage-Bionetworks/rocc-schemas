@@ -20,8 +20,16 @@ info:
 tags:
   - name: Challenge
     description: Operations about challenges
-  - name: User
-    description: Operations about users
+  - name: Grant
+    description: Operations about grants
+  - name: Organization
+    description: Operations about organizations
+  - name: Person
+    description: Operations about persons
+  - name: Tag
+    description: Operations about tags
+  # - name: User
+  #   description: Operations about users
 servers:
   - url: "{protocol}://rocc.org/api/v1"
     variables:
@@ -33,7 +41,23 @@ servers:
 paths:
   /challenges:
     $ref: paths/challenges.yaml
-  /challenges/{id}:
-    $ref: paths/challenges@{id}.yaml
-  /users/{username}:
-    $ref: paths/users@{username}.yaml
+  /challenges/{challengeId}:
+    $ref: paths/challenges@{challengeId}.yaml
+  /grants:
+    $ref: paths/grants.yaml
+  /grants/{grantId}:
+    $ref: paths/grants@{grantId}.yaml
+  /organizations:
+    $ref: paths/organizations.yaml
+  /organizations/{organizationId}:
+    $ref: paths/organizations@{organizationId}.yaml
+  /persons:
+    $ref: paths/persons.yaml
+  /persons/{personId}:
+    $ref: paths/persons@{personId}.yaml
+  /tags:
+    $ref: paths/tags.yaml
+  /tags/{tagId}:
+    $ref: paths/tags@{tagId}.yaml
+  # /users/{username}:
+  #   $ref: paths/users@{username}.yaml

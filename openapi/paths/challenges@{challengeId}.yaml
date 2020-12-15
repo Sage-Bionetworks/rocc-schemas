@@ -1,0 +1,41 @@
+parameters:
+  - in: path
+    name: challengeId
+    description: The ID of the challenge
+    required: true
+    schema:
+      $ref: ../components/schemas/ChallengeId.yaml
+get:
+  tags:
+    - Challenge
+  summary: Get a challenge
+  description: Returns the challenge specified
+  operationId: getChallenge
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Challenge.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Challenge
+  summary: Delete a challenge
+  description: Deletes the challenge specified
+  operationId: deleteChallenge
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Challenge.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

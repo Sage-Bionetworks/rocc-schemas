@@ -1,0 +1,41 @@
+parameters:
+  - in: path
+    name: organizationId
+    description: The ID of the organization
+    required: true
+    schema:
+      $ref: ../components/schemas/OrganizationId.yaml
+get:
+  tags:
+    - Organization
+  summary: Get an organization
+  description: Returns the organization specified
+  operationId: getOrganization
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Organization.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Organization
+  summary: Delete an organization
+  description: Deletes the organization specified
+  operationId: deleteOrganization
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Organization.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml

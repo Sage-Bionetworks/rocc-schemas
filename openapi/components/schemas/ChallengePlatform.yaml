@@ -1,0 +1,12 @@
+type: object
+description: A challenge platform
+properties:
+  challengePlatformId:
+    $ref: ChallengePlatformId.yaml
+  name:
+    description: The name of the challenge platform
+    type: string
+  url:
+    description: The URL to the homepage of the challenge platform
+    type: string
+    format: uri

@@ -1,0 +1,41 @@
+parameters:
+  - in: path
+    name: personId
+    description: The ID of the person
+    required: true
+    schema:
+      $ref: ../components/schemas/PersonId.yaml
+get:
+  tags:
+    - Person
+  summary: Get a person
+  description: Returns the person specified
+  operationId: getPerson
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Person.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+delete:
+  tags:
+    - Person
+  summary: Delete a person
+  description: Deletes the person specified
+  operationId: deletePerson
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/Person.yaml
+    '403':
+      $ref: ../components/responses/Unauthorized.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
