@@ -53,11 +53,11 @@ properties:
   #     - kaggle
   #     - casp
   #     - cagi
-  # organizers:
-  #   description: The organizers of the challenge
-  #   type: array
-  #   items:
-  #     $ref: Person.yaml
+  organizers:
+    description: The organizers of the challenge
+    type: array
+    items:
+      $ref: PersonId.yaml
   # grant:
   #   description: The grants supporting this challenge
   #   type: array
@@ -68,4 +68,4 @@ properties:
 #   - startDate
 #   - endDate
 #   - status
-    # - challengePlatform
+# - challengePlatform
