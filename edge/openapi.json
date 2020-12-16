@@ -906,6 +906,11 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-tag"
       },
+      "PersonId": {
+        "description": "The ID of the person",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "Challenge": {
         "type": "object",
         "description": "A challenge",
@@ -951,6 +956,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagId"
+            }
+          },
+          "organizers": {
+            "description": "The organizers of the challenge",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonId"
             }
           }
         }
@@ -1100,11 +1112,6 @@
             }
           }
         ]
-      },
-      "PersonId": {
-        "description": "The ID of the person",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
       },
       "Email": {
         "description": "An email address",
