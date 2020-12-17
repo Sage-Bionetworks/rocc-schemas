@@ -1,0 +1,17 @@
+type: object
+description: An object that describes how to filter Persons
+properties:
+  firstName:
+    description: Keep the persons whose first name starts with this term
+    type: string
+  lastName:
+    description: Keep the persons whose last name starts with this term
+    type: string
+  email:
+    description: Keep the persons whose email matches this term
+    type: string
+  organizations:
+    description: Keep the persons who belong to the organizations specified
+    type: array
+    items:
+      $ref: OrganizationId.yaml
