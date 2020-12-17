@@ -16,6 +16,8 @@ post:
           schema:
             $ref: ../components/schemas/Person.yaml
       description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
     '403':
       $ref: ../components/responses/Unauthorized.yaml
     '404':
@@ -61,6 +63,8 @@ get:
           schema:
             $ref: ../components/schemas/PageOfPersons.yaml
       description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
     '403':
       $ref: ../components/responses/Unauthorized.yaml
     '404':
