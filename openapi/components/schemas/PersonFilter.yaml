@@ -11,7 +11,7 @@ properties:
     description: Keep the persons whose email matches this term
     type: string
   organizations:
-    description: Keep the persons who belong to the organizations specified
+    description: Keep the persons who belong to these organizations
     type: array
     items:
       $ref: OrganizationId.yaml

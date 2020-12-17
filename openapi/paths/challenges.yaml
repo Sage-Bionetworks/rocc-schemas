@@ -47,6 +47,14 @@ get:
         type: integer
         default: 0
         minimum: 0
+    - in: query
+      name: filter
+      description: Object that describes how to filter the results
+      required: false
+      schema:
+        $ref: ../components/schemas/ChallengeFilter.yaml
+      style: deepObject
+      explode: true
   responses:
     '200':
       content:
