@@ -1,0 +1,6 @@
+type: object
+description: Object that describes how to filter Tags
+properties:
+  tagId:
+    description: Keep the tags whose tagId starts with this term
+    type: string
