@@ -773,6 +773,17 @@
               "default": 0,
               "minimum": 0
             }
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "Object that describes how to filter the results",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/TagFilter"
+            },
+            "style": "deepObject",
+            "explode": true
           }
         ],
         "responses": {
@@ -906,6 +917,11 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-tag"
       },
+      "PersonId": {
+        "description": "The ID of the person",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "Challenge": {
         "type": "object",
         "description": "A challenge",
@@ -951,6 +967,13 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagId"
+            }
+          },
+          "organizers": {
+            "description": "The organizers of the challenge",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonId"
             }
           }
         }
@@ -1101,11 +1124,6 @@
           }
         ]
       },
-      "PersonId": {
-        "description": "The ID of the person",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
       "Email": {
         "description": "An email address",
         "type": "string",
@@ -1161,6 +1179,16 @@
             }
           }
         ]
+      },
+      "TagFilter": {
+        "type": "object",
+        "description": "Object that describes how to filter Tags",
+        "properties": {
+          "tagId": {
+            "description": "Keep the tags whose tagId starts with this term",
+            "type": "string"
+          }
+        }
       },
       "Tag": {
         "type": "object",
