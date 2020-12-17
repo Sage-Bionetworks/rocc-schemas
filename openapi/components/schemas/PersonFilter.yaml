@@ -10,8 +10,14 @@ properties:
   email:
     description: Keep the persons whose email matches this term
     type: string
-  organizations:
-    description: Keep the persons who belong to these organizations
-    type: array
-    items:
-      $ref: OrganizationId.yaml
+  organization:
+    description: Keep the persons who belong to this organization
+    type: string
+  # organizations:
+  #   description: Keep the persons who belong to these organizations
+  #   type: string
+    # TODO: Figure out why the following does not work
+    # See https://github.com/Sage-Bionetworks/rocc/issues/36
+    # type: array
+    # items:
+    #   $ref: OrganizationId.yaml

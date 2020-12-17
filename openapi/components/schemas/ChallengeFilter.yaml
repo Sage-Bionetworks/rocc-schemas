@@ -6,13 +6,19 @@ properties:
     type: string
   status:
     $ref: ChallengeStatus.yaml
-  organizers:
-    description: Keep the challenges organized by these persons
-    type: array
-    items:
-      $ref: PersonId.yaml
-  tags:
-    description: Keep the challenges associated to these tags
-    type: array
-    items:
-      $ref: TagId.yaml
+  organizer:
+    description: Keep the challenges organized by this person
+    type: string
+  tag:
+    description: Keep the challenges associated to this tag
+    type: string
+  # organizers:
+  #   description: Keep the challenges organized by these persons
+  #   type: array
+  #   items:
+  #     $ref: PersonId.yaml
+  # tags:
+  #   description: Keep the challenges associated to these tags
+  #   type: array
+  #   items:
+  #     $ref: TagId.yaml

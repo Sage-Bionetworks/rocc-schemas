@@ -17,6 +17,8 @@ post:
           schema:
             $ref: ../components/schemas/Challenge.yaml
       description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
     '403':
       $ref: ../components/responses/Unauthorized.yaml
     '404':
@@ -62,6 +64,8 @@ get:
           schema:
             $ref: ../components/schemas/PageOfChallenges.yaml
       description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
     '403':
       $ref: ../components/responses/Unauthorized.yaml
     '404':
