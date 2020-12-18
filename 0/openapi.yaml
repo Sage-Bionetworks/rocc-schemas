@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.1
+  version: 0.1.2
   title: Registry of Open Community Challenge API
   contact:
     name: The ROCC Team
@@ -55,6 +55,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Challenge'
           description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '403':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -85,6 +87,14 @@ paths:
             type: integer
             default: 0
             minimum: 0
+        - in: query
+          name: filter
+          description: Object that describes how to filter the results
+          required: false
+          schema:
+            $ref: '#/components/schemas/ChallengeFilter'
+          style: deepObject
+          explode: true
       responses:
         '200':
           content:
@@ -92,6 +102,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PageOfChallenges'
           description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '403':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -368,6 +380,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Person'
           description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '403':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -398,6 +412,14 @@ paths:
             type: integer
             default: 0
             minimum: 0
+        - in: query
+          name: filter
+          description: Object that describes how to filter the results
+          required: false
+          schema:
+            $ref: '#/components/schemas/PersonFilter'
+          style: deepObject
+          explode: true
       responses:
         '200':
           content:
@@ -405,6 +427,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/PageOfPersons'
           description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '403':
           $ref: '#/components/responses/Unauthorized'
         '404':
@@ -509,6 +533,14 @@ paths:
             type: integer
             default: 0
             minimum: 0
+        - in: query
+          name: filter
+          description: Object that describes how to filter the results
+          required: false
+          schema:
+            $ref: '#/components/schemas/TagFilter'
+          style: deepObject
+          explode: true
       responses:
         '200':
           content:
@@ -564,6 +596,29 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ChallengeStatus:
+      description: The status of challenge
+      type: string
+      enum:
+        - upcoming
+        - open
+        - closed
+      example: open
+    ChallengeFilter:
+      type: object
+      description: An object that describes how to filter Challenges
+      properties:
+        name:
+          description: Keep the challenges whose name include this term
+          type: string
+        status:
+          $ref: '#/components/schemas/ChallengeStatus'
+        organizer:
+          description: Keep the challenges organized by this person
+          type: string
+        tag:
+          description: Keep the challenges associated to this tag
+          type: string
     ResponsePageMetadata:
       type: object
       description: A page of results
@@ -597,6 +652,10 @@ components:
       maxLength: 60
       pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
       example: awesome-tag
+    PersonId:
+      description: The ID of the person
+      type: string
+      example: 507f1f77bcf86cd799439011
     Challenge:
       type: object
       description: A challenge
@@ -623,18 +682,17 @@ components:
           format: uri
           example: 'https://synapse.org/awesome-challenge'
         status:
-          description: The status of challenge
-          type: string
-          enum:
-            - upcoming
-            - open
-            - closed
-          example: open
+          $ref: '#/components/schemas/ChallengeStatus'
         tags:
           description: The tags associated to the challenge
           type: array
           items:
             $ref: '#/components/schemas/TagId'
+        organizers:
+          description: The organizers of the challenge
+          type: array
+          items:
+            $ref: '#/components/schemas/PersonId'
     PageOfChallenges:
       type: object
       description: A page of Challenges
@@ -735,10 +793,22 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Organization'
-    PersonId:
-      description: The ID of the person
-      type: string
-      example: 507f1f77bcf86cd799439011
+    PersonFilter:
+      type: object
+      description: An object that describes how to filter Persons
+      properties:
+        firstName:
+          description: Keep the persons whose first name starts with this term
+          type: string
+        lastName:
+          description: Keep the persons whose last name starts with this term
+          type: string
+        email:
+          description: Keep the persons whose email matches this term
+          type: string
+        organization:
+          description: Keep the persons who belong to this organization
+          type: string
     Email:
       description: An email address
       type: string
@@ -777,6 +847,13 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Person'
+    TagFilter:
+      type: object
+      description: An object that describes how to filter Tags
+      properties:
+        tagId:
+          description: Keep the tags whose tagId starts with this term
+          type: string
     Tag:
       type: object
       description: A tag that can be assigned to a resource
@@ -799,6 +876,12 @@ components:
               items:
                 $ref: '#/components/schemas/Tag'
   responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized
       content:
@@ -813,12 +896,6 @@ components:
             $ref: '#/components/schemas/Error'
     Conflict:
       description: The request conflicts with current state of the target resource
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Invalid request
       content:
         application/json:
           schema:
