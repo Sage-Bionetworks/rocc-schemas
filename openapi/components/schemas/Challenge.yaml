@@ -29,6 +29,8 @@ properties:
     type: array
     items:
       $ref: TagId.yaml
+  challengeResults:
+    $ref: ChallengeResults.yaml
   # organizations:
   #   description: The organizations sponsoring this challenge
   #   type: array
