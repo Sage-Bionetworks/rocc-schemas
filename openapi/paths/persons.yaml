@@ -16,6 +16,8 @@ post:
           schema:
             $ref: ../components/schemas/Person.yaml
       description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
     '403':
       $ref: ../components/responses/Unauthorized.yaml
     '404':
@@ -46,6 +48,14 @@ get:
         type: integer
         default: 0
         minimum: 0
+    - in: query
+      name: filter
+      description: Object that describes how to filter the results
+      required: false
+      schema:
+        $ref: ../components/schemas/PersonFilter.yaml
+      style: deepObject
+      explode: true
   responses:
     '200':
       content:
@@ -53,6 +63,8 @@ get:
           schema:
             $ref: ../components/schemas/PageOfPersons.yaml
       description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
     '403':
       $ref: ../components/responses/Unauthorized.yaml
     '404':

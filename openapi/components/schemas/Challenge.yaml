@@ -23,13 +23,7 @@ properties:
     format: uri
     example: https://synapse.org/awesome-challenge
   status:
-    description: The status of challenge
-    type: string
-    enum:
-      - upcoming
-      - open
-      - closed
-    example: open
+    $ref: ChallengeStatus.yaml
   tags:
     description: The tags associated to the challenge
     type: array
