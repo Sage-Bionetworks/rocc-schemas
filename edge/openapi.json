@@ -982,6 +982,22 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-tag"
       },
+      "ChallengeResults": {
+        "type": "object",
+        "description": "The results of a challenge",
+        "properties": {
+          "nFinalSubmissions": {
+            "description": "Number of final submissions",
+            "type": "integer",
+            "minimum": 0
+          },
+          "nRegisteredParticipants": {
+            "description": "Number of registered participants",
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
       "PersonId": {
         "description": "The ID of the person",
         "type": "string",
@@ -1026,6 +1042,9 @@
             "items": {
               "$ref": "#/components/schemas/TagId"
             }
+          },
+          "challengeResults": {
+            "$ref": "#/components/schemas/ChallengeResults"
           },
           "organizers": {
             "description": "The organizers of the challenge",
