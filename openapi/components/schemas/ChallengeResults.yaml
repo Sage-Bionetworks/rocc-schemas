@@ -1,0 +1,11 @@
+type: object
+description: The results of a challenge
+properties:
+  nFinalSubmissions:
+    description: Number of final submissions
+    type: integer
+    minimum: 0
+  nRegisteredParticipants:
+    description: Number of registered participants
+    type: integer
+    minimum: 0
