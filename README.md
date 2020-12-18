@@ -9,7 +9,7 @@ The OpenAPI specification implemented by Challenge Registries.
 ## Releases
 
 - <https://sage-bionetworks.github.io/rocc-schemas/latest/docs/>
-- <https://sage-bionetworks.github.io/rocc-schemas/0.1.1/docs/>
+- <https://sage-bionetworks.github.io/rocc-schemas/0.1.2/docs/>
 - <https://sage-bionetworks.github.io/rocc-schemas/0.1/docs/>
 - <https://sage-bionetworks.github.io/rocc-schemas/0/docs/>
 - <https://sage-bionetworks.github.io/rocc-schemas/edge/docs/>
