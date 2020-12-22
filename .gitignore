@@ -2,3 +2,4 @@
 dist
 dist.yaml
 node_modules
+openapi.yaml

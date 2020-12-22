@@ -9,8 +9,8 @@
   "private": true,
   "scripts": {
     "start": "openapi preview-docs openapi/openapi.yaml",
-    "build": "openapi bundle -o dist openapi/openapi.yaml",
+    "build": "openapi bundle -o openapi openapi/openapi.yaml",
     "lint": "openapi lint openapi/openapi.yaml",
-    "lint:ibm": "npm run build && lint-openapi dist.yaml"
+    "lint:ibm": "npm run build && lint-openapi openapi.yaml"
   }
 }
