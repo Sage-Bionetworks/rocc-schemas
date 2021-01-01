@@ -4,7 +4,7 @@
   "devDependencies": {
     "@redocly/openapi-cli": "^1.0.0-beta.25",
     "gh-openapi-docs-ts": "^0.3.4",
-    "ibm-openapi-validator": "^0.31.1"
+    "ibm-openapi-validator": "^0.33.0"
   },
   "private": true,
   "scripts": {
