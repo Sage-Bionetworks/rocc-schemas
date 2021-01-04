@@ -1,6 +1,6 @@
 {
   "name": "rocc-schemas",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "devDependencies": {
     "@redocly/openapi-cli": "1.0.0-beta.25",
     "gh-openapi-docs-ts": "0.3.4",
@@ -9,8 +9,8 @@
   "private": true,
   "scripts": {
     "start": "openapi preview-docs openapi/openapi.yaml",
-    "build": "openapi bundle -o dist openapi/openapi.yaml",
+    "build": "openapi bundle -o openapi openapi/openapi.yaml",
     "lint": "openapi lint openapi/openapi.yaml",
-    "lint:ibm": "npm run build && lint-openapi dist.yaml"
+    "lint:ibm": "npm run build && lint-openapi openapi.yaml"
   }
 }
