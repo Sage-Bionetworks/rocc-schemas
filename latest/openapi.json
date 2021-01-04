@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.2",
+    "version": "0.1.3",
     "title": "Registry of Open Community Challenge API",
     "contact": {
       "name": "The ROCC Team",
@@ -982,6 +982,27 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-tag"
       },
+      "ChallengeResults": {
+        "type": "object",
+        "description": "The results of a challenge",
+        "properties": {
+          "nSubmissions": {
+            "description": "Number of total submissions throughout the challenge",
+            "type": "integer",
+            "minimum": 0
+          },
+          "nFinalSubmissions": {
+            "description": "Number of final submissions",
+            "type": "integer",
+            "minimum": 0
+          },
+          "nRegisteredParticipants": {
+            "description": "Number of registered participants",
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
       "PersonId": {
         "description": "The ID of the person",
         "type": "string",
@@ -1026,6 +1047,9 @@
             "items": {
               "$ref": "#/components/schemas/TagId"
             }
+          },
+          "challengeResults": {
+            "$ref": "#/components/schemas/ChallengeResults"
           },
           "organizers": {
             "description": "The organizers of the challenge",
