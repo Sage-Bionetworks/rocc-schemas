@@ -12,15 +12,15 @@ get:
   description: Returns the grant specified
   operationId: getGrant
   responses:
-    '200':
+    "200":
       description: Success
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Grant.yaml
-    '403':
+    "403":
       $ref: ../components/responses/Unauthorized.yaml
-    '404':
+    "404":
       $ref: ../components/responses/NotFound.yaml
 delete:
   tags:
@@ -29,13 +29,9 @@ delete:
   description: Deletes the grant specified
   operationId: deleteGrant
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/Grant.yaml
-    '403':
+    "200":
+      $ref: ../components/responses/Success.yaml
+    "403":
       $ref: ../components/responses/Unauthorized.yaml
-    '404':
+    "404":
       $ref: ../components/responses/NotFound.yaml
