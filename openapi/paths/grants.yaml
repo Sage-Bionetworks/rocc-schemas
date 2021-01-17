@@ -10,11 +10,11 @@ post:
         schema:
           $ref: ../components/schemas/Grant.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Grant.yaml
+            $ref: ../components/schemas/GrantId.yaml
       description: Success
     '403':
       $ref: ../components/responses/Unauthorized.yaml

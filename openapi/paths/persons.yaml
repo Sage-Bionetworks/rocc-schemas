@@ -10,11 +10,11 @@ post:
         schema:
           $ref: ../components/schemas/Person.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Person.yaml
+            $ref: ../components/schemas/PersonId.yaml
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml

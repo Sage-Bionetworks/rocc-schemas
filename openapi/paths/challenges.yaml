@@ -11,11 +11,11 @@ post:
         schema:
           $ref: ../components/schemas/Challenge.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Challenge.yaml
+            $ref: ../components/schemas/ChallengeId.yaml
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml

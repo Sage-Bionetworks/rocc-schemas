@@ -17,11 +17,11 @@ post:
         schema:
           $ref: ../components/schemas/Tag.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Tag.yaml
+            $ref: ../components/schemas/TagId.yaml
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
