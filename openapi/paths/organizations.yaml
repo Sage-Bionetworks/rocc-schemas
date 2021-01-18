@@ -17,17 +17,15 @@ post:
         schema:
           $ref: ../components/schemas/Organization.yaml
   responses:
-    '201':
+    "201":
       content:
         application/json:
           schema:
             $ref: ../components/schemas/OrganizationId.yaml
       description: Success
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-    '409':
+    "400":
+      $ref: ../components/responses/BadRequest.yaml
+    "409":
       $ref: ../components/responses/Conflict.yaml
 get:
   tags:
@@ -54,14 +52,11 @@ get:
         default: 0
         minimum: 0
   responses:
-    '200':
+    "200":
       content:
         application/json:
           schema:
             $ref: ../components/schemas/PageOfOrganizations.yaml
       description: Success
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-
+    "400":
+      $ref: ../components/responses/BadRequest.yaml
