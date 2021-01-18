@@ -11,17 +11,17 @@ post:
         schema:
           $ref: ../components/schemas/Challenge.yaml
   responses:
-    '201':
+    "201":
       content:
         application/json:
           schema:
             $ref: ../components/schemas/ChallengeId.yaml
       description: Success
-    '400':
+    "400":
       $ref: ../components/responses/BadRequest.yaml
-    '404':
+    "404":
       $ref: ../components/responses/NotFound.yaml
-    '409':
+    "409":
       $ref: ../components/responses/Conflict.yaml
 get:
   tags:
@@ -56,13 +56,11 @@ get:
       style: deepObject
       explode: true
   responses:
-    '200':
+    "200":
       content:
         application/json:
           schema:
             $ref: ../components/schemas/PageOfChallenges.yaml
       description: Success
-    '400':
+    "400":
       $ref: ../components/responses/BadRequest.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml

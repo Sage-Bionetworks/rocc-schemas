@@ -10,15 +10,15 @@ post:
         schema:
           $ref: ../components/schemas/Grant.yaml
   responses:
-    '201':
+    "201":
       content:
         application/json:
           schema:
             $ref: ../components/schemas/GrantId.yaml
       description: Success
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-    '409':
+    "400":
+      $ref: ../components/responses/BadRequest.yaml
+    "409":
       $ref: ../components/responses/Conflict.yaml
 get:
   tags:
@@ -45,12 +45,11 @@ get:
         default: 0
         minimum: 0
   responses:
-    '200':
+    "200":
       content:
         application/json:
           schema:
             $ref: ../components/schemas/PageOfGrants.yaml
       description: Success
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-
+    "400":
+      $ref: ../components/responses/BadRequest.yaml
