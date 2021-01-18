@@ -4,7 +4,7 @@ parameters:
     description: The ID of the challenge
     required: true
     schema:
-      $ref: ../components/schemas/ChallengeId.yaml
+      $ref: ../components/parameters/ChallengeId.yaml
 get:
   tags:
     - Challenge

@@ -20,4 +20,4 @@ properties:
     # See https://github.com/Sage-Bionetworks/rocc/issues/36
     # type: array
     # items:
-    #   $ref: OrganizationId.yaml
+    #   $ref: ../parameters/OrganizationId.yaml

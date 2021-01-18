@@ -4,7 +4,7 @@ parameters:
     description: The ID of the person
     required: true
     schema:
-      $ref: ../components/schemas/PersonId.yaml
+      $ref: ../components/parameters/PersonId.yaml
 get:
   tags:
     - Person

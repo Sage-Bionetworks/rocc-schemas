@@ -10,7 +10,7 @@ post:
       description: The ID of the organization that is being created
       required: true
       schema:
-        $ref: ../components/schemas/OrganizationId.yaml
+        $ref: ../components/parameters/OrganizationId.yaml
   requestBody:
     content:
       application/json:
@@ -21,7 +21,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/OrganizationId.yaml
+            $ref: ../components/responses/OrganizationId.yaml
       description: Success
     "400":
       $ref: ../components/responses/BadRequest.yaml

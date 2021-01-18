@@ -4,7 +4,7 @@ parameters:
     description: The ID of the organization
     required: true
     schema:
-      $ref: ../components/schemas/OrganizationId.yaml
+      $ref: ../components/parameters/OrganizationId.yaml
 get:
   tags:
     - Organization

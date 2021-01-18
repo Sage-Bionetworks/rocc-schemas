@@ -14,7 +14,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PersonId.yaml
+            $ref: ../components/responses/PersonId.yaml
       description: Success
     "400":
       $ref: ../components/responses/BadRequest.yaml
