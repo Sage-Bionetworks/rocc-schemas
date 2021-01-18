@@ -12,7 +12,7 @@ properties:
     type: string
     format: uri
   # organizationId:
-  #   $ref: OrganizationId.yaml
+  #   $ref: ../parameters/OrganizationId.yaml
 required:
   - name
 example:

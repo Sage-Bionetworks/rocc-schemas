@@ -15,12 +15,10 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ChallengeId.yaml
+            $ref: ../components/responses/ChallengeResponse.yaml
       description: Success
     "400":
       $ref: ../components/responses/BadRequest.yaml
-    "404":
-      $ref: ../components/responses/NotFound.yaml
     "409":
       $ref: ../components/responses/Conflict.yaml
 get:

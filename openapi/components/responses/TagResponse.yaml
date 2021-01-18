@@ -1,0 +1,7 @@
+type: object
+description: A tag ID
+properties:
+  tagId:
+    $ref: ../parameters/TagId.yaml
+example:
+  tagId: awesome-tag

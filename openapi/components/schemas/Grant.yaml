@@ -2,7 +2,7 @@ type: object
 description: Information about monetary resources for challenge
 properties:
   grantId:
-    $ref: GrantId.yaml
+    $ref: ../parameters/GrantId.yaml
   name:
     description: The grant name
     type: string
@@ -14,7 +14,7 @@ properties:
     type: string
     format: uri
   # organizationId:
-  #   $ref: OrganizationId.yaml
+  #   $ref: ../parameters/OrganizationId.yaml
 example:
   grantId: 507f1f77bcf86cd799439011
   name: Awesome Grant

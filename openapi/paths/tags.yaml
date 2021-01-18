@@ -10,7 +10,7 @@ post:
       description: The ID of the tag that is being created
       required: true
       schema:
-        $ref: ../components/schemas/TagId.yaml
+        $ref: ../components/parameters/TagId.yaml
   requestBody:
     content:
       application/json:
@@ -21,7 +21,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/TagId.yaml
+            $ref: ../components/responses/TagResponse.yaml
       description: Success
     "400":
       $ref: ../components/responses/BadRequest.yaml

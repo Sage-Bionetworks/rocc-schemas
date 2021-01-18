@@ -2,7 +2,7 @@ type: object
 description: An organization
 properties:
   organizationId:
-    $ref: OrganizationId.yaml
+    $ref: ../parameters/OrganizationId.yaml
   name:
     description: The organization name
     type: string

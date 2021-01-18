@@ -2,7 +2,7 @@ type: object
 description: A challenge
 properties:
   challengeId:
-    $ref: ChallengeId.yaml
+    $ref: ../parameters/ChallengeId.yaml
   name:
     description: The challenge name
     type: string
@@ -19,19 +19,19 @@ properties:
     type: string
     format: uri
   status:
-    $ref: ChallengeStatus.yaml
+    $ref: ../parameters/ChallengeStatus.yaml
   tags:
     description: The tags associated to the challenge
     type: array
     items:
-      $ref: TagId.yaml
+      $ref: ../parameters/TagId.yaml
   challengeResults:
     $ref: ChallengeResults.yaml
   organizers:
     description: The organizers of the challenge
     type: array
     items:
-      $ref: PersonId.yaml
+      $ref: ../parameters/PersonId.yaml
   # organizations:
   #   description: The organizations sponsoring this challenge
   #   type: array

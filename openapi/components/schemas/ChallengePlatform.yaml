@@ -2,7 +2,7 @@ type: object
 description: A challenge platform
 properties:
   challengePlatformId:
-    $ref: ChallengePlatformId.yaml
+    $ref: ../parameters/ChallengePlatformId.yaml
   name:
     description: The name of the challenge platform
     type: string

@@ -8,12 +8,12 @@ properties:
     description: The last name of the person
     type: string
   email:
-    $ref: Email.yaml
+    $ref: ../parameters/Email.yaml
   organizations:
     description: The organizations the person belongs to
     type: array
     items:
-      $ref: OrganizationId.yaml
+      $ref: ../parameters/OrganizationId.yaml
 required:
   - firstName
   - lastName
