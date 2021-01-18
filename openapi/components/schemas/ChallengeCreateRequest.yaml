@@ -1,8 +1,6 @@
 type: object
 description: A challenge
 properties:
-  challengeId:
-    $ref: ChallengeId.yaml
   name:
     description: The challenge name
     type: string
@@ -41,8 +39,12 @@ properties:
   #   type: array
   #   items:
   #     $ref: Grant.yaml
+required:
+  - name
+  - startDate
+  - endDate
+  - status
 example:
-  challengeId: 507f1f77bcf86cd799439011
   name: Awesome Challenge
   startDate: "2020-11-10"
   endDate: "2020-12-31"

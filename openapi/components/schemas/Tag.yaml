@@ -6,3 +6,8 @@ properties:
   description:
     description: A short description of the tag
     type: string
+required:
+  - tagId
+example:
+  tagId: awesome-tag
+  description: Awesome tag

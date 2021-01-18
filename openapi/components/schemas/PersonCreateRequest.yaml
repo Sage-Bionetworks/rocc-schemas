@@ -1,8 +1,6 @@
 type: object
 description: A person
 properties:
-  personId:
-    $ref: PersonId.yaml
   firstName:
     description: The first name of the person
     type: string
@@ -16,8 +14,11 @@ properties:
     type: array
     items:
       $ref: OrganizationId.yaml
+required:
+  - firstName
+  - lastName
+  - email
 example:
-  personId: 507f1f77bcf86cd799439011
   firstName: John
   lastName: Smith
   email: john.smith@example.com

@@ -9,7 +9,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Challenge.yaml
+          $ref: ../components/schemas/ChallengeCreateRequest.yaml
   responses:
     '201':
       content:
