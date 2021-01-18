@@ -2,4 +2,4 @@ description: Successful operation
 content:
   application/json:
     schema:
-      type: object
+      $ref: ../schemas/EmptyObject.yaml
