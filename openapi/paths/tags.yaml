@@ -21,7 +21,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/responses/TagId.yaml
+            $ref: ../components/responses/TagResponse.yaml
       description: Success
     "400":
       $ref: ../components/responses/BadRequest.yaml

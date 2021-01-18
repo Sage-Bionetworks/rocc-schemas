@@ -15,7 +15,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/responses/ChallengeId.yaml
+            $ref: ../components/responses/ChallengeResponse.yaml
       description: Success
     "400":
       $ref: ../components/responses/BadRequest.yaml
