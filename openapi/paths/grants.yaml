@@ -16,8 +16,6 @@ post:
           schema:
             $ref: ../components/schemas/GrantId.yaml
       description: Success
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '409':
@@ -53,8 +51,6 @@ get:
           schema:
             $ref: ../components/schemas/PageOfGrants.yaml
       description: Success
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
 

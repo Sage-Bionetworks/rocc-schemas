@@ -23,8 +23,6 @@ post:
           schema:
             $ref: ../components/schemas/OrganizationId.yaml
       description: Success
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '409':
@@ -60,8 +58,6 @@ get:
           schema:
             $ref: ../components/schemas/PageOfOrganizations.yaml
       description: Success
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
 
