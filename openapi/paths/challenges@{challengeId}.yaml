@@ -12,13 +12,13 @@ get:
   description: Returns the challenge specified
   operationId: getChallenge
   responses:
-    "200":
+    '200':
       description: Success
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Challenge.yaml
-    "404":
+    '404':
       $ref: ../components/responses/NotFound.yaml
 delete:
   tags:
@@ -27,7 +27,11 @@ delete:
   description: Deletes the challenge specified
   operationId: deleteChallenge
   responses:
-    "200":
-      $ref: ../components/responses/Success.yaml
-    "404":
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
+    '404':
       $ref: ../components/responses/NotFound.yaml
