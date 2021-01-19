@@ -3,7 +3,7 @@ post:
     - Organization
   summary: Create an organization
   description: Create an organization with the specified name
-  operationId: "createOrganization"
+  operationId: createOrganization
   parameters:
     - in: query
       name: organizationId
@@ -17,22 +17,22 @@ post:
         schema:
           $ref: ../components/schemas/Organization.yaml
   responses:
-    "201":
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/responses/OrganizationResponse.yaml
+            $ref: ../components/schemas/OrganizationCreateResponse.yaml
       description: Success
-    "400":
+    '400':
       $ref: ../components/responses/BadRequest.yaml
-    "409":
+    '409':
       $ref: ../components/responses/Conflict.yaml
 get:
   tags:
     - Organization
   summary: Get all organizations
   description: Returns the organizations
-  operationId: "listOrganizations"
+  operationId: listOrganizations
   parameters:
     - in: query
       name: limit
@@ -52,11 +52,11 @@ get:
         default: 0
         minimum: 0
   responses:
-    "200":
+    '200':
       content:
         application/json:
           schema:
             $ref: ../components/schemas/PageOfOrganizations.yaml
       description: Success
-    "400":
+    '400':
       $ref: ../components/responses/BadRequest.yaml

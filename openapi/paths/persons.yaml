@@ -3,29 +3,29 @@ post:
     - Person
   summary: Create a person
   description: Create a person with the specified name
-  operationId: "createPerson"
+  operationId: createPerson
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/PersonCreateRequest.yaml
   responses:
-    "201":
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/responses/PersonResponse.yaml
+            $ref: ../components/schemas/PersonCreateResponse.yaml
       description: Success
-    "400":
+    '400':
       $ref: ../components/responses/BadRequest.yaml
-    "409":
+    '409':
       $ref: ../components/responses/Conflict.yaml
 get:
   tags:
     - Person
   summary: Get all persons
   description: Returns the persons
-  operationId: "listPersons"
+  operationId: listPersons
   parameters:
     - in: query
       name: limit
@@ -53,11 +53,11 @@ get:
       style: deepObject
       explode: true
   responses:
-    "200":
+    '200':
       content:
         application/json:
           schema:
             $ref: ../components/schemas/PageOfPersons.yaml
       description: Success
-    "400":
+    '400':
       $ref: ../components/responses/BadRequest.yaml

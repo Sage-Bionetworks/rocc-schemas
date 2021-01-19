@@ -12,13 +12,13 @@ get:
   description: Returns the person specified
   operationId: getPerson
   responses:
-    "200":
+    '200':
       description: Success
       content:
         application/json:
           schema:
             $ref: ../components/schemas/Person.yaml
-    "404":
+    '404':
       $ref: ../components/responses/NotFound.yaml
 delete:
   tags:
@@ -27,7 +27,11 @@ delete:
   description: Deletes the person specified
   operationId: deletePerson
   responses:
-    "200":
-      $ref: ../components/responses/Success.yaml
-    "404":
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
+    '404':
       $ref: ../components/responses/NotFound.yaml

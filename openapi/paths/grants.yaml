@@ -3,29 +3,29 @@ post:
     - Grant
   summary: Create a grant
   description: Create a grant with the specified name
-  operationId: "createGrant"
+  operationId: createGrant
   requestBody:
     content:
       application/json:
         schema:
           $ref: ../components/schemas/GrantCreateRequest.yaml
   responses:
-    "201":
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/responses/GrantResponse.yaml
+            $ref: ../components/schemas/GrantCreateResponse.yaml
       description: Success
-    "400":
+    '400':
       $ref: ../components/responses/BadRequest.yaml
-    "409":
+    '409':
       $ref: ../components/responses/Conflict.yaml
 get:
   tags:
     - Grant
   summary: Get all grants
   description: Returns the grants
-  operationId: "listGrants"
+  operationId: listGrants
   parameters:
     - in: query
       name: limit
@@ -45,11 +45,11 @@ get:
         default: 0
         minimum: 0
   responses:
-    "200":
+    '200':
       content:
         application/json:
           schema:
             $ref: ../components/schemas/PageOfGrants.yaml
       description: Success
-    "400":
+    '400':
       $ref: ../components/responses/BadRequest.yaml
