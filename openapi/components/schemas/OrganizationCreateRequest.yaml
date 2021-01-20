@@ -1,8 +1,6 @@
 type: object
 description: An organization
 properties:
-  organizationId:
-    $ref: ../parameters/OrganizationId.yaml
   name:
     description: The organization name
     type: string
@@ -13,8 +11,10 @@ properties:
     description: The URL to the homepage of the organization
     type: string
     format: uri
+required:
+  - name
+  - url
 example:
-  organizationId: awesome-organization
   name: Awesome Organization
   shortName: AO
   url: https://www.example.org
