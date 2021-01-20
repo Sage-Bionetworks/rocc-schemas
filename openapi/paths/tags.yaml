@@ -15,7 +15,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Tag.yaml
+          $ref: ../components/schemas/TagCreateRequest.yaml
   responses:
     '201':
       content:
