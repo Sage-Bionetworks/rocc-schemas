@@ -1,0 +1,7 @@
+type: object
+description: A person ID
+properties:
+  personId:
+    $ref: ../parameters/PersonId.yaml
+example:
+  personId: 507f1f77bcf86cd799439011

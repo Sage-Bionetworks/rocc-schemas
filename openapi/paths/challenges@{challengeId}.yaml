@@ -4,7 +4,7 @@ parameters:
     description: The ID of the challenge
     required: true
     schema:
-      $ref: ../components/schemas/ChallengeId.yaml
+      $ref: ../components/parameters/ChallengeId.yaml
 get:
   tags:
     - Challenge
@@ -18,8 +18,6 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Challenge.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
 delete:
@@ -34,8 +32,6 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Challenge.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
+            $ref: ../components/schemas/EmptyObject.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml

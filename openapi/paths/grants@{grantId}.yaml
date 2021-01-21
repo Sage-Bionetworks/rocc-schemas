@@ -4,7 +4,7 @@ parameters:
     description: The ID of the grant that is being created
     required: true
     schema:
-      $ref: ../components/schemas/GrantId.yaml
+      $ref: ../components/parameters/GrantId.yaml
 get:
   tags:
     - Grant
@@ -18,8 +18,6 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Grant.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
 delete:
@@ -34,8 +32,6 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Grant.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
+            $ref: ../components/schemas/EmptyObject.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml

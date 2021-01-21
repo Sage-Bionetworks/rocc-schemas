@@ -3,32 +3,28 @@ post:
     - Tag
   summary: Create a tag
   description: Create a tag with the specified name
-  operationId: "createTag"
+  operationId: createTag
   parameters:
     - in: query
       name: tagId
       description: The ID of the tag that is being created
       required: true
       schema:
-        $ref: ../components/schemas/TagId.yaml
+        $ref: ../components/parameters/TagId.yaml
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Tag.yaml
+          $ref: ../components/schemas/TagCreateRequest.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Tag.yaml
+            $ref: ../components/schemas/TagCreateResponse.yaml
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
 get:
@@ -36,7 +32,7 @@ get:
     - Tag
   summary: Get all tags
   description: Returns the tags
-  operationId: "listTags"
+  operationId: listTags
   parameters:
     - in: query
       name: limit
@@ -70,8 +66,5 @@ get:
           schema:
             $ref: ../components/schemas/PageOfTags.yaml
       description: Success
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-
+    '400':
+      $ref: ../components/responses/BadRequest.yaml

@@ -9,20 +9,16 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/Challenge.yaml
+          $ref: ../components/schemas/ChallengeCreateRequest.yaml
   responses:
-    '200':
+    '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Challenge.yaml
+            $ref: ../components/schemas/ChallengeCreateResponse.yaml
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
 get:
@@ -66,7 +62,3 @@ get:
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml

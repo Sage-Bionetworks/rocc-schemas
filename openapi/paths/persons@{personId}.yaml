@@ -4,7 +4,7 @@ parameters:
     description: The ID of the person
     required: true
     schema:
-      $ref: ../components/schemas/PersonId.yaml
+      $ref: ../components/parameters/PersonId.yaml
 get:
   tags:
     - Person
@@ -18,8 +18,6 @@ get:
         application/json:
           schema:
             $ref: ../components/schemas/Person.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
 delete:
@@ -34,8 +32,6 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Person.yaml
-    '403':
-      $ref: ../components/responses/Unauthorized.yaml
+            $ref: ../components/schemas/EmptyObject.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
