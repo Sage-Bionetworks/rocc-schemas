@@ -67,17 +67,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Challenge"
+                "$ref": "#/components/schemas/ChallengeCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Challenge"
+                  "$ref": "#/components/schemas/ChallengeCreateResponse"
                 }
               }
             },
@@ -85,12 +85,6 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -153,12 +147,6 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
           }
         }
       }
@@ -193,9 +181,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -214,13 +199,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Challenge"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -240,27 +222,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Grant"
+                "$ref": "#/components/schemas/GrantCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Grant"
+                  "$ref": "#/components/schemas/GrantCreateResponse"
                 }
               }
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -310,11 +289,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -349,9 +325,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -370,13 +343,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Grant"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -407,27 +377,24 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Organization"
+                "$ref": "#/components/schemas/OrganizationCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Organization"
+                  "$ref": "#/components/schemas/OrganizationCreateResponse"
                 }
               }
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -477,11 +444,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -516,9 +480,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -537,13 +498,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Organization"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -563,17 +521,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Person"
+                "$ref": "#/components/schemas/PersonCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Person"
+                  "$ref": "#/components/schemas/PersonCreateResponse"
                 }
               }
             },
@@ -581,12 +539,6 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -649,12 +601,6 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
           }
         }
       }
@@ -689,9 +635,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -710,13 +653,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Person"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -747,17 +687,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Tag"
+                "$ref": "#/components/schemas/TagCreateRequest"
               }
             }
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tag"
+                  "$ref": "#/components/schemas/TagCreateResponse"
                 }
               }
             },
@@ -765,12 +705,6 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
@@ -831,11 +765,8 @@
             },
             "description": "Success"
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
           }
         }
       }
@@ -870,9 +801,6 @@
               }
             }
           },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
           "404": {
             "$ref": "#/components/responses/NotFound"
           }
@@ -891,13 +819,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Tag"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
-          },
-          "403": {
-            "$ref": "#/components/responses/Unauthorized"
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
@@ -909,7 +834,7 @@
   "components": {
     "schemas": {
       "ChallengeStatus": {
-        "description": "The status of challenge",
+        "description": "The status of the challenge",
         "type": "string",
         "enum": [
           "upcoming",
@@ -961,6 +886,10 @@
                 "format": "uri"
               }
             }
+          },
+          "totalResults": {
+            "description": "Total number of results in the result set",
+            "type": "integer"
           }
         },
         "required": [
@@ -1017,26 +946,22 @@
           },
           "name": {
             "description": "The challenge name",
-            "type": "string",
-            "example": "Awesome Challenge"
+            "type": "string"
           },
           "startDate": {
             "description": "When the challenge started",
             "type": "string",
-            "format": "date",
-            "example": "2020-11-10"
+            "format": "date"
           },
           "endDate": {
             "description": "When the challenge ended",
             "type": "string",
-            "format": "date",
-            "example": "2020-12-31"
+            "format": "date"
           },
           "url": {
             "description": "The URL to the challenge website",
             "type": "string",
-            "format": "uri",
-            "example": "https://synapse.org/awesome-challenge"
+            "format": "uri"
           },
           "status": {
             "$ref": "#/components/schemas/ChallengeStatus"
@@ -1058,6 +983,26 @@
               "$ref": "#/components/schemas/PersonId"
             }
           }
+        },
+        "example": {
+          "challengeId": "507f1f77bcf86cd799439011",
+          "name": "Awesome Challenge",
+          "startDate": "2020-11-10",
+          "endDate": "2020-12-31",
+          "url": "https://synapse.org/awesome-challenge",
+          "status": "open",
+          "tags": [
+            "awesome-tag1",
+            "awesome-tag2"
+          ],
+          "challengeResults": {
+            "nSubmissions": 0,
+            "nFinalSubmissions": 0,
+            "nRegisteredParticipants": 0
+          },
+          "organizers": [
+            "507f1f77bcf86cd799439011"
+          ]
         }
       },
       "PageOfChallenges": {
@@ -1107,6 +1052,92 @@
           "status"
         ]
       },
+      "ChallengeCreateRequest": {
+        "type": "object",
+        "description": "A challenge",
+        "properties": {
+          "name": {
+            "description": "The challenge name",
+            "type": "string"
+          },
+          "startDate": {
+            "description": "When the challenge started",
+            "type": "string",
+            "format": "date"
+          },
+          "endDate": {
+            "description": "When the challenge ended",
+            "type": "string",
+            "format": "date"
+          },
+          "url": {
+            "description": "The URL to the challenge website",
+            "type": "string",
+            "format": "uri"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ChallengeStatus"
+          },
+          "tags": {
+            "description": "The tags associated to the challenge",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TagId"
+            }
+          },
+          "challengeResults": {
+            "$ref": "#/components/schemas/ChallengeResults"
+          },
+          "organizers": {
+            "description": "The organizers of the challenge",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PersonId"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "startDate",
+          "endDate",
+          "status"
+        ],
+        "example": {
+          "name": "Awesome Challenge",
+          "startDate": "2020-11-10",
+          "endDate": "2020-12-31",
+          "url": "https://synapse.org/awesome-challenge",
+          "status": "open",
+          "tags": [
+            "awesome-tag1",
+            "awesome-tag2"
+          ],
+          "challengeResults": {
+            "nSubmissions": 0,
+            "nFinalSubmissions": 0,
+            "nRegisteredParticipants": 0
+          },
+          "organizers": [
+            "507f1f77bcf86cd799439011"
+          ]
+        }
+      },
+      "ChallengeCreateResponse": {
+        "type": "object",
+        "description": "A challenge ID",
+        "properties": {
+          "challengeId": {
+            "$ref": "#/components/schemas/ChallengeId"
+          }
+        },
+        "example": {
+          "challengeId": "507f1f77bcf86cd799439011"
+        }
+      },
+      "EmptyObject": {
+        "type": "object",
+        "description": "Empty JSON object"
+      },
       "GrantId": {
         "description": "The ID of the grant",
         "type": "string",
@@ -1132,6 +1163,12 @@
             "type": "string",
             "format": "uri"
           }
+        },
+        "example": {
+          "grantId": "507f1f77bcf86cd799439011",
+          "name": "Awesome Grant",
+          "description": "This is an awesome grant",
+          "url": "https://report.nih.gov/"
         }
       },
       "PageOfGrants": {
@@ -1154,6 +1191,45 @@
             }
           }
         ]
+      },
+      "GrantCreateRequest": {
+        "type": "object",
+        "description": "Information about monetary resources for challenge",
+        "properties": {
+          "name": {
+            "description": "The grant name",
+            "type": "string"
+          },
+          "description": {
+            "description": "A description of the grant",
+            "type": "string"
+          },
+          "url": {
+            "description": "The URL to the grant",
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "example": {
+          "name": "Awesome Grant",
+          "description": "This is an awesome grant",
+          "url": "https://report.nih.gov/"
+        }
+      },
+      "GrantCreateResponse": {
+        "type": "object",
+        "description": "A grant ID",
+        "properties": {
+          "grantId": {
+            "$ref": "#/components/schemas/GrantId"
+          }
+        },
+        "example": {
+          "grantId": "507f1f77bcf86cd799439011"
+        }
       },
       "OrganizationId": {
         "description": "The ID of the organization",
@@ -1183,6 +1259,12 @@
             "type": "string",
             "format": "uri"
           }
+        },
+        "example": {
+          "organizationId": "awesome-organization",
+          "name": "Awesome Organization",
+          "shortName": "AO",
+          "url": "https://www.example.org"
         }
       },
       "PageOfOrganizations": {
@@ -1205,6 +1287,46 @@
             }
           }
         ]
+      },
+      "OrganizationCreateRequest": {
+        "type": "object",
+        "description": "An organization",
+        "properties": {
+          "name": {
+            "description": "The organization name",
+            "type": "string"
+          },
+          "shortName": {
+            "description": "The organization short name",
+            "type": "string"
+          },
+          "url": {
+            "description": "The URL to the homepage of the organization",
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "name",
+          "url"
+        ],
+        "example": {
+          "name": "Awesome Organization",
+          "shortName": "AO",
+          "url": "https://www.example.org"
+        }
+      },
+      "OrganizationCreateResponse": {
+        "type": "object",
+        "description": "An organization ID",
+        "properties": {
+          "organizationId": {
+            "$ref": "#/components/schemas/OrganizationId"
+          }
+        },
+        "example": {
+          "organizationId": "awesome-organization"
+        }
       },
       "PersonFilter": {
         "type": "object",
@@ -1243,13 +1365,11 @@
           },
           "firstName": {
             "description": "The first name of the person",
-            "type": "string",
-            "example": "John"
+            "type": "string"
           },
           "lastName": {
             "description": "The last name of the person",
-            "type": "string",
-            "example": "Smith"
+            "type": "string"
           },
           "email": {
             "$ref": "#/components/schemas/Email"
@@ -1261,6 +1381,15 @@
               "$ref": "#/components/schemas/OrganizationId"
             }
           }
+        },
+        "example": {
+          "personId": "507f1f77bcf86cd799439011",
+          "firstName": "John",
+          "lastName": "Smith",
+          "email": "john.smith@example.com",
+          "organizations": [
+            "awesome-organization1"
+          ]
         }
       },
       "PageOfPersons": {
@@ -1284,6 +1413,55 @@
           }
         ]
       },
+      "PersonCreateRequest": {
+        "type": "object",
+        "description": "A person",
+        "properties": {
+          "firstName": {
+            "description": "The first name of the person",
+            "type": "string"
+          },
+          "lastName": {
+            "description": "The last name of the person",
+            "type": "string"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          },
+          "organizations": {
+            "description": "The organizations the person belongs to",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationId"
+            }
+          }
+        },
+        "required": [
+          "firstName",
+          "lastName",
+          "email"
+        ],
+        "example": {
+          "firstName": "John",
+          "lastName": "Smith",
+          "email": "john.smith@example.com",
+          "organizations": [
+            "awesome-organization1"
+          ]
+        }
+      },
+      "PersonCreateResponse": {
+        "type": "object",
+        "description": "A person ID",
+        "properties": {
+          "personId": {
+            "$ref": "#/components/schemas/PersonId"
+          }
+        },
+        "example": {
+          "personId": "507f1f77bcf86cd799439011"
+        }
+      },
       "TagFilter": {
         "type": "object",
         "description": "An object that describes how to filter Tags",
@@ -1305,6 +1483,10 @@
             "description": "A short description of the tag",
             "type": "string"
           }
+        },
+        "example": {
+          "tagId": "awesome-tag",
+          "description": "Awesome tag"
         }
       },
       "PageOfTags": {
@@ -1327,6 +1509,31 @@
             }
           }
         ]
+      },
+      "TagCreateRequest": {
+        "type": "object",
+        "description": "A tag that can be assigned to a resource",
+        "properties": {
+          "description": {
+            "description": "A short description of the tag",
+            "type": "string"
+          }
+        },
+        "example": {
+          "description": "Awesome tag"
+        }
+      },
+      "TagCreateResponse": {
+        "type": "object",
+        "description": "A tag ID",
+        "properties": {
+          "tagId": {
+            "$ref": "#/components/schemas/TagId"
+          }
+        },
+        "example": {
+          "tagId": "awesome-tag"
+        }
       }
     },
     "responses": {
@@ -1340,8 +1547,8 @@
           }
         }
       },
-      "Unauthorized": {
-        "description": "Unauthorized",
+      "Conflict": {
+        "description": "The request conflicts with current state of the target resource",
         "content": {
           "application/json": {
             "schema": {
@@ -1352,16 +1559,6 @@
       },
       "NotFound": {
         "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
-      "Conflict": {
-        "description": "The request conflicts with current state of the target resource",
         "content": {
           "application/json": {
             "schema": {
