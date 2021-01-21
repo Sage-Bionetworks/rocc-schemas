@@ -59,6 +59,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Challenge
@@ -100,6 +102,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/challenges/{challengeId}':
     parameters:
       - in: path
@@ -123,6 +127,8 @@ paths:
                 $ref: '#/components/schemas/Challenge'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Challenge
@@ -138,6 +144,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /grants:
     post:
       tags:
@@ -161,6 +169,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Grant
@@ -194,6 +204,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/grants/{grantId}':
     parameters:
       - in: path
@@ -217,6 +229,8 @@ paths:
                 $ref: '#/components/schemas/Grant'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Grant
@@ -232,6 +246,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /organizations:
     post:
       tags:
@@ -262,6 +278,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Organization
@@ -295,6 +313,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/organizations/{organizationId}':
     parameters:
       - in: path
@@ -318,6 +338,8 @@ paths:
                 $ref: '#/components/schemas/Organization'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Organization
@@ -333,6 +355,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /persons:
     post:
       tags:
@@ -356,6 +380,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Person
@@ -397,6 +423,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/persons/{personId}':
     parameters:
       - in: path
@@ -420,6 +448,8 @@ paths:
                 $ref: '#/components/schemas/Person'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Person
@@ -435,6 +465,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /tags:
     post:
       tags:
@@ -465,6 +497,8 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     get:
       tags:
         - Tag
@@ -506,6 +540,8 @@ paths:
           description: Success
         '400':
           $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/tags/{tagId}':
     parameters:
       - in: path
@@ -529,6 +565,8 @@ paths:
                 $ref: '#/components/schemas/Tag'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
     delete:
       tags:
         - Tag
@@ -544,6 +582,8 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
 components:
   schemas:
     ChallengeStatus:
@@ -1052,6 +1092,12 @@ components:
   responses:
     BadRequest:
       description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: The request cannot be fulfilled due to an unexpected server error
       content:
         application/json:
           schema:
