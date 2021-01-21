@@ -20,6 +20,8 @@ post:
       $ref: ../components/responses/BadRequest.yaml
     '409':
       $ref: ../components/responses/Conflict.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
 get:
   tags:
     - Grant
@@ -53,3 +55,5 @@ get:
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
