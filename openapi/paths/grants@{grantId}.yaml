@@ -20,6 +20,8 @@ get:
             $ref: ../components/schemas/Grant.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
 delete:
   tags:
     - Grant
@@ -35,3 +37,5 @@ delete:
             $ref: ../components/schemas/EmptyObject.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
