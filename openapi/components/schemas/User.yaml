@@ -1,0 +1,32 @@
+type: object
+description: A user of the portal
+allOf:
+  - $ref: PersonCreateRequest.yaml
+  - type: object
+    properties:
+      username:
+        $ref: ../parameters/Username.yaml
+      password:
+        description: The password of the user
+        type: string
+        format: password
+        minLength: 8
+        maxLength: 100
+        writeOnly: true
+      role:
+        description: The role of the user
+        type: string
+        enum:
+          - user
+          - admin
+        default: user
+    required:
+      - username
+      - email
+example:
+  username: awesome-user
+  role: user
+  firstName: John
+  lastName: Smith
+  email: john.smith@example.com
+  organizations: [awesome-organization]
