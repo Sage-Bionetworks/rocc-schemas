@@ -59,5 +59,7 @@ paths:
     $ref: paths/tags.yaml
   /tags/{tagId}:
     $ref: paths/tags@{tagId}.yaml
+  /users:
+    $ref: paths/users.yaml
   /users/{username}:
     $ref: paths/users@{username}.yaml

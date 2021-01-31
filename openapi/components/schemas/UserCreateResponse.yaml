@@ -1,0 +1,7 @@
+type: object
+description: A user's username
+properties:
+  username:
+    $ref: ../parameters/Username.yaml
+example:
+  username: awesome-user

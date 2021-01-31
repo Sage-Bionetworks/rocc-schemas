@@ -4,8 +4,8 @@ allOf:
   - $ref: PersonCreateRequest.yaml
   - type: object
     properties:
-      username:
-        $ref: ../parameters/Username.yaml
+      password:
+        $ref: ../parameters/Password.yaml
       role:
         description: The role of the user
         type: string
@@ -13,8 +13,11 @@ allOf:
           - user
           - admin
         default: user
+    required:
+      - password
+      - email
 example:
-  username: awesome-user
+  password: awesome-password
   role: user
   firstName: John
   lastName: Smith
