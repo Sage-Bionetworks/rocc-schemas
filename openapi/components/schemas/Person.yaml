@@ -1,24 +1,5 @@
 type: object
 description: A person
-properties:
-  personId:
-    $ref: ../parameters/PersonId.yaml
-  firstName:
-    description: The first name of the person
-    type: string
-  lastName:
-    description: The last name of the person
-    type: string
-  email:
-    $ref: ../parameters/Email.yaml
-  organizations:
-    description: The organizations the person belongs to
-    type: array
-    items:
-      $ref: ../parameters/OrganizationId.yaml
-example:
-  personId: 507f1f77bcf86cd799439011
-  firstName: John
-  lastName: Smith
-  email: john.smith@example.com
-  organizations: [awesome-organization1]
+allOf:
+  - $ref: PersonCreateResponse.yaml
+  - $ref: PersonCreateRequest.yaml
