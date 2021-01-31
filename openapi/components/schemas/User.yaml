@@ -1,11 +1,10 @@
 type: object
 description: A user of the portal
 allOf:
+  - $ref: UserCreateResponse.yaml
   - $ref: PersonCreateRequest.yaml
   - type: object
     properties:
-      username:
-        $ref: ../parameters/Username.yaml
       role:
         description: The role of the user
         type: string
