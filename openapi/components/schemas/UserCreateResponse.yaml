@@ -3,5 +3,13 @@ description: A user's username
 properties:
   username:
     $ref: ../parameters/Username.yaml
+  role:
+    description: The role of the user
+    type: string
+    enum:
+      - user
+      - admin
+    default: user
 example:
   username: awesome-user
+  role: user

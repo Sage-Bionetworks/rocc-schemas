@@ -3,19 +3,3 @@ description: A user of the portal
 allOf:
   - $ref: UserCreateResponse.yaml
   - $ref: PersonCreateRequest.yaml
-  - type: object
-    properties:
-      role:
-        description: The role of the user
-        type: string
-        enum:
-          - user
-          - admin
-        default: user
-example:
-  username: awesome-user
-  role: user
-  firstName: John
-  lastName: Smith
-  email: john.smith@example.com
-  organizations: [awesome-organization]
