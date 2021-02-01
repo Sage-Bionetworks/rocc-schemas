@@ -17,7 +17,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/User.yaml
+            $ref: ../components/schemas/UserGetResponse.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '500':

@@ -1,11 +1,10 @@
 type: object
 description: A user of the portal
 allOf:
+  - $ref: UserCreateResponse.yaml
   - $ref: PersonCreateRequest.yaml
   - type: object
     properties:
-      password:
-        $ref: ../parameters/Password.yaml
       role:
         description: The role of the user
         type: string
@@ -13,10 +12,8 @@ allOf:
           - user
           - admin
         default: user
-    required:
-      - password
 example:
-  password: awesome-password
+  username: awesome-user
   role: user
   firstName: John
   lastName: Smith
