@@ -37,6 +37,10 @@
     {
       "name": "Tag",
       "description": "Operations about tags"
+    },
+    {
+      "name": "User",
+      "description": "Operations about users"
     }
   ],
   "servers": [
@@ -889,6 +893,173 @@
           }
         }
       }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a user",
+        "description": "Create a user with the specified username",
+        "operationId": "createUser",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "username",
+            "description": "The username of the user that is being created",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Username"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserCreateResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get all users",
+        "description": "Returns the users",
+        "operationId": "listUsers",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "Maximum number of results returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 10,
+              "maximum": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "Index of the first result that must be returned",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfUsers"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/users/{username}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "username",
+          "description": "The username of the user",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Username"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get a user",
+        "description": "Returns the user specified",
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a user",
+        "description": "Deletes the user specified",
+        "operationId": "deleteUser",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -963,6 +1134,18 @@
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
       },
+      "ChallengeCreateResponse": {
+        "type": "object",
+        "description": "A challenge ID",
+        "properties": {
+          "challengeId": {
+            "$ref": "#/components/schemas/ChallengeId"
+          }
+        },
+        "example": {
+          "challengeId": "507f1f77bcf86cd799439011"
+        }
+      },
       "TagId": {
         "description": "The ID of the tag",
         "type": "string",
@@ -996,121 +1179,6 @@
         "description": "The ID of the person",
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
-      },
-      "Challenge": {
-        "type": "object",
-        "description": "A challenge",
-        "properties": {
-          "challengeId": {
-            "$ref": "#/components/schemas/ChallengeId"
-          },
-          "name": {
-            "description": "The challenge name",
-            "type": "string"
-          },
-          "startDate": {
-            "description": "When the challenge started",
-            "type": "string",
-            "format": "date"
-          },
-          "endDate": {
-            "description": "When the challenge ended",
-            "type": "string",
-            "format": "date"
-          },
-          "url": {
-            "description": "The URL to the challenge website",
-            "type": "string",
-            "format": "uri"
-          },
-          "status": {
-            "$ref": "#/components/schemas/ChallengeStatus"
-          },
-          "tags": {
-            "description": "The tags associated to the challenge",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TagId"
-            }
-          },
-          "challengeResults": {
-            "$ref": "#/components/schemas/ChallengeResults"
-          },
-          "organizers": {
-            "description": "The organizers of the challenge",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PersonId"
-            }
-          }
-        },
-        "example": {
-          "challengeId": "507f1f77bcf86cd799439011",
-          "name": "Awesome Challenge",
-          "startDate": "2020-11-10",
-          "endDate": "2020-12-31",
-          "url": "https://synapse.org/awesome-challenge",
-          "status": "open",
-          "tags": [
-            "awesome-tag1",
-            "awesome-tag2"
-          ],
-          "challengeResults": {
-            "nSubmissions": 0,
-            "nFinalSubmissions": 0,
-            "nRegisteredParticipants": 0
-          },
-          "organizers": [
-            "507f1f77bcf86cd799439011"
-          ]
-        }
-      },
-      "PageOfChallenges": {
-        "type": "object",
-        "description": "A page of Challenges",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "challenges": {
-                "description": "An array of Challenges",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Challenge"
-                }
-              }
-            }
-          }
-        ]
-      },
-      "Error": {
-        "type": "object",
-        "description": "Problem details (tools.ietf.org/html/rfc7807)",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A human readable documentation for the problem type"
-          },
-          "status": {
-            "type": "integer",
-            "description": "The HTTP status code"
-          },
-          "detail": {
-            "type": "string",
-            "description": "A human readable explanation specific to this occurrence of the problem"
-          },
-          "type": {
-            "type": "string",
-            "description": "An absolute URI that identifies the problem type"
-          }
-        },
-        "required": [
-          "title",
-          "status"
-        ]
       },
       "ChallengeCreateRequest": {
         "type": "object",
@@ -1182,17 +1250,64 @@
           ]
         }
       },
-      "ChallengeCreateResponse": {
+      "Challenge": {
         "type": "object",
-        "description": "A challenge ID",
+        "description": "A challenge",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChallengeCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ChallengeCreateRequest"
+          }
+        ]
+      },
+      "PageOfChallenges": {
+        "type": "object",
+        "description": "A page of Challenges",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "challenges": {
+                "description": "An array of Challenges",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Challenge"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "description": "Problem details (tools.ietf.org/html/rfc7807)",
         "properties": {
-          "challengeId": {
-            "$ref": "#/components/schemas/ChallengeId"
+          "title": {
+            "type": "string",
+            "description": "A human readable documentation for the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the problem"
+          },
+          "type": {
+            "type": "string",
+            "description": "An absolute URI that identifies the problem type"
           }
         },
-        "example": {
-          "challengeId": "507f1f77bcf86cd799439011"
-        }
+        "required": [
+          "title",
+          "status"
+        ]
       },
       "EmptyObject": {
         "type": "object",
@@ -1203,54 +1318,17 @@
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
       },
-      "Grant": {
+      "GrantCreateResponse": {
         "type": "object",
-        "description": "Information about monetary resources for challenge",
+        "description": "A grant ID",
         "properties": {
           "grantId": {
             "$ref": "#/components/schemas/GrantId"
-          },
-          "name": {
-            "description": "The grant name",
-            "type": "string"
-          },
-          "description": {
-            "description": "A description of the grant",
-            "type": "string"
-          },
-          "url": {
-            "description": "The URL to the grant",
-            "type": "string",
-            "format": "uri"
           }
         },
         "example": {
-          "grantId": "507f1f77bcf86cd799439011",
-          "name": "Awesome Grant",
-          "description": "This is an awesome grant",
-          "url": "https://report.nih.gov/"
+          "grantId": "507f1f77bcf86cd799439011"
         }
-      },
-      "PageOfGrants": {
-        "type": "object",
-        "description": "A page of Grants",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "grants": {
-                "description": "An array of Grants",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Grant"
-                }
-              }
-            }
-          }
-        ]
       },
       "GrantCreateRequest": {
         "type": "object",
@@ -1279,17 +1357,38 @@
           "url": "https://report.nih.gov/"
         }
       },
-      "GrantCreateResponse": {
+      "Grant": {
         "type": "object",
-        "description": "A grant ID",
-        "properties": {
-          "grantId": {
-            "$ref": "#/components/schemas/GrantId"
+        "description": "Information about monetary resources for challenge",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GrantCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/GrantCreateRequest"
           }
-        },
-        "example": {
-          "grantId": "507f1f77bcf86cd799439011"
-        }
+        ]
+      },
+      "PageOfGrants": {
+        "type": "object",
+        "description": "A page of Grants",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "grants": {
+                "description": "An array of Grants",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Grant"
+                }
+              }
+            }
+          }
+        ]
       },
       "OrganizationId": {
         "description": "The ID of the organization",
@@ -1299,54 +1398,17 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-organization"
       },
-      "Organization": {
+      "OrganizationCreateResponse": {
         "type": "object",
-        "description": "An organization",
+        "description": "An organization ID",
         "properties": {
           "organizationId": {
             "$ref": "#/components/schemas/OrganizationId"
-          },
-          "name": {
-            "description": "The organization name",
-            "type": "string"
-          },
-          "shortName": {
-            "description": "The organization short name",
-            "type": "string"
-          },
-          "url": {
-            "description": "The URL to the homepage of the organization",
-            "type": "string",
-            "format": "uri"
           }
         },
         "example": {
-          "organizationId": "awesome-organization",
-          "name": "Awesome Organization",
-          "shortName": "AO",
-          "url": "https://www.example.org"
+          "organizationId": "awesome-organization"
         }
-      },
-      "PageOfOrganizations": {
-        "type": "object",
-        "description": "A page of Organizations",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "organizations": {
-                "description": "An array of Organizations",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Organization"
-                }
-              }
-            }
-          }
-        ]
       },
       "OrganizationCreateRequest": {
         "type": "object",
@@ -1376,17 +1438,38 @@
           "url": "https://www.example.org"
         }
       },
-      "OrganizationCreateResponse": {
+      "Organization": {
         "type": "object",
-        "description": "An organization ID",
-        "properties": {
-          "organizationId": {
-            "$ref": "#/components/schemas/OrganizationId"
+        "description": "An organization",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OrganizationCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/OrganizationCreateRequest"
           }
-        },
-        "example": {
-          "organizationId": "awesome-organization"
-        }
+        ]
+      },
+      "PageOfOrganizations": {
+        "type": "object",
+        "description": "A page of Organizations",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "organizations": {
+                "description": "An array of Organizations",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            }
+          }
+        ]
       },
       "PersonFilter": {
         "type": "object",
@@ -1410,68 +1493,23 @@
           }
         }
       },
+      "PersonCreateResponse": {
+        "type": "object",
+        "description": "A person ID",
+        "properties": {
+          "personId": {
+            "$ref": "#/components/schemas/PersonId"
+          }
+        },
+        "example": {
+          "personId": "507f1f77bcf86cd799439011"
+        }
+      },
       "Email": {
         "description": "An email address",
         "type": "string",
         "format": "email",
         "example": "john.smith@example.com"
-      },
-      "Person": {
-        "type": "object",
-        "description": "A person",
-        "properties": {
-          "personId": {
-            "$ref": "#/components/schemas/PersonId"
-          },
-          "firstName": {
-            "description": "The first name of the person",
-            "type": "string"
-          },
-          "lastName": {
-            "description": "The last name of the person",
-            "type": "string"
-          },
-          "email": {
-            "$ref": "#/components/schemas/Email"
-          },
-          "organizations": {
-            "description": "The organizations the person belongs to",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrganizationId"
-            }
-          }
-        },
-        "example": {
-          "personId": "507f1f77bcf86cd799439011",
-          "firstName": "John",
-          "lastName": "Smith",
-          "email": "john.smith@example.com",
-          "organizations": [
-            "awesome-organization1"
-          ]
-        }
-      },
-      "PageOfPersons": {
-        "type": "object",
-        "description": "A page of Persons",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "persons": {
-                "description": "An array of Persons",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Person"
-                }
-              }
-            }
-          }
-        ]
       },
       "PersonCreateRequest": {
         "type": "object",
@@ -1506,21 +1544,42 @@
           "lastName": "Smith",
           "email": "john.smith@example.com",
           "organizations": [
-            "awesome-organization1"
+            "awesome-organization"
           ]
         }
       },
-      "PersonCreateResponse": {
+      "Person": {
         "type": "object",
-        "description": "A person ID",
-        "properties": {
-          "personId": {
-            "$ref": "#/components/schemas/PersonId"
+        "description": "A person",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PersonCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/PersonCreateRequest"
           }
-        },
-        "example": {
-          "personId": "507f1f77bcf86cd799439011"
-        }
+        ]
+      },
+      "PageOfPersons": {
+        "type": "object",
+        "description": "A page of Persons",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "persons": {
+                "description": "An array of Persons",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            }
+          }
+        ]
       },
       "TagFilter": {
         "type": "object",
@@ -1532,22 +1591,42 @@
           }
         }
       },
-      "Tag": {
+      "TagCreateResponse": {
         "type": "object",
-        "description": "A tag that can be assigned to a resource",
+        "description": "A tag ID",
         "properties": {
           "tagId": {
             "$ref": "#/components/schemas/TagId"
-          },
+          }
+        },
+        "example": {
+          "tagId": "awesome-tag"
+        }
+      },
+      "TagCreateRequest": {
+        "type": "object",
+        "description": "A tag that can be assigned to a resource",
+        "properties": {
           "description": {
             "description": "A short description of the tag",
             "type": "string"
           }
         },
         "example": {
-          "tagId": "awesome-tag",
           "description": "Awesome tag"
         }
+      },
+      "Tag": {
+        "type": "object",
+        "description": "A tag that can be assigned to a resource",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TagCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/TagCreateRequest"
+          }
+        ]
       },
       "PageOfTags": {
         "type": "object",
@@ -1570,30 +1649,85 @@
           }
         ]
       },
-      "TagCreateRequest": {
+      "Username": {
+        "description": "The username of the user",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 25,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-user"
+      },
+      "UserCreateResponse": {
         "type": "object",
-        "description": "A tag that can be assigned to a resource",
+        "description": "A user's username",
         "properties": {
-          "description": {
-            "description": "A short description of the tag",
-            "type": "string"
+          "username": {
+            "$ref": "#/components/schemas/Username"
+          },
+          "role": {
+            "description": "The role of the user",
+            "type": "string",
+            "enum": [
+              "user",
+              "admin"
+            ],
+            "default": "user"
           }
         },
         "example": {
-          "description": "Awesome tag"
+          "username": "awesome-user",
+          "role": "user"
         }
       },
-      "TagCreateResponse": {
+      "UserCreateRequest": {
         "type": "object",
-        "description": "A tag ID",
-        "properties": {
-          "tagId": {
-            "$ref": "#/components/schemas/TagId"
+        "description": "A user of the service",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PersonCreateRequest"
           }
-        },
+        ],
         "example": {
-          "tagId": "awesome-tag"
+          "firstName": "John",
+          "lastName": "Smith",
+          "email": "john.smith@example.com",
+          "organizations": [
+            "awesome-organization"
+          ]
         }
+      },
+      "User": {
+        "type": "object",
+        "description": "A user of the portal",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UserCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/UserCreateRequest"
+          }
+        ]
+      },
+      "PageOfUsers": {
+        "type": "object",
+        "description": "A page of Users",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "users": {
+                "description": "An array of Users",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "responses": {
