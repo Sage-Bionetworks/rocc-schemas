@@ -1,0 +1,41 @@
+parameters:
+  - in: path
+    name: username
+    description: The username of the user
+    required: true
+    schema:
+      $ref: ../components/parameters/Username.yaml
+get:
+  tags:
+    - User
+  summary: Get a user
+  description: Returns the user specified
+  operationId: getUser
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/User.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - User
+  summary: Delete a user
+  description: Deletes the user specified
+  operationId: deleteUser
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
+    '400':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

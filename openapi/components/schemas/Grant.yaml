@@ -1,22 +1,5 @@
 type: object
 description: Information about monetary resources for challenge
-properties:
-  grantId:
-    $ref: ../parameters/GrantId.yaml
-  name:
-    description: The grant name
-    type: string
-  description:
-    description: A description of the grant
-    type: string
-  url:
-    description: The URL to the grant
-    type: string
-    format: uri
-  # organizationId:
-  #   $ref: ../parameters/OrganizationId.yaml
-example:
-  grantId: 507f1f77bcf86cd799439011
-  name: Awesome Grant
-  description: This is an awesome grant
-  url: https://report.nih.gov/
+allOf:
+  - $ref: GrantCreateResponse.yaml
+  - $ref: GrantCreateRequest.yaml

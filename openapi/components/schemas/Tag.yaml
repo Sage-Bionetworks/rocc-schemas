@@ -1,11 +1,5 @@
 type: object
 description: A tag that can be assigned to a resource
-properties:
-  tagId:
-    $ref: ../parameters/TagId.yaml
-  description:
-    description: A short description of the tag
-    type: string
-example:
-  tagId: awesome-tag
-  description: Awesome tag
+allOf:
+  - $ref: TagCreateResponse.yaml
+  - $ref: TagCreateRequest.yaml

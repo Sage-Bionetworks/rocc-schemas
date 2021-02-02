@@ -1,0 +1,5 @@
+type: object
+description: A user of the portal
+allOf:
+  - $ref: UserCreateResponse.yaml
+  - $ref: UserCreateRequest.yaml

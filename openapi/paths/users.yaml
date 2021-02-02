@@ -1,0 +1,66 @@
+post:
+  tags:
+    - User
+  summary: Create a user
+  description: Create a user with the specified username
+  operationId: createUser
+  parameters:
+    - in: query
+      name: username
+      description: The username of the user that is being created
+      required: true
+      schema:
+        $ref: ../components/parameters/Username.yaml
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UserCreateRequest.yaml
+  responses:
+    '201':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/UserCreateResponse.yaml
+      description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '409':
+      $ref: ../components/responses/Conflict.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+get:
+  tags:
+    - User
+  summary: Get all users
+  description: Returns the users
+  operationId: listUsers
+  parameters:
+    - in: query
+      name: limit
+      description: Maximum number of results returned
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 10
+        maximum: 100
+    - in: query
+      name: offset
+      description: Index of the first result that must be returned
+      required: false
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PageOfUsers.yaml
+      description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml

@@ -22,4 +22,4 @@ example:
   firstName: John
   lastName: Smith
   email: john.smith@example.com
-  organizations: [awesome-organization1]
+  organizations: [awesome-organization]
