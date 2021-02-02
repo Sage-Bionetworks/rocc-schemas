@@ -8,4 +8,4 @@ allOf:
         description: An array of Users
         type: array
         items:
-          $ref: UserGetResponse.yaml
+          $ref: User.yaml

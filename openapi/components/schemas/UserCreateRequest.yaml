@@ -1,15 +1,15 @@
 type: object
-description: A user of the portal
+description: A user of the service
 allOf:
   - $ref: PersonCreateRequest.yaml
-  - type: object
-    properties:
-      password:
-        $ref: ../parameters/Password.yaml
-    required:
-      - password
+  # - type: object
+  #   properties:
+  #     password:
+  #       $ref: ../parameters/Password.yaml
+  #   required:
+  #     - password
 example:
-  password: awesome-password
+  # password: awesome-password
   firstName: John
   lastName: Smith
   email: john.smith@example.com
