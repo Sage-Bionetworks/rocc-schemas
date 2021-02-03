@@ -1032,7 +1032,6 @@ components:
       required:
         - firstName
         - lastName
-        - email
       example:
         firstName: John
         lastName: Smith
