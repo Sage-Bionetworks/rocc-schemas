@@ -63,3 +63,11 @@ paths:
     $ref: paths/users.yaml
   /users/{username}:
     $ref: paths/users@{username}.yaml
+components:
+  securitySchemes:
+    oauth2:
+      $ref: components/securitySchemes/main_auth.yaml
+    http:
+      $ref: components/securitySchemes/bearer_auth.yaml
+    api_key:
+      $ref: components/securitySchemes/api_key.yaml

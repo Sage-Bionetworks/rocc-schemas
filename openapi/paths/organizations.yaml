@@ -4,6 +4,8 @@ post:
   summary: Create an organization
   description: Create an organization with the specified name
   operationId: createOrganization
+  security:
+    - api_key: []
   parameters:
     - in: query
       name: organizationId

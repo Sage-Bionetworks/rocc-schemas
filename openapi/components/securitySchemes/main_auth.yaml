@@ -3,5 +3,6 @@ flows:
   implicit:
     authorizationUrl: 'http://example.com/api/oauth/dialog'
     scopes:
-      'read:users': read users info
-      'write:users': modify or remove users
+      read: Grants read access
+      write: Grants write access
+      admin: Grants access to admin operations

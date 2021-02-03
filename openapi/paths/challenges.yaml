@@ -4,6 +4,8 @@ post:
   summary: Add a challenge
   description: Adds a challenge
   operationId: createChallenge
+  security:
+    - api_key: []
   requestBody:
     required: true
     content:

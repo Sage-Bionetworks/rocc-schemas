@@ -4,6 +4,8 @@ post:
   summary: Create a user
   description: Create a user with the specified username
   operationId: createUser
+  security:
+    - api_key: []
   parameters:
     - in: query
       name: username

@@ -4,6 +4,8 @@ post:
   summary: Create a tag
   description: Create a tag with the specified name
   operationId: createTag
+  security:
+    - api_key: []
   parameters:
     - in: query
       name: tagId

@@ -4,6 +4,8 @@ post:
   summary: Create a person
   description: Create a person with the specified name
   operationId: createPerson
+  security:
+    - api_key: []
   requestBody:
     content:
       application/json:

@@ -28,6 +28,8 @@ delete:
   summary: Delete a grant
   description: Deletes the grant specified
   operationId: deleteGrant
+  security:
+    - api_key: []
   responses:
     '200':
       description: Success
