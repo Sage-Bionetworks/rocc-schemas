@@ -1536,8 +1536,7 @@
         },
         "required": [
           "firstName",
-          "lastName",
-          "email"
+          "lastName"
         ],
         "example": {
           "firstName": "John",
