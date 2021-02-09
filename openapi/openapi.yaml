@@ -30,6 +30,8 @@ tags:
     description: Operations about tags
   - name: User
     description: Operations about users
+  - name: HealthCheck
+    description: Operations about health checks
 servers:
   - url: "{protocol}://rocc.org/api/v1"
     variables:
@@ -63,3 +65,5 @@ paths:
     $ref: paths/users.yaml
   /users/{username}:
     $ref: paths/users@{username}.yaml
+  /healthcheck:
+    $ref: paths/healthcheck.yaml
