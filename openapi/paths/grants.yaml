@@ -57,3 +57,20 @@ get:
       $ref: ../components/responses/BadRequest.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - Grant
+  summary: Delete all grants
+  description: Delete all grants
+  operationId: deleteAllGrants
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
