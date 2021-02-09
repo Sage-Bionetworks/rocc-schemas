@@ -66,4 +66,4 @@ paths:
   /users/{username}:
     $ref: paths/users@{username}.yaml
   /healthcheck:
-    $ref: paths/healthcheck.yaml
+    $ref: paths/healthCheck.yaml
