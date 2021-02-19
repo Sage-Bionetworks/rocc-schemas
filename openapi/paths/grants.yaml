@@ -16,6 +16,11 @@ post:
           schema:
             $ref: ../components/schemas/GrantCreateResponse.yaml
       description: Success
+      links:
+        GetGrantById:
+          $ref: ../components/links/GetGrantById.yaml
+        DeleteGrantById:
+          $ref: ../components/links/DeleteGrantById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':

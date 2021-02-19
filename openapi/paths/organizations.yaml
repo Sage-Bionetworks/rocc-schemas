@@ -23,6 +23,11 @@ post:
           schema:
             $ref: ../components/schemas/OrganizationCreateResponse.yaml
       description: Success
+      links:
+        GetOrganizationById:
+          $ref: ../components/links/GetOrganizationById.yaml
+        DeleteOrganizationById:
+          $ref: ../components/links/DeleteOrganizationById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':
