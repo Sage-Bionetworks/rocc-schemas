@@ -7,7 +7,7 @@ properties:
   limit:
     description: Maximum number of results returned
     type: integer
-  links:
+  paging:
     description: Links to navigate to different pages of results
     type: object
     properties:
