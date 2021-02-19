@@ -21,4 +21,4 @@ properties:
 required:
   - offset
   - limit
-  - links
+  - paging
