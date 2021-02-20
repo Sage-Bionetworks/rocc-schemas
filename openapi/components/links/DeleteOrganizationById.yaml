@@ -3,4 +3,4 @@ description: >
   The `id` value returned in the response can be used as the
   `organizationId` parameter in `DELETE /organizations/{organizationId}`
 parameters:
-  challengeId: $response.body#/organizationId
+  organizationId: $response.body#/organizationId

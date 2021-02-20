@@ -3,4 +3,4 @@ description: >
   The `id` value returned in the response can be used as the
   `grantId` parameter in `DELETE /grants/{grantId}`
 parameters:
-  challengeId: $response.body#/grantId
+  grantId: $response.body#/grantId

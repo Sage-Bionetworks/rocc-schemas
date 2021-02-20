@@ -3,4 +3,4 @@ description: >
   The `username` value returned in the response can be used as the
   `username` parameter in `DELETE /users/{username}`
 parameters:
-  challengeId: $response.body#/username
+  username: $response.body#/username

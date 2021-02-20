@@ -3,4 +3,4 @@ description: >
   The `id` value returned in the response can be used as the
   `personId` parameter in `GET /persons/{personId}`
 parameters:
-  challengeId: $response.body#/personId
+  personId: $response.body#/personId
