@@ -89,7 +89,15 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "Success",
+            "links": {
+              "GetChallengeById": {
+                "$ref": "#/components/links/GetChallengeById"
+              },
+              "DeleteChallengeById": {
+                "$ref": "#/components/links/DeleteChallengeById"
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -282,7 +290,15 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "Success",
+            "links": {
+              "GetGrantById": {
+                "$ref": "#/components/links/GetGrantById"
+              },
+              "DeleteGrantById": {
+                "$ref": "#/components/links/DeleteGrantById"
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -475,7 +491,15 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "Success",
+            "links": {
+              "GetOrganizationById": {
+                "$ref": "#/components/links/GetOrganizationById"
+              },
+              "DeleteOrganizationById": {
+                "$ref": "#/components/links/DeleteOrganizationById"
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -657,7 +681,15 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "Success",
+            "links": {
+              "GetPersonById": {
+                "$ref": "#/components/links/GetPersonById"
+              },
+              "DeletePersonById": {
+                "$ref": "#/components/links/DeletePersonById"
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -861,7 +893,15 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "Success",
+            "links": {
+              "GetTagById": {
+                "$ref": "#/components/links/GetTagById"
+              },
+              "DeleteTagById": {
+                "$ref": "#/components/links/DeleteTagById"
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -1065,7 +1105,15 @@
                 }
               }
             },
-            "description": "Success"
+            "description": "Success",
+            "links": {
+              "GetUserById": {
+                "$ref": "#/components/links/GetUserById"
+              },
+              "DeleteUserById": {
+                "$ref": "#/components/links/DeleteUserById"
+              }
+            }
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -1292,7 +1340,7 @@
             "description": "Maximum number of results returned",
             "type": "integer"
           },
-          "links": {
+          "paging": {
             "description": "Links to navigate to different pages of results",
             "type": "object",
             "properties": {
@@ -1311,7 +1359,7 @@
         "required": [
           "offset",
           "limit",
-          "links"
+          "paging"
         ]
       },
       "ChallengeId": {
@@ -1971,6 +2019,92 @@
               "$ref": "#/components/schemas/Error"
             }
           }
+        }
+      }
+    },
+    "links": {
+      "GetChallengeById": {
+        "operationId": "getChallenge",
+        "description": "The `id` value returned in the response can be used as the `challengeId` parameter in `GET /challenges/{challengeId}`\n",
+        "parameters": {
+          "challengeId": "$response.body#/challengeId"
+        }
+      },
+      "DeleteChallengeById": {
+        "operationId": "deleteChallenge",
+        "description": "The `id` value returned in the response can be used as the `challengeId` parameter in `DELETE /challenges/{challengeId}`\n",
+        "parameters": {
+          "challengeId": "$response.body#/challengeId"
+        }
+      },
+      "GetGrantById": {
+        "operationId": "getGrant",
+        "description": "The `id` value returned in the response can be used as the `grantId` parameter in `GET /grants/{grantId}`\n",
+        "parameters": {
+          "grantId": "$response.body#/grantId"
+        }
+      },
+      "DeleteGrantById": {
+        "operationId": "deleteGrant",
+        "description": "The `id` value returned in the response can be used as the `grantId` parameter in `DELETE /grants/{grantId}`\n",
+        "parameters": {
+          "grantId": "$response.body#/grantId"
+        }
+      },
+      "GetOrganizationById": {
+        "operationId": "getOrganization",
+        "description": "The `id` value returned in the response can be used as the `organizationId` parameter in `GET /organizations/{organizationId}`\n",
+        "parameters": {
+          "organizationId": "$response.body#/organizationId"
+        }
+      },
+      "DeleteOrganizationById": {
+        "operationId": "deleteOrganization",
+        "description": "The `id` value returned in the response can be used as the `organizationId` parameter in `DELETE /organizations/{organizationId}`\n",
+        "parameters": {
+          "organizationId": "$response.body#/organizationId"
+        }
+      },
+      "GetPersonById": {
+        "operationId": "getPerson",
+        "description": "The `id` value returned in the response can be used as the `personId` parameter in `GET /persons/{personId}`\n",
+        "parameters": {
+          "personId": "$response.body#/personId"
+        }
+      },
+      "DeletePersonById": {
+        "operationId": "deletePerson",
+        "description": "The `id` value returned in the response can be used as the `personId` parameter in `DELETE /persons/{personId}`\n",
+        "parameters": {
+          "personId": "$response.body#/personId"
+        }
+      },
+      "GetTagById": {
+        "operationId": "getTag",
+        "description": "The `id` value returned in the response can be used as the `tagId` parameter in `GET /tags/{tagId}`\n",
+        "parameters": {
+          "tagId": "$response.body#/tagId"
+        }
+      },
+      "DeleteTagById": {
+        "operationId": "deleteTag",
+        "description": "The `id` value returned in the response can be used as the `tagId` parameter in `DELETE /tags/{tagId}`\n",
+        "parameters": {
+          "tagId": "$response.body#/tagId"
+        }
+      },
+      "GetUserById": {
+        "operationId": "getUser",
+        "description": "The `username` value returned in the response can be used as the `username` parameter in `GET /users/{username}`\n",
+        "parameters": {
+          "username": "$response.body#/username"
+        }
+      },
+      "DeleteUserById": {
+        "operationId": "deleteUser",
+        "description": "The `username` value returned in the response can be used as the `username` parameter in `DELETE /users/{username}`\n",
+        "parameters": {
+          "username": "$response.body#/username"
         }
       }
     }
