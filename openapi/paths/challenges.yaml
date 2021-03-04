@@ -17,6 +17,11 @@ post:
           schema:
             $ref: ../components/schemas/ChallengeCreateResponse.yaml
       description: Success
+      links:
+        GetChallengeById:
+          $ref: ../components/links/GetChallengeById.yaml
+        DeleteChallengeById:
+          $ref: ../components/links/DeleteChallengeById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':

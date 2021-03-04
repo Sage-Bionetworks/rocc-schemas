@@ -23,6 +23,11 @@ post:
           schema:
             $ref: ../components/schemas/UserCreateResponse.yaml
       description: Success
+      links:
+        GetUserById:
+          $ref: ../components/links/GetUserById.yaml
+        DeleteUserById:
+          $ref: ../components/links/DeleteUserById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':

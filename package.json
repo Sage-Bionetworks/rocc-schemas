@@ -2,9 +2,9 @@
   "name": "rocc-schemas",
   "version": "0.1.4",
   "devDependencies": {
-    "@redocly/openapi-cli": "1.0.0-beta.29",
+    "@redocly/openapi-cli": "1.0.0-beta.32",
     "gh-openapi-docs-ts": "0.3.4",
-    "ibm-openapi-validator": "0.34.1"
+    "ibm-openapi-validator": "0.34.3"
   },
   "private": true,
   "scripts": {
