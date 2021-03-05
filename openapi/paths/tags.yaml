@@ -23,6 +23,11 @@ post:
           schema:
             $ref: ../components/schemas/TagCreateResponse.yaml
       description: Success
+      links:
+        GetTagById:
+          $ref: ../components/links/GetTagById.yaml
+        DeleteTagById:
+          $ref: ../components/links/DeleteTagById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':

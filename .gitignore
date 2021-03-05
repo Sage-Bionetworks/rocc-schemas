@@ -1,5 +1,7 @@
-# Dir for bundles
-dist
+.idea/
+dist/
+node_modules/
+preview/
+
 dist.yaml
-node_modules
 openapi.yaml
