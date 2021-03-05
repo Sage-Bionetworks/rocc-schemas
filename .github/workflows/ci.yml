@@ -27,7 +27,7 @@ jobs:
       uses: actions/setup-node@v2.1.5
       with:
         node-version: ${{ env.node_version }}
-    - run: npm install
+    - run: npm ci
     - name: Lint openapi specifications
       run: npm run validate
 
@@ -80,7 +80,7 @@ jobs:
       uses: actions/setup-node@v2.1.5
       with:
         node-version: ${{ env.node_version }}
-    - run: npm install
+    - run: npm ci
     - name: Create openapi docs
       run: npx gh-openapi-docs-ts
     - name: Commit doc changes
