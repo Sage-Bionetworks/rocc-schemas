@@ -1,6 +1,6 @@
 operationId: deleteOrganization
 description: >
   The `id` value returned in the response can be used as the
-  `organizationId` parameter in `DELETE /organizations/{organizationId}`
+  `id` parameter in `DELETE /organizations/{id}`
 parameters:
-  organizationId: $response.body#/organizationId
+  id: $response.body#/id

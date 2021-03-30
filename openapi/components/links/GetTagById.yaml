@@ -1,6 +1,6 @@
 operationId: getTag
 description: >
   The `id` value returned in the response can be used as the
-  `tagId` parameter in `GET /tags/{tagId}`
+  `id` parameter in `GET /tags/{id}`
 parameters:
-  tagId: $response.body#/tagId
+  id: $response.body#/id

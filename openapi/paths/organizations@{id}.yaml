@@ -1,33 +1,33 @@
 parameters:
   - in: path
-    name: grantId
-    description: The ID of the grant that is being created
+    name: id
+    description: The ID of the organization
     required: true
     schema:
-      $ref: ../components/parameters/GrantId.yaml
+      $ref: ../components/parameters/OrganizationId.yaml
 get:
   tags:
-    - Grant
-  summary: Get a grant
-  description: Returns the grant specified
-  operationId: getGrant
+    - Organization
+  summary: Get an organization
+  description: Returns the organization specified
+  operationId: getOrganization
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Grant.yaml
+            $ref: ../components/schemas/Organization.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml
 delete:
   tags:
-    - Grant
-  summary: Delete a grant
-  description: Deletes the grant specified
-  operationId: deleteGrant
+    - Organization
+  summary: Delete an organization
+  description: Deletes the organization specified
+  operationId: deleteOrganization
   responses:
     '200':
       description: Success

@@ -11,7 +11,7 @@ properties:
     description: The URL to the grant
     type: string
     format: uri
-  # organizationId:
+  # organization:
   #   $ref: ../parameters/OrganizationId.yaml
 required:
   - name
