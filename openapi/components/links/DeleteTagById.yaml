@@ -1,6 +1,6 @@
 operationId: deleteTag
 description: >
   The `id` value returned in the response can be used as the
-  `id` parameter in `DELETE /tags/{id}`
+  `tagId` parameter in `DELETE /tags/{tagId}`
 parameters:
-  id: $response.body#/id
+  tagId: $response.body#/tagId

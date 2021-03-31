@@ -1,6 +1,6 @@
 operationId: getPerson
 description: >
   The `id` value returned in the response can be used as the
-  `id` parameter in `GET /persons/{id}`
+  `personId` parameter in `GET /persons/{personId}`
 parameters:
-  id: $response.body#/id
+  personId: $response.body#/personId

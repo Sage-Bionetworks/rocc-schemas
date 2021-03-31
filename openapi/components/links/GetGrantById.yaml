@@ -1,6 +1,6 @@
 operationId: getGrant
 description: >
   The `id` value returned in the response can be used as the
-  `id` parameter in `GET /grants/{id}`
+  `grantId` parameter in `GET /grants/{grantId}`
 parameters:
-  id: $response.body#/id
+  grantId: $response.body#/grantId

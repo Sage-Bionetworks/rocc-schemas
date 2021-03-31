@@ -1,6 +1,6 @@
 parameters:
   - in: path
-    name: id
+    name: personId
     description: The ID of the person
     required: true
     schema:

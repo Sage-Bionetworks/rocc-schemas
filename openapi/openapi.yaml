@@ -43,24 +43,24 @@ servers:
 paths:
   /challenges:
     $ref: paths/challenges.yaml
-  /challenges/{id}:
-    $ref: paths/challenges@{id}.yaml
+  /challenges/{challengeId}:
+    $ref: paths/challenges@{challengeId}.yaml
   /grants:
     $ref: paths/grants.yaml
-  /grants/{id}:
-    $ref: paths/grants@{id}.yaml
+  /grants/{grantId}:
+    $ref: paths/grants@{grantId}.yaml
   /organizations:
     $ref: paths/organizations.yaml
-  /organizations/{id}:
-    $ref: paths/organizations@{id}.yaml
+  /organizations/{organizationId}:
+    $ref: paths/organizations@{organizationId}.yaml
   /persons:
     $ref: paths/persons.yaml
-  /persons/{id}:
-    $ref: paths/persons@{id}.yaml
+  /persons/{personId}:
+    $ref: paths/persons@{personId}.yaml
   /tags:
     $ref: paths/tags.yaml
-  /tags/{id}:
-    $ref: paths/tags@{id}.yaml
+  /tags/{tagId}:
+    $ref: paths/tags@{tagId}.yaml
   /users:
     $ref: paths/users.yaml
   /users/{username}:

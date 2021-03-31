@@ -1,6 +1,6 @@
 operationId: getChallenge
 description: >
   The `id` value returned in the response can be used as the
-  `id` parameter in `GET /challenges/{id}`
+  `challengeId` parameter in `GET /challenges/{challengeId}`
 parameters:
-  id: $response.body#/id
+  challengeId: $response.body#/challengeId

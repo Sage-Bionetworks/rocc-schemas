@@ -1,6 +1,6 @@
 operationId: deleteChallenge
 description: >
   The `id` value returned in the response can be used as the
-  `id` parameter in `DELETE /challenges/{id}`
+  `challengeId` parameter in `DELETE /challenges/{challengeId}`
 parameters:
-  id: $response.body#/id
+  challengeId: $response.body#/challengeId

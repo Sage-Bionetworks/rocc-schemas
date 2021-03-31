@@ -1,41 +1,41 @@
 parameters:
   - in: path
-    name: id
-    description: The ID of the grant that is being created
+    name: tagId
+    description: The ID of the tag
     required: true
     schema:
-      $ref: ../components/parameters/GrantId.yaml
+      $ref: ../components/parameters/TagId.yaml
 get:
   tags:
-    - Grant
-  summary: Get a grant
-  description: Returns the grant specified
-  operationId: getGrant
+    - Tag
+  summary: Get a tag
+  description: Returns the tag specified
+  operationId: getTag
   responses:
-    '200':
+    "200":
       description: Success
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Grant.yaml
-    '404':
+            $ref: ../components/schemas/Tag.yaml
+    "404":
       $ref: ../components/responses/NotFound.yaml
-    '500':
+    "500":
       $ref: ../components/responses/InternalServerError.yaml
 delete:
   tags:
-    - Grant
-  summary: Delete a grant
-  description: Deletes the grant specified
-  operationId: deleteGrant
+    - Tag
+  summary: Delete a tag
+  description: Deletes the tag specified
+  operationId: deleteTag
   responses:
-    '200':
+    "200":
       description: Success
       content:
         application/json:
           schema:
             $ref: ../components/schemas/EmptyObject.yaml
-    '404':
+    "404":
       $ref: ../components/responses/NotFound.yaml
-    '500':
+    "500":
       $ref: ../components/responses/InternalServerError.yaml

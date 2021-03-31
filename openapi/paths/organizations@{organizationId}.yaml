@@ -1,33 +1,33 @@
 parameters:
   - in: path
-    name: id
-    description: The ID of the challenge
+    name: organizationId
+    description: The ID of the organization
     required: true
     schema:
-      $ref: ../components/parameters/ChallengeId.yaml
+      $ref: ../components/parameters/OrganizationId.yaml
 get:
   tags:
-    - Challenge
-  summary: Get a challenge
-  description: Returns the challenge specified
-  operationId: getChallenge
+    - Organization
+  summary: Get an organization
+  description: Returns the organization specified
+  operationId: getOrganization
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/Challenge.yaml
+            $ref: ../components/schemas/Organization.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml
 delete:
   tags:
-    - Challenge
-  summary: Delete a challenge
-  description: Deletes the challenge specified
-  operationId: deleteChallenge
+    - Organization
+  summary: Delete an organization
+  description: Deletes the organization specified
+  operationId: deleteOrganization
   responses:
     '200':
       description: Success
