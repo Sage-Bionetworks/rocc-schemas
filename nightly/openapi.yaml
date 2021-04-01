@@ -898,15 +898,18 @@ components:
     ChallengeId:
       description: The ID of the challenge
       type: string
-      example: 507f1f77bcf86cd799439011
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-challenge
     ChallengeCreateResponse:
       type: object
       description: A challenge ID
       properties:
-        challengeId:
+        id:
           $ref: '#/components/schemas/ChallengeId'
       example:
-        challengeId: 507f1f77bcf86cd799439011
+        id: awesome-challenge
     TagId:
       description: The ID of the tag
       type: string
@@ -1037,10 +1040,10 @@ components:
       type: object
       description: A grant ID
       properties:
-        grantId:
+        id:
           $ref: '#/components/schemas/GrantId'
       example:
-        grantId: 507f1f77bcf86cd799439011
+        id: 507f1f77bcf86cd799439011
     GrantCreateRequest:
       type: object
       description: Information about monetary resources for challenge
@@ -1090,10 +1093,10 @@ components:
       type: object
       description: An organization ID
       properties:
-        organizationId:
+        id:
           $ref: '#/components/schemas/OrganizationId'
       example:
-        organizationId: awesome-organization
+        id: awesome-organization
     OrganizationCreateRequest:
       type: object
       description: An organization
@@ -1153,10 +1156,10 @@ components:
       type: object
       description: A person ID
       properties:
-        personId:
+        id:
           $ref: '#/components/schemas/PersonId'
       example:
-        personId: 507f1f77bcf86cd799439011
+        id: 507f1f77bcf86cd799439011
     Email:
       description: An email address
       type: string
@@ -1210,17 +1213,17 @@ components:
       type: object
       description: An object that describes how to filter Tags
       properties:
-        tagId:
+        id:
           description: Keep the tags whose tagId starts with this term
           type: string
     TagCreateResponse:
       type: object
       description: A tag ID
       properties:
-        tagId:
+        id:
           $ref: '#/components/schemas/TagId'
       example:
-        tagId: awesome-tag
+        id: awesome-tag
     TagCreateRequest:
       type: object
       description: A tag that can be assigned to a resource
