@@ -1,14 +1,14 @@
 {
   "devDependencies": {
-    "@redocly/openapi-cli": "1.0.0-beta.40",
+    "@redocly/openapi-cli": "1.0.0-beta.44",
     "gh-openapi-docs-ts": "0.3.6",
-    "ibm-openapi-validator": "0.39.0"
+    "ibm-openapi-validator": "0.40.1"
   },
   "private": true,
   "scripts": {
     "start": "openapi preview-docs openapi/openapi.yaml",
     "build": "openapi bundle -o openapi openapi/openapi.yaml",
     "lint": "openapi lint openapi/openapi.yaml",
-    "validate": "npm run build && lint-openapi openapi.yaml"
+    "validate": "npm run build && lint-openapi --config .validaterc --ruleset .spectral.yaml -v openapi.yaml"
   }
 }
