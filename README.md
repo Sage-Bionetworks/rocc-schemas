@@ -34,3 +34,11 @@ Bundles the definition to the dist folder.
 #### `npm test`
 
 Validates the definition.
+
+## License
+
+[Apache License 2.0]
+
+<!-- Links -->
+
+[Apache License 2.0]: https://github.com/Sage-Bionetworks/rocc-schemas/blob/develop/LICENSE
