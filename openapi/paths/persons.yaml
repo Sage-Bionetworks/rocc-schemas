@@ -9,6 +9,7 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/PersonCreateRequest.yaml
+    required: true
   responses:
     '201':
       content:
