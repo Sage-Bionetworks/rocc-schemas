@@ -5,11 +5,11 @@ post:
   description: Adds a challenge
   operationId: createChallenge
   requestBody:
-    required: true
     content:
       application/json:
         schema:
           $ref: ../components/schemas/ChallengeCreateRequest.yaml
+    required: true
   responses:
     '201':
       content:
