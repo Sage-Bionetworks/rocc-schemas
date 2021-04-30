@@ -47,11 +47,11 @@ paths:
       description: Adds a challenge
       operationId: createChallenge
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ChallengeCreateRequest'
+        required: true
       responses:
         '201':
           content:
@@ -184,6 +184,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/GrantCreateRequest'
+        required: true
       responses:
         '201':
           content:
@@ -315,6 +316,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OrganizationCreateRequest'
+        required: true
       responses:
         '201':
           content:
@@ -439,6 +441,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PersonCreateRequest'
+        required: true
       responses:
         '201':
           content:
@@ -578,6 +581,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/TagCreateRequest'
+        required: true
       responses:
         '201':
           content:
@@ -717,6 +721,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserCreateRequest'
+        required: true
       responses:
         '201':
           content:
