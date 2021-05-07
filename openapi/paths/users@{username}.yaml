@@ -1,7 +1,7 @@
 parameters:
   - in: path
     name: username
-    description: The username of the user
+    description: The username of the user.
     required: true
     schema:
       $ref: ../components/parameters/Username.yaml
@@ -9,7 +9,7 @@ get:
   tags:
     - User
   summary: Get a user
-  description: Returns the user specified
+  description: Get the user specified.
   operationId: getUser
   responses:
     '200':
@@ -26,7 +26,7 @@ delete:
   tags:
     - User
   summary: Delete a user
-  description: Deletes the user specified
+  description: Delete the user specified.
   operationId: deleteUser
   responses:
     '200':

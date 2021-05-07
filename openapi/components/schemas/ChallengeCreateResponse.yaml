@@ -1,7 +1,9 @@
 type: object
-description: A challenge ID
+description: The identifier of the challenge.
 properties:
-  id:
+  identifier:
     $ref: ../parameters/ChallengeId.yaml
+required:
+  - identifier
 example:
-  id: awesome-challenge
+  identifier: awesome-challenge

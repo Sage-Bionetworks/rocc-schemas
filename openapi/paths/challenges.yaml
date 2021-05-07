@@ -2,7 +2,7 @@ post:
   tags:
     - Challenge
   summary: Add a challenge
-  description: Adds a challenge
+  description: Adds a challenge.
   operationId: createChallenge
   requestBody:
     content:
@@ -31,13 +31,13 @@ post:
 get:
   tags:
     - Challenge
-  summary: List all the challenges
-  description: Returns all the challenges
+  summary: Get all challenges
+  description: Get all challenges.
   operationId: listChallenges
   parameters:
     - in: query
       name: limit
-      description: Maximum number of results returned
+      description: Maximum number of results returned.
       required: false
       schema:
         type: integer
@@ -46,7 +46,7 @@ get:
         maximum: 100
     - in: query
       name: offset
-      description: Index of the first result that must be returned
+      description: Index of the first result that must be returned.
       required: false
       schema:
         type: integer
@@ -54,7 +54,7 @@ get:
         minimum: 0
     - in: query
       name: filter
-      description: Object that describes how to filter the results
+      description: Object that describes how to filter the results.
       required: false
       schema:
         $ref: ../components/schemas/ChallengeFilter.yaml
@@ -75,7 +75,7 @@ delete:
   tags:
     - Challenge
   summary: Delete all challenges
-  description: Delete all challenges
+  description: Delete all challenges.
   operationId: deleteAllChallenges
   responses:
     '200':

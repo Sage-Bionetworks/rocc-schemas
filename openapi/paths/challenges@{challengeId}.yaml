@@ -1,7 +1,7 @@
 parameters:
   - in: path
     name: challengeId
-    description: The ID of the challenge
+    description: The identifier of the challenge.
     required: true
     schema:
       $ref: ../components/parameters/ChallengeId.yaml
@@ -9,7 +9,7 @@ get:
   tags:
     - Challenge
   summary: Get a challenge
-  description: Returns the challenge specified
+  description: Get the challenge specified.
   operationId: getChallenge
   responses:
     '200':
@@ -26,7 +26,7 @@ delete:
   tags:
     - Challenge
   summary: Delete a challenge
-  description: Deletes the challenge specified
+  description: Deletes the challenge specified.
   operationId: deleteChallenge
   responses:
     '200':

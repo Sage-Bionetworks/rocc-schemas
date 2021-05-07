@@ -5,28 +5,28 @@ properties:
     description: The name of the challenge.
     type: string
   startDate:
-    description: When the challenge started
+    description: The start date and time of the challenge.
     type: string
     format: date
   endDate:
-    description: When the challenge ended
+    description: The end date and time of the challenge.
     type: string
     format: date
   url:
-    description: The URL to the challenge website
+    description: The URL to the challenge.
     type: string
     format: uri
   status:
     $ref: ../parameters/ChallengeStatus.yaml
   tags:
-    description: The tags associated to the challenge
+    description: The tags associated to the challenge.
     type: array
     items:
       $ref: ../parameters/TagId.yaml
-  challengeResults:
-    $ref: ChallengeResults.yaml
+  # challengeResults:
+  #   $ref: ChallengeResults.yaml
   organizers:
-    description: The organizers of the challenge
+    description: The organizers of the challenge.
     type: array
     items:
       $ref: ../parameters/PersonId.yaml
@@ -51,8 +51,8 @@ example:
   url: https://synapse.org/awesome-challenge
   status: open
   tags: [awesome-tag1, awesome-tag2]
-  challengeResults:
-    nSubmissions: 0
-    nFinalSubmissions: 0
-    nRegisteredParticipants: 0
+  # challengeResults:
+  #   nSubmissions: 0
+  #   nFinalSubmissions: 0
+  #   nRegisteredParticipants: 0
   organizers: [507f1f77bcf86cd799439011]

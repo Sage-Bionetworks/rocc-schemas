@@ -22,3 +22,4 @@ required:
   - offset
   - limit
   - paging
+  - totalResults
