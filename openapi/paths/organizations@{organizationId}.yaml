@@ -9,7 +9,7 @@ get:
   tags:
     - Organization
   summary: Get an organization
-  description: Returns the organization specified.
+  description: Get the organization specified.
   operationId: getOrganization
   responses:
     '200':

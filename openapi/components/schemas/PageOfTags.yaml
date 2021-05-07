@@ -1,11 +1,11 @@
 type: object
-description: A page of Tags
+description: A page of tags.
 allOf:
   - $ref: ResponsePageMetadata.yaml
   - type: object
     properties:
       tags:
-        description: An array of Tags
+        description: An array of tags.
         type: array
         items:
           $ref: Tag.yaml

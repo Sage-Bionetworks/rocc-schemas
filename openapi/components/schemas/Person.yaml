@@ -1,5 +1,5 @@
 type: object
-description: A person
+description: A person.
 allOf:
   - $ref: PersonCreateResponse.yaml
   - $ref: PersonCreateRequest.yaml

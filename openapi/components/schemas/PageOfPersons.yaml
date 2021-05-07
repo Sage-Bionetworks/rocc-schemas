@@ -1,11 +1,11 @@
 type: object
-description: A page of Persons
+description: A page of persons.
 allOf:
   - $ref: ResponsePageMetadata.yaml
   - type: object
     properties:
       persons:
-        description: An array of Persons
+        description: An array of persons.
         type: array
         items:
           $ref: Person.yaml

@@ -1,24 +1,24 @@
 type: object
-description: A person
+description: A person.
 properties:
-  firstName:
-    description: The first name of the person
+  givenName:
+    description: The first name of the person.
     type: string
-  lastName:
-    description: The last name of the person
+  familyName:
+    description: The last name of the person.
     type: string
   email:
     $ref: ../parameters/Email.yaml
-  organizations:
-    description: The organizations the person belongs to
-    type: array
-    items:
-      $ref: ../parameters/OrganizationId.yaml
+  # organizations:
+  #   description: The organizations the person belongs to
+  #   type: array
+  #   items:
+  #     $ref: ../parameters/OrganizationId.yaml
 required:
-  - firstName
-  - lastName
+  - givenName
+  - familyName
 example:
-  firstName: John
-  lastName: Smith
+  givenName: John
+  familyName: Smith
   email: john.smith@example.com
-  organizations: [awesome-organization]
+  # organizations: [awesome-organization]

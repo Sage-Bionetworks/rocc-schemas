@@ -1,5 +1,5 @@
 type: object
-description: A challenge
+description: A challenge.
 allOf:
   - $ref: ChallengeCreateResponse.yaml
   - $ref: ChallengeCreateRequest.yaml

@@ -9,7 +9,7 @@ get:
   tags:
     - Tag
   summary: Get a tag
-  description: Get a tag.
+  description: Get the tag specified.
   operationId: getTag
   responses:
     '200':

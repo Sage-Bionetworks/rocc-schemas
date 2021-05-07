@@ -1,7 +1,9 @@
 type: object
-description: A person ID
+description: The identifier of the person.
 properties:
-  id:
+  identifier:
     $ref: ../parameters/PersonId.yaml
+required:
+  - identifier
 example:
-  id: 507f1f77bcf86cd799439011
+  identifier: 507f1f77bcf86cd799439011

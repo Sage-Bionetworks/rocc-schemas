@@ -1,17 +1,17 @@
 type: object
-description: An object that describes how to filter Persons
+description: An object that describes how to filter persons.
 properties:
   firstName:
-    description: Keep the persons whose first name starts with this term
+    description: Keep the persons whose first name starts with this term.
     type: string
   lastName:
-    description: Keep the persons whose last name starts with this term
+    description: Keep the persons whose last name starts with this term.
     type: string
   email:
-    description: Keep the persons whose email matches this term
+    description: Keep the persons whose email matches this term.
     type: string
   organization:
-    description: Keep the persons who belong to this organization
+    description: Keep the persons who belong to this organization.
     type: string
   # organizations:
   #   description: Keep the persons who belong to these organizations

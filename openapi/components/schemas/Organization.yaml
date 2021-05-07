@@ -1,5 +1,5 @@
 type: object
-description: An organization
+description: An organization.
 allOf:
   - $ref: OrganizationCreateResponse.yaml
   - $ref: OrganizationCreateRequest.yaml

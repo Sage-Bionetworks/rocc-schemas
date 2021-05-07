@@ -1,7 +1,7 @@
 parameters:
   - in: path
     name: personId
-    description: The ID of the person
+    description: The identifier of the person.
     required: true
     schema:
       $ref: ../components/parameters/PersonId.yaml
@@ -9,7 +9,7 @@ get:
   tags:
     - Person
   summary: Get a person
-  description: Returns the person specified
+  description: Get the person specified.
   operationId: getPerson
   responses:
     '200':

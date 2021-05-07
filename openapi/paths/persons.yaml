@@ -2,7 +2,7 @@ post:
   tags:
     - Person
   summary: Create a person
-  description: Create a person with the specified name
+  description: Create a person with the specified name.
   operationId: createPerson
   requestBody:
     content:
@@ -32,12 +32,12 @@ get:
   tags:
     - Person
   summary: Get all persons
-  description: Returns the persons
+  description: Get all persons.
   operationId: listPersons
   parameters:
     - in: query
       name: limit
-      description: Maximum number of results returned
+      description: Maximum number of results returned.
       required: false
       schema:
         type: integer
@@ -46,7 +46,7 @@ get:
         maximum: 100
     - in: query
       name: offset
-      description: Index of the first result that must be returned
+      description: Index of the first result that must be returned.
       required: false
       schema:
         type: integer
@@ -54,7 +54,7 @@ get:
         minimum: 0
     - in: query
       name: filter
-      description: Object that describes how to filter the results
+      description: Object that describes how to filter the results.
       required: false
       schema:
         $ref: ../components/schemas/PersonFilter.yaml
@@ -75,7 +75,7 @@ delete:
   tags:
     - Person
   summary: Delete all persons
-  description: Delete all persons
+  description: Delete all persons.
   operationId: deleteAllPersons
   responses:
     '200':
