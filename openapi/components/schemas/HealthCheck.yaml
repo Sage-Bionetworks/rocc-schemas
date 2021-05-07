@@ -1,8 +1,8 @@
 type: object
-description: Represents the health of a service
+description: Represents the health of a service.
 properties:
   status:
-    description: Indicates whether the service status is acceptable or not
+    description: Indicates whether the service status is acceptable or not.
     type: string
     enum:
       - pass
