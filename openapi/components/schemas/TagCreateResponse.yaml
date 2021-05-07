@@ -5,3 +5,5 @@ properties:
     $ref: ../parameters/TagId.yaml
 example:
   id: awesome-tag
+required:
+  - id
