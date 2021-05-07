@@ -1,7 +1,7 @@
 parameters:
   - in: path
     name: tagId
-    description: The ID of the tag
+    description: The identifier of the tag.
     required: true
     schema:
       $ref: ../components/parameters/TagId.yaml
@@ -9,7 +9,7 @@ get:
   tags:
     - Tag
   summary: Get a tag
-  description: Returns the tag specified
+  description: Get a tag.
   operationId: getTag
   responses:
     '200':
@@ -26,7 +26,7 @@ delete:
   tags:
     - Tag
   summary: Delete a tag
-  description: Deletes the tag specified
+  description: Deletes the tag specified.
   operationId: deleteTag
   responses:
     '200':

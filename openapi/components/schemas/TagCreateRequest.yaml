@@ -1,8 +1,8 @@
 type: object
-description: A tag that can be assigned to a resource
+description: A tag that can be assigned to a resource.
 properties:
   description:
-    description: A short description of the tag
+    description: A short description of the tag.
     type: string
 example:
   description: Awesome tag

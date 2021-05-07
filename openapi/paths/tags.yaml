@@ -2,12 +2,12 @@ post:
   tags:
     - Tag
   summary: Create a tag
-  description: Create a tag with the specified name
+  description: Create a tag with the specified name.
   operationId: createTag
   parameters:
     - in: query
       name: tagId
-      description: The ID of the tag that is being created
+      description: The identifier of the tag that is being created.
       required: true
       schema:
         $ref: ../components/parameters/TagId.yaml
@@ -39,12 +39,12 @@ get:
   tags:
     - Tag
   summary: Get all tags
-  description: Returns the tags
+  description: Get all tags.
   operationId: listTags
   parameters:
     - in: query
       name: limit
-      description: Maximum number of results returned
+      description: Maximum number of results returned.
       required: false
       schema:
         type: integer
@@ -53,7 +53,7 @@ get:
         maximum: 100
     - in: query
       name: offset
-      description: Index of the first result that must be returned
+      description: Index of the first result that must be returned.
       required: false
       schema:
         type: integer
@@ -61,7 +61,7 @@ get:
         minimum: 0
     - in: query
       name: filter
-      description: Object that describes how to filter the results
+      description: Object that describes how to filter the results.
       required: false
       schema:
         $ref: ../components/schemas/TagFilter.yaml
@@ -82,7 +82,7 @@ delete:
   tags:
     - Tag
   summary: Delete all tags
-  description: Delete all tags
+  description: Delete all tags.
   operationId: deleteAllTags
   responses:
     '200':

@@ -1,14 +1,17 @@
 type: object
-description: An organization
+description: An organization.
 properties:
   name:
-    description: The organization name
+    description: The name of the organization.
     type: string
-  shortName:
-    description: The organization short name
+  description:
+    description: A description of the organization.
+    type: string
+  alternateName:
+    description: An alias for the organization.
     type: string
   url:
-    description: The URL to the homepage of the organization
+    description: The URL of the organization.
     type: string
     format: uri
 required:
@@ -16,5 +19,5 @@ required:
   - url
 example:
   name: Awesome Organization
-  shortName: AO
+  alternateName: AO
   url: https://www.example.org

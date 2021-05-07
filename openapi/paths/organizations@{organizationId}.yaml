@@ -1,7 +1,7 @@
 parameters:
   - in: path
     name: organizationId
-    description: The ID of the organization
+    description: The identifier of the organization.
     required: true
     schema:
       $ref: ../components/parameters/OrganizationId.yaml
@@ -9,7 +9,7 @@ get:
   tags:
     - Organization
   summary: Get an organization
-  description: Returns the organization specified
+  description: Returns the organization specified.
   operationId: getOrganization
   responses:
     '200':
@@ -26,7 +26,7 @@ delete:
   tags:
     - Organization
   summary: Delete an organization
-  description: Deletes the organization specified
+  description: Deletes the organization specified.
   operationId: deleteOrganization
   responses:
     '200':
