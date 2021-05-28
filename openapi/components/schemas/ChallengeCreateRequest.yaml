@@ -46,8 +46,8 @@ required:
   - status
 example:
   name: Awesome Challenge
-  startDate: '2020-11-10'
-  endDate: '2020-12-31'
+  startDate: "2020-11-10"
+  endDate: "2020-12-31"
   url: https://synapse.org/awesome-challenge
   status: open
   tags: [awesome-tag1, awesome-tag2]
