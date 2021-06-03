@@ -1421,6 +1421,14 @@
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
       },
+      "OrganizationId": {
+        "description": "The ID of the organization",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-organization"
+      },
       "ChallengeCreateRequest": {
         "type": "object",
         "description": "A challenge",
@@ -1463,12 +1471,17 @@
             "items": {
               "$ref": "#/components/schemas/PersonId"
             }
+          },
+          "dataProviders": {
+            "description": "The organizations contributing the data",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrganizationId"
+            }
           }
         },
         "required": [
           "name",
-          "startDate",
-          "endDate",
           "status"
         ],
         "example": {
@@ -1488,6 +1501,9 @@
           },
           "organizers": [
             "507f1f77bcf86cd799439011"
+          ],
+          "dataProviders": [
+            "awesome-organization"
           ]
         }
       },
@@ -1630,14 +1646,6 @@
             }
           }
         ]
-      },
-      "OrganizationId": {
-        "description": "The ID of the organization",
-        "type": "string",
-        "minLength": 3,
-        "maxLength": 60,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": "awesome-organization"
       },
       "OrganizationCreateResponse": {
         "type": "object",
