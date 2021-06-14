@@ -22,7 +22,13 @@ GitHub repository                               | Language
 ------------------------------------------------|---------
 [Sage-Bionetworks/rocc-service]                 | Python
 
-## ROCC Clients
+## ROCC Web Client
+
+GitHub repository                               | Language
+------------------------------------------------|---------
+[Sage-Bionetworks/rocc-app]                     | TypeScript-Angular
+
+## ROCC Client Libraries
 
 GitHub repository                               | Language
 ------------------------------------------------|---------
@@ -81,7 +87,9 @@ Thinking about contributing to this project? Get started by reading our
 
 <!-- Links -->
 
+[Node]: https://nodejs.org/en/
 [Sage-Bionetworks/rocc-service]: https://github.com/Sage-Bionetworks/rocc-service
+[Sage-Bionetworks/rocc-app]: https://github.com/Sage-Bionetworks/rocc-app
 [Sage-Bionetworks/rocc-client-angular]: https://github.com/Sage-Bionetworks/rocc-client-angular
 [Sage-Bionetworks/rocc-client-python]: https://github.com/Sage-Bionetworks/rocc-client-python
 [semantic versioning]: https://semver.org/
