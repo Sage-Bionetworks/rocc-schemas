@@ -29,13 +29,6 @@ GitHub repository                               | Language
 [Sage-Bionetworks/rocc-client-angular]          | TypeScript-Angular
 [Sage-Bionetworks/rocc-client-python]           | Python
 
-## Working on your OpenAPI Definition
-
-### Install
-
-1. Install [Node JS](https://nodejs.org/).
-2. Clone this repo and run `npm install` in the repo root.
-
 ## Usage
 
 ### `npm start`
