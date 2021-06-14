@@ -35,6 +35,33 @@ Bundles the definition to the dist folder.
 
 Validates the definition.
 
+## Versioning
+
+### GitHub release tags
+
+This repository uses [semantic versioning] to track the releases of the NLP
+Sandbox schemas. This repository uses "non-moving" GitHub tags, that is, a tag
+will always point to the same git commit once it has been created.
+
+### Schemas / GitHub Pages tags
+
+The artifact published by this repository are OpenAPI schemas and documentation
+published to GitHub Pages. The versions of the schemas are aligned with the
+GitHub tags of this repository. For example:
+
+- https://sage-bionetworks.github.io/rocc-schemas/latest/docs/
+- https://sage-bionetworks.github.io/rocc-schemas/latest/openapi.yaml
+- https://sage-bionetworks.github.io/rocc-schemas/latest/openapi.json
+
+The table below describes the schemas tags available.
+
+| Tag name                        | Description                                            | Moving
+|---------------------------------|--------------------------------------------------------|-------
+| `latest`                        | Latest stable release.                                 | Yes
+| `edge`                          | Lastest commit made to the default branch.             | Yes
+| `edge-<sha>`                    | Same as above with the reference to the git commit.    | No
+| `<major>.<minor>.<patch>`       | Latest stable patch release `<major>.<minor>.<patch>`. | No
+
 ## Contributing
 
 Thinking about contributing to this project? Get started by reading our
@@ -46,5 +73,6 @@ Thinking about contributing to this project? Get started by reading our
 
 <!-- Links -->
 
+[semantic versioning]: https://semver.org/
 [contribution guidelines]: .github/CONTRIBUTING.md
 [Apache License 2.0]: https://github.com/Sage-Bionetworks/rocc-schemas/blob/develop/LICENSE
