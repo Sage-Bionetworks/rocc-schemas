@@ -54,7 +54,14 @@
       "no_property_description": "warning",
       "description_mentions_json": "warning",
       "array_of_arrays": "warning",
-      "inconsistent_property_type": "off",
+      "inconsistent_property_type": [
+        "error",
+        [
+          "type",
+          "value",
+          "status"
+        ]
+      ],
       "property_case_convention": [
         "error",
         "lower_camel_case"
@@ -83,18 +90,11 @@
   },
   "oas3": {
     "operations": {
-      "no_request_body_content": "error",
       "no_request_body_name": "warning"
     },
-    "parameters": {
-      "no_in_property": "error",
-      "invalid_in_property": "error",
-      "missing_schema_or_content": "error",
-      "has_schema_and_content": "error"
-    },
     "responses": {
-      "no_response_codes": "error",
       "no_success_response_codes": "warning",
+      "protocol_switching_and_success_code": "error",
       "no_response_body": "warning",
       "ibm_status_code_guidelines": "warning"
     },
