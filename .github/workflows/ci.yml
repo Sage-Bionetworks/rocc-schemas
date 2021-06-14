@@ -64,7 +64,7 @@ jobs:
         name: GITHUB_ENV
         path: .GITHUB_ENV
 
-  lint:
+  test:
     needs: [configure]
     runs-on: ubuntu-latest
     steps:
@@ -79,12 +79,10 @@ jobs:
       run: npm ci
 
     - name: Lint openapi specifications
-      run: |
-        npm run lint
-        npm run validate
+      run: npm test
 
   build:
-    needs: [lint]
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

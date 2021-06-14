@@ -6,13 +6,30 @@
 
 The OpenAPI specification implemented by Challenge Registries.
 
-## Releases
+## Introduction
 
-- <https://sage-bionetworks.github.io/rocc-schemas/latest/docs/>
-- <https://sage-bionetworks.github.io/rocc-schemas/0.1.4/docs/>
-- <https://sage-bionetworks.github.io/rocc-schemas/0.1/docs/>
-- <https://sage-bionetworks.github.io/rocc-schemas/0/docs/>
-- <https://sage-bionetworks.github.io/rocc-schemas/edge/docs/>
+TBA
+
+## Specification
+
+- ROCC schemas version: 0.1.4
+
+## Requirements
+
+- [Node] >=14
+
+## ROCC Services
+
+GitHub repository                               | Language
+------------------------------------------------|---------
+[Sage-Bionetworks/rocc-service]                 | Python
+
+## ROCC Clients
+
+GitHub repository                               | Language
+------------------------------------------------|---------
+[Sage-Bionetworks/rocc-client-angular]          | TypeScript-Angular
+[Sage-Bionetworks/rocc-client-python]           | Python
 
 ## Working on your OpenAPI Definition
 
@@ -21,17 +38,17 @@ The OpenAPI specification implemented by Challenge Registries.
 1. Install [Node JS](https://nodejs.org/).
 2. Clone this repo and run `npm install` in the repo root.
 
-### Usage
+## Usage
 
-#### `npm start`
+### `npm start`
 
 Starts the reference docs preview server.
 
-#### `npm run build`
+### `npm run build`
 
 Bundles the definition to the dist folder.
 
-#### `npm test`
+### `npm test`
 
 Validates the definition.
 
@@ -73,6 +90,9 @@ Thinking about contributing to this project? Get started by reading our
 
 <!-- Links -->
 
+[Sage-Bionetworks/rocc-service]: https://github.com/Sage-Bionetworks/rocc-service
+[Sage-Bionetworks/rocc-client-angular]: https://github.com/Sage-Bionetworks/rocc-client-angular
+[Sage-Bionetworks/rocc-client-python]: https://github.com/Sage-Bionetworks/rocc-client-python
 [semantic versioning]: https://semver.org/
 [contribution guidelines]: .github/CONTRIBUTING.md
 [Apache License 2.0]: https://github.com/Sage-Bionetworks/rocc-schemas/blob/develop/LICENSE
