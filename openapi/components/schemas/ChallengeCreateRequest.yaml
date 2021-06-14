@@ -38,7 +38,7 @@ properties:
   summary:
     description: The summary of challenge
     type: string
-
+  # grants:
   #   description: The grants supporting this challenge
   #   type: array
   #   items:
