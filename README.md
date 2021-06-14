@@ -16,7 +16,7 @@ TBA
 
 - [Node] >=14
 
-## ROCC Services
+## ROCC Service
 
 GitHub repository                               | Language
 ------------------------------------------------|---------
