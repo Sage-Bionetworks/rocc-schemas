@@ -35,10 +35,16 @@ Bundles the definition to the dist folder.
 
 Validates the definition.
 
+## Contributing
+
+Thinking about contributing to this project? Get started by reading our
+[contribution guidelines].
+
 ## License
 
 [Apache License 2.0]
 
 <!-- Links -->
 
+[contribution guidelines]: .github/CONTRIBUTING.md
 [Apache License 2.0]: https://github.com/Sage-Bionetworks/rocc-schemas/blob/develop/LICENSE
