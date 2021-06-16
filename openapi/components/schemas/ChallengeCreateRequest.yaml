@@ -35,6 +35,10 @@ properties:
     type: array
     items:
       $ref: ../parameters/OrganizationId.yaml
+  summary:
+    description: The summary of challenge
+    type: string
+  # grants:
   #   description: The grants supporting this challenge
   #   type: array
   #   items:
@@ -57,3 +61,4 @@ example:
     nRegisteredParticipants: 0
   organizers: [507f1f77bcf86cd799439011]
   dataProviders: [awesome-organization]
+  summary: "This challenge is awesome."
