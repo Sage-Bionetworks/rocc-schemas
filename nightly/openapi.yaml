@@ -987,6 +987,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrganizationId'
+        summary:
+          description: The summary of challenge
+          type: string
       required:
         - name
         - status
@@ -1007,6 +1010,7 @@ components:
           - 507f1f77bcf86cd799439011
         dataProviders:
           - awesome-organization
+        summary: This challenge is awesome.
     Challenge:
       type: object
       description: A challenge

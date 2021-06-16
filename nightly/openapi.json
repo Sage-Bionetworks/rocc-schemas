@@ -1478,6 +1478,10 @@
             "items": {
               "$ref": "#/components/schemas/OrganizationId"
             }
+          },
+          "summary": {
+            "description": "The summary of challenge",
+            "type": "string"
           }
         },
         "required": [
@@ -1504,7 +1508,8 @@
           ],
           "dataProviders": [
             "awesome-organization"
-          ]
+          ],
+          "summary": "This challenge is awesome."
         }
       },
       "Challenge": {
