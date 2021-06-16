@@ -1,4 +1,4 @@
-# Contributing to ROCC Schemas
+# Contribution Guide
 
 A big welcome and thank you for considering contributing to this project.
 
