@@ -5,14 +5,10 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    target-branch: "develop"
-    reviewers:
-      - "Sage-Bionetworks/rocc-maitainers"
+    target-branch: "main"
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "monthly"
-    target-branch: "develop"
-    reviewers:
-      - "Sage-Bionetworks/rocc-maitainers"
+    target-branch: "main"

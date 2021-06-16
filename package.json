@@ -9,6 +9,7 @@
     "start": "openapi preview-docs openapi/openapi.yaml",
     "build": "openapi bundle -o openapi openapi/openapi.yaml",
     "lint": "openapi lint openapi/openapi.yaml",
-    "validate": "npm run build && lint-openapi --config .validaterc --ruleset .spectral.yaml -v openapi.yaml"
+    "validate": "npm run build && lint-openapi --config .validaterc --ruleset .spectral.yaml -v openapi.yaml",
+    "test": "npm run lint && npm run validate"
   }
 }
