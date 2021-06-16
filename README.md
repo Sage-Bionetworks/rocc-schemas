@@ -8,32 +8,38 @@
 
 TBA
 
+
 ## Specification
 
 - ROCC schemas version: 0.1.4
+
 
 ## Requirements
 
 - [Node] >=14
 
-## ROCC Service
+
+## Implementations
+
+### Service
 
 GitHub repository                               | Language
 ------------------------------------------------|---------
 [Sage-Bionetworks/rocc-service]                 | Python
 
-## ROCC Web Client
+### Web Client
 
 GitHub repository                               | Language
 ------------------------------------------------|---------
 [Sage-Bionetworks/rocc-app]                     | TypeScript-Angular
 
-## ROCC Client Libraries
+### Client Libraries
 
 GitHub repository                               | Language
 ------------------------------------------------|---------
 [Sage-Bionetworks/rocc-client-angular]          | TypeScript-Angular
 [Sage-Bionetworks/rocc-client-python]           | Python
+
 
 ## Usage
 
@@ -48,6 +54,7 @@ Bundles the definition to the dist folder.
 ### `npm test`
 
 Validates the definition.
+
 
 ## Versioning
 
@@ -76,10 +83,12 @@ The table below describes the schemas tags available.
 | `edge-<sha>`                    | Same as above with the reference to the git commit.    | No
 | `<major>.<minor>.<patch>`       | Latest stable patch release `<major>.<minor>.<patch>`. | No
 
+
 ## Contributing
 
 Thinking about contributing to this project? Get started by reading our
 [contribution guidelines].
+
 
 ## License
 
