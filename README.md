@@ -103,4 +103,4 @@ Thinking about contributing to this project? Get started by reading our
 [Sage-Bionetworks/rocc-client-python]: https://github.com/Sage-Bionetworks/rocc-client-python
 [semantic versioning]: https://semver.org/
 [contribution guidelines]: .github/CONTRIBUTING.md
-[Apache License 2.0]: https://github.com/Sage-Bionetworks/rocc-schemas/blob/develop/LICENSE
+[Apache License 2.0]: https://github.com/Sage-Bionetworks/rocc-schemas/blob/main/LICENSE
