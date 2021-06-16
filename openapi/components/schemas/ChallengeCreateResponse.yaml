@@ -3,5 +3,7 @@ description: A challenge ID
 properties:
   id:
     $ref: ../parameters/ChallengeId.yaml
+required:
+  - id
 example:
   id: awesome-challenge

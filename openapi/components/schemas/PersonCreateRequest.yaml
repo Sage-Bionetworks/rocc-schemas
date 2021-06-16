@@ -9,7 +9,7 @@ properties:
     type: string
   email:
     $ref: ../parameters/Email.yaml
-  organizations:
+  organizationIds:
     description: The organizations the person belongs to
     type: array
     items:
@@ -17,8 +17,10 @@ properties:
 required:
   - firstName
   - lastName
+  - organizationIds
 example:
   firstName: John
   lastName: Smith
   email: john.smith@example.com
-  organizations: [awesome-organization]
+  organizationIds:
+    - awesome-organization

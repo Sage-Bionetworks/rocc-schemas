@@ -3,5 +3,7 @@ description: A tag ID
 properties:
   id:
     $ref: ../parameters/TagId.yaml
+required:
+ - id
 example:
   id: awesome-tag

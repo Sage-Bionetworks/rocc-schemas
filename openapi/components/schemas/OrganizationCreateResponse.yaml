@@ -3,5 +3,7 @@ description: An organization ID
 properties:
   id:
     $ref: ../parameters/OrganizationId.yaml
+required:
+  - id
 example:
   id: awesome-organization

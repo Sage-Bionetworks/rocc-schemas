@@ -2,5 +2,5 @@ type: object
 description: An object that describes how to filter Tags
 properties:
   id:
-    description: Keep the tags whose tagId starts with this term
+    description: Keep the tags whose ID starts with this term
     type: string
