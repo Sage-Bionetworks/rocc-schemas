@@ -4,5 +4,7 @@ properties:
   description:
     description: A short description of the tag
     type: string
+required:
+  - description
 example:
   description: Awesome tag
