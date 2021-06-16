@@ -85,11 +85,11 @@ In general, we follow the [Forking Workflow]:
 We recommend that you add this repository as an [upstream remote] to your local
 git repository so that you can fetch the latest updates.
 
-On your local machine make sure you have the latest version of the `develop`
+On your local machine make sure you have the latest version of the `main`
 branch from this upstream repository:
 
-    git checkout develop
-    git pull upstream develop
+    git checkout main
+    git pull upstream main
 
 ### Setup Development Environment
 
