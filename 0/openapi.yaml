@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.5
+  version: 0.1.6
   title: Registry of Open Community Challenge API
   contact:
     name: The ROCC Team
@@ -126,8 +126,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmptyObject'
-        '400':
-          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   '/challenges/{challengeId}':
@@ -251,8 +249,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmptyObject'
-        '400':
-          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   '/grants/{grantId}':
@@ -383,8 +379,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmptyObject'
-        '400':
-          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   '/organizations/{organizationId}':
@@ -516,8 +510,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmptyObject'
-        '400':
-          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   '/persons/{personId}':
@@ -656,8 +648,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmptyObject'
-        '400':
-          $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
   '/tags/{tagId}':
@@ -903,10 +893,7 @@ components:
     ChallengeId:
       description: The ID of the challenge
       type: string
-      minLength: 3
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-challenge
+      example: 507f1f77bcf86cd799439011
     ChallengeCreateResponse:
       type: object
       description: A challenge ID
@@ -935,6 +922,10 @@ components:
       maxLength: 60
       pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
       example: awesome-organization
+    GrantId:
+      description: The ID of the grant
+      type: string
+      example: 507f1f77bcf86cd799439011
     ChallengeCreateRequest:
       type: object
       description: A challenge
@@ -980,6 +971,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OrganizationId'
+        grantIds:
+          description: The grants supporting this challenge
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantId'
       required:
         - name
         - description
@@ -988,6 +984,7 @@ components:
         - tagIds
         - organizerIds
         - dataProviderIds
+        - grantIds
       example:
         name: Awesome Challenge
         description: This challenge is awesome.
@@ -1003,6 +1000,8 @@ components:
           - 507f1f77bcf86cd799439011
         dataProviderIds:
           - awesome-organization
+        grantIds:
+          - 507f1f77bcf86cd799439011
     Challenge:
       type: object
       description: A challenge
@@ -1045,16 +1044,14 @@ components:
     EmptyObject:
       type: object
       description: Empty JSON object
-    GrantId:
-      description: The ID of the grant
-      type: string
-      example: 507f1f77bcf86cd799439011
     GrantCreateResponse:
       type: object
       description: A grant ID
       properties:
         id:
           $ref: '#/components/schemas/GrantId'
+      required:
+        - id
       example:
         id: 507f1f77bcf86cd799439011
     GrantCreateRequest:
@@ -1073,6 +1070,7 @@ components:
           format: uri
       required:
         - name
+        - description
       example:
         name: Awesome Grant
         description: This is an awesome grant
