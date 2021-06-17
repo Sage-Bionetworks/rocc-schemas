@@ -1595,8 +1595,7 @@
         },
         "required": [
           "name",
-          "description",
-          "url"
+          "description"
         ],
         "example": {
           "name": "Awesome Grant",

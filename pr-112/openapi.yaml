@@ -1071,7 +1071,6 @@ components:
       required:
         - name
         - description
-        - url
       example:
         name: Awesome Grant
         description: This is an awesome grant
