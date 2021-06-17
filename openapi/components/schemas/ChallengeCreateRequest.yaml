@@ -70,7 +70,7 @@ example:
     - awesome-tag1
     - awesome-tag2
   organizerIds:
-    - 507f1f77bcf86cd799439011
+    - 60cbb00eeb27597ba4bfe167
   dataProviderIds:
     - awesome-organization
   grantIds:
