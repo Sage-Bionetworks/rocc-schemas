@@ -1383,7 +1383,7 @@
       "PersonId": {
         "description": "The ID of the person",
         "type": "string",
-        "example": "60cbb00eeb27597ba4bfe167"
+        "example": "507f1f77bcf86cd799439011"
       },
       "OrganizationId": {
         "description": "The ID of the organization",
@@ -1396,7 +1396,7 @@
       "GrantId": {
         "description": "The ID of the grant",
         "type": "string",
-        "example": "60cbaf102a7b381334e78e56"
+        "example": "507f1f77bcf86cd799439011"
       },
       "ChallengeCreateRequest": {
         "type": "object",
@@ -1487,13 +1487,13 @@
             "awesome-tag2"
           ],
           "organizerIds": [
-            "60cbb00eeb27597ba4bfe167"
+            "507f1f77bcf86cd799439011"
           ],
           "dataProviderIds": [
             "awesome-organization"
           ],
           "grantIds": [
-            "60cbaf102a7b381334e78e56"
+            "507f1f77bcf86cd799439011"
           ]
         }
       },
@@ -1572,7 +1572,7 @@
           "id"
         ],
         "example": {
-          "id": "60cbaf102a7b381334e78e56"
+          "id": "507f1f77bcf86cd799439011"
         }
       },
       "GrantCreateRequest": {
@@ -1747,7 +1747,7 @@
           "id"
         ],
         "example": {
-          "id": "60cbb00eeb27597ba4bfe167"
+          "id": "507f1f77bcf86cd799439011"
         }
       },
       "Email": {
