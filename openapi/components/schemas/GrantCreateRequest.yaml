@@ -15,6 +15,7 @@ properties:
   #   $ref: ../parameters/OrganizationId.yaml
 required:
   - name
+  - description
 example:
   name: Awesome Grant
   description: This is an awesome grant

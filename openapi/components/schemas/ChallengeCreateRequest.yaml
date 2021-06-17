@@ -42,11 +42,11 @@ properties:
     type: array
     items:
       $ref: ../parameters/OrganizationId.yaml
-  # grants:
-  #   description: The grants supporting this challenge
-  #   type: array
-  #   items:
-  #     $ref: Grant.yaml
+  grantIds:
+    description: The grants supporting this challenge
+    type: array
+    items:
+      $ref: ../parameters/GrantId.yaml
   # challengeResults:
   #   $ref: ChallengeResults.yaml
 required:
@@ -57,6 +57,7 @@ required:
   - tagIds
   - organizerIds
   - dataProviderIds
+  - grantIds
 example:
   name: Awesome Challenge
   description: This challenge is awesome.
@@ -72,6 +73,8 @@ example:
     - 507f1f77bcf86cd799439011
   dataProviderIds:
     - awesome-organization
+  grantIds:
+    - 507f1f77bcf86cd799439011
   # challengeResults:
   #   nSubmissions: 0
   #   nFinalSubmissions: 0

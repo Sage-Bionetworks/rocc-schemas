@@ -1,4 +1,4 @@
-# ROCC OpenAPI Specifications
+# ROCC OpenAPI Specification
 
 [![GitHub Release](https://img.shields.io/github/release/Sage-Bionetworks/rocc-schemas.svg?include_prereleases&color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/Sage-Bionetworks/rocc-schemas)
 [![GitHub CI](https://img.shields.io/github/workflow/status/sage-bionetworks/rocc-schemas/ci.svg?color=94398d&labelColor=555555&logoColor=ffffff&style=for-the-badge&logo=github)](https://github.com/sage-bionetworks/rocc-schemas)
@@ -11,7 +11,7 @@ TBA
 
 ## Specification
 
-- ROCC schemas version: 0.1.5
+- ROCC schemas version: 0.1.6
 
 
 ## Requirements
@@ -53,7 +53,7 @@ Bundles the definition to the dist folder.
 
 ### `npm test`
 
-Validates the definition.
+Validates the OpenAPI specification.
 
 
 ## Versioning
