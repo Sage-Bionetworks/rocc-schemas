@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.4",
+    "version": "0.1.5",
     "title": "Registry of Open Community Challenge API",
     "contact": {
       "name": "The ROCC Team",
@@ -1383,6 +1383,9 @@
             "$ref": "#/components/schemas/ChallengeId"
           }
         },
+        "required": [
+          "id"
+        ],
         "example": {
           "id": "awesome-challenge"
         }
@@ -1394,27 +1397,6 @@
         "maxLength": 60,
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-tag"
-      },
-      "ChallengeResults": {
-        "type": "object",
-        "description": "The results of a challenge",
-        "properties": {
-          "nSubmissions": {
-            "description": "Number of total submissions throughout the challenge",
-            "type": "integer",
-            "minimum": 0
-          },
-          "nFinalSubmissions": {
-            "description": "Number of final submissions",
-            "type": "integer",
-            "minimum": 0
-          },
-          "nRegisteredParticipants": {
-            "description": "Number of registered participants",
-            "type": "integer",
-            "minimum": 0
-          }
-        }
       },
       "PersonId": {
         "description": "The ID of the person",
@@ -1435,6 +1417,17 @@
         "properties": {
           "name": {
             "description": "The challenge name",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60
+          },
+          "description": {
+            "description": "A short description of the challenge",
+            "type": "string",
+            "maxLength": 280
+          },
+          "summary": {
+            "description": "The summary of challenge",
             "type": "string"
           },
           "startDate": {
@@ -1455,61 +1448,55 @@
           "status": {
             "$ref": "#/components/schemas/ChallengeStatus"
           },
-          "tags": {
+          "tagIds": {
             "description": "The tags associated to the challenge",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagId"
             }
           },
-          "challengeResults": {
-            "$ref": "#/components/schemas/ChallengeResults"
-          },
-          "organizers": {
+          "organizerIds": {
             "description": "The organizers of the challenge",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/PersonId"
             }
           },
-          "dataProviders": {
+          "dataProviderIds": {
             "description": "The organizations contributing the data",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OrganizationId"
             }
-          },
-          "summary": {
-            "description": "The summary of challenge",
-            "type": "string"
           }
         },
         "required": [
           "name",
-          "status"
+          "description",
+          "url",
+          "status",
+          "tagIds",
+          "organizerIds",
+          "dataProviderIds"
         ],
         "example": {
           "name": "Awesome Challenge",
+          "description": "This challenge is awesome.",
+          "summary": "This challenge is awesome.",
           "startDate": "2020-11-10",
           "endDate": "2020-12-31",
           "url": "https://synapse.org/awesome-challenge",
           "status": "open",
-          "tags": [
+          "tagIds": [
             "awesome-tag1",
             "awesome-tag2"
           ],
-          "challengeResults": {
-            "nSubmissions": 0,
-            "nFinalSubmissions": 0,
-            "nRegisteredParticipants": 0
-          },
-          "organizers": [
+          "organizerIds": [
             "507f1f77bcf86cd799439011"
           ],
-          "dataProviders": [
+          "dataProviderIds": [
             "awesome-organization"
-          ],
-          "summary": "This challenge is awesome."
+          ]
         }
       },
       "Challenge": {
@@ -1660,6 +1647,9 @@
             "$ref": "#/components/schemas/OrganizationId"
           }
         },
+        "required": [
+          "id"
+        ],
         "example": {
           "id": "awesome-organization"
         }
@@ -1755,6 +1745,9 @@
             "$ref": "#/components/schemas/PersonId"
           }
         },
+        "required": [
+          "id"
+        ],
         "example": {
           "id": "507f1f77bcf86cd799439011"
         }
@@ -1780,7 +1773,7 @@
           "email": {
             "$ref": "#/components/schemas/Email"
           },
-          "organizations": {
+          "organizationIds": {
             "description": "The organizations the person belongs to",
             "type": "array",
             "items": {
@@ -1790,13 +1783,14 @@
         },
         "required": [
           "firstName",
-          "lastName"
+          "lastName",
+          "organizationIds"
         ],
         "example": {
           "firstName": "John",
           "lastName": "Smith",
           "email": "john.smith@example.com",
-          "organizations": [
+          "organizationIds": [
             "awesome-organization"
           ]
         }
@@ -1839,7 +1833,7 @@
         "description": "An object that describes how to filter Tags",
         "properties": {
           "id": {
-            "description": "Keep the tags whose tagId starts with this term",
+            "description": "Keep the tags whose ID starts with this term",
             "type": "string"
           }
         }
@@ -1852,6 +1846,9 @@
             "$ref": "#/components/schemas/TagId"
           }
         },
+        "required": [
+          "id"
+        ],
         "example": {
           "id": "awesome-tag"
         }
@@ -1865,6 +1862,9 @@
             "type": "string"
           }
         },
+        "required": [
+          "description"
+        ],
         "example": {
           "description": "Awesome tag"
         }
