@@ -91,7 +91,5 @@ delete:
         application/json:
           schema:
             $ref: ../components/schemas/EmptyObject.yaml
-    '400':
-      $ref: ../components/responses/BadRequest.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml
