@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.5",
+    "version": "0.1.6",
     "title": "Registry of Open Community Challenge API",
     "contact": {
       "name": "The ROCC Team",
@@ -190,9 +190,6 @@
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
@@ -380,9 +377,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -583,9 +577,6 @@
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
@@ -784,9 +775,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -997,9 +985,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -1370,10 +1355,7 @@
       "ChallengeId": {
         "description": "The ID of the challenge",
         "type": "string",
-        "minLength": 3,
-        "maxLength": 60,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": "awesome-challenge"
+        "example": "507f1f77bcf86cd799439011"
       },
       "ChallengeCreateResponse": {
         "type": "object",
@@ -1410,6 +1392,11 @@
         "maxLength": 60,
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-organization"
+      },
+      "GrantId": {
+        "description": "The ID of the grant",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
       },
       "ChallengeCreateRequest": {
         "type": "object",
@@ -1468,6 +1455,13 @@
             "items": {
               "$ref": "#/components/schemas/OrganizationId"
             }
+          },
+          "grantIds": {
+            "description": "The grants supporting this challenge",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GrantId"
+            }
           }
         },
         "required": [
@@ -1477,7 +1471,8 @@
           "status",
           "tagIds",
           "organizerIds",
-          "dataProviderIds"
+          "dataProviderIds",
+          "grantIds"
         ],
         "example": {
           "name": "Awesome Challenge",
@@ -1496,6 +1491,9 @@
           ],
           "dataProviderIds": [
             "awesome-organization"
+          ],
+          "grantIds": [
+            "507f1f77bcf86cd799439011"
           ]
         }
       },
@@ -1562,11 +1560,6 @@
         "type": "object",
         "description": "Empty JSON object"
       },
-      "GrantId": {
-        "description": "The ID of the grant",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
       "GrantCreateResponse": {
         "type": "object",
         "description": "A grant ID",
@@ -1575,6 +1568,9 @@
             "$ref": "#/components/schemas/GrantId"
           }
         },
+        "required": [
+          "id"
+        ],
         "example": {
           "id": "507f1f77bcf86cd799439011"
         }
@@ -1598,7 +1594,8 @@
           }
         },
         "required": [
-          "name"
+          "name",
+          "description"
         ],
         "example": {
           "name": "Awesome Grant",
