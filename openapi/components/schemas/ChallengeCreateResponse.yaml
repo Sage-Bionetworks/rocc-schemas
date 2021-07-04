@@ -1,7 +1,9 @@
 type: object
 description: A challenge ID
 properties:
-  challengeId:
+  id:
     $ref: ../parameters/ChallengeId.yaml
+required:
+  - id
 example:
-  challengeId: 507f1f77bcf86cd799439011
+  id: awesome-challenge

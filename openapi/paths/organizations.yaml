@@ -18,6 +18,7 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/OrganizationCreateRequest.yaml
+    required: true
   responses:
     '201':
       content:
@@ -25,6 +26,11 @@ post:
           schema:
             $ref: ../components/schemas/OrganizationCreateResponse.yaml
       description: Success
+      links:
+        GetOrganizationById:
+          $ref: ../components/links/GetOrganizationById.yaml
+        DeleteOrganizationById:
+          $ref: ../components/links/DeleteOrganizationById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':
@@ -64,5 +70,20 @@ get:
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - Organization
+  summary: Delete all organizations
+  description: Delete all organizations
+  operationId: deleteAllOrganizations
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml

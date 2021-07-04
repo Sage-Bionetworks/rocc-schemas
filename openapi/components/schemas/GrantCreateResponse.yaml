@@ -1,7 +1,9 @@
 type: object
 description: A grant ID
 properties:
-  grantId:
+  id:
     $ref: ../parameters/GrantId.yaml
+required:
+  - id
 example:
-  grantId: 507f1f77bcf86cd799439011
+  id: 507f1f77bcf86cd799439011

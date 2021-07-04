@@ -4,6 +4,15 @@ properties:
   name:
     description: The challenge name
     type: string
+    minLength: 3
+    maxLength: 60
+  description:
+    description: A short description of the challenge
+    type: string
+    maxLength: 280
+  summary:
+    description: The summary of challenge
+    type: string
   startDate:
     description: When the challenge started
     type: string
@@ -18,41 +27,55 @@ properties:
     format: uri
   status:
     $ref: ../parameters/ChallengeStatus.yaml
-  tags:
+  tagIds:
     description: The tags associated to the challenge
     type: array
     items:
       $ref: ../parameters/TagId.yaml
-  challengeResults:
-    $ref: ChallengeResults.yaml
-  organizers:
+  organizerIds:
     description: The organizers of the challenge
     type: array
     items:
       $ref: ../parameters/PersonId.yaml
-  # organizations:
-  #   description: The organizations sponsoring this challenge
-  #   type: array
-  #   items:
-  #     $ref: Organization.yaml
-  #   description: The grants supporting this challenge
-  #   type: array
-  #   items:
-  #     $ref: Grant.yaml
+  dataProviderIds:
+    description: The organizations contributing the data
+    type: array
+    items:
+      $ref: ../parameters/OrganizationId.yaml
+  grantIds:
+    description: The grants supporting this challenge
+    type: array
+    items:
+      $ref: ../parameters/GrantId.yaml
+  # challengeResults:
+  #   $ref: ChallengeResults.yaml
 required:
   - name
-  - startDate
-  - endDate
+  - description
+  - url
   - status
+  - tagIds
+  - organizerIds
+  - dataProviderIds
+  - grantIds
 example:
   name: Awesome Challenge
+  description: This challenge is awesome.
+  summary: This challenge is awesome.
   startDate: "2020-11-10"
   endDate: "2020-12-31"
   url: https://synapse.org/awesome-challenge
   status: open
-  tags: [awesome-tag1, awesome-tag2]
-  challengeResults:
-    nSubmissions: 0
-    nFinalSubmissions: 0
-    nRegisteredParticipants: 0
-  organizers: [507f1f77bcf86cd799439011]
+  tagIds:
+    - awesome-tag1
+    - awesome-tag2
+  organizerIds:
+    - 507f1f77bcf86cd799439011
+  dataProviderIds:
+    - awesome-organization
+  grantIds:
+    - 507f1f77bcf86cd799439011
+  # challengeResults:
+  #   nSubmissions: 0
+  #   nFinalSubmissions: 0
+  #   nRegisteredParticipants: 0

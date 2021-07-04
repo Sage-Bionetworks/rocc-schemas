@@ -11,6 +11,7 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/PersonCreateRequest.yaml
+    required: true
   responses:
     '201':
       content:
@@ -18,6 +19,11 @@ post:
           schema:
             $ref: ../components/schemas/PersonCreateResponse.yaml
       description: Success
+      links:
+        GetPersonById:
+          $ref: ../components/links/GetPersonById.yaml
+        DeletePersonById:
+          $ref: ../components/links/DeletePersonById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':
@@ -65,5 +71,20 @@ get:
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - Person
+  summary: Delete all persons
+  description: Delete all persons
+  operationId: deleteAllPersons
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml

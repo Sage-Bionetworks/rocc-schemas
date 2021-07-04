@@ -1,7 +1,9 @@
 type: object
 description: An organization ID
 properties:
-  organizationId:
+  id:
     $ref: ../parameters/OrganizationId.yaml
+required:
+  - id
 example:
-  organizationId: awesome-organization
+  id: awesome-organization

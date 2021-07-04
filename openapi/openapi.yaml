@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.4
+  version: 0.1.6
   title: Registry of Open Community Challenge API
   contact:
     name: The ROCC Team
@@ -30,6 +30,8 @@ tags:
     description: Operations about tags
   - name: User
     description: Operations about users
+  - name: HealthCheck
+    description: Operations about health checks
 servers:
   - url: "{protocol}://rocc.org/api/v1"
     variables:
@@ -71,3 +73,5 @@ components:
       $ref: components/securitySchemes/bearer_auth.yaml
     api_key:
       $ref: components/securitySchemes/api_key.yaml
+  /healthcheck:
+    $ref: paths/healthCheck.yaml

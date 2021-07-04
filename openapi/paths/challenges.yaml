@@ -7,11 +7,11 @@ post:
   security:
     - api_key: []
   requestBody:
-    required: true
     content:
       application/json:
         schema:
           $ref: ../components/schemas/ChallengeCreateRequest.yaml
+    required: true
   responses:
     '201':
       content:
@@ -19,6 +19,11 @@ post:
           schema:
             $ref: ../components/schemas/ChallengeCreateResponse.yaml
       description: Success
+      links:
+        GetChallengeById:
+          $ref: ../components/links/GetChallengeById.yaml
+        DeleteChallengeById:
+          $ref: ../components/links/DeleteChallengeById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':
@@ -66,5 +71,20 @@ get:
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - Challenge
+  summary: Delete all challenges
+  description: Delete all challenges
+  operationId: deleteAllChallenges
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml

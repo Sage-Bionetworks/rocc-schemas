@@ -11,10 +11,11 @@ properties:
     description: The URL to the grant
     type: string
     format: uri
-  # organizationId:
+  # organization:
   #   $ref: ../parameters/OrganizationId.yaml
 required:
   - name
+  - description
 example:
   name: Awesome Grant
   description: This is an awesome grant

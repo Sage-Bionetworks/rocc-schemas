@@ -18,6 +18,7 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/UserCreateRequest.yaml
+    required: true
   responses:
     '201':
       content:
@@ -25,6 +26,11 @@ post:
           schema:
             $ref: ../components/schemas/UserCreateResponse.yaml
       description: Success
+      links:
+        GetUserById:
+          $ref: ../components/links/GetUserById.yaml
+        DeleteUserById:
+          $ref: ../components/links/DeleteUserById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':
@@ -62,6 +68,23 @@ get:
           schema:
             $ref: ../components/schemas/PageOfUsers.yaml
       description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - User
+  summary: Delete all users
+  description: Delete all users
+  operationId: deleteAllUsers
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '500':

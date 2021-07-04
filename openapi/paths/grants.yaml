@@ -11,6 +11,7 @@ post:
       application/json:
         schema:
           $ref: ../components/schemas/GrantCreateRequest.yaml
+    required: true
   responses:
     '201':
       content:
@@ -18,6 +19,11 @@ post:
           schema:
             $ref: ../components/schemas/GrantCreateResponse.yaml
       description: Success
+      links:
+        GetGrantById:
+          $ref: ../components/links/GetGrantById.yaml
+        DeleteGrantById:
+          $ref: ../components/links/DeleteGrantById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':
@@ -57,5 +63,20 @@ get:
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
+delete:
+  tags:
+    - Grant
+  summary: Delete all grants
+  description: Delete all grants
+  operationId: deleteAllGrants
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyObject.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml

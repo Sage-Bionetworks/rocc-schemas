@@ -1,16 +1,15 @@
 {
-  "name": "rocc-schemas",
-  "version": "0.1.4",
   "devDependencies": {
-    "@redocly/openapi-cli": "1.0.0-beta.29",
-    "gh-openapi-docs-ts": "0.3.4",
-    "ibm-openapi-validator": "0.34.1"
+    "@redocly/openapi-cli": "1.0.0-beta.50",
+    "gh-openapi-docs-ts": "0.3.6",
+    "ibm-openapi-validator": "0.46.0"
   },
   "private": true,
   "scripts": {
     "start": "openapi preview-docs openapi/openapi.yaml",
     "build": "openapi bundle -o openapi openapi/openapi.yaml",
     "lint": "openapi lint openapi/openapi.yaml",
-    "lint:ibm": "npm run build && lint-openapi openapi.yaml"
+    "validate": "npm run build && lint-openapi --config .validaterc --ruleset .spectral.yaml -v openapi.yaml",
+    "test": "npm run lint && npm run validate"
   }
 }
