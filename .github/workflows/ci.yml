@@ -71,7 +71,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Use Node.js ${{ env.node_version }}
-      uses: actions/setup-node@v2.1.5
+      uses: actions/setup-node@v2.2.0
       with:
         node-version: ${{ env.node_version }}
 
@@ -97,7 +97,7 @@ jobs:
       run: cat .GITHUB_ENV >> $GITHUB_ENV
 
     - name: Use Node.js ${{ env.node_version }}
-      uses: actions/setup-node@v2.1.5
+      uses: actions/setup-node@v2.2.0
       with:
         node-version: ${{ env.node_version }}
 
