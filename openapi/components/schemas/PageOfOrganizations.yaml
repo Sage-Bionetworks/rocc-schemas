@@ -9,3 +9,5 @@ allOf:
         type: array
         items:
           $ref: Organization.yaml
+    required:
+      - organizations
