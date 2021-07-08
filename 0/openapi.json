@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.6",
+    "version": "0.1.7",
     "title": "Registry of Open Community Challenge API",
     "contact": {
       "name": "The ROCC Team",
@@ -1526,7 +1526,10 @@
                   "$ref": "#/components/schemas/Challenge"
                 }
               }
-            }
+            },
+            "required": [
+              "challenges"
+            ]
           }
         ]
       },
@@ -1632,7 +1635,10 @@
                   "$ref": "#/components/schemas/Grant"
                 }
               }
-            }
+            },
+            "required": [
+              "grants"
+            ]
           }
         ]
       },
@@ -1708,7 +1714,10 @@
                   "$ref": "#/components/schemas/Organization"
                 }
               }
-            }
+            },
+            "required": [
+              "organizations"
+            ]
           }
         ]
       },
@@ -1821,7 +1830,10 @@
                   "$ref": "#/components/schemas/Person"
                 }
               }
-            }
+            },
+            "required": [
+              "persons"
+            ]
           }
         ]
       },
@@ -1895,7 +1907,10 @@
                   "$ref": "#/components/schemas/Tag"
                 }
               }
-            }
+            },
+            "required": [
+              "tags"
+            ]
           }
         ]
       },
@@ -1975,7 +1990,10 @@
                   "$ref": "#/components/schemas/User"
                 }
               }
-            }
+            },
+            "required": [
+              "users"
+            ]
           }
         ]
       },

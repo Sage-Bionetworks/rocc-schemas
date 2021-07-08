@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.6
+  version: 0.1.7
   title: Registry of Open Community Challenge API
   contact:
     name: The ROCC Team
@@ -1020,6 +1020,8 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Challenge'
+          required:
+            - challenges
     Error:
       type: object
       description: Problem details (tools.ietf.org/html/rfc7807)
@@ -1093,6 +1095,8 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Grant'
+          required:
+            - grants
     OrganizationCreateResponse:
       type: object
       description: An organization ID
@@ -1142,6 +1146,8 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Organization'
+          required:
+            - organizations
     PersonFilter:
       type: object
       description: An object that describes how to filter Persons
@@ -1218,6 +1224,8 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Person'
+          required:
+            - persons
     TagFilter:
       type: object
       description: An object that describes how to filter Tags
@@ -1264,6 +1272,8 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/Tag'
+          required:
+            - tags
     Username:
       description: The username of the user
       type: string
@@ -1316,6 +1326,8 @@ components:
               type: array
               items:
                 $ref: '#/components/schemas/User'
+          required:
+            - users
     HealthCheck:
       type: object
       description: Represents the health of a service
