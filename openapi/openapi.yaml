@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.6
+  version: 0.1.7
   title: Registry of Open Community Challenge API
   contact:
     name: The ROCC Team
