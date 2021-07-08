@@ -9,3 +9,5 @@ allOf:
         type: array
         items:
           $ref: Challenge.yaml
+    required:
+      - challenges
