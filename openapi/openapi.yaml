@@ -63,7 +63,7 @@ paths:
     $ref: paths/tags@{tagId}.yaml
   /users:
     $ref: paths/users.yaml
-  /users/{user}:
-    $ref: paths/users@{user}.yaml
+  /users/{userId}:
+    $ref: paths/users@{userId}.yaml
   /healthcheck:
     $ref: paths/healthCheck.yaml

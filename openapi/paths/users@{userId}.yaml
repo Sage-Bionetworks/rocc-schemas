@@ -1,6 +1,6 @@
 parameters:
   - in: path
-    name: user
+    name: userId
     description: The unique identifier of the user, either the user ID or username
     required: true
     schema:
