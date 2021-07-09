@@ -3,3 +3,9 @@ description: A ROCC user
 allOf:
   - $ref: UserCreateResponse.yaml
   - $ref: UserCreateRequest.yaml
+  - type: object
+    properties:
+      verified:
+        description: Indication of user's verification on ROCC
+        type: boolean
+        default: false
