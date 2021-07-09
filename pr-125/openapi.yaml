@@ -1338,9 +1338,6 @@ components:
             description:
               description: Short biography about the user
               type: string
-            verified:
-              description: Indication of user's verification on ROCC
-              type: boolean
             profileImageUrl:
               description: URL to the user's profile image
               type: string
@@ -1362,6 +1359,12 @@ components:
       allOf:
         - $ref: '#/components/schemas/UserCreateResponse'
         - $ref: '#/components/schemas/UserCreateRequest'
+        - type: object
+          properties:
+            verified:
+              description: Indication of user's verification on ROCC
+              type: boolean
+              default: false
     PageOfUsers:
       type: object
       description: A page of Users
