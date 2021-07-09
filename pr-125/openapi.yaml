@@ -77,8 +77,8 @@ paths:
       description: Returns all the challenges
       operationId: listChallenges
       parameters:
-        - in: query
-          name: limit
+        - name: limit
+          in: query
           description: Maximum number of results returned
           required: false
           schema:
@@ -86,22 +86,40 @@ paths:
             default: 10
             minimum: 10
             maximum: 100
-        - in: query
-          name: offset
+        - name: offset
+          in: query
           description: Index of the first result that must be returned
           required: false
           schema:
             type: integer
             default: 0
             minimum: 0
-        - in: query
-          name: filter
+        - name: filter
+          in: query
           description: Object that describes how to filter the results
           required: false
           schema:
             $ref: '#/components/schemas/ChallengeFilter'
           style: deepObject
           explode: true
+        - name: sort
+          in: query
+          description: Property used to sort the results that must be returned
+          required: false
+          schema:
+            type: string
+            enum:
+              - createdAt
+              - updatedAt
+        - name: direction
+          description: Can be either `asc` or `desc`. Ignored without `sort` parameter.
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
       responses:
         '200':
           content:
@@ -1010,6 +1028,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/ChallengeCreateResponse'
         - $ref: '#/components/schemas/ChallengeCreateRequest'
+        - type: object
+          properties:
+            createdAt:
+              description: When this challenge has been created
+              type: string
+              format: date-time
+            updatedAt:
+              description: When this challenge has last been updated
+              type: string
+              format: date-time
+          required:
+            - createdAt
+            - updatedAt
     PageOfChallenges:
       type: object
       description: A page of Challenges
@@ -1327,7 +1358,7 @@ components:
           - awesome-organization
     User:
       type: object
-      description: A portal user
+      description: A ROCC user
       allOf:
         - $ref: '#/components/schemas/UserCreateResponse'
         - $ref: '#/components/schemas/UserCreateRequest'

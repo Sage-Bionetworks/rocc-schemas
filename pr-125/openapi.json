@@ -119,8 +119,8 @@
         "operationId": "listChallenges",
         "parameters": [
           {
-            "in": "query",
             "name": "limit",
+            "in": "query",
             "description": "Maximum number of results returned",
             "required": false,
             "schema": {
@@ -131,8 +131,8 @@
             }
           },
           {
-            "in": "query",
             "name": "offset",
+            "in": "query",
             "description": "Index of the first result that must be returned",
             "required": false,
             "schema": {
@@ -142,8 +142,8 @@
             }
           },
           {
-            "in": "query",
             "name": "filter",
+            "in": "query",
             "description": "Object that describes how to filter the results",
             "required": false,
             "schema": {
@@ -151,6 +151,32 @@
             },
             "style": "deepObject",
             "explode": true
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Property used to sort the results that must be returned",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "createdAt",
+                "updatedAt"
+              ]
+            }
+          },
+          {
+            "name": "direction",
+            "description": "Can be either `asc` or `desc`. Ignored without `sort` parameter.",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            }
           }
         ],
         "responses": {
@@ -1513,6 +1539,25 @@
           },
           {
             "$ref": "#/components/schemas/ChallengeCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "createdAt": {
+                "description": "When this challenge has been created",
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "description": "When this challenge has last been updated",
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "createdAt",
+              "updatedAt"
+            ]
           }
         ]
       },
@@ -1992,7 +2037,7 @@
       },
       "User": {
         "type": "object",
-        "description": "A portal user",
+        "description": "A ROCC user",
         "allOf": [
           {
             "$ref": "#/components/schemas/UserCreateResponse"
