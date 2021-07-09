@@ -1,15 +1,7 @@
 type: object
 description: A user's username
 properties:
-  username:
-    $ref: ../parameters/Username.yaml
-  role:
-    description: The role of the user
-    type: string
-    enum:
-      - user
-      - admin
-    default: user
+  id:
+    $ref: ../parameters/UserId.yaml
 example:
-  username: awesome-user
-  role: user
+  id: 2244994945
