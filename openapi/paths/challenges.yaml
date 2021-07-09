@@ -62,6 +62,7 @@ get:
       explode: true
     - name: sort
       in: query
+      description: Property used to sort the results that must be returned
       required: false
       schema:
         type: string
