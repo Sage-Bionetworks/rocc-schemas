@@ -1,27 +1,24 @@
 type: object
 description: A user of the service
-properties:
-  username:
-    $ref: ../parameters/Username.yaml
-  description:
-    description: Short biography about the user
-    type: string
-  verified:
-    description: Indication of user's verification on ROCC
-    type: boolean
-  profileImageUrl:
-    description: URL to the user's profile image
-    type: string
 allOf:
   - $ref: PersonCreateRequest.yaml
-  # - type: object
-  #   properties:
+  - type: object
+    properties:
+      username:
+        $ref: ../parameters/Username.yaml
+      description:
+        description: Short biography about the user
+        type: string
+      verified:
+        description: Indication of user's verification on ROCC
+        type: boolean
+      profileImageUrl:
+        description: URL to the user's profile image
+        type: string
   #     password:
   #       $ref: ../parameters/Password.yaml
-  #   required:
-  #     - password
-required:
-  - username
+    required:
+      - username
 example:
   username: awesome-user
   # password: awesome-password
