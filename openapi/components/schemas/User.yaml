@@ -1,5 +1,5 @@
 type: object
-description: A portal user
+description: A ROCC user
 allOf:
   - $ref: UserCreateResponse.yaml
   - $ref: UserCreateRequest.yaml
