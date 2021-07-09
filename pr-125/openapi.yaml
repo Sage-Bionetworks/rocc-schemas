@@ -1346,7 +1346,6 @@ components:
       example:
         username: awesome-user
         description: I am awesome.
-        verified: true
         profileImageUrl: www.awesome-picture.com
         firstName: Awesome
         lastName: User
