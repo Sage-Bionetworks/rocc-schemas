@@ -25,7 +25,7 @@ required:
 example:
   username: awesome-user
   # password: awesome-password
-  descrription: I am awesome.
+  description: I am awesome.
   verified: true
   profileImageUrl: www.awesome-picture.com
   firstName: Awesome
