@@ -35,8 +35,8 @@ get:
   description: Returns all the challenges
   operationId: listChallenges
   parameters:
-    - in: query
-      name: limit
+    - name: limit
+      in: query
       description: Maximum number of results returned
       required: false
       schema:
@@ -44,22 +44,39 @@ get:
         default: 10
         minimum: 10
         maximum: 100
-    - in: query
-      name: offset
+    - name: offset
+      in: query
       description: Index of the first result that must be returned
       required: false
       schema:
         type: integer
         default: 0
         minimum: 0
-    - in: query
-      name: filter
+    - name: filter
+      in: query
       description: Object that describes how to filter the results
       required: false
       schema:
         $ref: ../components/schemas/ChallengeFilter.yaml
       style: deepObject
       explode: true
+    - name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - createdAt
+        - updatedAt
+    - name: direction
+      description: Can be either `asc` or `desc`. Ignored without `sort` parameter.
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+        - asc
+        - desc
   responses:
     '200':
       content:

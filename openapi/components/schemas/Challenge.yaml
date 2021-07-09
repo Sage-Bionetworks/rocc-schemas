@@ -3,3 +3,19 @@ description: A challenge
 allOf:
   - $ref: ChallengeCreateResponse.yaml
   - $ref: ChallengeCreateRequest.yaml
+  - type: object
+    properties:
+      createdAt:
+        description: When this challenge has been created
+        type: string
+        format: date-time
+      updatedAt:
+        description: When this challenge has been created
+        type: string
+        format: date-time
+    required:
+      - createdAt
+      - updatedAt
+    example:
+      createdAt: '2017-07-08T16:18:44-04:00'
+      updatedAt: '2017-07-08T16:18:44-04:00'
