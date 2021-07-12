@@ -1335,8 +1335,18 @@
         "description": "The ID of the challenge platform",
         "type": "string",
         "enum": [
+          "biocreaative",
+          "cagi",
+          "camda",
+          "cami",
+          "casp",
+          "idash",
+          "kaggle",
+          "other",
+          "pfda",
+          "sbv-improver",
           "synapse",
-          "kaggle"
+          "cafa"
         ],
         "example": "synapse"
       },
