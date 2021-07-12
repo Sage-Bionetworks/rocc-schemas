@@ -872,13 +872,18 @@ components:
       description: The ID of the challenge platform
       type: string
       enum:
+        - biocreaative
         - cagi
         - camda
         - cami
+        - casp
+        - idash
         - kaggle
         - other
+        - pfda
         - sbv-improver
         - synapse
+        - cafa
       example: synapse
     ChallengeFilter:
       type: object
