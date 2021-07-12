@@ -1,6 +1,16 @@
 description: The ID of the challenge platform
 type: string
 enum:
-  - synapse
+  - biocreaative
+  - cagi
+  - camda
+  - cami
+  - casp
+  - idash
   - kaggle
+  - other
+  - pfda
+  - sbv-improver
+  - synapse
+  - cafa
 example: synapse
