@@ -10,10 +10,15 @@ properties:
     description: Keep the challenges organized by this person
     type: string
   tagIds:
-    description: Keep the challenges associated to this tag
+    description: Keep the challenges associated to these tags
     type: array
     items:
       $ref: ../parameters/TagId.yaml
+  platformIds:
+    description: Keep the challenges associated to these challenge platforms
+    type: array
+    items:
+      $ref: ../parameters/ChallengePlatformId.yaml
   # organizers:
   #   description: Keep the challenges organized by these persons
   #   type: array
