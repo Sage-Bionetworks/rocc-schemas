@@ -1,6 +1,10 @@
 description: The ID of the challenge platform
 type: string
 enum:
+  - cagi
+  - camda
+  - cami
+  - other
+  - sbv-improver
   - synapse
-  - kaggle
 example: synapse
