@@ -4,6 +4,7 @@ enum:
   - cagi
   - camda
   - cami
+  - kaggle
   - other
   - sbv-improver
   - synapse
