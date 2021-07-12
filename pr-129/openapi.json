@@ -1331,6 +1331,15 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-tag"
       },
+      "ChallengePlatformId": {
+        "description": "The ID of the challenge platform",
+        "type": "string",
+        "enum": [
+          "synapse",
+          "kaggle"
+        ],
+        "example": "synapse"
+      },
       "ChallengeFilter": {
         "type": "object",
         "description": "An object that describes how to filter Challenges",
@@ -1347,10 +1356,17 @@
             "type": "string"
           },
           "tagIds": {
-            "description": "Keep the challenges associated to this tag",
+            "description": "Keep the challenges associated to these tags",
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TagId"
+            }
+          },
+          "platformIds": {
+            "description": "Keep the challenges associated to these challenge platforms",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengePlatformId"
             }
           }
         }
@@ -1491,6 +1507,10 @@
             "items": {
               "$ref": "#/components/schemas/GrantId"
             }
+          },
+          "platformId": {
+            "description": "The platform used to organize the challenge",
+            "$ref": "#/components/schemas/ChallengePlatformId"
           }
         },
         "required": [
@@ -1501,7 +1521,8 @@
           "tagIds",
           "organizerIds",
           "dataProviderIds",
-          "grantIds"
+          "grantIds",
+          "platformId"
         ],
         "example": {
           "name": "Awesome Challenge",
@@ -1523,7 +1544,8 @@
           ],
           "grantIds": [
             "507f1f77bcf86cd799439011"
-          ]
+          ],
+          "platformId": "synapse"
         }
       },
       "Challenge": {
