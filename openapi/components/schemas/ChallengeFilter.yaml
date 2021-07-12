@@ -12,6 +12,11 @@ properties:
   tag:
     description: Keep the challenges associated to this tag
     type: string
+  platformIds:
+    description: Keep the challenges associated to this challenge platform
+    type: array
+    items:
+      $ref: ../parameters/ChallengePlatformId.yaml
   # organizers:
   #   description: Keep the challenges organized by these persons
   #   type: array
