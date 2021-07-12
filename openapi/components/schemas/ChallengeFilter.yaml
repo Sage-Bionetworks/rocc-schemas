@@ -9,9 +9,11 @@ properties:
   organizer:
     description: Keep the challenges organized by this person
     type: string
-  tag:
+  tagIds:
     description: Keep the challenges associated to this tag
-    type: string
+    type: array
+    items:
+      $ref: ../parameters/TagId.yaml
   # organizers:
   #   description: Keep the challenges organized by these persons
   #   type: array
