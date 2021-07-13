@@ -868,6 +868,23 @@ components:
         - open
         - closed
       example: open
+    ChallengePlatformId:
+      description: The ID of the challenge platform
+      type: string
+      enum:
+        - biocreaative
+        - cagi
+        - camda
+        - cami
+        - casp
+        - idash
+        - kaggle
+        - other
+        - pfda
+        - sbv-improver
+        - synapse
+        - cafa
+      example: synapse
     ChallengeFilter:
       type: object
       description: An object that describes how to filter Challenges
@@ -883,6 +900,11 @@ components:
         tag:
           description: Keep the challenges associated to this tag
           type: string
+        platformIds:
+          description: Keep the challenges associated to this challenge platform
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengePlatformId'
     ResponsePageMetadata:
       type: object
       description: A page of results
@@ -994,6 +1016,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GrantId'
+        platformId:
+          description: The platform used to organize the challenge
+          $ref: '#/components/schemas/ChallengePlatformId'
       required:
         - name
         - description
@@ -1003,6 +1028,7 @@ components:
         - organizerIds
         - dataProviderIds
         - grantIds
+        - platformId
       example:
         name: Awesome Challenge
         description: This challenge is awesome.
@@ -1020,6 +1046,7 @@ components:
           - awesome-organization
         grantIds:
           - 507f1f77bcf86cd799439011
+        platformId: synapse
     Challenge:
       type: object
       description: A challenge
