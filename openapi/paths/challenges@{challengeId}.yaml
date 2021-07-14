@@ -28,6 +28,8 @@ delete:
   summary: Delete a challenge
   description: Deletes the challenge specified
   operationId: deleteChallenge
+  security:
+    - api_key: []
   responses:
     '200':
       description: Success

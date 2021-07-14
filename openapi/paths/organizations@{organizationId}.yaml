@@ -28,6 +28,8 @@ delete:
   summary: Delete an organization
   description: Deletes the organization specified
   operationId: deleteOrganization
+  security:
+    - api_key: []
   responses:
     '200':
       description: Success

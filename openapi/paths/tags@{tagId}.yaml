@@ -28,6 +28,8 @@ delete:
   summary: Delete a tag
   description: Deletes the tag specified
   operationId: deleteTag
+  security:
+    - api_key: []
   responses:
     '200':
       description: Success
