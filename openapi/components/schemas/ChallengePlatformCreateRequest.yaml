@@ -15,7 +15,6 @@ properties:
 required:
   - name
   - url
-  - imageUrl
 example:
   name: Awesome Challenge Platform
   url: https://awesome-challenge-platform.io

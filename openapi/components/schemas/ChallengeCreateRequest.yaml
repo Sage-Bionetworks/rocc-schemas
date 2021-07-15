@@ -48,7 +48,6 @@ properties:
     items:
       $ref: ../parameters/GrantId.yaml
   platformId:
-    description: The platform used to organize the challenge
     $ref: ../parameters/ChallengePlatformId.yaml
   # challengeResults:
   #   $ref: ChallengeResults.yaml
