@@ -1,0 +1,9 @@
+type: object
+description: A challenge platform ID
+properties:
+  id:
+    $ref: ../parameters/ChallengePlatformId.yaml
+required:
+  - id
+example:
+  id: awesome-challenge-platform

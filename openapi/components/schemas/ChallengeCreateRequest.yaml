@@ -48,7 +48,6 @@ properties:
     items:
       $ref: ../parameters/GrantId.yaml
   platformId:
-    description: The platform used to organize the challenge
     $ref: ../parameters/ChallengePlatformId.yaml
   # challengeResults:
   #   $ref: ChallengeResults.yaml
@@ -79,7 +78,7 @@ example:
     - awesome-organization
   grantIds:
     - 507f1f77bcf86cd799439011
-  platformId: synapse
+  platformId: awesome-challenge-platform
   # challengeResults:
   #   nSubmissions: 0
   #   nFinalSubmissions: 0

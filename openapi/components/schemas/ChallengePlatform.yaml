@@ -1,12 +1,18 @@
 type: object
 description: A challenge platform
-properties:
-  id:
-    $ref: ../parameters/ChallengePlatformId.yaml
-  name:
-    description: The name of the challenge platform
-    type: string
-  url:
-    description: The URL to the homepage of the challenge platform
-    type: string
-    format: uri
+allOf:
+  - $ref: ChallengePlatformCreateResponse.yaml
+  - $ref: ChallengePlatformCreateRequest.yaml
+  - type: object
+    properties:
+      createdAt:
+        description: When this challenge platform has been created
+        type: string
+        format: date-time
+      updatedAt:
+        description: When this challenge platform has last been updated
+        type: string
+        format: date-time
+    required:
+      - createdAt
+      - updatedAt
