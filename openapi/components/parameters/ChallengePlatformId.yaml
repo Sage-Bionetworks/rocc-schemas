@@ -1,16 +1,6 @@
 description: The ID of the challenge platform
 type: string
-enum:
-  - biocreaative
-  - cagi
-  - camda
-  - cami
-  - casp
-  - idash
-  - kaggle
-  - other
-  - pfda
-  - sbv-improver
-  - synapse
-  - cafa
-example: synapse
+minLength: 1
+maxLength: 60
+pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+example: awesome-challenge-platform
