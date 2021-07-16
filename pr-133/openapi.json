@@ -153,8 +153,20 @@
             "schema": {
               "$ref": "#/components/schemas/ChallengeFilter"
             },
-            "style": "form",
-            "explode": false
+            "style": "deepObject",
+            "explode": true
+          },
+          {
+            "name": "tagIds",
+            "in": "query",
+            "description": "Array of tag ids used to filter the results",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TagId"
+              }
+            }
           },
           {
             "name": "sort",
