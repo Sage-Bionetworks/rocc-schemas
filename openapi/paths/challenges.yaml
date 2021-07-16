@@ -35,59 +35,14 @@ get:
   description: Returns all the challenges
   operationId: listChallenges
   parameters:
-    - name: limit
-      in: query
-      description: Maximum number of results returned
-      required: false
-      schema:
-        type: integer
-        default: 10
-        minimum: 10
-        maximum: 100
-    - name: offset
-      in: query
-      description: Index of the first result that must be returned
-      required: false
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    - name: filter
-      in: query
-      description: Object that describes how to filter the results
-      required: false
-      schema:
-        $ref: ../components/schemas/ChallengeFilter.yaml
-      style: deepObject
-      explode: true
-    - name: tagIds
-      in: query
-      description: Array of tag ids used to filter the results
-      required: false
-      schema:
-        type: array
-        items:
-          $ref: ../components/parameters/TagId.yaml
-      # style: form
-      # explode: true
-    - name: sort
-      in: query
-      description: Property used to sort the results that must be returned
-      required: false
-      schema:
-        type: string
-        enum:
-        - createdAt
-        - updatedAt
-    - name: direction
-      description: Can be either `asc` or `desc`. Ignored without `sort` parameter.
-      in: query
-      required: false
-      schema:
-        type: string
-        enum:
-        - asc
-        - desc
+    - $ref: parameters/limit.yaml
+    - $ref: parameters/offset.yaml
+    - $ref: parameters/sort.yaml
+    - $ref: parameters/direction.yaml
+    - $ref: parameters/name.yaml
+    - $ref: parameters/tagIds.yaml
+    - $ref: parameters/challenge/status.yaml
+    - $ref: parameters/challenge/platformIds.yaml
   responses:
     '200':
       content:

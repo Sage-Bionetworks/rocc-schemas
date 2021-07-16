@@ -1,0 +1,8 @@
+name: name
+description: Array of names used to filter the results
+in: query
+required: false
+schema:
+  type: array
+  items:
+    type: string

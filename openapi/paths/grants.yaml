@@ -35,23 +35,8 @@ get:
   description: Returns the grants
   operationId: listGrants
   parameters:
-    - in: query
-      name: limit
-      description: Maximum number of results returned
-      required: false
-      schema:
-        type: integer
-        default: 10
-        minimum: 10
-        maximum: 100
-    - in: query
-      name: offset
-      description: Index of the first result that must be returned
-      required: false
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
+    - $ref: parameters/limit.yaml
+    - $ref: parameters/offset.yaml
   responses:
     '200':
       content:
