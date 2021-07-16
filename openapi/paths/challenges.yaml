@@ -58,8 +58,18 @@ get:
       required: false
       schema:
         $ref: ../components/schemas/ChallengeFilter.yaml
-      style: form
-      explode: false
+      style: deepObject
+      explode: true
+    - name: tagIds
+      in: query
+      description: Array of tag ids used to filter the results
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: ../components/parameters/TagId.yaml
+      # style: form
+      # explode: true
     - name: sort
       in: query
       description: Property used to sort the results that must be returned
