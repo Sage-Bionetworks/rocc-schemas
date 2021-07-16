@@ -83,7 +83,7 @@ paths:
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/sort'
         - $ref: '#/components/parameters/direction'
-        - $ref: '#/components/parameters/name'
+        - $ref: '#/components/parameters/searchTerms'
         - $ref: '#/components/parameters/tagIds'
         - $ref: '#/components/parameters/status'
         - $ref: '#/components/parameters/platformIds'
@@ -890,9 +890,9 @@ components:
         enum:
           - asc
           - desc
-    name:
-      name: name
-      description: A string used to filter the results by name
+    searchTerms:
+      name: searchTerms
+      description: A string of search terms used to filter the results
       in: query
       required: false
       schema:

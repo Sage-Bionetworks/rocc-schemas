@@ -135,7 +135,7 @@
             "$ref": "#/components/parameters/direction"
           },
           {
-            "$ref": "#/components/parameters/name"
+            "$ref": "#/components/parameters/searchTerms"
           },
           {
             "$ref": "#/components/parameters/tagIds"
@@ -1405,9 +1405,9 @@
           ]
         }
       },
-      "name": {
-        "name": "name",
-        "description": "A string used to filter the results by name",
+      "searchTerms": {
+        "name": "searchTerms",
+        "description": "A string of search terms used to filter the results",
         "in": "query",
         "required": false,
         "schema": {
