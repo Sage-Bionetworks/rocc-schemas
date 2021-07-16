@@ -1,6 +1,0 @@
-name: name
-description: A string used to filter the results by name
-in: query
-required: false
-schema:
-  type: string

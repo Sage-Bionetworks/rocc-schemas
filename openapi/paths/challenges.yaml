@@ -39,7 +39,7 @@ get:
     - $ref: parameters/offset.yaml
     - $ref: parameters/sort.yaml
     - $ref: parameters/direction.yaml
-    - $ref: parameters/name.yaml
+    - $ref: parameters/searchTerms.yaml
     - $ref: parameters/tagIds.yaml
     - $ref: parameters/challenge/status.yaml
     - $ref: parameters/challenge/platformIds.yaml
