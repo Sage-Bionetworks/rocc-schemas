@@ -18,6 +18,8 @@ info:
 tags:
   - name: Challenge
     description: Operations about challenges
+  - name: ChallengePlatform
+    description: Operations about challenge platforms
   - name: Grant
     description: Operations about grants
   - name: Organization
@@ -177,6 +179,136 @@ paths:
       summary: Delete a challenge
       description: Deletes the challenge specified
       operationId: deleteChallenge
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /challengePlatforms:
+    post:
+      tags:
+        - ChallengePlatform
+      summary: Create a challenge platform
+      description: Create a challenge platform with the specified ID
+      operationId: createChallengePlatform
+      parameters:
+        - in: query
+          name: challengePlatformId
+          description: The ID of the challenge platform that is being created
+          required: true
+          schema:
+            $ref: '#/components/schemas/ChallengePlatformId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChallengePlatformCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChallengePlatformCreateResponse'
+          description: Success
+          links:
+            GetChallengePlatformById:
+              $ref: '#/components/links/GetChallengePlatformById'
+            DeleteTagById:
+              $ref: '#/components/links/DeleteChallengePlatformById'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - ChallengePlatform
+      summary: Get all challenge platforms
+      description: Returns the challenge platforms
+      operationId: listChallengePlatforms
+      parameters:
+        - in: query
+          name: limit
+          description: Maximum number of results returned
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 10
+            maximum: 100
+        - in: query
+          name: offset
+          description: Index of the first result that must be returned
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfChallengePlatforms'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - ChallengePlatform
+      summary: Delete all challenge platforms
+      description: Delete all challenge platforms
+      operationId: deleteAllChallengePlatforms
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/challengePlatforms/{challengePlatformId}':
+    parameters:
+      - in: path
+        name: challengePlatformId
+        description: The ID of the challenge platform
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengePlatformId'
+    get:
+      tags:
+        - ChallengePlatform
+      summary: Get a challenge platform
+      description: Returns the challenge platform specified
+      operationId: getChallengePlatform
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChallengePlatform'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - ChallengePlatform
+      summary: Delete a challenge platform
+      description: Deletes the challenge platform specified
+      operationId: deleteChallengePlatform
       responses:
         '200':
           description: Success
@@ -868,23 +1000,20 @@ components:
         - open
         - closed
       example: open
+    TagId:
+      description: The ID of the tag
+      type: string
+      minLength: 1
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-tag
     ChallengePlatformId:
       description: The ID of the challenge platform
       type: string
-      enum:
-        - biocreaative
-        - cagi
-        - camda
-        - cami
-        - casp
-        - idash
-        - kaggle
-        - other
-        - pfda
-        - sbv-improver
-        - synapse
-        - cafa
-      example: synapse
+      minLength: 1
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-challenge-platform
     ChallengeFilter:
       type: object
       description: An object that describes how to filter Challenges
@@ -897,11 +1026,13 @@ components:
         organizer:
           description: Keep the challenges organized by this person
           type: string
-        tag:
-          description: Keep the challenges associated to this tag
-          type: string
+        tagIds:
+          description: Keep the challenges associated to these tags
+          type: array
+          items:
+            $ref: '#/components/schemas/TagId'
         platformIds:
-          description: Keep the challenges associated to this challenge platform
+          description: Keep the challenges associated to these challenge platforms
           type: array
           items:
             $ref: '#/components/schemas/ChallengePlatformId'
@@ -944,13 +1075,6 @@ components:
         - id
       example:
         id: awesome-challenge
-    TagId:
-      description: The ID of the tag
-      type: string
-      minLength: 1
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-tag
     PersonId:
       description: The ID of the person
       type: string
@@ -1017,7 +1141,6 @@ components:
           items:
             $ref: '#/components/schemas/GrantId'
         platformId:
-          description: The platform used to organize the challenge
           $ref: '#/components/schemas/ChallengePlatformId'
       required:
         - name
@@ -1046,7 +1169,7 @@ components:
           - awesome-organization
         grantIds:
           - 507f1f77bcf86cd799439011
-        platformId: synapse
+        platformId: awesome-challenge-platform
     Challenge:
       type: object
       description: A challenge
@@ -1104,6 +1227,66 @@ components:
     EmptyObject:
       type: object
       description: Empty JSON object
+    ChallengePlatformCreateResponse:
+      type: object
+      description: A challenge platform ID
+      properties:
+        id:
+          $ref: '#/components/schemas/ChallengePlatformId'
+      required:
+        - id
+      example:
+        id: awesome-challenge-platform
+    ChallengePlatformCreateRequest:
+      type: object
+      description: A challenge platform
+      properties:
+        name:
+          description: The name of the challenge platform
+          type: string
+        url:
+          description: The URL to the homepage of the challenge platform
+          type: string
+          format: uri
+      required:
+        - name
+        - url
+      example:
+        name: Awesome Challenge Platform
+        url: 'https://awesome-challenge-platform.io'
+    ChallengePlatform:
+      type: object
+      description: A challenge platform
+      allOf:
+        - $ref: '#/components/schemas/ChallengePlatformCreateResponse'
+        - $ref: '#/components/schemas/ChallengePlatformCreateRequest'
+        - type: object
+          properties:
+            createdAt:
+              description: When this challenge platform has been created
+              type: string
+              format: date-time
+            updatedAt:
+              description: When this challenge platform has last been updated
+              type: string
+              format: date-time
+          required:
+            - createdAt
+            - updatedAt
+    PageOfChallengePlatforms:
+      type: object
+      description: A page of ChallengePlatforms
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            challengePlatforms:
+              description: An array of ChallengePlatforms
+              type: array
+              items:
+                $ref: '#/components/schemas/ChallengePlatform'
+          required:
+            - challengePlatforms
     GrantCreateResponse:
       type: object
       description: A grant ID
@@ -1439,6 +1622,22 @@ components:
         parameter in `DELETE /challenges/{challengeId}`
       parameters:
         challengeId: $response.body#/challengeId
+    GetChallengePlatformById:
+      operationId: getChallengePlatform
+      description: >
+        The `id` value returned in the response can be used as the
+        `challengePlatformId` parameter in `GET
+        /challengePlatforms/{challengePlatformId}`
+      parameters:
+        challengePlatformId: $response.body#/challengeId
+    DeleteChallengePlatformById:
+      operationId: deleteChallengePlatform
+      description: >
+        The `id` value returned in the response can be used as the
+        `challengePlatformId` parameter in `DELETE
+        /challengePlatforms/{challengePlatformId}`
+      parameters:
+        challengePlatformId: $response.body#/challengePlatformId
     GetGrantById:
       operationId: getGrant
       description: >
