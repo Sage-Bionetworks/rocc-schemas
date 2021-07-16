@@ -1,8 +1,6 @@
 name: name
-description: Array of names used to filter the results
+description: A string used to filter the results by name
 in: query
 required: false
 schema:
-  type: array
-  items:
-    type: string
+  type: string
