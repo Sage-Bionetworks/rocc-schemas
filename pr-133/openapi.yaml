@@ -892,13 +892,11 @@ components:
           - desc
     name:
       name: name
-      description: Array of names used to filter the results
+      description: A string used to filter the results by name
       in: query
       required: false
       schema:
-        type: array
-        items:
-          type: string
+        type: string
     tagIds:
       name: tagIds
       description: Array of tag ids used to filter the results
