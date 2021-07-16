@@ -58,8 +58,8 @@ get:
       required: false
       schema:
         $ref: ../components/schemas/ChallengeFilter.yaml
-      style: deepObject
-      explode: true
+      style: form
+      explode: false
     - name: sort
       in: query
       description: Property used to sort the results that must be returned
