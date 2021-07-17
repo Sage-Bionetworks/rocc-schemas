@@ -1,0 +1,9 @@
+name: sort
+description: Property used to sort the results that must be returned
+in: query
+required: false
+schema:
+  type: string
+  enum:
+  - createdAt
+  - updatedAt
