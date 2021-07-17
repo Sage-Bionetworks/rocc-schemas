@@ -43,6 +43,7 @@ get:
     - $ref: parameters/tagIds.yaml
     - $ref: parameters/challenge/status.yaml
     - $ref: parameters/challenge/platformIds.yaml
+    - $ref: parameters/challenge/startDateRange.yaml
   responses:
     '200':
       content:
