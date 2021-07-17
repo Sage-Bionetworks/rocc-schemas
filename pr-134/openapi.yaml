@@ -930,17 +930,10 @@ components:
       description: Return challenges that start during the date range specified
       in: query
       required: false
+      style: deepObject
+      explode: true
       schema:
-        type: object
-        properties:
-          startDate:
-            description: Start date of the date range
-            type: string
-            format: date
-          endDate:
-            description: End date of the date range
-            type: string
-            format: date
+        $ref: '#/components/schemas/DateRange'
   schemas:
     TagId:
       description: The ID of the tag
@@ -964,6 +957,23 @@ components:
       maxLength: 60
       pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
       example: awesome-challenge-platform
+    DateRange:
+      type: object
+      properties:
+        startDate:
+          description: Start date of the date range
+          type: string
+          format: date
+        endDate:
+          description: End date of the date range
+          type: string
+          format: date
+      required:
+        - startDate
+        - endDate
+      example:
+        startDate: '2021-07-17'
+        endDate: '2021-07-17'
     ResponsePageMetadata:
       type: object
       description: A page of results
