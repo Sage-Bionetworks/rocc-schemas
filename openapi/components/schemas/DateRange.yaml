@@ -1,16 +1,16 @@
 type: object
 properties:
-  startDate:
+  start:
     description: Start date of the date range
     type: string
     format: date
-  endDate:
+  end:
     description: End date of the date range
     type: string
     format: date
 required:
-  - startDate
-  - endDate
+  - start
+  - end
 example:
-  startDate: "2021-07-17"
-  endDate: "2021-07-17"
+  start: "2021-07-17"
+  end: "2021-07-17"
