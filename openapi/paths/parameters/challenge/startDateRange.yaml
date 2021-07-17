@@ -1,0 +1,15 @@
+name: startDateRange
+description: Return challenges that start during the date range specified
+in: query
+required: false
+schema:
+  type: object
+  properties:
+    startDate:
+      description: Start date of the date range
+      type: string
+      format: date
+    endDate:
+      description: End date of the date range
+      type: string
+      format: date
