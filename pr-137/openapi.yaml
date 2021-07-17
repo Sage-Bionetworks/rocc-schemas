@@ -87,6 +87,7 @@ paths:
         - $ref: '#/components/parameters/tagIds'
         - $ref: '#/components/parameters/status'
         - $ref: '#/components/parameters/platformIds'
+        - $ref: '#/components/parameters/startDateRange'
       responses:
         '200':
           content:
@@ -924,6 +925,22 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/ChallengePlatformId'
+    startDateRange:
+      name: startDateRange
+      description: Return challenges that start during the date range specified
+      in: query
+      required: false
+      schema:
+        type: object
+        properties:
+          startDate:
+            description: Start date of the date range
+            type: string
+            format: date
+          endDate:
+            description: End date of the date range
+            type: string
+            format: date
   schemas:
     TagId:
       description: The ID of the tag
