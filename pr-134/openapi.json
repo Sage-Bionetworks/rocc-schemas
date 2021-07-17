@@ -1489,10 +1489,10 @@
         "type": "string",
         "enum": [
           "upcoming",
-          "open",
-          "closed"
+          "active",
+          "completed"
         ],
-        "example": "open"
+        "example": "active"
       },
       "ChallengePlatformId": {
         "description": "The ID of the challenge platform",
@@ -1661,7 +1661,7 @@
           "startDate": "2020-11-10",
           "endDate": "2020-12-31",
           "url": "https://synapse.org/awesome-challenge",
-          "status": "open",
+          "status": "active",
           "tagIds": [
             "awesome-tag1",
             "awesome-tag2"

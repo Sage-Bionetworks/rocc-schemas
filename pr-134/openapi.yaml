@@ -954,9 +954,9 @@ components:
       type: string
       enum:
         - upcoming
-        - open
-        - closed
-      example: open
+        - active
+        - completed
+      example: active
     ChallengePlatformId:
       description: The ID of the challenge platform
       type: string
@@ -1087,7 +1087,7 @@ components:
         startDate: '2020-11-10'
         endDate: '2020-12-31'
         url: 'https://synapse.org/awesome-challenge'
-        status: open
+        status: active
         tagIds:
           - awesome-tag1
           - awesome-tag2
