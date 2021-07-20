@@ -8,9 +8,6 @@ properties:
     description: End date of the date range
     type: string
     format: date
-required:
-  - start
-  - end
 example:
   start: "2021-07-17"
   end: "2021-07-17"
