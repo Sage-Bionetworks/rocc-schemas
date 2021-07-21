@@ -35,31 +35,16 @@ get:
   description: Returns the persons
   operationId: listPersons
   parameters:
-    - in: query
-      name: limit
-      description: Maximum number of results returned
-      required: false
-      schema:
-        type: integer
-        default: 10
-        minimum: 10
-        maximum: 100
-    - in: query
-      name: offset
-      description: Index of the first result that must be returned
-      required: false
-      schema:
-        type: integer
-        default: 0
-        minimum: 0
-    - in: query
-      name: filter
-      description: Object that describes how to filter the results
-      required: false
-      schema:
-        $ref: ../components/schemas/PersonFilter.yaml
-      style: deepObject
-      explode: true
+    - $ref: parameters/limit.yaml
+    - $ref: parameters/offset.yaml
+    # - in: query
+    #   name: filter
+    #   description: Object that describes how to filter the results
+    #   required: false
+    #   schema:
+    #     $ref: ../components/schemas/PersonFilter.yaml
+    #   style: deepObject
+    #   explode: true
   responses:
     '200':
       content:
