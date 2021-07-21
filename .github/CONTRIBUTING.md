@@ -135,7 +135,7 @@ release. Releases are created with the npm package [release-it].
     - `npm run release -- major --ci --dry-run`
     - `npm run release -- minor --ci --dry-run`
     - `npm run release -- patch --ci --dry-run`
-4. Create the release using one of the command listed below.
+4. Create the release using one of the commands listed below.
     - `npm run release -- major --ci`
     - `npm run release -- minor --ci`
     - `npm run release -- patch --ci`
