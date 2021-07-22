@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.1.7",
+    "version": "0.2.0",
     "title": "Registry of Open Community Challenge API",
     "contact": {
       "name": "The ROCC Team",
@@ -123,64 +123,31 @@
         "operationId": "listChallenges",
         "parameters": [
           {
-            "name": "limit",
-            "in": "query",
-            "description": "Maximum number of results returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
-            }
+            "$ref": "#/components/parameters/limit"
           },
           {
-            "name": "offset",
-            "in": "query",
-            "description": "Index of the first result that must be returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
-            }
+            "$ref": "#/components/parameters/offset"
           },
           {
-            "name": "filter",
-            "in": "query",
-            "description": "Object that describes how to filter the results",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/ChallengeFilter"
-            },
-            "style": "deepObject",
-            "explode": true
+            "$ref": "#/components/parameters/sort"
           },
           {
-            "name": "sort",
-            "in": "query",
-            "description": "Property used to sort the results that must be returned",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "createdAt",
-                "updatedAt"
-              ]
-            }
+            "$ref": "#/components/parameters/direction"
           },
           {
-            "name": "direction",
-            "description": "Can be either `asc` or `desc`. Ignored without `sort` parameter.",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "asc",
-                "desc"
-              ]
-            }
+            "$ref": "#/components/parameters/searchTerms"
+          },
+          {
+            "$ref": "#/components/parameters/tagIds"
+          },
+          {
+            "$ref": "#/components/parameters/status"
+          },
+          {
+            "$ref": "#/components/parameters/platformIds"
+          },
+          {
+            "$ref": "#/components/parameters/startDateRange"
           }
         ],
         "responses": {
@@ -359,27 +326,10 @@
         "operationId": "listChallengePlatforms",
         "parameters": [
           {
-            "in": "query",
-            "name": "limit",
-            "description": "Maximum number of results returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
-            }
+            "$ref": "#/components/parameters/limit"
           },
           {
-            "in": "query",
-            "name": "offset",
-            "description": "Index of the first result that must be returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
-            }
+            "$ref": "#/components/parameters/offset"
           }
         ],
         "responses": {
@@ -547,27 +497,10 @@
         "operationId": "listGrants",
         "parameters": [
           {
-            "in": "query",
-            "name": "limit",
-            "description": "Maximum number of results returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
-            }
+            "$ref": "#/components/parameters/limit"
           },
           {
-            "in": "query",
-            "name": "offset",
-            "description": "Index of the first result that must be returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
-            }
+            "$ref": "#/components/parameters/offset"
           }
         ],
         "responses": {
@@ -746,27 +679,10 @@
         "operationId": "listOrganizations",
         "parameters": [
           {
-            "in": "query",
-            "name": "limit",
-            "description": "Maximum number of results returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
-            }
+            "$ref": "#/components/parameters/limit"
           },
           {
-            "in": "query",
-            "name": "offset",
-            "description": "Index of the first result that must be returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
-            }
+            "$ref": "#/components/parameters/offset"
           }
         ],
         "responses": {
@@ -934,38 +850,10 @@
         "operationId": "listPersons",
         "parameters": [
           {
-            "in": "query",
-            "name": "limit",
-            "description": "Maximum number of results returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
-            }
+            "$ref": "#/components/parameters/limit"
           },
           {
-            "in": "query",
-            "name": "offset",
-            "description": "Index of the first result that must be returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "Object that describes how to filter the results",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/PersonFilter"
-            },
-            "style": "deepObject",
-            "explode": true
+            "$ref": "#/components/parameters/offset"
           }
         ],
         "responses": {
@@ -1144,38 +1032,10 @@
         "operationId": "listTags",
         "parameters": [
           {
-            "in": "query",
-            "name": "limit",
-            "description": "Maximum number of results returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
-            }
+            "$ref": "#/components/parameters/limit"
           },
           {
-            "in": "query",
-            "name": "offset",
-            "description": "Index of the first result that must be returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
-            }
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "Object that describes how to filter the results",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/TagFilter"
-            },
-            "style": "deepObject",
-            "explode": true
+            "$ref": "#/components/parameters/offset"
           }
         ],
         "responses": {
@@ -1354,27 +1214,10 @@
         "operationId": "listUsers",
         "parameters": [
           {
-            "in": "query",
-            "name": "limit",
-            "description": "Maximum number of results returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10,
-              "minimum": 10,
-              "maximum": 100
-            }
+            "$ref": "#/components/parameters/limit"
           },
           {
-            "in": "query",
-            "name": "offset",
-            "description": "Index of the first result that must be returned",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 0,
-              "minimum": 0
-            }
+            "$ref": "#/components/parameters/offset"
           }
         ],
         "responses": {
@@ -1515,17 +1358,114 @@
     }
   },
   "components": {
-    "schemas": {
-      "ChallengeStatus": {
-        "description": "The status of the challenge",
-        "type": "string",
-        "enum": [
-          "upcoming",
-          "open",
-          "closed"
-        ],
-        "example": "open"
+    "parameters": {
+      "limit": {
+        "name": "limit",
+        "description": "Maximum number of results returned",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 10,
+          "minimum": 10,
+          "maximum": 100
+        }
       },
+      "offset": {
+        "name": "offset",
+        "description": "Index of the first result that must be returned",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0
+        }
+      },
+      "sort": {
+        "name": "sort",
+        "description": "Property used to sort the results that must be returned",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "createdAt",
+            "updatedAt"
+          ]
+        }
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Can be either `asc` or `desc`. Ignored without `sort` parameter.",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ]
+        }
+      },
+      "searchTerms": {
+        "name": "searchTerms",
+        "description": "A string of search terms used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "tagIds": {
+        "name": "tagIds",
+        "description": "Array of tag ids used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/TagId"
+          }
+        }
+      },
+      "status": {
+        "name": "status",
+        "description": "Array of challenge status used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengeStatus"
+          }
+        }
+      },
+      "platformIds": {
+        "name": "platformIds",
+        "description": "Array of challenge platform ids used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengePlatformId"
+          }
+        }
+      },
+      "startDateRange": {
+        "name": "startDateRange",
+        "description": "Return challenges that start during the date range specified",
+        "in": "query",
+        "required": false,
+        "style": "deepObject",
+        "explode": true,
+        "schema": {
+          "$ref": "#/components/schemas/DateRange"
+        }
+      }
+    },
+    "schemas": {
       "TagId": {
         "description": "The ID of the tag",
         "type": "string",
@@ -1533,6 +1473,16 @@
         "maxLength": 60,
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-tag"
+      },
+      "ChallengeStatus": {
+        "description": "The status of the challenge",
+        "type": "string",
+        "enum": [
+          "upcoming",
+          "active",
+          "completed"
+        ],
+        "example": "active"
       },
       "ChallengePlatformId": {
         "description": "The ID of the challenge platform",
@@ -1542,35 +1492,23 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-challenge-platform"
       },
-      "ChallengeFilter": {
+      "DateRange": {
         "type": "object",
-        "description": "An object that describes how to filter Challenges",
         "properties": {
-          "name": {
-            "description": "Keep the challenges whose name include this term",
-            "type": "string"
+          "start": {
+            "description": "Start date of the date range",
+            "type": "string",
+            "format": "date"
           },
-          "status": {
-            "$ref": "#/components/schemas/ChallengeStatus"
-          },
-          "organizer": {
-            "description": "Keep the challenges organized by this person",
-            "type": "string"
-          },
-          "tagIds": {
-            "description": "Keep the challenges associated to these tags",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TagId"
-            }
-          },
-          "platformIds": {
-            "description": "Keep the challenges associated to these challenge platforms",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ChallengePlatformId"
-            }
+          "end": {
+            "description": "End date of the date range",
+            "type": "string",
+            "format": "date"
           }
+        },
+        "example": {
+          "start": "2021-07-17",
+          "end": "2021-07-17"
         }
       },
       "ResponsePageMetadata": {
@@ -1732,7 +1670,7 @@
           "startDate": "2020-11-10",
           "endDate": "2020-12-31",
           "url": "https://synapse.org/awesome-challenge",
-          "status": "open",
+          "status": "active",
           "tagIds": [
             "awesome-tag1",
             "awesome-tag2"
@@ -2085,28 +2023,6 @@
           }
         ]
       },
-      "PersonFilter": {
-        "type": "object",
-        "description": "An object that describes how to filter Persons",
-        "properties": {
-          "firstName": {
-            "description": "Keep the persons whose first name starts with this term",
-            "type": "string"
-          },
-          "lastName": {
-            "description": "Keep the persons whose last name starts with this term",
-            "type": "string"
-          },
-          "email": {
-            "description": "Keep the persons whose email matches this term",
-            "type": "string"
-          },
-          "organization": {
-            "description": "Keep the persons who belong to this organization",
-            "type": "string"
-          }
-        }
-      },
       "PersonCreateResponse": {
         "type": "object",
         "description": "A person ID",
@@ -2200,16 +2116,6 @@
             ]
           }
         ]
-      },
-      "TagFilter": {
-        "type": "object",
-        "description": "An object that describes how to filter Tags",
-        "properties": {
-          "id": {
-            "description": "Keep the tags whose ID starts with this term",
-            "type": "string"
-          }
-        }
       },
       "TagCreateResponse": {
         "type": "object",
