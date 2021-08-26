@@ -4,4 +4,4 @@ properties:
   id:
     $ref: ../parameters/UserId.yaml
 example:
-  id: 2244994945
+  id: 507f1f77bcf86cd799439011

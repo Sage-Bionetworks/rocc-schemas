@@ -1,3 +1,3 @@
 description: The ID of the user
-type: integer
-example: 2244994945
+type: string
+example: 507f1f77bcf86cd799439011
