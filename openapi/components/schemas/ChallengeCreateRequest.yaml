@@ -47,6 +47,8 @@ properties:
     type: array
     items:
       $ref: ../parameters/GrantId.yaml
+  platformId:
+    $ref: ../parameters/ChallengePlatformId.yaml
   # challengeResults:
   #   $ref: ChallengeResults.yaml
 required:
@@ -58,6 +60,7 @@ required:
   - organizerIds
   - dataProviderIds
   - grantIds
+  - platformId
 example:
   name: Awesome Challenge
   description: This challenge is awesome.
@@ -65,7 +68,7 @@ example:
   startDate: "2020-11-10"
   endDate: "2020-12-31"
   url: https://synapse.org/awesome-challenge
-  status: open
+  status: active
   tagIds:
     - awesome-tag1
     - awesome-tag2
@@ -75,6 +78,7 @@ example:
     - awesome-organization
   grantIds:
     - 507f1f77bcf86cd799439011
+  platformId: awesome-challenge-platform
   # challengeResults:
   #   nSubmissions: 0
   #   nFinalSubmissions: 0

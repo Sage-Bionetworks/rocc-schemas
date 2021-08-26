@@ -1,0 +1,20 @@
+type: object
+description: A challenge platform
+properties:
+  name:
+    description: The name of the challenge platform
+    type: string
+  url:
+    description: The URL to the homepage of the challenge platform
+    type: string
+    format: uri
+  # imageUrl:
+  #   description: The URL to the challenge platform logo
+  #   type: string
+  #   format: uri
+required:
+  - name
+  - url
+example:
+  name: Awesome Challenge Platform
+  url: https://awesome-challenge-platform.io

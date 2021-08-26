@@ -1,34 +1,34 @@
 post:
   tags:
-    - User
-  summary: Create a user
-  description: Create a user with the specified username
-  operationId: createUser
+    - ChallengePlatform
+  summary: Create a challenge platform
+  description: Create a challenge platform with the specified ID
+  operationId: createChallengePlatform
   parameters:
     - in: query
-      name: username
-      description: The username of the user that is being created
+      name: challengePlatformId
+      description: The ID of the challenge platform that is being created
       required: true
       schema:
-        $ref: ../components/parameters/Username.yaml
+        $ref: ../components/parameters/ChallengePlatformId.yaml
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/UserCreateRequest.yaml
+          $ref: ../components/schemas/ChallengePlatformCreateRequest.yaml
     required: true
   responses:
     '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/UserCreateResponse.yaml
+            $ref: ../components/schemas/ChallengePlatformCreateResponse.yaml
       description: Success
       links:
-        GetUserById:
-          $ref: ../components/links/GetUserById.yaml
-        DeleteUserById:
-          $ref: ../components/links/DeleteUserById.yaml
+        GetChallengePlatformById:
+          $ref: ../components/links/GetChallengePlatformById.yaml
+        DeleteTagById:
+          $ref: ../components/links/DeleteChallengePlatformById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':
@@ -37,10 +37,10 @@ post:
       $ref: ../components/responses/InternalServerError.yaml
 get:
   tags:
-    - User
-  summary: Get all users
-  description: Returns the users
-  operationId: listUsers
+    - ChallengePlatform
+  summary: Get all challenge platforms
+  description: Returns the challenge platforms
+  operationId: listChallengePlatforms
   parameters:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
@@ -49,7 +49,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PageOfUsers.yaml
+            $ref: ../components/schemas/PageOfChallengePlatforms.yaml
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
@@ -57,10 +57,10 @@ get:
       $ref: ../components/responses/InternalServerError.yaml
 delete:
   tags:
-    - User
-  summary: Delete all users
-  description: Delete all users
-  operationId: deleteAllUsers
+    - ChallengePlatform
+  summary: Delete all challenge platforms
+  description: Delete all challenge platforms
+  operationId: deleteAllChallengePlatforms
   responses:
     '200':
       description: Success
@@ -68,7 +68,5 @@ delete:
         application/json:
           schema:
             $ref: ../components/schemas/EmptyObject.yaml
-    '400':
-      $ref: ../components/responses/BadRequest.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml

@@ -2,6 +2,6 @@ description: The status of the challenge
 type: string
 enum:
   - upcoming
-  - open
-  - closed
-example: open
+  - active
+  - completed
+example: active

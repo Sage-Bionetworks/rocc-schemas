@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.1.7
+  version: 0.2.0
   title: Registry of Open Community Challenge API
   contact:
     name: The ROCC Team
@@ -20,6 +20,8 @@ info:
 tags:
   - name: Challenge
     description: Operations about challenges
+  - name: ChallengePlatform
+    description: Operations about challenge platforms
   - name: Grant
     description: Operations about grants
   - name: Organization
@@ -45,6 +47,10 @@ paths:
     $ref: paths/challenges.yaml
   /challenges/{challengeId}:
     $ref: paths/challenges@{challengeId}.yaml
+  /challengePlatforms:
+    $ref: paths/challengePlatforms.yaml
+  /challengePlatforms/{challengePlatformId}:
+    $ref: paths/challengePlatforms@{challengePlatformId}.yaml
   /grants:
     $ref: paths/grants.yaml
   /grants/{grantId}:
