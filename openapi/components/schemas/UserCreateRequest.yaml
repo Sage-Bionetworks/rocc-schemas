@@ -21,7 +21,7 @@ example:
   # password: awesome-password
   description: I am awesome.
   profileImageUrl: www.awesome-picture.com
-  firstName: Awesome
-  lastName: User
+  givenName: Awesome
+  familyName: User
   email: awesome.user@example.com
   organizations: [awesome-organization]

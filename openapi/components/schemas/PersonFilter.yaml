@@ -1,10 +1,10 @@
 type: object
 description: An object that describes how to filter Persons
 properties:
-  firstName:
+  givenName:
     description: Keep the persons whose first name starts with this term
     type: string
-  lastName:
+  familyName:
     description: Keep the persons whose last name starts with this term
     type: string
   email:
