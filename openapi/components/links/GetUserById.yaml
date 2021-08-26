@@ -1,6 +1,6 @@
 operationId: getUser
 description: >
-  The `username` value returned in the response can be used as the
-  `username` parameter in `GET /users/{username}`
+  The `userName` value returned in the response can be used as the
+  `userName` parameter in `GET /users/{userName}`
 parameters:
-  username: $response.body#/username
+  userName: $response.body#/userName

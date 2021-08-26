@@ -6,11 +6,11 @@ post:
   operationId: createUser
   parameters:
     - in: query
-      name: username
+      name: userName
       description: The username of the user that is being created
       required: true
       schema:
-        $ref: ../components/parameters/Username.yaml
+        $ref: ../components/parameters/UserName.yaml
   requestBody:
     content:
       application/json:

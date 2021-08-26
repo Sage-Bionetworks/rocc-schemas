@@ -6,7 +6,7 @@ parameters:
     schema:
       oneOf:
         - $ref: ../components/parameters/UserId.yaml
-        - $ref: ../components/parameters/Username.yaml
+        - $ref: ../components/parameters/UserName.yaml
 get:
   tags:
     - User

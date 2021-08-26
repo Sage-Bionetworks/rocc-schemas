@@ -4,8 +4,8 @@ allOf:
   - $ref: PersonCreateRequest.yaml
   - type: object
     properties:
-      username:
-        $ref: ../parameters/Username.yaml
+      userName:
+        $ref: ../parameters/UserName.yaml
       description:
         description: Short biography about the user
         type: string
@@ -15,9 +15,9 @@ allOf:
   #     password:
   #       $ref: ../parameters/Password.yaml
     required:
-      - username
+      - userName
 example:
-  username: awesome-user
+  userName: awesome-user
   # password: awesome-password
   description: I am awesome.
   profileImageUrl: www.awesome-picture.com
