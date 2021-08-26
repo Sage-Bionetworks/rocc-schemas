@@ -1157,11 +1157,11 @@
         "parameters": [
           {
             "in": "query",
-            "name": "username",
+            "name": "userName",
             "description": "The username of the user that is being created",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Username"
+              "$ref": "#/components/schemas/UserName"
             }
           }
         ],
@@ -1279,7 +1279,7 @@
                 "$ref": "#/components/schemas/UserId"
               },
               {
-                "$ref": "#/components/schemas/Username"
+                "$ref": "#/components/schemas/UserName"
               }
             ]
           }
@@ -2055,11 +2055,11 @@
         "type": "object",
         "description": "A person",
         "properties": {
-          "firstName": {
+          "givenName": {
             "description": "The first name of the person",
             "type": "string"
           },
-          "lastName": {
+          "familyName": {
             "description": "The last name of the person",
             "type": "string"
           },
@@ -2075,13 +2075,13 @@
           }
         },
         "required": [
-          "firstName",
-          "lastName",
+          "givenName",
+          "familyName",
           "organizationIds"
         ],
         "example": {
-          "firstName": "John",
-          "lastName": "Smith",
+          "givenName": "John",
+          "familyName": "Smith",
           "email": "john.smith@example.com",
           "organizationIds": [
             "awesome-organization"
@@ -2208,7 +2208,7 @@
           "id": 2244994945
         }
       },
-      "Username": {
+      "UserName": {
         "description": "The username of the user",
         "type": "string",
         "minLength": 3,
@@ -2226,8 +2226,8 @@
           {
             "type": "object",
             "properties": {
-              "username": {
-                "$ref": "#/components/schemas/Username"
+              "userName": {
+                "$ref": "#/components/schemas/UserName"
               },
               "description": {
                 "description": "Short biography about the user",
@@ -2239,16 +2239,16 @@
               }
             },
             "required": [
-              "username"
+              "userName"
             ]
           }
         ],
         "example": {
-          "username": "awesome-user",
+          "userName": "awesome-user",
           "description": "I am awesome.",
           "profileImageUrl": "www.awesome-picture.com",
-          "firstName": "Awesome",
-          "lastName": "User",
+          "givenName": "Awesome",
+          "familyName": "User",
           "email": "awesome.user@example.com",
           "organizations": [
             "awesome-organization"
@@ -2449,16 +2449,16 @@
       },
       "GetUserById": {
         "operationId": "getUser",
-        "description": "The `username` value returned in the response can be used as the `username` parameter in `GET /users/{username}`\n",
+        "description": "The `userName` value returned in the response can be used as the `userName` parameter in `GET /users/{userName}`\n",
         "parameters": {
-          "username": "$response.body#/username"
+          "userName": "$response.body#/userName"
         }
       },
       "DeleteUserById": {
         "operationId": "deleteUser",
-        "description": "The `username` value returned in the response can be used as the `username` parameter in `DELETE /users/{username}`\n",
+        "description": "The `userName` value returned in the response can be used as the `userName` parameter in `DELETE /users/{userName}`\n",
         "parameters": {
-          "username": "$response.body#/username"
+          "userName": "$response.body#/userName"
         }
       }
     }
