@@ -1,10 +1,10 @@
 type: object
 description: A person
 properties:
-  firstName:
+  givenName:
     description: The first name of the person
     type: string
-  lastName:
+  familyName:
     description: The last name of the person
     type: string
   email:
@@ -15,12 +15,12 @@ properties:
     items:
       $ref: ../parameters/OrganizationId.yaml
 required:
-  - firstName
-  - lastName
+  - givenName
+  - familyName
   - organizationIds
 example:
-  firstName: John
-  lastName: Smith
+  givenName: John
+  familyName: Smith
   email: john.smith@example.com
   organizationIds:
     - awesome-organization
