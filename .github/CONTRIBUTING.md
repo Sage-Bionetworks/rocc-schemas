@@ -3,8 +3,8 @@
 A big welcome and thank you for considering contributing to this project.
 
 This project is a community effort and lives off your contributions, be it in
-the form of bug reports, feature requests, discussions, or fixes and other
-code changes.
+the form of bug reports, feature requests, discussions, or fixes and other code
+changes.
 
 Reading and following these guidelines will help us make the contribution
 process easy and effective for everyone involved. It also communicates that you
@@ -44,9 +44,9 @@ general guidelines that cover both:
 ### Issues
 
 Issues should be used to report problems with this project, request a new
-feature, or to discuss potential changes before a PR is created. When you
-create a new Issue, a template will be loaded that will guide you through
-collecting and providing the information we need to investigate.
+feature, or to discuss potential changes before a PR is created. When you create
+a new Issue, a template will be loaded that will guide you through collecting
+and providing the information we need to investigate.
 
 If you find an Issue that addresses the problem you're having, please add your
 own reproduction information to the existing issue rather than creating a new
@@ -60,12 +60,12 @@ fix or improvement slated for the next release. In general, PRs should:
 
 - Only fix/add the functionality in question **OR** address wide-spread
   whitespace/style issues, not both.
-- Add unit or integration tests for fixed or changed functionality
-  (if a test suite already exists).
+- Add unit or integration tests for fixed or changed functionality (if a test
+  suite already exists).
 - Address a single concern in the least number of changed lines as possible.
 - Include documentation in the repo or on our [docs site].
-- Be accompanied by a complete Pull Request template (loaded automatically
-  when a PR is created).
+- Be accompanied by a complete Pull Request template (loaded automatically when
+  a PR is created).
 
 For changes that address core functionality or would require breaking changes
 (e.g. a major release), it's best to open an Issue to discuss your proposal
@@ -85,8 +85,8 @@ In general, we follow the [Forking Workflow]:
 We recommend that you add this repository as an [upstream remote] to your local
 git repository so that you can fetch the latest updates.
 
-On your local machine make sure you have the latest version of the `main`
-branch from this upstream repository:
+On your local machine make sure you have the latest version of the `main` branch
+from this upstream repository:
 
     git checkout main
     git pull upstream main
@@ -104,7 +104,7 @@ install the required development tools.
 The command below builds and serves a preview of the HTML documentation of one
 of the APIs defined in this repository:
 
-    npm run start --api=<name>
+    npm run start
 
 where `<name>` is the name of one of the API folders included in [openapi/] for
 which you want to see the HTML documentation. The HTML page will be available at
@@ -115,8 +115,8 @@ http://localhost:8080.
 Before submitting a PR, please check that the content of the branch that you
 plan to submit passes with the tests defined for this project:
 
-    npm run lint:all
-    npm run validate --api=<name>
+    npm run lint
+    npm run validate
 
 where `<name>` is the name of the API folder in [openapi/] that you want to
 test.
@@ -124,14 +124,33 @@ test.
 ## Release Procedure
 
 Maintainers are required to follow the procedure below when creating a new
-release.
+release. Releases are created with the npm package [release-it].
 
-TBA
+1. [Identify whether the release is a major, minor or patch release.]
+2. Bump the project version in the files listed below but not in `package.json`
+   (updated automatically by `release-it`).
+   - `README.md`
+   - `openapi/openapi.yaml`
+3. Obtain a [personal access token] (release-it only needs "repo" access; no
+   "admin" or other scopes).
+4. Make sure the token is [available as an environment variable].
+5. Preview the release information using one of the commands listed below. These
+   commands will not modify any local or remote files.
+    - `npm run release -- major --ci --dry-run`
+    - `npm run release -- minor --ci --dry-run`
+    - `npm run release -- patch --ci --dry-run`
+6. Create the release using one of the commands listed below.
+    - `npm run release -- major --ci`
+    - `npm run release -- minor --ci`
+    - `npm run release -- patch --ci`
+7. Check that the release has been successfully created on GitHub along with any
+   release artifacts that may have been created (GitHub Pages, Docker image
+   pushed to Docker registry, Python package published to PyPi, etc.).
 
 ## Getting Help
 
-Join us on the XXX and post your question to the
-channel that best matches the topic of your request.
+Join us on the XXX and post your question to the channel that best matches the
+topic of your request.
 
 <!-- Links -->
 
@@ -141,3 +160,7 @@ channel that best matches the topic of your request.
 [Forking Workflow]: https://www.atlassian.com/git/tutorials/comparing-workflows/forking-workflow
 [package.json]: ../package.json
 [openapi/]: ../openapi/
+[release-it]: https://github.com/release-it/release-it
+[Identify whether the release is a major, minor or patch release.]: https://semver.org/#summary
+[personal access token]: https://github.com/settings/tokens/new?scopes=repo&description=release-it
+[available as an environment variable]: https://github.com/release-it/release-it/blob/master/docs/environment-variables.md

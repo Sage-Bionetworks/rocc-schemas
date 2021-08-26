@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  version: 0.2.0
+  version: 0.3.0
   title: Registry of Open Community Challenge API
   contact:
     name: The ROCC Team
@@ -69,7 +69,7 @@ paths:
     $ref: paths/tags@{tagId}.yaml
   /users:
     $ref: paths/users.yaml
-  /users/{username}:
-    $ref: paths/users@{username}.yaml
+  /users/{userId}:
+    $ref: paths/users@{userId}.yaml
   /healthcheck:
     $ref: paths/healthCheck.yaml

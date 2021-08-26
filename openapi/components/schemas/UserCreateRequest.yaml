@@ -2,15 +2,26 @@ type: object
 description: A user of the service
 allOf:
   - $ref: PersonCreateRequest.yaml
-  # - type: object
-  #   properties:
+  - type: object
+    properties:
+      userName:
+        $ref: ../parameters/UserName.yaml
+      description:
+        description: Short biography about the user
+        type: string
+      profileImageUrl:
+        description: URL to the user's profile image
+        type: string
   #     password:
   #       $ref: ../parameters/Password.yaml
-  #   required:
-  #     - password
+    required:
+      - userName
 example:
+  userName: awesome-user
   # password: awesome-password
-  firstName: John
-  lastName: Smith
-  email: john.smith@example.com
+  description: I am awesome.
+  profileImageUrl: www.awesome-picture.com
+  givenName: Awesome
+  familyName: User
+  email: awesome.user@example.com
   organizations: [awesome-organization]
