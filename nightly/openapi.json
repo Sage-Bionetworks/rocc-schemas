@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "title": "Registry of Open Community Challenge API",
     "contact": {
       "name": "The ROCC Team",
@@ -1157,11 +1157,11 @@
         "parameters": [
           {
             "in": "query",
-            "name": "username",
+            "name": "userName",
             "description": "The username of the user that is being created",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Username"
+              "$ref": "#/components/schemas/UserName"
             }
           }
         ],
@@ -1266,15 +1266,22 @@
         }
       }
     },
-    "/users/{username}": {
+    "/users/{userId}": {
       "parameters": [
         {
           "in": "path",
-          "name": "username",
-          "description": "The username of the user",
+          "name": "userId",
+          "description": "The unique identifier of the user, either the user ID or username",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/Username"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/UserId"
+              },
+              {
+                "$ref": "#/components/schemas/UserName"
+              }
+            ]
           }
         }
       ],
@@ -2048,11 +2055,11 @@
         "type": "object",
         "description": "A person",
         "properties": {
-          "firstName": {
+          "givenName": {
             "description": "The first name of the person",
             "type": "string"
           },
-          "lastName": {
+          "familyName": {
             "description": "The last name of the person",
             "type": "string"
           },
@@ -2068,13 +2075,13 @@
           }
         },
         "required": [
-          "firstName",
-          "lastName",
+          "givenName",
+          "familyName",
           "organizationIds"
         ],
         "example": {
-          "firstName": "John",
-          "lastName": "Smith",
+          "givenName": "John",
+          "familyName": "Smith",
           "email": "john.smith@example.com",
           "organizationIds": [
             "awesome-organization"
@@ -2184,7 +2191,24 @@
           }
         ]
       },
-      "Username": {
+      "UserId": {
+        "description": "The ID of the user",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "UserCreateResponse": {
+        "type": "object",
+        "description": "A user's username",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/UserId"
+          }
+        },
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "UserName": {
         "description": "The username of the user",
         "type": "string",
         "minLength": 3,
@@ -2192,40 +2216,40 @@
         "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
         "example": "awesome-user"
       },
-      "UserCreateResponse": {
-        "type": "object",
-        "description": "A user's username",
-        "properties": {
-          "username": {
-            "$ref": "#/components/schemas/Username"
-          },
-          "role": {
-            "description": "The role of the user",
-            "type": "string",
-            "enum": [
-              "user",
-              "admin"
-            ],
-            "default": "user"
-          }
-        },
-        "example": {
-          "username": "awesome-user",
-          "role": "user"
-        }
-      },
       "UserCreateRequest": {
         "type": "object",
         "description": "A user of the service",
         "allOf": [
           {
             "$ref": "#/components/schemas/PersonCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "userName": {
+                "$ref": "#/components/schemas/UserName"
+              },
+              "description": {
+                "description": "Short biography about the user",
+                "type": "string"
+              },
+              "profileImageUrl": {
+                "description": "URL to the user's profile image",
+                "type": "string"
+              }
+            },
+            "required": [
+              "userName"
+            ]
           }
         ],
         "example": {
-          "firstName": "John",
-          "lastName": "Smith",
-          "email": "john.smith@example.com",
+          "userName": "awesome-user",
+          "description": "I am awesome.",
+          "profileImageUrl": "www.awesome-picture.com",
+          "givenName": "Awesome",
+          "familyName": "User",
+          "email": "awesome.user@example.com",
           "organizations": [
             "awesome-organization"
           ]
@@ -2233,13 +2257,23 @@
       },
       "User": {
         "type": "object",
-        "description": "A user of the portal",
+        "description": "A ROCC user",
         "allOf": [
           {
             "$ref": "#/components/schemas/UserCreateResponse"
           },
           {
             "$ref": "#/components/schemas/UserCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "verified": {
+                "description": "Indication of user's verification on ROCC",
+                "type": "boolean",
+                "default": false
+              }
+            }
           }
         ]
       },
@@ -2415,16 +2449,16 @@
       },
       "GetUserById": {
         "operationId": "getUser",
-        "description": "The `username` value returned in the response can be used as the `username` parameter in `GET /users/{username}`\n",
+        "description": "The `userName` value returned in the response can be used as the `userName` parameter in `GET /users/{userName}`\n",
         "parameters": {
-          "username": "$response.body#/username"
+          "userName": "$response.body#/userName"
         }
       },
       "DeleteUserById": {
         "operationId": "deleteUser",
-        "description": "The `username` value returned in the response can be used as the `username` parameter in `DELETE /users/{username}`\n",
+        "description": "The `userName` value returned in the response can be used as the `userName` parameter in `DELETE /users/{userName}`\n",
         "parameters": {
-          "username": "$response.body#/username"
+          "userName": "$response.body#/userName"
         }
       }
     }
