@@ -3,3 +3,13 @@ description: A person
 allOf:
   - $ref: PersonCreateResponse.yaml
   - $ref: PersonCreateRequest.yaml
+  - type: object
+    properties:
+      createdAt:
+        description: When this challenge has been created
+        type: string
+        format: date-time
+      updatedAt:
+        description: When this challenge has last been updated
+        type: string
+        format: date-time

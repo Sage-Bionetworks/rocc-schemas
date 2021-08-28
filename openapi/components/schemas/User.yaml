@@ -5,7 +5,8 @@ allOf:
   - $ref: UserCreateRequest.yaml
   - type: object
     properties:
-      verified:
-        description: Indication of user's verification on ROCC
-        type: boolean
-        default: false
+      suspendedAt:
+        description: Whether this user has been suspended
+        type: string
+        format: date-time
+        nullable: true

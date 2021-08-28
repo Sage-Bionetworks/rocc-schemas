@@ -6,22 +6,22 @@ allOf:
     properties:
       userName:
         $ref: ../parameters/UserName.yaml
-      description:
+      bio:
         description: Short biography about the user
         type: string
-      profileImageUrl:
+      avatarUrl:
         description: URL to the user's profile image
         type: string
-  #     password:
-  #       $ref: ../parameters/Password.yaml
+        format: uri
     required:
       - userName
 example:
   userName: awesome-user
-  # password: awesome-password
-  description: I am awesome.
-  profileImageUrl: www.awesome-picture.com
+  bio: I am awesome.
+  avatarUrl: www.awesome-picture.com
   givenName: Awesome
   familyName: User
   email: awesome.user@example.com
-  organizations: [awesome-organization]
+  organizationIds:
+    - awesome-organization
+    - other-awesome-organization

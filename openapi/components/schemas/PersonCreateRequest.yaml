@@ -17,10 +17,10 @@ properties:
 required:
   - givenName
   - familyName
-  - organizationIds
 example:
   givenName: John
   familyName: Smith
   email: john.smith@example.com
   organizationIds:
     - awesome-organization
+    - other-awesome-organization

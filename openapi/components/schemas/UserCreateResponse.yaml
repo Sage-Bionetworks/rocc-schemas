@@ -1,5 +1,5 @@
 type: object
-description: A user's username
+description: A user ID
 properties:
   id:
     $ref: ../parameters/UserId.yaml
