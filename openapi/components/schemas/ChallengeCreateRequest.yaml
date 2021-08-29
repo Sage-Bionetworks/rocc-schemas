@@ -49,8 +49,6 @@ properties:
       $ref: ../parameters/GrantId.yaml
   platformId:
     $ref: ../parameters/ChallengePlatformId.yaml
-  # challengeResults:
-  #   $ref: ChallengeResults.yaml
 required:
   - name
   - description
@@ -74,12 +72,11 @@ example:
     - awesome-tag2
   organizerIds:
     - 507f1f77bcf86cd799439011
+    - 507f1f77bcf86cd799439012
   dataProviderIds:
-    - awesome-organization
+    - 507f1f77bcf86cd799439011
+    - 507f1f77bcf86cd799439012
   grantIds:
     - 507f1f77bcf86cd799439011
+    - 507f1f77bcf86cd799439012
   platformId: awesome-challenge-platform
-  # challengeResults:
-  #   nSubmissions: 0
-  #   nFinalSubmissions: 0
-  #   nRegisteredParticipants: 0
