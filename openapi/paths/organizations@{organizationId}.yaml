@@ -1,10 +1,12 @@
 parameters:
   - in: path
     name: organizationId
-    description: The ID of the organization
+    description: The unique identifier of the organization, either the user ID or account name
     required: true
     schema:
-      $ref: ../components/parameters/OrganizationId.yaml
+      oneOf:
+        - $ref: ../components/parameters/OrganizationId.yaml
+        - $ref: ../components/parameters/AccountName.yaml
 get:
   tags:
     - Organization
