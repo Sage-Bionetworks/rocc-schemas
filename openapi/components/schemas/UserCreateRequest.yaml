@@ -4,8 +4,8 @@ allOf:
   - $ref: PersonCreateRequest.yaml
   - type: object
     properties:
-      userName:
-        $ref: ../parameters/UserName.yaml
+      accountName:
+        $ref: ../parameters/AccountName.yaml
       bio:
         description: Short biography about the user
         type: string
@@ -13,15 +13,17 @@ allOf:
         description: URL to the user's profile image
         type: string
         format: uri
-    required:
-      - userName
+required:
+  - accountName
+  - givenName
+  - familyName
 example:
-  userName: awesome-user
+  accountName: awesome-user
   bio: I am awesome.
   avatarUrl: www.awesome-picture.com
   givenName: Awesome
   familyName: User
   email: awesome.user@example.com
   organizationIds:
-    - awesome-organization
-    - other-awesome-organization
+    - 507f1f77bcf86cd799439011
+    - 507f1f77bcf86cd799439012

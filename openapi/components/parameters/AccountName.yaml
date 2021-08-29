@@ -1,4 +1,4 @@
-description: The username of the user
+description: The user or organization account name
 type: string
 minLength: 3
 maxLength: 25
