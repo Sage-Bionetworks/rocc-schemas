@@ -10,3 +10,6 @@ allOf:
         type: string
         format: date-time
         nullable: true
+    required:
+      - createdAt
+      - updatedAt
