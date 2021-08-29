@@ -2,17 +2,25 @@ type: object
 description: A challenge
 properties:
   name:
-    description: The challenge name
+    description: The name of the challenge
+    type: string
+    pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    minLength: 3
+    maxLength: 60
+  displayName:
     type: string
     minLength: 3
     maxLength: 60
   description:
     description: A short description of the challenge
     type: string
+    nullable: true
     maxLength: 280
-  summary:
-    description: The summary of challenge
+  websiteUrl:
     type: string
+    format: uri
+  status:
+    $ref: ../parameters/ChallengeStatus.yaml
   startDate:
     description: When the challenge started
     type: string
@@ -21,62 +29,20 @@ properties:
     description: When the challenge ended
     type: string
     format: date
-  url:
-    description: The URL to the challenge website
-    type: string
-    format: uri
-  status:
-    $ref: ../parameters/ChallengeStatus.yaml
-  tagIds:
-    description: The tags associated to the challenge
-    type: array
-    items:
-      $ref: ../parameters/TagId.yaml
-  organizerIds:
-    description: The organizers of the challenge
-    type: array
-    items:
-      $ref: ../parameters/PersonId.yaml
-  dataProviderIds:
-    description: The organizations contributing the data
-    type: array
-    items:
-      $ref: ../parameters/OrganizationId.yaml
-  grantIds:
-    description: The grants supporting this challenge
-    type: array
-    items:
-      $ref: ../parameters/GrantId.yaml
   platformId:
     $ref: ../parameters/ChallengePlatformId.yaml
+    nullable: true
 required:
   - name
   - description
-  - url
+  - websiteUrl
   - status
-  - tagIds
-  - organizerIds
-  - dataProviderIds
-  - grantIds
-  - platformId
 example:
-  name: Awesome Challenge
+  name: awesome-challenge
+  displayName: Awesome Challenge
   description: This challenge is awesome.
-  summary: This challenge is awesome.
+  websiteUrl: https://synapse.org/awesome-challenge
+  status: active
   startDate: "2020-11-10"
   endDate: "2020-12-31"
-  url: https://synapse.org/awesome-challenge
-  status: active
-  tagIds:
-    - awesome-tag1
-    - awesome-tag2
-  organizerIds:
-    - 507f1f77bcf86cd799439011
-    - 507f1f77bcf86cd799439012
-  dataProviderIds:
-    - 507f1f77bcf86cd799439011
-    - 507f1f77bcf86cd799439012
-  grantIds:
-    - 507f1f77bcf86cd799439011
-    - 507f1f77bcf86cd799439012
   platformId: awesome-challenge-platform
