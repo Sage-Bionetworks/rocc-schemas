@@ -384,15 +384,15 @@ paths:
       tags:
         - Organization
       summary: Create an organization
-      description: Create an organization with the specified name
+      description: Create an organization with the specified account name
       operationId: createOrganization
       parameters:
         - in: query
-          name: organizationId
-          description: The ID of the organization that is being created
+          name: accountName
+          description: The account name of the org that is being created
           required: true
           schema:
-            $ref: '#/components/schemas/OrganizationId'
+            $ref: '#/components/schemas/AccountName'
       requestBody:
         content:
           application/json:
@@ -456,10 +456,14 @@ paths:
     parameters:
       - in: path
         name: organizationId
-        description: The ID of the organization
+        description: >-
+          The unique identifier of the organization, either the user ID or
+          account name
         required: true
         schema:
-          $ref: '#/components/schemas/OrganizationId'
+          oneOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - $ref: '#/components/schemas/AccountName'
     get:
       tags:
         - Organization
@@ -722,15 +726,15 @@ paths:
       tags:
         - User
       summary: Create a user
-      description: Create a user with the specified username
+      description: Create a user with the specified account name
       operationId: createUser
       parameters:
         - in: query
-          name: userName
-          description: The username of the user that is being created
+          name: accountName
+          description: The account name of the user that is being created
           required: true
           schema:
-            $ref: '#/components/schemas/UserName'
+            $ref: '#/components/schemas/AccountName'
       requestBody:
         content:
           application/json:
@@ -796,12 +800,12 @@ paths:
     parameters:
       - in: path
         name: userId
-        description: 'The unique identifier of the user, either the user ID or username'
+        description: 'The unique identifier of the user, either the user ID or account name'
         required: true
         schema:
           oneOf:
             - $ref: '#/components/schemas/UserId'
-            - $ref: '#/components/schemas/UserName'
+            - $ref: '#/components/schemas/AccountName'
     get:
       tags:
         - User
@@ -1019,10 +1023,7 @@ components:
     OrganizationId:
       description: The ID of the organization
       type: string
-      minLength: 3
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-organization
+      example: 507f1f77bcf86cd799439011
     GrantId:
       description: The ID of the grant
       type: string
@@ -1102,10 +1103,13 @@ components:
           - awesome-tag2
         organizerIds:
           - 507f1f77bcf86cd799439011
+          - 507f1f77bcf86cd799439012
         dataProviderIds:
-          - awesome-organization
+          - 507f1f77bcf86cd799439011
+          - 507f1f77bcf86cd799439012
         grantIds:
           - 507f1f77bcf86cd799439011
+          - 507f1f77bcf86cd799439012
         platformId: awesome-challenge-platform
     Challenge:
       type: object
@@ -1284,34 +1288,57 @@ components:
       required:
         - id
       example:
-        id: awesome-organization
+        id: 507f1f77bcf86cd799439011
+    AccountName:
+      description: The user or organization account name
+      type: string
+      minLength: 3
+      maxLength: 25
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-user
     OrganizationCreateRequest:
       type: object
       description: An organization
       properties:
+        accountName:
+          $ref: '#/components/schemas/AccountName'
         name:
-          description: The organization name
+          description: The organization display name
           type: string
         shortName:
-          description: The organization short name
+          description: The organization short display name
           type: string
-        url:
+        websiteUrl:
           description: The URL to the homepage of the organization
           type: string
           format: uri
       required:
+        - accountName
         - name
-        - url
       example:
+        accountName: awesome-organization
         name: Awesome Organization
         shortName: AO
-        url: 'https://www.example.org'
+        websiteUrl: 'https://www.example.org'
     Organization:
       type: object
       description: An organization
       allOf:
         - $ref: '#/components/schemas/OrganizationCreateResponse'
         - $ref: '#/components/schemas/OrganizationCreateRequest'
+        - type: object
+          properties:
+            createdAt:
+              description: When this organization has been created
+              type: string
+              format: date-time
+            updatedAt:
+              description: When this organization has last been updated
+              type: string
+              format: date-time
+          required:
+            - createdAt
+            - updatedAt
     PageOfOrganizations:
       type: object
       description: A page of Organizations
@@ -1384,6 +1411,9 @@ components:
               description: When this challenge has last been updated
               type: string
               format: date-time
+          required:
+            - createdAt
+            - updatedAt
     PageOfPersons:
       type: object
       description: A page of Persons
@@ -1451,13 +1481,6 @@ components:
           $ref: '#/components/schemas/UserId'
       example:
         id: 507f1f77bcf86cd799439011
-    UserName:
-      description: The username of the user
-      type: string
-      minLength: 3
-      maxLength: 25
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-user
     UserCreateRequest:
       type: object
       description: A user of the service
@@ -1465,8 +1488,8 @@ components:
         - $ref: '#/components/schemas/PersonCreateRequest'
         - type: object
           properties:
-            userName:
-              $ref: '#/components/schemas/UserName'
+            accountName:
+              $ref: '#/components/schemas/AccountName'
             bio:
               description: Short biography about the user
               type: string
@@ -1474,18 +1497,20 @@ components:
               description: URL to the user's profile image
               type: string
               format: uri
-          required:
-            - userName
+      required:
+        - accountName
+        - givenName
+        - familyName
       example:
-        userName: awesome-user
+        accountName: awesome-user
         bio: I am awesome.
         avatarUrl: www.awesome-picture.com
         givenName: Awesome
         familyName: User
         email: awesome.user@example.com
         organizationIds:
-          - awesome-organization
-          - other-awesome-organization
+          - 507f1f77bcf86cd799439011
+          - 507f1f77bcf86cd799439012
     User:
       type: object
       description: A ROCC user
@@ -1499,6 +1524,9 @@ components:
               type: string
               format: date-time
               nullable: true
+          required:
+            - createdAt
+            - updatedAt
     PageOfUsers:
       type: object
       description: A page of Users
