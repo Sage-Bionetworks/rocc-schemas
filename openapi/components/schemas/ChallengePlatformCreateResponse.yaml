@@ -1,4 +1,5 @@
 type: object
+description: The unique identifier of the challenge platform created
 properties:
   id:
     $ref: ../parameters/ChallengePlatformId.yaml

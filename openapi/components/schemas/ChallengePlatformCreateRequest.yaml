@@ -1,4 +1,5 @@
 type: object
+description: The information used to create a challenge platform
 properties:
   name:
     $ref: ../parameters/ChallengePlatformName.yaml

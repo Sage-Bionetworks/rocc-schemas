@@ -51,7 +51,7 @@
       "invalid_type_format_pair": "warning",
       "snake_case_only": "off",
       "no_schema_description": "warning",
-      "no_property_description": "warning",
+      "no_property_description": "off",
       "description_mentions_json": "warning",
       "array_of_arrays": "warning",
       "inconsistent_property_type": [
@@ -68,7 +68,7 @@
       ],
       "property_case_collision": "error",
       "enum_case_convention": [
-        "warning",
+        "off",
         "lower_snake_case"
       ],
       "undefined_required_properties": "warning"

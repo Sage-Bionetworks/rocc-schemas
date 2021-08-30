@@ -1,5 +1,5 @@
 type: object
-description: The information required to create an organization account
+description: The information required to create an org account
 properties:
   login:
     type: string

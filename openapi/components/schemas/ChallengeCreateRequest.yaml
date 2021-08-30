@@ -1,5 +1,5 @@
 type: object
-description: A challenge
+description: The information used to create a challenge
 properties:
   name:
     description: The name of the challenge

@@ -1,5 +1,5 @@
 type: object
-description: A person
+description: The information used to create a person
 properties:
   name:
     type: string
