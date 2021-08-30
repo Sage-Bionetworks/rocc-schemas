@@ -442,9 +442,7 @@ paths:
           account name
         required: true
         schema:
-          oneOf:
-            - $ref: '#/components/schemas/AccountId'
-            - $ref: '#/components/schemas/AccountLogin'
+          $ref: '#/components/schemas/AccountId'
     get:
       tags:
         - Organization
@@ -660,9 +658,7 @@ paths:
         description: The unique identifier of the tag
         required: true
         schema:
-          oneOf:
-            - $ref: '#/components/schemas/TagId'
-            - $ref: '#/components/schemas/TagName'
+          $ref: '#/components/schemas/TagId'
     get:
       tags:
         - Tag
@@ -772,9 +768,7 @@ paths:
         description: 'The unique identifier of the user, either the user account ID or login'
         required: true
         schema:
-          oneOf:
-            - $ref: '#/components/schemas/AccountId'
-            - $ref: '#/components/schemas/AccountLogin'
+          $ref: '#/components/schemas/AccountId'
     get:
       tags:
         - User
@@ -1302,13 +1296,6 @@ components:
                 $ref: '#/components/schemas/Organization'
           required:
             - organizations
-    AccountLogin:
-      description: The user or organization account name
-      type: string
-      minLength: 3
-      maxLength: 25
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-user
     PersonId:
       description: The unique identifier of a person
       type: string
