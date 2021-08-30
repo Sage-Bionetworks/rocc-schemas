@@ -1052,31 +1052,16 @@ components:
             updatedAt:
               type: string
               format: date-time
-      required:
-        - id
-        - name
-        - displayName
-        - description
-        - websiteUrl
-        - status
-        - fullName
-        - ownerId
-        - createdAt
-        - updatedAt
-      example:
-        id: 507f1f77bcf86cd799439011
-        name: awesome-challenge
-        displayName: Awesome Challenge
-        description: This challenge is awesome.
-        websiteUrl: 'https://synapse.org/awesome-challenge'
-        status: active
-        startDate: '2020-11-10'
-        endDate: '2020-12-31'
-        platformId: 507f1f77bcf86cd799439011
-        fullName: dream/awesome-challenge
-        ownerId: 507f1f77bcf86cd799439011
-        createdAt: '2017-07-08T16:18:44-04:00'
-        updatedAt: '2017-07-08T16:18:44-04:00'
+          required:
+            - fullName
+            - ownerId
+            - createdAt
+            - updatedAt
+          example:
+            fullName: dream/awesome-challenge
+            ownerId: 507f1f77bcf86cd799439011
+            createdAt: '2017-07-08T16:18:44-04:00'
+            updatedAt: '2017-07-08T16:18:44-04:00'
     PageOfChallenges:
       type: object
       description: A page of Challenges
@@ -1170,22 +1155,12 @@ components:
             updatedAt:
               type: string
               format: date-time
-      required:
-        - id
-        - name
-        - displayName
-        - websiteUrl
-        - avatarUrl
-        - createdAt
-        - updatedAt
-      example:
-        id: 507f1f77bcf86cd799439011
-        name: awesome-challenge-platform
-        displayName: Awesome Challenge Platform
-        websiteUrl: 'https://awesome-challenge-platform.io'
-        avatarUrl: 'https://awesome-challenge-platform.io/logo.png'
-        createdAt: '2017-07-08T16:18:44-04:00'
-        updatedAt: '2017-07-08T16:18:44-04:00'
+          required:
+            - createdAt
+            - updatedAt
+          example:
+            createdAt: '2017-07-08T16:18:44-04:00'
+            updatedAt: '2017-07-08T16:18:44-04:00'
     PageOfChallengePlatforms:
       type: object
       description: A page of ChallengePlatforms
@@ -1231,12 +1206,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/GrantCreateResponse'
         - $ref: '#/components/schemas/GrantCreateRequest'
-      required:
-        - id
-        - name
-      example:
-        id: 507f1f77bcf86cd799439011
-        name: Awesome Grant
     PageOfGrants:
       type: object
       description: A page of Grants
@@ -1261,21 +1230,25 @@ components:
         - id
       example:
         id: 507f1f77bcf86cd799439011
+    Email:
+      description: An email address
+      type: string
+      format: email
+      example: john.smith@example.com
     OrganizationCreateRequest:
       type: object
       description: The information required to create an org account
       properties:
         login:
           type: string
+        email:
+          $ref: '#/components/schemas/Email'
       required:
         - login
+        - email
       example:
         login: awesome-org
-    Email:
-      description: An email address
-      type: string
-      format: email
-      example: john.smith@example.com
+        email: contact@example.org
     Organization:
       type: object
       description: An organization
@@ -1287,13 +1260,11 @@ components:
             name:
               type: string
               nullable: true
-            email:
-              $ref: '#/components/schemas/Email'
-              nullable: true
             avatarUrl:
               type: string
               format: uri
               example: 'https://example.com/awesome-avatar.png'
+              nullable: true
             description:
               type: string
               nullable: true
@@ -1306,21 +1277,17 @@ components:
             type:
               type: string
               example: Organization
-      required:
-        - id
-        - login
-        - avatarUrl
-        - type
-      example:
-        id: 507f1f77bcf86cd799439011
-        login: awesome-org
-        name: Awesome User
-        email: awesome.user@example.com
-        avatarUrl: 'https://example.com/awesome-avatar.png'
-        description: A great organization
-        createdAt: '2017-07-08T16:18:44-04:00'
-        updatedAt: '2017-07-08T16:18:44-04:00'
-        type: Organization
+          required:
+            - createdAt
+            - updatedAt
+            - type
+          example:
+            name: Awesome Org
+            avatarUrl: 'https://example.com/awesome-avatar.png'
+            description: A great organization
+            createdAt: '2017-07-08T16:18:44-04:00'
+            updatedAt: '2017-07-08T16:18:44-04:00'
+            type: Organization
     PageOfOrganizations:
       type: object
       description: A page of Organizations
@@ -1384,17 +1351,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/PersonCreateResponse'
         - $ref: '#/components/schemas/PersonCreateRequest'
-      required:
-        - id
-        - name
-        - organizationIds
-      example:
-        id: 507f1f77bcf86cd799439011
-        name: John Smith
-        email: john.smith@example.com
-        organizationIds:
-          - 507f1f77bcf86cd799439011
-          - 507f1f77bcf86cd799439012
     PageOfPersons:
       type: object
       description: A page of Persons
@@ -1442,12 +1398,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TagCreateResponse'
         - $ref: '#/components/schemas/TagCreateRequest'
-      required:
-        - id
-        - name
-      example:
-        id: 507f1f77bcf86cd799439011
-        name: awesome-tag
     PageOfTags:
       type: object
       description: A page of Tags
@@ -1501,6 +1451,7 @@ components:
               type: string
               format: uri
               example: 'https://example.com/awesome-avatar.png'
+              nullable: true
             createdAt:
               type: string
               format: date-time
@@ -1510,23 +1461,16 @@ components:
             type:
               type: string
               example: User
-      required:
-        - id
-        - login
-        - email
-        - avatarUrl
-        - createdAt
-        - updatedAt
-        - type
-      example:
-        id: 507f1f77bcf86cd799439011
-        login: awesome-user
-        email: awesome-user@example.org
-        name: Awesome User
-        avatarUrl: 'https://example.com/awesome-avatar.png'
-        createdAt: '2017-07-08T16:18:44-04:00'
-        updatedAt: '2017-07-08T16:18:44-04:00'
-        type: User
+          required:
+            - createdAt
+            - updatedAt
+            - type
+          example:
+            name: Awesome User
+            avatarUrl: 'https://example.com/awesome-avatar.png'
+            createdAt: '2017-07-08T16:18:44-04:00'
+            updatedAt: '2017-07-08T16:18:44-04:00'
+            type: User
     PageOfUsers:
       type: object
       description: A page of Users
