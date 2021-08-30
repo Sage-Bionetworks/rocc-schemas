@@ -5,8 +5,8 @@ parameters:
     required: true
     schema:
       oneOf:
-        - $ref: ../components/parameters/UserId.yaml
-        - $ref: ../components/parameters/UserLogin.yaml
+        - $ref: ../components/parameters/AccountId.yaml
+        - $ref: ../components/parameters/AccountLogin.yaml
 get:
   tags:
     - User
