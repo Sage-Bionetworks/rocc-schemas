@@ -11,8 +11,10 @@ properties:
     type: string
     format: uri
 required:
+  - name
   - displayName
   - websiteUrl
+  - avatarUrl
 example:
   name: awesome-challenge-platform
   displayName: Awesome Challenge Platform

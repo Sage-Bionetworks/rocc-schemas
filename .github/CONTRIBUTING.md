@@ -147,6 +147,22 @@ release. Releases are created with the npm package [release-it].
    release artifacts that may have been created (GitHub Pages, Docker image
    pushed to Docker registry, Python package published to PyPi, etc.).
 
+## Conventions
+
+### Schemas
+
+- The properties listed below `required:` must be in the same order as below `properties:`.
+
+### Abbreviations
+
+The name of properties must not include abbreviation in general in order to be
+fully descriptive. The abbreviations listed below are accepted as exceptions to
+this rule.
+
+Short name | Full name | Motivation
+-----------|-----------|-----------
+Org | Organization | Increase readability of the OpenAPI document.
+
 ## Getting Help
 
 Join us on the XXX and post your question to the channel that best matches the

@@ -1,10 +1,9 @@
 type: object
-description: A tag that can be assigned to a resource
+description: The information required to create a tag
 properties:
-  description:
-    description: A short description of the tag
-    type: string
+  name:
+    $ref: ../parameters/TagName.yaml
 required:
-  - description
+  - name
 example:
-  description: Awesome tag
+  name: awesome-tag

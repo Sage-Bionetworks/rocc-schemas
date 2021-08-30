@@ -1,8 +1,7 @@
 type: object
-description: An organization ID
 properties:
   id:
-    $ref: ../parameters/OrganizationId.yaml
+    $ref: ../parameters/AccountId.yaml
 required:
   - id
 example:

@@ -22,18 +22,19 @@ properties:
   status:
     $ref: ../parameters/ChallengeStatus.yaml
   startDate:
-    description: When the challenge started
     type: string
     format: date
+    nullable: true
   endDate:
-    description: When the challenge ended
     type: string
     format: date
+    nullable: true
   platformId:
     $ref: ../parameters/ChallengePlatformId.yaml
     nullable: true
 required:
   - name
+  - displayName
   - description
   - websiteUrl
   - status
@@ -45,4 +46,4 @@ example:
   status: active
   startDate: "2020-11-10"
   endDate: "2020-12-31"
-  platformId: awesome-challenge-platform
+  platformId: 507f1f77bcf86cd799439011

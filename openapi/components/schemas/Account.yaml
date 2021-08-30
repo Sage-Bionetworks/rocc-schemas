@@ -1,0 +1,12 @@
+type: object
+description: A user or organization account
+properties:
+  id:
+    $ref: ../parameters/AccountId.yaml
+  login:
+    $ref: ../parameters/AccountLogin.yaml
+  type:
+    type: string
+    enum:
+      - User
+      - Organization

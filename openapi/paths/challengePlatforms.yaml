@@ -4,13 +4,6 @@ post:
   summary: Create a challenge platform
   description: Create a challenge platform with the specified ID
   operationId: createChallengePlatform
-  parameters:
-    - in: query
-      name: challengePlatformName
-      description: The name of the challenge platform that is being created
-      required: true
-      schema:
-        $ref: ../components/parameters/ChallengePlatformName.yaml
   requestBody:
     content:
       application/json:

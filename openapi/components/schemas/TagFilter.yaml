@@ -1,6 +1,0 @@
-type: object
-description: An object that describes how to filter Tags
-properties:
-  id:
-    description: Keep the tags whose ID starts with this term
-    type: string

@@ -3,3 +3,9 @@ description: Information about monetary resources for challenge
 allOf:
   - $ref: GrantCreateResponse.yaml
   - $ref: GrantCreateRequest.yaml
+required:
+  - id
+  - name
+example:
+  id: 507f1f77bcf86cd799439011
+  name: Awesome Grant

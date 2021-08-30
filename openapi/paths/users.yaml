@@ -4,13 +4,6 @@ post:
   summary: Create a user
   description: Create a user with the specified account name
   operationId: createUser
-  parameters:
-    - in: query
-      name: accountName
-      description: The account name of the user that is being created
-      required: true
-      schema:
-        $ref: ../components/parameters/AccountName.yaml
   requestBody:
     content:
       application/json:

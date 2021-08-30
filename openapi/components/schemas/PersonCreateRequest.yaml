@@ -1,26 +1,21 @@
 type: object
 description: A person
 properties:
-  givenName:
-    description: The first name of the person
-    type: string
-  familyName:
-    description: The last name of the person
+  name:
     type: string
   email:
     $ref: ../parameters/Email.yaml
+    nullable: true
   organizationIds:
-    description: The organizations the person belongs to
     type: array
     items:
-      $ref: ../parameters/OrganizationId.yaml
+      $ref: ../parameters/AccountId.yaml
 required:
-  - givenName
-  - familyName
+  - name
+  - organizationIds
 example:
-  givenName: John
-  familyName: Smith
+  name: John Smith
   email: john.smith@example.com
   organizationIds:
-    - awesome-organization
-    - other-awesome-organization
+    - 507f1f77bcf86cd799439011
+    - 507f1f77bcf86cd799439012

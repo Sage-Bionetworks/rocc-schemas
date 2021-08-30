@@ -3,3 +3,9 @@ description: A tag that can be assigned to a resource
 allOf:
   - $ref: TagCreateResponse.yaml
   - $ref: TagCreateRequest.yaml
+required:
+  - id
+  - name
+example:
+  id: 507f1f77bcf86cd799439011
+  name: awesome-tag

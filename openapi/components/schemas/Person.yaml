@@ -3,16 +3,14 @@ description: A person
 allOf:
   - $ref: PersonCreateResponse.yaml
   - $ref: PersonCreateRequest.yaml
-  - type: object
-    properties:
-      createdAt:
-        description: When this challenge has been created
-        type: string
-        format: date-time
-      updatedAt:
-        description: When this challenge has last been updated
-        type: string
-        format: date-time
-    required:
-      - createdAt
-      - updatedAt
+required:
+  - id
+  - name
+  - organizationIds
+example:
+  id: 507f1f77bcf86cd799439011
+  name: John Smith
+  email: john.smith@example.com
+  organizationIds:
+    - 507f1f77bcf86cd799439011
+    - 507f1f77bcf86cd799439012

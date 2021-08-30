@@ -1,12 +1,12 @@
 parameters:
   - in: path
     name: userId
-    description: The unique identifier of the user, either the user ID or account name
+    description: The unique identifier of the user, either the user account ID or login
     required: true
     schema:
       oneOf:
         - $ref: ../components/parameters/UserId.yaml
-        - $ref: ../components/parameters/AccountName.yaml
+        - $ref: ../components/parameters/UserLogin.yaml
 get:
   tags:
     - User

@@ -1,10 +1,12 @@
 parameters:
   - in: path
     name: tagId
-    description: The ID of the tag
+    description: The unique identifier of the tag
     required: true
     schema:
-      $ref: ../components/parameters/TagId.yaml
+      oneOf:
+        - $ref: ../components/parameters/TagId.yaml
+        - $ref: ../components/parameters/TagName.yaml
 get:
   tags:
     - Tag

@@ -1,9 +1,8 @@
 type: object
-description: A tag ID
 properties:
   id:
     $ref: ../parameters/TagId.yaml
 required:
- - id
+  - id
 example:
-  id: awesome-tag
+  id: 507f1f77bcf86cd799439011

@@ -4,13 +4,6 @@ post:
   summary: Create an organization
   description: Create an organization with the specified account name
   operationId: createOrganization
-  parameters:
-    - in: query
-      name: accountName
-      description: The account name of the org that is being created
-      required: true
-      schema:
-        $ref: ../components/parameters/AccountName.yaml
   requestBody:
     content:
       application/json:

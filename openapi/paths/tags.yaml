@@ -4,13 +4,6 @@ post:
   summary: Create a tag
   description: Create a tag with the specified name
   operationId: createTag
-  parameters:
-    - in: query
-      name: tagId
-      description: The ID of the tag that is being created
-      required: true
-      schema:
-        $ref: ../components/parameters/TagId.yaml
   requestBody:
     content:
       application/json:
