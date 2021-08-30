@@ -163,13 +163,6 @@ paths:
       summary: Create a challenge platform
       description: Create a challenge platform with the specified ID
       operationId: createChallengePlatform
-      parameters:
-        - in: query
-          name: challengePlatformId
-          description: The ID of the challenge platform that is being created
-          required: true
-          schema:
-            $ref: '#/components/schemas/ChallengePlatformId'
       requestBody:
         content:
           application/json:
@@ -183,11 +176,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ChallengePlatformCreateResponse'
           description: Success
-          links:
-            GetChallengePlatformById:
-              $ref: '#/components/links/GetChallengePlatformById'
-            DeleteTagById:
-              $ref: '#/components/links/DeleteChallengePlatformById'
         '400':
           $ref: '#/components/responses/BadRequest'
         '409':
@@ -233,7 +221,7 @@ paths:
     parameters:
       - in: path
         name: challengePlatformId
-        description: The ID of the challenge platform
+        description: The unique identifier of the challenge platform
         required: true
         schema:
           $ref: '#/components/schemas/ChallengePlatformId'
@@ -386,13 +374,6 @@ paths:
       summary: Create an organization
       description: Create an organization with the specified account name
       operationId: createOrganization
-      parameters:
-        - in: query
-          name: accountName
-          description: The account name of the org that is being created
-          required: true
-          schema:
-            $ref: '#/components/schemas/AccountName'
       requestBody:
         content:
           application/json:
@@ -462,8 +443,8 @@ paths:
         required: true
         schema:
           oneOf:
-            - $ref: '#/components/schemas/OrganizationId'
-            - $ref: '#/components/schemas/AccountName'
+            - $ref: '#/components/schemas/AccountId'
+            - $ref: '#/components/schemas/AccountLogin'
     get:
       tags:
         - Organization
@@ -568,7 +549,7 @@ paths:
     parameters:
       - in: path
         name: personId
-        description: The ID of the person
+        description: The unique identifier of the person
         required: true
         schema:
           $ref: '#/components/schemas/PersonId'
@@ -613,13 +594,6 @@ paths:
       summary: Create a tag
       description: Create a tag with the specified name
       operationId: createTag
-      parameters:
-        - in: query
-          name: tagId
-          description: The ID of the tag that is being created
-          required: true
-          schema:
-            $ref: '#/components/schemas/TagId'
       requestBody:
         content:
           application/json:
@@ -683,10 +657,12 @@ paths:
     parameters:
       - in: path
         name: tagId
-        description: The ID of the tag
+        description: The unique identifier of the tag
         required: true
         schema:
-          $ref: '#/components/schemas/TagId'
+          oneOf:
+            - $ref: '#/components/schemas/TagId'
+            - $ref: '#/components/schemas/TagName'
     get:
       tags:
         - Tag
@@ -728,13 +704,6 @@ paths:
       summary: Create a user
       description: Create a user with the specified account name
       operationId: createUser
-      parameters:
-        - in: query
-          name: accountName
-          description: The account name of the user that is being created
-          required: true
-          schema:
-            $ref: '#/components/schemas/AccountName'
       requestBody:
         content:
           application/json:
@@ -800,12 +769,12 @@ paths:
     parameters:
       - in: path
         name: userId
-        description: 'The unique identifier of the user, either the user ID or account name'
+        description: 'The unique identifier of the user, either the user account ID or login'
         required: true
         schema:
           oneOf:
-            - $ref: '#/components/schemas/UserId'
-            - $ref: '#/components/schemas/AccountName'
+            - $ref: '#/components/schemas/AccountId'
+            - $ref: '#/components/schemas/AccountLogin'
     get:
       tags:
         - User
@@ -942,12 +911,9 @@ components:
         $ref: '#/components/schemas/DateRange'
   schemas:
     TagId:
-      description: The ID of the tag
+      description: The unique identifier of a tag
       type: string
-      minLength: 1
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-tag
+      example: 507f1f77bcf86cd799439011
     ChallengeStatus:
       description: The status of the challenge
       type: string
@@ -957,12 +923,9 @@ components:
         - completed
       example: active
     ChallengePlatformId:
-      description: The ID of the challenge platform
+      description: The unique identifier of a challenge platform
       type: string
-      minLength: 1
-      maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-challenge-platform
+      example: 507f1f77bcf86cd799439011
     DateRange:
       type: object
       properties:
@@ -1003,114 +966,139 @@ components:
         - limit
         - paging
     ChallengeId:
-      description: The ID of the challenge
+      description: The unique identifier of the challenge
       type: string
       example: 507f1f77bcf86cd799439011
     ChallengeCreateResponse:
       type: object
-      description: A challenge ID
       properties:
         id:
           $ref: '#/components/schemas/ChallengeId'
       required:
         - id
       example:
-        id: awesome-challenge
-    PersonId:
-      description: The ID of the person
-      type: string
-      example: 507f1f77bcf86cd799439011
-    OrganizationId:
-      description: The ID of the organization
-      type: string
-      example: 507f1f77bcf86cd799439011
-    GrantId:
-      description: The ID of the grant
-      type: string
-      example: 507f1f77bcf86cd799439011
+        id: 507f1f77bcf86cd799439011
     ChallengeCreateRequest:
       type: object
       description: A challenge
       properties:
         name:
-          description: The challenge name
+          description: The name of the challenge
+          type: string
+          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+          minLength: 3
+          maxLength: 60
+        displayName:
           type: string
           minLength: 3
           maxLength: 60
         description:
           description: A short description of the challenge
           type: string
+          nullable: true
           maxLength: 280
-        summary:
-          description: The summary of challenge
-          type: string
-        startDate:
-          description: When the challenge started
-          type: string
-          format: date
-        endDate:
-          description: When the challenge ended
-          type: string
-          format: date
-        url:
-          description: The URL to the challenge website
+        websiteUrl:
           type: string
           format: uri
         status:
           $ref: '#/components/schemas/ChallengeStatus'
-        tagIds:
-          description: The tags associated to the challenge
-          type: array
-          items:
-            $ref: '#/components/schemas/TagId'
-        organizerIds:
-          description: The organizers of the challenge
-          type: array
-          items:
-            $ref: '#/components/schemas/PersonId'
-        dataProviderIds:
-          description: The organizations contributing the data
-          type: array
-          items:
-            $ref: '#/components/schemas/OrganizationId'
-        grantIds:
-          description: The grants supporting this challenge
-          type: array
-          items:
-            $ref: '#/components/schemas/GrantId'
+        startDate:
+          type: string
+          format: date
+          nullable: true
+        endDate:
+          type: string
+          format: date
+          nullable: true
         platformId:
           $ref: '#/components/schemas/ChallengePlatformId'
+          nullable: true
       required:
         - name
+        - displayName
         - description
-        - url
+        - websiteUrl
         - status
-        - tagIds
-        - organizerIds
-        - dataProviderIds
-        - grantIds
-        - platformId
       example:
-        name: Awesome Challenge
+        name: awesome-challenge
+        displayName: Awesome Challenge
         description: This challenge is awesome.
-        summary: This challenge is awesome.
+        websiteUrl: 'https://synapse.org/awesome-challenge'
+        status: active
         startDate: '2020-11-10'
         endDate: '2020-12-31'
-        url: 'https://synapse.org/awesome-challenge'
-        status: active
-        tagIds:
-          - awesome-tag1
-          - awesome-tag2
-        organizerIds:
-          - 507f1f77bcf86cd799439011
-          - 507f1f77bcf86cd799439012
-        dataProviderIds:
-          - 507f1f77bcf86cd799439011
-          - 507f1f77bcf86cd799439012
-        grantIds:
-          - 507f1f77bcf86cd799439011
-          - 507f1f77bcf86cd799439012
-        platformId: awesome-challenge-platform
+        platformId: 507f1f77bcf86cd799439011
+    AccountId:
+      description: The unique identifier of an account
+      type: string
+      example: 507f1f77bcf86cd799439011
+    UserCreateResponse:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/AccountId'
+      required:
+        - id
+      example:
+        id: 507f1f77bcf86cd799439011
+    UserCreateRequest:
+      type: object
+      description: The information required to create a user account
+      properties:
+        login:
+          type: string
+      required:
+        - login
+      example:
+        login: awesome-user
+    Email:
+      description: An email address
+      type: string
+      format: email
+      example: john.smith@example.com
+    User:
+      type: object
+      description: A simple user
+      allOf:
+        - $ref: '#/components/schemas/UserCreateResponse'
+        - $ref: '#/components/schemas/UserCreateRequest'
+        - type: object
+          properties:
+            name:
+              type: string
+              nullable: true
+            email:
+              $ref: '#/components/schemas/Email'
+              nullable: true
+            avatarUrl:
+              type: string
+              format: uri
+              example: 'https://example.com/awesome-avatar.png'
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            type:
+              type: string
+              example: User
+      required:
+        - id
+        - login
+        - avatarUrl
+        - createdAt
+        - updatedAt
+        - type
+      example:
+        id: 507f1f77bcf86cd799439011
+        login: awesome-user
+        name: Awesome User
+        email: awesome.user@example.com
+        avatarUrl: 'https://example.com/awesome-avatar.png'
+        createdAt: '2017-07-08T16:18:44-04:00'
+        updatedAt: '2017-07-08T16:18:44-04:00'
+        type: User
     Challenge:
       type: object
       description: A challenge
@@ -1119,17 +1107,41 @@ components:
         - $ref: '#/components/schemas/ChallengeCreateRequest'
         - type: object
           properties:
+            fullName:
+              type: string
+            owner:
+              $ref: '#/components/schemas/User'
             createdAt:
-              description: When this challenge has been created
               type: string
               format: date-time
             updatedAt:
-              description: When this challenge has last been updated
               type: string
               format: date-time
-          required:
-            - createdAt
-            - updatedAt
+      required:
+        - id
+        - name
+        - displayName
+        - description
+        - websiteUrl
+        - status
+        - fullName
+        - owner
+        - createdAt
+        - updatedAt
+      example:
+        id: 507f1f77bcf86cd799439011
+        name: awesome-challenge
+        displayName: Awesome Challenge
+        description: This challenge is awesome.
+        websiteUrl: 'https://synapse.org/awesome-challenge'
+        status: active
+        startDate: '2020-11-10'
+        endDate: '2020-12-31'
+        platformId: 507f1f77bcf86cd799439011
+        fullName: dream/awesome-challenge
+        owner: awesome-user
+        createdAt: '2017-07-08T16:18:44-04:00'
+        updatedAt: '2017-07-08T16:18:44-04:00'
     PageOfChallenges:
       type: object
       description: A page of Challenges
@@ -1170,31 +1182,43 @@ components:
       description: Empty JSON object
     ChallengePlatformCreateResponse:
       type: object
-      description: A challenge platform ID
       properties:
         id:
           $ref: '#/components/schemas/ChallengePlatformId'
       required:
         - id
       example:
-        id: awesome-challenge-platform
+        id: 507f1f77bcf86cd799439011
+    ChallengePlatformName:
+      description: The name of the challenge platform
+      type: string
+      minLength: 3
+      maxLength: 30
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-challenge-platform
     ChallengePlatformCreateRequest:
       type: object
-      description: A challenge platform
       properties:
         name:
-          description: The name of the challenge platform
+          $ref: '#/components/schemas/ChallengePlatformName'
+        displayName:
           type: string
-        url:
-          description: The URL to the homepage of the challenge platform
+        websiteUrl:
+          type: string
+          format: uri
+        avatarUrl:
           type: string
           format: uri
       required:
         - name
-        - url
+        - displayName
+        - websiteUrl
+        - avatarUrl
       example:
-        name: Awesome Challenge Platform
-        url: 'https://awesome-challenge-platform.io'
+        name: awesome-challenge-platform
+        displayName: Awesome Challenge Platform
+        websiteUrl: 'https://awesome-challenge-platform.io'
+        avatarUrl: 'https://awesome-challenge-platform.io/logo.png'
     ChallengePlatform:
       type: object
       description: A challenge platform
@@ -1204,16 +1228,27 @@ components:
         - type: object
           properties:
             createdAt:
-              description: When this challenge platform has been created
               type: string
               format: date-time
             updatedAt:
-              description: When this challenge platform has last been updated
               type: string
               format: date-time
-          required:
-            - createdAt
-            - updatedAt
+      required:
+        - id
+        - name
+        - displayName
+        - websiteUrl
+        - avatarUrl
+        - createdAt
+        - updatedAt
+      example:
+        id: 507f1f77bcf86cd799439011
+        name: awesome-challenge-platform
+        displayName: Awesome Challenge Platform
+        websiteUrl: 'https://awesome-challenge-platform.io'
+        avatarUrl: 'https://awesome-challenge-platform.io/logo.png'
+        createdAt: '2017-07-08T16:18:44-04:00'
+        updatedAt: '2017-07-08T16:18:44-04:00'
     PageOfChallengePlatforms:
       type: object
       description: A page of ChallengePlatforms
@@ -1228,9 +1263,12 @@ components:
                 $ref: '#/components/schemas/ChallengePlatform'
           required:
             - challengePlatforms
+    GrantId:
+      description: The ID of the grant
+      type: string
+      example: 507f1f77bcf86cd799439011
     GrantCreateResponse:
       type: object
-      description: A grant ID
       properties:
         id:
           $ref: '#/components/schemas/GrantId'
@@ -1240,31 +1278,27 @@ components:
         id: 507f1f77bcf86cd799439011
     GrantCreateRequest:
       type: object
-      description: Information about monetary resources for challenge
+      description: The information required to create a grant
       properties:
         name:
-          description: The grant name
+          description: The name of the grant
           type: string
-        description:
-          description: A description of the grant
-          type: string
-        url:
-          description: The URL to the grant
-          type: string
-          format: uri
       required:
         - name
-        - description
       example:
         name: Awesome Grant
-        description: This is an awesome grant
-        url: 'https://report.nih.gov/'
     Grant:
       type: object
       description: Information about monetary resources for challenge
       allOf:
         - $ref: '#/components/schemas/GrantCreateResponse'
         - $ref: '#/components/schemas/GrantCreateRequest'
+      required:
+        - id
+        - name
+      example:
+        id: 507f1f77bcf86cd799439011
+        name: Awesome Grant
     PageOfGrants:
       type: object
       description: A page of Grants
@@ -1281,45 +1315,23 @@ components:
             - grants
     OrganizationCreateResponse:
       type: object
-      description: An organization ID
       properties:
         id:
-          $ref: '#/components/schemas/OrganizationId'
+          $ref: '#/components/schemas/AccountId'
       required:
         - id
       example:
         id: 507f1f77bcf86cd799439011
-    AccountName:
-      description: The user or organization account name
-      type: string
-      minLength: 3
-      maxLength: 25
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-user
     OrganizationCreateRequest:
       type: object
-      description: An organization
+      description: The information required to create an organization account
       properties:
-        accountName:
-          $ref: '#/components/schemas/AccountName'
-        name:
-          description: The organization display name
+        login:
           type: string
-        shortName:
-          description: The organization short display name
-          type: string
-        websiteUrl:
-          description: The URL to the homepage of the organization
-          type: string
-          format: uri
       required:
-        - accountName
-        - name
+        - login
       example:
-        accountName: awesome-organization
-        name: Awesome Organization
-        shortName: AO
-        websiteUrl: 'https://www.example.org'
+        login: awesome-org
     Organization:
       type: object
       description: An organization
@@ -1328,17 +1340,43 @@ components:
         - $ref: '#/components/schemas/OrganizationCreateRequest'
         - type: object
           properties:
+            name:
+              type: string
+              nullable: true
+            email:
+              $ref: '#/components/schemas/Email'
+              nullable: true
+            avatarUrl:
+              type: string
+              format: uri
+              example: 'https://example.com/awesome-avatar.png'
+            description:
+              type: string
+              nullable: true
             createdAt:
-              description: When this organization has been created
               type: string
               format: date-time
             updatedAt:
-              description: When this organization has last been updated
               type: string
               format: date-time
-          required:
-            - createdAt
-            - updatedAt
+            type:
+              type: string
+              example: Organization
+      required:
+        - id
+        - login
+        - avatarUrl
+        - type
+      example:
+        id: 507f1f77bcf86cd799439011
+        login: awesome-org
+        name: Awesome User
+        email: awesome.user@example.com
+        avatarUrl: 'https://example.com/awesome-avatar.png'
+        description: A great organization
+        createdAt: '2017-07-08T16:18:44-04:00'
+        updatedAt: '2017-07-08T16:18:44-04:00'
+        type: Organization
     PageOfOrganizations:
       type: object
       description: A page of Organizations
@@ -1353,9 +1391,19 @@ components:
                 $ref: '#/components/schemas/Organization'
           required:
             - organizations
+    AccountLogin:
+      description: The user or organization account name
+      type: string
+      minLength: 3
+      maxLength: 25
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-user
+    PersonId:
+      description: The unique identifier of a person
+      type: string
+      example: 507f1f77bcf86cd799439011
     PersonCreateResponse:
       type: object
-      description: A person ID
       properties:
         id:
           $ref: '#/components/schemas/PersonId'
@@ -1363,57 +1411,45 @@ components:
         - id
       example:
         id: 507f1f77bcf86cd799439011
-    Email:
-      description: An email address
-      type: string
-      format: email
-      example: john.smith@example.com
     PersonCreateRequest:
       type: object
       description: A person
       properties:
-        givenName:
-          description: The first name of the person
-          type: string
-        familyName:
-          description: The last name of the person
+        name:
           type: string
         email:
           $ref: '#/components/schemas/Email'
+          nullable: true
         organizationIds:
-          description: The organizations the person belongs to
           type: array
           items:
-            $ref: '#/components/schemas/OrganizationId'
+            $ref: '#/components/schemas/AccountId'
       required:
-        - givenName
-        - familyName
+        - name
+        - organizationIds
       example:
-        givenName: John
-        familyName: Smith
+        name: John Smith
         email: john.smith@example.com
         organizationIds:
-          - awesome-organization
-          - other-awesome-organization
+          - 507f1f77bcf86cd799439011
+          - 507f1f77bcf86cd799439012
     Person:
       type: object
       description: A person
       allOf:
         - $ref: '#/components/schemas/PersonCreateResponse'
         - $ref: '#/components/schemas/PersonCreateRequest'
-        - type: object
-          properties:
-            createdAt:
-              description: When this challenge has been created
-              type: string
-              format: date-time
-            updatedAt:
-              description: When this challenge has last been updated
-              type: string
-              format: date-time
-          required:
-            - createdAt
-            - updatedAt
+      required:
+        - id
+        - name
+        - organizationIds
+      example:
+        id: 507f1f77bcf86cd799439011
+        name: John Smith
+        email: john.smith@example.com
+        organizationIds:
+          - 507f1f77bcf86cd799439011
+          - 507f1f77bcf86cd799439012
     PageOfPersons:
       type: object
       description: A page of Persons
@@ -1430,31 +1466,42 @@ components:
             - persons
     TagCreateResponse:
       type: object
-      description: A tag ID
       properties:
         id:
           $ref: '#/components/schemas/TagId'
       required:
         - id
       example:
-        id: awesome-tag
+        id: 507f1f77bcf86cd799439011
+    TagName:
+      description: The name of a tag
+      type: string
+      minLength: 3
+      maxLength: 30
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-tag
     TagCreateRequest:
       type: object
-      description: A tag that can be assigned to a resource
+      description: The information required to create a tag
       properties:
-        description:
-          description: A short description of the tag
-          type: string
+        name:
+          $ref: '#/components/schemas/TagName'
       required:
-        - description
+        - name
       example:
-        description: Awesome tag
+        name: awesome-tag
     Tag:
       type: object
       description: A tag that can be assigned to a resource
       allOf:
         - $ref: '#/components/schemas/TagCreateResponse'
         - $ref: '#/components/schemas/TagCreateRequest'
+      required:
+        - id
+        - name
+      example:
+        id: 507f1f77bcf86cd799439011
+        name: awesome-tag
     PageOfTags:
       type: object
       description: A page of Tags
@@ -1469,64 +1516,6 @@ components:
                 $ref: '#/components/schemas/Tag'
           required:
             - tags
-    UserId:
-      description: The ID of the user
-      type: string
-      example: 507f1f77bcf86cd799439011
-    UserCreateResponse:
-      type: object
-      description: A user ID
-      properties:
-        id:
-          $ref: '#/components/schemas/UserId'
-      example:
-        id: 507f1f77bcf86cd799439011
-    UserCreateRequest:
-      type: object
-      description: A user of the service
-      allOf:
-        - $ref: '#/components/schemas/PersonCreateRequest'
-        - type: object
-          properties:
-            accountName:
-              $ref: '#/components/schemas/AccountName'
-            bio:
-              description: Short biography about the user
-              type: string
-            avatarUrl:
-              description: URL to the user's profile image
-              type: string
-              format: uri
-      required:
-        - accountName
-        - givenName
-        - familyName
-      example:
-        accountName: awesome-user
-        bio: I am awesome.
-        avatarUrl: www.awesome-picture.com
-        givenName: Awesome
-        familyName: User
-        email: awesome.user@example.com
-        organizationIds:
-          - 507f1f77bcf86cd799439011
-          - 507f1f77bcf86cd799439012
-    User:
-      type: object
-      description: A ROCC user
-      allOf:
-        - $ref: '#/components/schemas/UserCreateResponse'
-        - $ref: '#/components/schemas/UserCreateRequest'
-        - type: object
-          properties:
-            suspendedAt:
-              description: Whether this user has been suspended
-              type: string
-              format: date-time
-              nullable: true
-          required:
-            - createdAt
-            - updatedAt
     PageOfUsers:
       type: object
       description: A page of Users
@@ -1594,22 +1583,6 @@ components:
         parameter in `DELETE /challenges/{challengeId}`
       parameters:
         challengeId: $response.body#/challengeId
-    GetChallengePlatformById:
-      operationId: getChallengePlatform
-      description: >
-        The `id` value returned in the response can be used as the
-        `challengePlatformId` parameter in `GET
-        /challengePlatforms/{challengePlatformId}`
-      parameters:
-        challengePlatformId: $response.body#/challengeId
-    DeleteChallengePlatformById:
-      operationId: deleteChallengePlatform
-      description: >
-        The `id` value returned in the response can be used as the
-        `challengePlatformId` parameter in `DELETE
-        /challengePlatforms/{challengePlatformId}`
-      parameters:
-        challengePlatformId: $response.body#/challengePlatformId
     GetGrantById:
       operationId: getGrant
       description: >
