@@ -3,7 +3,11 @@ description: The information required to create an org account
 properties:
   login:
     type: string
+  email:
+    $ref: ../parameters/Email.yaml
 required:
   - login
+  - email
 example:
   login: awesome-org
+  email: contact@example.org

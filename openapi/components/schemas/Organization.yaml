@@ -8,13 +8,11 @@ allOf:
       name:
         type: string
         nullable: true
-      email:
-        $ref: ../parameters/Email.yaml
-        nullable: true
       avatarUrl:
         type: string
         format: uri
         example: https://example.com/awesome-avatar.png
+        nullable: true
       description:
         type: string
         nullable: true
@@ -27,19 +25,15 @@ allOf:
       type:
         type: string
         example: Organization
-required:
-  - id
-  - login
-  - avatarUrl
-  - type
-example:
-  id: 507f1f77bcf86cd799439011
-  login: awesome-org
-  name: Awesome User
-  email: awesome.user@example.com
-  avatarUrl: https://example.com/awesome-avatar.png
-  description: A great organization
-  createdAt: '2017-07-08T16:18:44-04:00'
-  updatedAt: '2017-07-08T16:18:44-04:00'
-  type: Organization
+    required:
+      - createdAt
+      - updatedAt
+      - type
+    example:
+      name: Awesome Org
+      avatarUrl: https://example.com/awesome-avatar.png
+      description: A great organization
+      createdAt: '2017-07-08T16:18:44-04:00'
+      updatedAt: '2017-07-08T16:18:44-04:00'
+      type: Organization
 
