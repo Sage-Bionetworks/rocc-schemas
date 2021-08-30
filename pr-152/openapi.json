@@ -1457,6 +1457,7 @@
       },
       "DateRange": {
         "type": "object",
+        "description": "A date range",
         "properties": {
           "start": {
             "description": "Start date of the date range",
@@ -1515,6 +1516,7 @@
       },
       "ChallengeCreateResponse": {
         "type": "object",
+        "description": "The unique identifier of the challenge created",
         "properties": {
           "id": {
             "$ref": "#/components/schemas/ChallengeId"
@@ -1529,7 +1531,7 @@
       },
       "ChallengeCreateRequest": {
         "type": "object",
-        "description": "A challenge",
+        "description": "The information used to create a challenge",
         "properties": {
           "name": {
             "description": "The name of the challenge",
@@ -1594,101 +1596,6 @@
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
       },
-      "UserCreateResponse": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/AccountId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "507f1f77bcf86cd799439011"
-        }
-      },
-      "UserCreateRequest": {
-        "type": "object",
-        "description": "The information required to create a user account",
-        "properties": {
-          "login": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "login"
-        ],
-        "example": {
-          "login": "awesome-user"
-        }
-      },
-      "Email": {
-        "description": "An email address",
-        "type": "string",
-        "format": "email",
-        "example": "john.smith@example.com"
-      },
-      "User": {
-        "type": "object",
-        "description": "A simple user",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/UserCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/UserCreateRequest"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "nullable": true
-              },
-              "email": {
-                "$ref": "#/components/schemas/Email",
-                "nullable": true
-              },
-              "avatarUrl": {
-                "type": "string",
-                "format": "uri",
-                "example": "https://example.com/awesome-avatar.png"
-              },
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "type": {
-                "type": "string",
-                "example": "User"
-              }
-            }
-          }
-        ],
-        "required": [
-          "id",
-          "login",
-          "avatarUrl",
-          "createdAt",
-          "updatedAt",
-          "type"
-        ],
-        "example": {
-          "id": "507f1f77bcf86cd799439011",
-          "login": "awesome-user",
-          "name": "Awesome User",
-          "email": "awesome.user@example.com",
-          "avatarUrl": "https://example.com/awesome-avatar.png",
-          "createdAt": "2017-07-08T16:18:44-04:00",
-          "updatedAt": "2017-07-08T16:18:44-04:00",
-          "type": "User"
-        }
-      },
       "Challenge": {
         "type": "object",
         "description": "A challenge",
@@ -1705,8 +1612,8 @@
               "fullName": {
                 "type": "string"
               },
-              "owner": {
-                "$ref": "#/components/schemas/User"
+              "ownerId": {
+                "$ref": "#/components/schemas/AccountId"
               },
               "createdAt": {
                 "type": "string",
@@ -1727,7 +1634,7 @@
           "websiteUrl",
           "status",
           "fullName",
-          "owner",
+          "ownerId",
           "createdAt",
           "updatedAt"
         ],
@@ -1742,7 +1649,7 @@
           "endDate": "2020-12-31",
           "platformId": "507f1f77bcf86cd799439011",
           "fullName": "dream/awesome-challenge",
-          "owner": "awesome-user",
+          "ownerId": "507f1f77bcf86cd799439011",
           "createdAt": "2017-07-08T16:18:44-04:00",
           "updatedAt": "2017-07-08T16:18:44-04:00"
         }
@@ -1803,6 +1710,7 @@
       },
       "ChallengePlatformCreateResponse": {
         "type": "object",
+        "description": "The unique identifier of the challenge platform created",
         "properties": {
           "id": {
             "$ref": "#/components/schemas/ChallengePlatformId"
@@ -1825,6 +1733,7 @@
       },
       "ChallengePlatformCreateRequest": {
         "type": "object",
+        "description": "The information used to create a challenge platform",
         "properties": {
           "name": {
             "$ref": "#/components/schemas/ChallengePlatformName"
@@ -1928,6 +1837,7 @@
       },
       "GrantCreateResponse": {
         "type": "object",
+        "description": "The unique identifier of the grant created",
         "properties": {
           "id": {
             "$ref": "#/components/schemas/GrantId"
@@ -2002,6 +1912,7 @@
       },
       "OrganizationCreateResponse": {
         "type": "object",
+        "description": "The unique identifier of the org created",
         "properties": {
           "id": {
             "$ref": "#/components/schemas/AccountId"
@@ -2016,7 +1927,7 @@
       },
       "OrganizationCreateRequest": {
         "type": "object",
-        "description": "The information required to create an organization account",
+        "description": "The information required to create an org account",
         "properties": {
           "login": {
             "type": "string"
@@ -2028,6 +1939,12 @@
         "example": {
           "login": "awesome-org"
         }
+      },
+      "Email": {
+        "description": "An email address",
+        "type": "string",
+        "format": "email",
+        "example": "john.smith@example.com"
       },
       "Organization": {
         "type": "object",
@@ -2131,6 +2048,7 @@
       },
       "PersonCreateResponse": {
         "type": "object",
+        "description": "The unique identifier of the person created",
         "properties": {
           "id": {
             "$ref": "#/components/schemas/PersonId"
@@ -2145,7 +2063,7 @@
       },
       "PersonCreateRequest": {
         "type": "object",
-        "description": "A person",
+        "description": "The information used to create a person",
         "properties": {
           "name": {
             "type": "string"
@@ -2226,6 +2144,7 @@
       },
       "TagCreateResponse": {
         "type": "object",
+        "description": "The unique identifier of the tag created",
         "properties": {
           "id": {
             "$ref": "#/components/schemas/TagId"
@@ -2304,6 +2223,98 @@
             ]
           }
         ]
+      },
+      "UserCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the user created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/AccountId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "UserCreateRequest": {
+        "type": "object",
+        "description": "The information required to create a user account",
+        "properties": {
+          "login": {
+            "type": "string"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          }
+        },
+        "required": [
+          "login",
+          "email"
+        ],
+        "example": {
+          "login": "awesome-user",
+          "email": "awesome-user@example.org"
+        }
+      },
+      "User": {
+        "type": "object",
+        "description": "A simple user",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UserCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/UserCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "nullable": true
+              },
+              "avatarUrl": {
+                "type": "string",
+                "format": "uri",
+                "example": "https://example.com/awesome-avatar.png"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "type": {
+                "type": "string",
+                "example": "User"
+              }
+            }
+          }
+        ],
+        "required": [
+          "id",
+          "login",
+          "email",
+          "avatarUrl",
+          "createdAt",
+          "updatedAt",
+          "type"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011",
+          "login": "awesome-user",
+          "email": "awesome-user@example.org",
+          "name": "Awesome User",
+          "avatarUrl": "https://example.com/awesome-avatar.png",
+          "createdAt": "2017-07-08T16:18:44-04:00",
+          "updatedAt": "2017-07-08T16:18:44-04:00",
+          "type": "User"
+        }
       },
       "PageOfUsers": {
         "type": "object",
