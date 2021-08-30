@@ -4,9 +4,7 @@ parameters:
     description: The unique identifier of the user, either the user account ID or login
     required: true
     schema:
-      oneOf:
-        - $ref: ../components/parameters/AccountId.yaml
-        - $ref: ../components/parameters/AccountLogin.yaml
+      $ref: ../components/parameters/AccountId.yaml
 get:
   tags:
     - User

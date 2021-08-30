@@ -4,9 +4,7 @@ parameters:
     description: The unique identifier of the tag
     required: true
     schema:
-      oneOf:
-        - $ref: ../components/parameters/TagId.yaml
-        - $ref: ../components/parameters/TagName.yaml
+      $ref: ../components/parameters/TagId.yaml
 get:
   tags:
     - Tag
