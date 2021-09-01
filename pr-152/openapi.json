@@ -19,6 +19,10 @@
   },
   "tags": [
     {
+      "name": "Account",
+      "description": "Operations about accounts"
+    },
+    {
       "name": "Challenge",
       "description": "Operations about challenges"
     },
@@ -66,6 +70,45 @@
     }
   ],
   "paths": {
+    "/accounts/{login}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "login",
+          "description": "The login of an account",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Get an account",
+        "description": "Returns the user or org account",
+        "operationId": "getAccount",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Account"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/challenges": {
       "post": {
         "tags": [
@@ -1306,114 +1349,65 @@
     }
   },
   "components": {
-    "parameters": {
-      "limit": {
-        "name": "limit",
-        "description": "Maximum number of results returned",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "integer",
-          "default": 10,
-          "minimum": 10,
-          "maximum": 100
-        }
-      },
-      "offset": {
-        "name": "offset",
-        "description": "Index of the first result that must be returned",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "integer",
-          "default": 0,
-          "minimum": 0
-        }
-      },
-      "sort": {
-        "name": "sort",
-        "description": "Property used to sort the results that must be returned",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "string",
-          "enum": [
-            "createdAt",
-            "updatedAt"
-          ]
-        }
-      },
-      "direction": {
-        "name": "direction",
-        "description": "Can be either `asc` or `desc`. Ignored without `sort` parameter.",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ]
-        }
-      },
-      "searchTerms": {
-        "name": "searchTerms",
-        "description": "A string of search terms used to filter the results",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "string"
-        }
-      },
-      "tagIds": {
-        "name": "tagIds",
-        "description": "Array of tag ids used to filter the results",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/TagId"
-          }
-        }
-      },
-      "status": {
-        "name": "status",
-        "description": "Array of challenge status used to filter the results",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/ChallengeStatus"
-          }
-        }
-      },
-      "platformIds": {
-        "name": "platformIds",
-        "description": "Array of challenge platform ids used to filter the results",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/ChallengePlatformId"
-          }
-        }
-      },
-      "startDateRange": {
-        "name": "startDateRange",
-        "description": "Return challenges that start during the date range specified",
-        "in": "query",
-        "required": false,
-        "style": "deepObject",
-        "explode": true,
-        "schema": {
-          "$ref": "#/components/schemas/DateRange"
-        }
-      }
-    },
     "schemas": {
+      "AccountLogin": {
+        "description": "The user or organization account name",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 25,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-user"
+      },
+      "AccountId": {
+        "description": "The unique identifier of an account",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "Account": {
+        "type": "object",
+        "description": "A user or organization account",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/AccountId"
+          },
+          "login": {
+            "$ref": "#/components/schemas/AccountLogin"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Organization"
+            ]
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "description": "Problem details (tools.ietf.org/html/rfc7807)",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A human readable documentation for the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the problem"
+          },
+          "type": {
+            "type": "string",
+            "description": "An absolute URI that identifies the problem type"
+          }
+        },
+        "required": [
+          "title",
+          "status"
+        ]
+      },
       "TagId": {
         "description": "The unique identifier of a tag",
         "type": "string",
@@ -1567,11 +1561,6 @@
           "platformId": "507f1f77bcf86cd799439011"
         }
       },
-      "AccountId": {
-        "description": "The unique identifier of an account",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
       "Challenge": {
         "type": "object",
         "description": "A challenge",
@@ -1637,32 +1626,6 @@
               "challenges"
             ]
           }
-        ]
-      },
-      "Error": {
-        "type": "object",
-        "description": "Problem details (tools.ietf.org/html/rfc7807)",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A human readable documentation for the problem type"
-          },
-          "status": {
-            "type": "integer",
-            "description": "The HTTP status code"
-          },
-          "detail": {
-            "type": "string",
-            "description": "A human readable explanation specific to this occurrence of the problem"
-          },
-          "type": {
-            "type": "string",
-            "description": "An absolute URI that identifies the problem type"
-          }
-        },
-        "required": [
-          "title",
-          "status"
         ]
       },
       "EmptyObject": {
@@ -2265,8 +2228,8 @@
       }
     },
     "responses": {
-      "BadRequest": {
-        "description": "Invalid request",
+      "NotFound": {
+        "description": "The specified resource was not found",
         "content": {
           "application/json": {
             "schema": {
@@ -2285,6 +2248,16 @@
           }
         }
       },
+      "BadRequest": {
+        "description": "Invalid request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
       "Conflict": {
         "description": "The request conflicts with current state of the target resource",
         "content": {
@@ -2294,15 +2267,112 @@
             }
           }
         }
+      }
+    },
+    "parameters": {
+      "limit": {
+        "name": "limit",
+        "description": "Maximum number of results returned",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 10,
+          "minimum": 10,
+          "maximum": 100
+        }
       },
-      "NotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
+      "offset": {
+        "name": "offset",
+        "description": "Index of the first result that must be returned",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 0,
+          "minimum": 0
+        }
+      },
+      "sort": {
+        "name": "sort",
+        "description": "Property used to sort the results that must be returned",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "createdAt",
+            "updatedAt"
+          ]
+        }
+      },
+      "direction": {
+        "name": "direction",
+        "description": "Can be either `asc` or `desc`. Ignored without `sort` parameter.",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ]
+        }
+      },
+      "searchTerms": {
+        "name": "searchTerms",
+        "description": "A string of search terms used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "tagIds": {
+        "name": "tagIds",
+        "description": "Array of tag ids used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/TagId"
           }
+        }
+      },
+      "status": {
+        "name": "status",
+        "description": "Array of challenge status used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengeStatus"
+          }
+        }
+      },
+      "platformIds": {
+        "name": "platformIds",
+        "description": "Array of challenge platform ids used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengePlatformId"
+          }
+        }
+      },
+      "startDateRange": {
+        "name": "startDateRange",
+        "description": "Return challenges that start during the date range specified",
+        "in": "query",
+        "required": false,
+        "style": "deepObject",
+        "explode": true,
+        "schema": {
+          "$ref": "#/components/schemas/DateRange"
         }
       }
     },
