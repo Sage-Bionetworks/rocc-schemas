@@ -1554,10 +1554,7 @@
         },
         "required": [
           "name",
-          "displayName",
-          "description",
-          "websiteUrl",
-          "status"
+          "description"
         ],
         "example": {
           "name": "awesome-challenge",

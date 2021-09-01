@@ -1011,10 +1011,7 @@ components:
           nullable: true
       required:
         - name
-        - displayName
         - description
-        - websiteUrl
-        - status
       example:
         name: awesome-challenge
         displayName: Awesome Challenge
