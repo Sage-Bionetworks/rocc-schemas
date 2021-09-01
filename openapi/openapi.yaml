@@ -18,6 +18,8 @@ info:
 
     TBA
 tags:
+  - name: Account
+    description: Operations about accounts
   - name: Challenge
     description: Operations about challenges
   - name: ChallengePlatform
@@ -43,6 +45,8 @@ servers:
           - https
         default: https
 paths:
+  /accounts/{login}:
+    $ref: paths/accounts@{login}.yaml
   /challenges:
     $ref: paths/challenges.yaml
   /challenges/{challengeId}:
