@@ -141,14 +141,20 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challenges/{challengeId}':
+  '/challenges/{accountName}/{challengeName}':
     parameters:
       - in: path
-        name: challengeId
-        description: The ID of the challenge
+        name: accountName
+        description: The name of the account that owns the challenge
         required: true
         schema:
-          $ref: '#/components/schemas/ChallengeId'
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
     get:
       tags:
         - Challenge
@@ -971,16 +977,19 @@ components:
         - id
       example:
         id: 507f1f77bcf86cd799439011
+    ChallengeName:
+      description: The name of the a challenge
+      type: string
+      minLength: 3
+      maxLength: 60
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example: awesome-challenge
     ChallengeCreateRequest:
       type: object
       description: The information used to create a challenge
       properties:
         name:
-          description: The name of the challenge
-          type: string
-          pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-          minLength: 3
-          maxLength: 60
+          $ref: '#/components/schemas/ChallengeName'
         displayName:
           type: string
           minLength: 3
