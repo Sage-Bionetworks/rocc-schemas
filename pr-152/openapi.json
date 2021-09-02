@@ -110,53 +110,6 @@
       }
     },
     "/challenges": {
-      "post": {
-        "tags": [
-          "Challenge"
-        ],
-        "summary": "Add a challenge",
-        "description": "Adds a challenge",
-        "operationId": "createChallenge",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChallengeCreateRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChallengeCreateResponse"
-                }
-              }
-            },
-            "description": "Success",
-            "links": {
-              "GetChallengeById": {
-                "$ref": "#/components/links/GetChallengeById"
-              },
-              "DeleteChallengeById": {
-                "$ref": "#/components/links/DeleteChallengeById"
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      },
       "get": {
         "tags": [
           "Challenge"
@@ -229,6 +182,66 @@
                 }
               }
             }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/challenges/{accountName}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Add a challenge",
+        "description": "Adds a challenge",
+        "operationId": "createChallenge",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChallengeCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChallengeCreateResponse"
+                }
+              }
+            },
+            "description": "Success",
+            "links": {
+              "GetChallengeById": {
+                "$ref": "#/components/links/GetChallengeById"
+              },
+              "DeleteChallengeById": {
+                "$ref": "#/components/links/DeleteChallengeById"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
