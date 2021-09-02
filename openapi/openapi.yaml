@@ -49,6 +49,8 @@ paths:
     $ref: paths/accounts@{login}.yaml
   /challenges:
     $ref: paths/challenges.yaml
+  /challenges/{accountName}:
+    $ref: paths/challenges@{accountName}.yaml
   /challenges/{accountName}/{challengeName}:
     $ref: paths/challenges@{accountName}@{challengeName}.yaml
   /challengePlatforms:
