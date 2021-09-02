@@ -1380,6 +1380,16 @@
               "Organization"
             ]
           }
+        },
+        "required": [
+          "id",
+          "login",
+          "type"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011",
+          "login": "awesome-user",
+          "type": "User"
         }
       },
       "Error": {
