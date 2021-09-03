@@ -37,14 +37,6 @@ get:
   parameters:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
-    # - in: query
-    #   name: filter
-    #   description: Object that describes how to filter the results
-    #   required: false
-    #   schema:
-    #     $ref: ../components/schemas/PersonFilter.yaml
-    #   style: deepObject
-    #   explode: true
   responses:
     '200':
       content:

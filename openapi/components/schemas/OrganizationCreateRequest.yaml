@@ -1,20 +1,13 @@
 type: object
-description: An organization
+description: The information required to create an org account
 properties:
-  name:
-    description: The organization name
+  login:
     type: string
-  shortName:
-    description: The organization short name
-    type: string
-  url:
-    description: The URL to the homepage of the organization
-    type: string
-    format: uri
+  email:
+    $ref: ../parameters/Email.yaml
 required:
-  - name
-  - url
+  - login
+  - email
 example:
-  name: Awesome Organization
-  shortName: AO
-  url: https://www.example.org
+  login: awesome-org
+  email: contact@example.org

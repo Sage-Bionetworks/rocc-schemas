@@ -1,10 +1,16 @@
 parameters:
   - in: path
-    name: challengeId
-    description: The ID of the challenge
+    name: accountName
+    description: The name of the account that owns the challenge
     required: true
     schema:
-      $ref: ../components/parameters/ChallengeId.yaml
+      $ref: ../components/parameters/AccountLogin.yaml
+  - in: path
+    name: challengeName
+    description: The name of the challenge
+    required: true
+    schema:
+      $ref: ../components/parameters/ChallengeName.yaml
 get:
   tags:
     - Challenge

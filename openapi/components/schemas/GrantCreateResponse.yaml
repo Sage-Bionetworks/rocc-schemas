@@ -1,5 +1,5 @@
 type: object
-description: A grant ID
+description: The unique identifier of the grant created
 properties:
   id:
     $ref: ../parameters/GrantId.yaml

@@ -4,13 +4,6 @@ post:
   summary: Create a challenge platform
   description: Create a challenge platform with the specified ID
   operationId: createChallengePlatform
-  parameters:
-    - in: query
-      name: challengePlatformId
-      description: The ID of the challenge platform that is being created
-      required: true
-      schema:
-        $ref: ../components/parameters/ChallengePlatformId.yaml
   requestBody:
     content:
       application/json:
@@ -24,11 +17,11 @@ post:
           schema:
             $ref: ../components/schemas/ChallengePlatformCreateResponse.yaml
       description: Success
-      links:
-        GetChallengePlatformById:
-          $ref: ../components/links/GetChallengePlatformById.yaml
-        DeleteTagById:
-          $ref: ../components/links/DeleteChallengePlatformById.yaml
+      # links:
+      #   GetChallengePlatformById:
+      #     $ref: ../components/links/GetChallengePlatformById.yaml
+      #   DeleteTagById:
+      #     $ref: ../components/links/DeleteChallengePlatformById.yaml
     '400':
       $ref: ../components/responses/BadRequest.yaml
     '409':

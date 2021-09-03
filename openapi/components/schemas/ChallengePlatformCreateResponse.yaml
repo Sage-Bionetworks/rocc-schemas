@@ -1,9 +1,9 @@
 type: object
-description: A challenge platform ID
+description: The unique identifier of the challenge platform created
 properties:
   id:
     $ref: ../parameters/ChallengePlatformId.yaml
 required:
   - id
 example:
-  id: awesome-challenge-platform
+  id: 507f1f77bcf86cd799439011

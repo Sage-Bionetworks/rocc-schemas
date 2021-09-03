@@ -1,7 +1,7 @@
 parameters:
   - in: path
     name: challengePlatformId
-    description: The ID of the challenge platform
+    description: The unique identifier of the challenge platform
     required: true
     schema:
       $ref: ../components/parameters/ChallengePlatformId.yaml

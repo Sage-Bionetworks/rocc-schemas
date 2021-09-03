@@ -1,7 +1,9 @@
 type: object
-description: A user's username
+description: The unique identifier of the user created
 properties:
   id:
-    $ref: ../parameters/UserId.yaml
+    $ref: ../parameters/AccountId.yaml
+required:
+  - id
 example:
   id: 507f1f77bcf86cd799439011

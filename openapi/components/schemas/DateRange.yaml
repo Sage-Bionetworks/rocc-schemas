@@ -1,4 +1,5 @@
 type: object
+description: A date range
 properties:
   start:
     description: Start date of the date range

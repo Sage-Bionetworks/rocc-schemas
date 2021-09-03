@@ -1,9 +1,9 @@
 type: object
-description: An organization ID
+description: The unique identifier of the org created
 properties:
   id:
-    $ref: ../parameters/OrganizationId.yaml
+    $ref: ../parameters/AccountId.yaml
 required:
   - id
 example:
-  id: awesome-organization
+  id: 507f1f77bcf86cd799439011

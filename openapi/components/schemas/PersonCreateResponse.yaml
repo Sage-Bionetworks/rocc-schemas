@@ -1,5 +1,5 @@
 type: object
-description: A person ID
+description: The unique identifier of the person created
 properties:
   id:
     $ref: ../parameters/PersonId.yaml
