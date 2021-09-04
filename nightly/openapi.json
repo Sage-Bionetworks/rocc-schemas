@@ -19,6 +19,10 @@
   },
   "tags": [
     {
+      "name": "Account",
+      "description": "Operations about accounts"
+    },
+    {
       "name": "Challenge",
       "description": "Operations about challenges"
     },
@@ -66,54 +70,46 @@
     }
   ],
   "paths": {
-    "/challenges": {
-      "post": {
+    "/accounts/{login}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "login",
+          "description": "The login of an account",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        }
+      ],
+      "get": {
         "tags": [
-          "Challenge"
+          "Account"
         ],
-        "summary": "Add a challenge",
-        "description": "Adds a challenge",
-        "operationId": "createChallenge",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ChallengeCreateRequest"
-              }
-            }
-          },
-          "required": true
-        },
+        "summary": "Get an account",
+        "description": "Returns the user or org account",
+        "operationId": "getAccount",
         "responses": {
-          "201": {
+          "200": {
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChallengeCreateResponse"
+                  "$ref": "#/components/schemas/Account"
                 }
-              }
-            },
-            "description": "Success",
-            "links": {
-              "GetChallengeById": {
-                "$ref": "#/components/links/GetChallengeById"
-              },
-              "DeleteChallengeById": {
-                "$ref": "#/components/links/DeleteChallengeById"
               }
             }
           },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
+          "404": {
+            "$ref": "#/components/responses/NotFound"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
           }
         }
-      },
+      }
+    },
+    "/challenges": {
       "get": {
         "tags": [
           "Challenge"
@@ -193,15 +189,84 @@
         }
       }
     },
-    "/challenges/{challengeId}": {
+    "/challenges/{accountName}": {
       "parameters": [
         {
           "in": "path",
-          "name": "challengeId",
-          "description": "The ID of the challenge",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/ChallengeId"
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Add a challenge",
+        "description": "Adds a challenge",
+        "operationId": "createChallenge",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChallengeCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChallengeCreateResponse"
+                }
+              }
+            },
+            "description": "Success",
+            "links": {
+              "GetChallengeById": {
+                "$ref": "#/components/links/GetChallengeById"
+              },
+              "DeleteChallengeById": {
+                "$ref": "#/components/links/DeleteChallengeById"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/challenges/{accountName}/{challengeName}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
           }
         }
       ],
@@ -266,17 +331,6 @@
         "summary": "Create a challenge platform",
         "description": "Create a challenge platform with the specified ID",
         "operationId": "createChallengePlatform",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "challengePlatformId",
-            "description": "The ID of the challenge platform that is being created",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ChallengePlatformId"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -296,15 +350,7 @@
                 }
               }
             },
-            "description": "Success",
-            "links": {
-              "GetChallengePlatformById": {
-                "$ref": "#/components/links/GetChallengePlatformById"
-              },
-              "DeleteTagById": {
-                "$ref": "#/components/links/DeleteChallengePlatformById"
-              }
-            }
+            "description": "Success"
           },
           "400": {
             "$ref": "#/components/responses/BadRequest"
@@ -380,7 +426,7 @@
         {
           "in": "path",
           "name": "challengePlatformId",
-          "description": "The ID of the challenge platform",
+          "description": "The unique identifier of the challenge platform",
           "required": true,
           "schema": {
             "$ref": "#/components/schemas/ChallengePlatformId"
@@ -617,19 +663,8 @@
           "Organization"
         ],
         "summary": "Create an organization",
-        "description": "Create an organization with the specified name",
+        "description": "Create an organization with the specified account name",
         "operationId": "createOrganization",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "organizationId",
-            "description": "The ID of the organization that is being created",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/OrganizationId"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -733,10 +768,10 @@
         {
           "in": "path",
           "name": "organizationId",
-          "description": "The ID of the organization",
+          "description": "The unique identifier of the organization, either the user ID or account name",
           "required": true,
           "schema": {
-            "$ref": "#/components/schemas/OrganizationId"
+            "$ref": "#/components/schemas/AccountId"
           }
         }
       ],
@@ -904,7 +939,7 @@
         {
           "in": "path",
           "name": "personId",
-          "description": "The ID of the person",
+          "description": "The unique identifier of the person",
           "required": true,
           "schema": {
             "$ref": "#/components/schemas/PersonId"
@@ -972,17 +1007,6 @@
         "summary": "Create a tag",
         "description": "Create a tag with the specified name",
         "operationId": "createTag",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "tagId",
-            "description": "The ID of the tag that is being created",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/TagId"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1086,7 +1110,7 @@
         {
           "in": "path",
           "name": "tagId",
-          "description": "The ID of the tag",
+          "description": "The unique identifier of the tag",
           "required": true,
           "schema": {
             "$ref": "#/components/schemas/TagId"
@@ -1152,19 +1176,8 @@
           "User"
         ],
         "summary": "Create a user",
-        "description": "Create a user with the specified username",
+        "description": "Create a user with the specified account name",
         "operationId": "createUser",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userName",
-            "description": "The username of the user that is being created",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/UserName"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1271,17 +1284,10 @@
         {
           "in": "path",
           "name": "userId",
-          "description": "The unique identifier of the user, either the user ID or username",
+          "description": "The unique identifier of the user, either the user account ID or login",
           "required": true,
           "schema": {
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/UserId"
-              },
-              {
-                "$ref": "#/components/schemas/UserName"
-              }
-            ]
+            "$ref": "#/components/schemas/AccountId"
           }
         }
       ],
@@ -1365,6 +1371,940 @@
     }
   },
   "components": {
+    "schemas": {
+      "AccountLogin": {
+        "description": "The user or organization account name",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 25,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-user"
+      },
+      "AccountId": {
+        "description": "The unique identifier of an account",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "Account": {
+        "type": "object",
+        "description": "A user or organization account",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/AccountId"
+          },
+          "login": {
+            "$ref": "#/components/schemas/AccountLogin"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "User",
+              "Organization"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "login",
+          "type"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011",
+          "login": "awesome-user",
+          "type": "User"
+        }
+      },
+      "Error": {
+        "type": "object",
+        "description": "Problem details (tools.ietf.org/html/rfc7807)",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A human readable documentation for the problem type"
+          },
+          "status": {
+            "type": "integer",
+            "description": "The HTTP status code"
+          },
+          "detail": {
+            "type": "string",
+            "description": "A human readable explanation specific to this occurrence of the problem"
+          },
+          "type": {
+            "type": "string",
+            "description": "An absolute URI that identifies the problem type"
+          }
+        },
+        "required": [
+          "title",
+          "status"
+        ]
+      },
+      "TagId": {
+        "description": "The unique identifier of a tag",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "ChallengeStatus": {
+        "description": "The status of the challenge",
+        "type": "string",
+        "enum": [
+          "upcoming",
+          "active",
+          "completed"
+        ],
+        "example": "active"
+      },
+      "ChallengePlatformId": {
+        "description": "The unique identifier of a challenge platform",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "DateRange": {
+        "type": "object",
+        "description": "A date range",
+        "properties": {
+          "start": {
+            "description": "Start date of the date range",
+            "type": "string",
+            "format": "date"
+          },
+          "end": {
+            "description": "End date of the date range",
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "example": {
+          "start": "2021-07-17",
+          "end": "2021-07-17"
+        }
+      },
+      "ResponsePageMetadata": {
+        "type": "object",
+        "description": "A page of results",
+        "properties": {
+          "offset": {
+            "description": "Index of the first result that must be returned",
+            "type": "integer"
+          },
+          "limit": {
+            "description": "Maximum number of results returned",
+            "type": "integer"
+          },
+          "paging": {
+            "description": "Links to navigate to different pages of results",
+            "type": "object",
+            "properties": {
+              "next": {
+                "description": "Link to the next page of results",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "totalResults": {
+            "description": "Total number of results in the result set",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "offset",
+          "limit",
+          "paging"
+        ]
+      },
+      "ChallengeId": {
+        "description": "The unique identifier of the challenge",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "ChallengeCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the challenge created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ChallengeId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "ChallengeName": {
+        "description": "The name of the a challenge",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 60,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-challenge"
+      },
+      "ChallengeCreateRequest": {
+        "type": "object",
+        "description": "The information used to create a challenge",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/ChallengeName"
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 60
+          },
+          "description": {
+            "description": "A short description of the challenge",
+            "type": "string",
+            "nullable": true,
+            "maxLength": 280
+          },
+          "websiteUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ChallengeStatus"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "platformId": {
+            "$ref": "#/components/schemas/ChallengePlatformId",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "description"
+        ],
+        "example": {
+          "name": "awesome-challenge",
+          "displayName": "Awesome Challenge",
+          "description": "This challenge is awesome.",
+          "websiteUrl": "https://synapse.org/awesome-challenge",
+          "status": "active",
+          "startDate": "2020-11-10",
+          "endDate": "2020-12-31",
+          "platformId": "507f1f77bcf86cd799439011"
+        }
+      },
+      "Challenge": {
+        "type": "object",
+        "description": "A challenge",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChallengeCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ChallengeCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "fullName": {
+                "type": "string"
+              },
+              "ownerId": {
+                "$ref": "#/components/schemas/AccountId"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "fullName",
+              "ownerId",
+              "createdAt",
+              "updatedAt"
+            ],
+            "example": {
+              "fullName": "dream/awesome-challenge",
+              "ownerId": "507f1f77bcf86cd799439011",
+              "createdAt": "2017-07-08T16:18:44-04:00",
+              "updatedAt": "2017-07-08T16:18:44-04:00"
+            }
+          }
+        ]
+      },
+      "PageOfChallenges": {
+        "type": "object",
+        "description": "A page of Challenges",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "challenges": {
+                "description": "An array of Challenges",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Challenge"
+                }
+              }
+            },
+            "required": [
+              "challenges"
+            ]
+          }
+        ]
+      },
+      "EmptyObject": {
+        "type": "object",
+        "description": "Empty JSON object"
+      },
+      "ChallengePlatformCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the challenge platform created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ChallengePlatformId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "ChallengePlatformName": {
+        "description": "The name of the challenge platform",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-challenge-platform"
+      },
+      "ChallengePlatformCreateRequest": {
+        "type": "object",
+        "description": "The information used to create a challenge platform",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/ChallengePlatformName"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "websiteUrl": {
+            "type": "string",
+            "format": "uri"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "name",
+          "displayName",
+          "websiteUrl",
+          "avatarUrl"
+        ],
+        "example": {
+          "name": "awesome-challenge-platform",
+          "displayName": "Awesome Challenge Platform",
+          "websiteUrl": "https://awesome-challenge-platform.io",
+          "avatarUrl": "https://awesome-challenge-platform.io/logo.png"
+        }
+      },
+      "ChallengePlatform": {
+        "type": "object",
+        "description": "A challenge platform",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChallengePlatformCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ChallengePlatformCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "createdAt",
+              "updatedAt"
+            ],
+            "example": {
+              "createdAt": "2017-07-08T16:18:44-04:00",
+              "updatedAt": "2017-07-08T16:18:44-04:00"
+            }
+          }
+        ]
+      },
+      "PageOfChallengePlatforms": {
+        "type": "object",
+        "description": "A page of ChallengePlatforms",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "challengePlatforms": {
+                "description": "An array of ChallengePlatforms",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ChallengePlatform"
+                }
+              }
+            },
+            "required": [
+              "challengePlatforms"
+            ]
+          }
+        ]
+      },
+      "GrantId": {
+        "description": "The unique identifier of a grant",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "GrantCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the grant created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/GrantId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "GrantCreateRequest": {
+        "type": "object",
+        "description": "The information required to create a grant",
+        "properties": {
+          "name": {
+            "description": "The name of the grant",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "example": {
+          "name": "Awesome Grant"
+        }
+      },
+      "Grant": {
+        "type": "object",
+        "description": "Information about monetary resources for challenge",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/GrantCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/GrantCreateRequest"
+          }
+        ]
+      },
+      "PageOfGrants": {
+        "type": "object",
+        "description": "A page of Grants",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "grants": {
+                "description": "An array of Grants",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Grant"
+                }
+              }
+            },
+            "required": [
+              "grants"
+            ]
+          }
+        ]
+      },
+      "OrganizationCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the org created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/AccountId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "Email": {
+        "description": "An email address",
+        "type": "string",
+        "format": "email",
+        "example": "john.smith@example.com"
+      },
+      "OrganizationCreateRequest": {
+        "type": "object",
+        "description": "The information required to create an org account",
+        "properties": {
+          "login": {
+            "type": "string"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          }
+        },
+        "required": [
+          "login",
+          "email"
+        ],
+        "example": {
+          "login": "awesome-org",
+          "email": "contact@example.org"
+        }
+      },
+      "Organization": {
+        "type": "object",
+        "description": "An organization",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OrganizationCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/OrganizationCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "nullable": true
+              },
+              "avatarUrl": {
+                "type": "string",
+                "format": "uri",
+                "example": "https://example.com/awesome-avatar.png",
+                "nullable": true
+              },
+              "description": {
+                "type": "string",
+                "nullable": true
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "type": {
+                "type": "string",
+                "example": "Organization"
+              }
+            },
+            "required": [
+              "createdAt",
+              "updatedAt",
+              "type"
+            ],
+            "example": {
+              "name": "Awesome Org",
+              "avatarUrl": "https://example.com/awesome-avatar.png",
+              "description": "A great organization",
+              "createdAt": "2017-07-08T16:18:44-04:00",
+              "updatedAt": "2017-07-08T16:18:44-04:00",
+              "type": "Organization"
+            }
+          }
+        ]
+      },
+      "PageOfOrganizations": {
+        "type": "object",
+        "description": "A page of Organizations",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "organizations": {
+                "description": "An array of Organizations",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Organization"
+                }
+              }
+            },
+            "required": [
+              "organizations"
+            ]
+          }
+        ]
+      },
+      "PersonId": {
+        "description": "The unique identifier of a person",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "PersonCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the person created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/PersonId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "PersonCreateRequest": {
+        "type": "object",
+        "description": "The information used to create a person",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email",
+            "nullable": true
+          },
+          "organizationIds": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountId"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "organizationIds"
+        ],
+        "example": {
+          "name": "John Smith",
+          "email": "john.smith@example.com",
+          "organizationIds": [
+            "507f1f77bcf86cd799439011",
+            "507f1f77bcf86cd799439012"
+          ]
+        }
+      },
+      "Person": {
+        "type": "object",
+        "description": "A person",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PersonCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/PersonCreateRequest"
+          }
+        ]
+      },
+      "PageOfPersons": {
+        "type": "object",
+        "description": "A page of Persons",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "persons": {
+                "description": "An array of Persons",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Person"
+                }
+              }
+            },
+            "required": [
+              "persons"
+            ]
+          }
+        ]
+      },
+      "TagCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the tag created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/TagId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "TagName": {
+        "description": "The name of a tag",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": "awesome-tag"
+      },
+      "TagCreateRequest": {
+        "type": "object",
+        "description": "The information required to create a tag",
+        "properties": {
+          "name": {
+            "$ref": "#/components/schemas/TagName"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "example": {
+          "name": "awesome-tag"
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "description": "A tag that can be assigned to a resource",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/TagCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/TagCreateRequest"
+          }
+        ]
+      },
+      "PageOfTags": {
+        "type": "object",
+        "description": "A page of Tags",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "tags": {
+                "description": "An array of Tags",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Tag"
+                }
+              }
+            },
+            "required": [
+              "tags"
+            ]
+          }
+        ]
+      },
+      "UserCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the user created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/AccountId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "UserCreateRequest": {
+        "type": "object",
+        "description": "The information required to create a user account",
+        "properties": {
+          "login": {
+            "type": "string"
+          },
+          "email": {
+            "$ref": "#/components/schemas/Email"
+          }
+        },
+        "required": [
+          "login",
+          "email"
+        ],
+        "example": {
+          "login": "awesome-user",
+          "email": "awesome-user@example.org"
+        }
+      },
+      "User": {
+        "type": "object",
+        "description": "A simple user",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UserCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/UserCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "nullable": true
+              },
+              "avatarUrl": {
+                "type": "string",
+                "format": "uri",
+                "example": "https://example.com/awesome-avatar.png",
+                "nullable": true
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "type": {
+                "type": "string",
+                "example": "User"
+              }
+            },
+            "required": [
+              "createdAt",
+              "updatedAt",
+              "type"
+            ],
+            "example": {
+              "name": "Awesome User",
+              "avatarUrl": "https://example.com/awesome-avatar.png",
+              "createdAt": "2017-07-08T16:18:44-04:00",
+              "updatedAt": "2017-07-08T16:18:44-04:00",
+              "type": "User"
+            }
+          }
+        ]
+      },
+      "PageOfUsers": {
+        "type": "object",
+        "description": "A page of Users",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "users": {
+                "description": "An array of Users",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "required": [
+              "users"
+            ]
+          }
+        ]
+      },
+      "HealthCheck": {
+        "type": "object",
+        "description": "Represents the health of a service",
+        "properties": {
+          "status": {
+            "description": "Indicates whether the service status is acceptable or not",
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "warn"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "The request cannot be fulfilled due to an unexpected server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Invalid request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Conflict": {
+        "description": "The request conflicts with current state of the target resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
     "parameters": {
       "limit": {
         "name": "limit",
@@ -1472,896 +2412,6 @@
         }
       }
     },
-    "schemas": {
-      "TagId": {
-        "description": "The ID of the tag",
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 60,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": "awesome-tag"
-      },
-      "ChallengeStatus": {
-        "description": "The status of the challenge",
-        "type": "string",
-        "enum": [
-          "upcoming",
-          "active",
-          "completed"
-        ],
-        "example": "active"
-      },
-      "ChallengePlatformId": {
-        "description": "The ID of the challenge platform",
-        "type": "string",
-        "minLength": 1,
-        "maxLength": 60,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": "awesome-challenge-platform"
-      },
-      "DateRange": {
-        "type": "object",
-        "properties": {
-          "start": {
-            "description": "Start date of the date range",
-            "type": "string",
-            "format": "date"
-          },
-          "end": {
-            "description": "End date of the date range",
-            "type": "string",
-            "format": "date"
-          }
-        },
-        "example": {
-          "start": "2021-07-17",
-          "end": "2021-07-17"
-        }
-      },
-      "ResponsePageMetadata": {
-        "type": "object",
-        "description": "A page of results",
-        "properties": {
-          "offset": {
-            "description": "Index of the first result that must be returned",
-            "type": "integer"
-          },
-          "limit": {
-            "description": "Maximum number of results returned",
-            "type": "integer"
-          },
-          "paging": {
-            "description": "Links to navigate to different pages of results",
-            "type": "object",
-            "properties": {
-              "next": {
-                "description": "Link to the next page of results",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "totalResults": {
-            "description": "Total number of results in the result set",
-            "type": "integer"
-          }
-        },
-        "required": [
-          "offset",
-          "limit",
-          "paging"
-        ]
-      },
-      "ChallengeId": {
-        "description": "The ID of the challenge",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "ChallengeCreateResponse": {
-        "type": "object",
-        "description": "A challenge ID",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/ChallengeId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "awesome-challenge"
-        }
-      },
-      "PersonId": {
-        "description": "The ID of the person",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "OrganizationId": {
-        "description": "The ID of the organization",
-        "type": "string",
-        "minLength": 3,
-        "maxLength": 60,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": "awesome-organization"
-      },
-      "GrantId": {
-        "description": "The ID of the grant",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "ChallengeCreateRequest": {
-        "type": "object",
-        "description": "A challenge",
-        "properties": {
-          "name": {
-            "description": "The challenge name",
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 60
-          },
-          "description": {
-            "description": "A short description of the challenge",
-            "type": "string",
-            "maxLength": 280
-          },
-          "summary": {
-            "description": "The summary of challenge",
-            "type": "string"
-          },
-          "startDate": {
-            "description": "When the challenge started",
-            "type": "string",
-            "format": "date"
-          },
-          "endDate": {
-            "description": "When the challenge ended",
-            "type": "string",
-            "format": "date"
-          },
-          "url": {
-            "description": "The URL to the challenge website",
-            "type": "string",
-            "format": "uri"
-          },
-          "status": {
-            "$ref": "#/components/schemas/ChallengeStatus"
-          },
-          "tagIds": {
-            "description": "The tags associated to the challenge",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TagId"
-            }
-          },
-          "organizerIds": {
-            "description": "The organizers of the challenge",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PersonId"
-            }
-          },
-          "dataProviderIds": {
-            "description": "The organizations contributing the data",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrganizationId"
-            }
-          },
-          "grantIds": {
-            "description": "The grants supporting this challenge",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GrantId"
-            }
-          },
-          "platformId": {
-            "$ref": "#/components/schemas/ChallengePlatformId"
-          }
-        },
-        "required": [
-          "name",
-          "description",
-          "url",
-          "status",
-          "tagIds",
-          "organizerIds",
-          "dataProviderIds",
-          "grantIds",
-          "platformId"
-        ],
-        "example": {
-          "name": "Awesome Challenge",
-          "description": "This challenge is awesome.",
-          "summary": "This challenge is awesome.",
-          "startDate": "2020-11-10",
-          "endDate": "2020-12-31",
-          "url": "https://synapse.org/awesome-challenge",
-          "status": "active",
-          "tagIds": [
-            "awesome-tag1",
-            "awesome-tag2"
-          ],
-          "organizerIds": [
-            "507f1f77bcf86cd799439011"
-          ],
-          "dataProviderIds": [
-            "awesome-organization"
-          ],
-          "grantIds": [
-            "507f1f77bcf86cd799439011"
-          ],
-          "platformId": "awesome-challenge-platform"
-        }
-      },
-      "Challenge": {
-        "type": "object",
-        "description": "A challenge",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ChallengeCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/ChallengeCreateRequest"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "description": "When this challenge has been created",
-                "type": "string",
-                "format": "date-time"
-              },
-              "updatedAt": {
-                "description": "When this challenge has last been updated",
-                "type": "string",
-                "format": "date-time"
-              }
-            },
-            "required": [
-              "createdAt",
-              "updatedAt"
-            ]
-          }
-        ]
-      },
-      "PageOfChallenges": {
-        "type": "object",
-        "description": "A page of Challenges",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "challenges": {
-                "description": "An array of Challenges",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Challenge"
-                }
-              }
-            },
-            "required": [
-              "challenges"
-            ]
-          }
-        ]
-      },
-      "Error": {
-        "type": "object",
-        "description": "Problem details (tools.ietf.org/html/rfc7807)",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A human readable documentation for the problem type"
-          },
-          "status": {
-            "type": "integer",
-            "description": "The HTTP status code"
-          },
-          "detail": {
-            "type": "string",
-            "description": "A human readable explanation specific to this occurrence of the problem"
-          },
-          "type": {
-            "type": "string",
-            "description": "An absolute URI that identifies the problem type"
-          }
-        },
-        "required": [
-          "title",
-          "status"
-        ]
-      },
-      "EmptyObject": {
-        "type": "object",
-        "description": "Empty JSON object"
-      },
-      "ChallengePlatformCreateResponse": {
-        "type": "object",
-        "description": "A challenge platform ID",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/ChallengePlatformId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "awesome-challenge-platform"
-        }
-      },
-      "ChallengePlatformCreateRequest": {
-        "type": "object",
-        "description": "A challenge platform",
-        "properties": {
-          "name": {
-            "description": "The name of the challenge platform",
-            "type": "string"
-          },
-          "url": {
-            "description": "The URL to the homepage of the challenge platform",
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "required": [
-          "name",
-          "url"
-        ],
-        "example": {
-          "name": "Awesome Challenge Platform",
-          "url": "https://awesome-challenge-platform.io"
-        }
-      },
-      "ChallengePlatform": {
-        "type": "object",
-        "description": "A challenge platform",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ChallengePlatformCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/ChallengePlatformCreateRequest"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "description": "When this challenge platform has been created",
-                "type": "string",
-                "format": "date-time"
-              },
-              "updatedAt": {
-                "description": "When this challenge platform has last been updated",
-                "type": "string",
-                "format": "date-time"
-              }
-            },
-            "required": [
-              "createdAt",
-              "updatedAt"
-            ]
-          }
-        ]
-      },
-      "PageOfChallengePlatforms": {
-        "type": "object",
-        "description": "A page of ChallengePlatforms",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "challengePlatforms": {
-                "description": "An array of ChallengePlatforms",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ChallengePlatform"
-                }
-              }
-            },
-            "required": [
-              "challengePlatforms"
-            ]
-          }
-        ]
-      },
-      "GrantCreateResponse": {
-        "type": "object",
-        "description": "A grant ID",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/GrantId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "507f1f77bcf86cd799439011"
-        }
-      },
-      "GrantCreateRequest": {
-        "type": "object",
-        "description": "Information about monetary resources for challenge",
-        "properties": {
-          "name": {
-            "description": "The grant name",
-            "type": "string"
-          },
-          "description": {
-            "description": "A description of the grant",
-            "type": "string"
-          },
-          "url": {
-            "description": "The URL to the grant",
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "required": [
-          "name",
-          "description"
-        ],
-        "example": {
-          "name": "Awesome Grant",
-          "description": "This is an awesome grant",
-          "url": "https://report.nih.gov/"
-        }
-      },
-      "Grant": {
-        "type": "object",
-        "description": "Information about monetary resources for challenge",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/GrantCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/GrantCreateRequest"
-          }
-        ]
-      },
-      "PageOfGrants": {
-        "type": "object",
-        "description": "A page of Grants",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "grants": {
-                "description": "An array of Grants",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Grant"
-                }
-              }
-            },
-            "required": [
-              "grants"
-            ]
-          }
-        ]
-      },
-      "OrganizationCreateResponse": {
-        "type": "object",
-        "description": "An organization ID",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/OrganizationId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "awesome-organization"
-        }
-      },
-      "OrganizationCreateRequest": {
-        "type": "object",
-        "description": "An organization",
-        "properties": {
-          "name": {
-            "description": "The organization name",
-            "type": "string"
-          },
-          "shortName": {
-            "description": "The organization short name",
-            "type": "string"
-          },
-          "url": {
-            "description": "The URL to the homepage of the organization",
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "required": [
-          "name",
-          "url"
-        ],
-        "example": {
-          "name": "Awesome Organization",
-          "shortName": "AO",
-          "url": "https://www.example.org"
-        }
-      },
-      "Organization": {
-        "type": "object",
-        "description": "An organization",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OrganizationCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/OrganizationCreateRequest"
-          }
-        ]
-      },
-      "PageOfOrganizations": {
-        "type": "object",
-        "description": "A page of Organizations",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "organizations": {
-                "description": "An array of Organizations",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Organization"
-                }
-              }
-            },
-            "required": [
-              "organizations"
-            ]
-          }
-        ]
-      },
-      "PersonCreateResponse": {
-        "type": "object",
-        "description": "A person ID",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/PersonId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "507f1f77bcf86cd799439011"
-        }
-      },
-      "Email": {
-        "description": "An email address",
-        "type": "string",
-        "format": "email",
-        "example": "john.smith@example.com"
-      },
-      "PersonCreateRequest": {
-        "type": "object",
-        "description": "A person",
-        "properties": {
-          "givenName": {
-            "description": "The first name of the person",
-            "type": "string"
-          },
-          "familyName": {
-            "description": "The last name of the person",
-            "type": "string"
-          },
-          "email": {
-            "$ref": "#/components/schemas/Email"
-          },
-          "organizationIds": {
-            "description": "The organizations the person belongs to",
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OrganizationId"
-            }
-          }
-        },
-        "required": [
-          "givenName",
-          "familyName",
-          "organizationIds"
-        ],
-        "example": {
-          "givenName": "John",
-          "familyName": "Smith",
-          "email": "john.smith@example.com",
-          "organizationIds": [
-            "awesome-organization"
-          ]
-        }
-      },
-      "Person": {
-        "type": "object",
-        "description": "A person",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/PersonCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/PersonCreateRequest"
-          }
-        ]
-      },
-      "PageOfPersons": {
-        "type": "object",
-        "description": "A page of Persons",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "persons": {
-                "description": "An array of Persons",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Person"
-                }
-              }
-            },
-            "required": [
-              "persons"
-            ]
-          }
-        ]
-      },
-      "TagCreateResponse": {
-        "type": "object",
-        "description": "A tag ID",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TagId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "awesome-tag"
-        }
-      },
-      "TagCreateRequest": {
-        "type": "object",
-        "description": "A tag that can be assigned to a resource",
-        "properties": {
-          "description": {
-            "description": "A short description of the tag",
-            "type": "string"
-          }
-        },
-        "required": [
-          "description"
-        ],
-        "example": {
-          "description": "Awesome tag"
-        }
-      },
-      "Tag": {
-        "type": "object",
-        "description": "A tag that can be assigned to a resource",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TagCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/TagCreateRequest"
-          }
-        ]
-      },
-      "PageOfTags": {
-        "type": "object",
-        "description": "A page of Tags",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "tags": {
-                "description": "An array of Tags",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Tag"
-                }
-              }
-            },
-            "required": [
-              "tags"
-            ]
-          }
-        ]
-      },
-      "UserId": {
-        "description": "The ID of the user",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "UserCreateResponse": {
-        "type": "object",
-        "description": "A user's username",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/UserId"
-          }
-        },
-        "example": {
-          "id": "507f1f77bcf86cd799439011"
-        }
-      },
-      "UserName": {
-        "description": "The username of the user",
-        "type": "string",
-        "minLength": 3,
-        "maxLength": 25,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": "awesome-user"
-      },
-      "UserCreateRequest": {
-        "type": "object",
-        "description": "A user of the service",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/PersonCreateRequest"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "userName": {
-                "$ref": "#/components/schemas/UserName"
-              },
-              "description": {
-                "description": "Short biography about the user",
-                "type": "string"
-              },
-              "profileImageUrl": {
-                "description": "URL to the user's profile image",
-                "type": "string"
-              }
-            },
-            "required": [
-              "userName"
-            ]
-          }
-        ],
-        "example": {
-          "userName": "awesome-user",
-          "description": "I am awesome.",
-          "profileImageUrl": "www.awesome-picture.com",
-          "givenName": "Awesome",
-          "familyName": "User",
-          "email": "awesome.user@example.com",
-          "organizations": [
-            "awesome-organization"
-          ]
-        }
-      },
-      "User": {
-        "type": "object",
-        "description": "A ROCC user",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/UserCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/UserCreateRequest"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "verified": {
-                "description": "Indication of user's verification on ROCC",
-                "type": "boolean",
-                "default": false
-              }
-            }
-          }
-        ]
-      },
-      "PageOfUsers": {
-        "type": "object",
-        "description": "A page of Users",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "users": {
-                "description": "An array of Users",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            },
-            "required": [
-              "users"
-            ]
-          }
-        ]
-      },
-      "HealthCheck": {
-        "type": "object",
-        "description": "Represents the health of a service",
-        "properties": {
-          "status": {
-            "description": "Indicates whether the service status is acceptable or not",
-            "type": "string",
-            "enum": [
-              "pass",
-              "fail",
-              "warn"
-            ]
-          }
-        },
-        "required": [
-          "status"
-        ]
-      }
-    },
-    "responses": {
-      "BadRequest": {
-        "description": "Invalid request",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
-      "InternalServerError": {
-        "description": "The request cannot be fulfilled due to an unexpected server error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
-      "Conflict": {
-        "description": "The request conflicts with current state of the target resource",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
-      "NotFound": {
-        "description": "The specified resource was not found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      }
-    },
     "links": {
       "GetChallengeById": {
         "operationId": "getChallenge",
@@ -2375,20 +2425,6 @@
         "description": "The `id` value returned in the response can be used as the `challengeId` parameter in `DELETE /challenges/{challengeId}`\n",
         "parameters": {
           "challengeId": "$response.body#/challengeId"
-        }
-      },
-      "GetChallengePlatformById": {
-        "operationId": "getChallengePlatform",
-        "description": "The `id` value returned in the response can be used as the `challengePlatformId` parameter in `GET /challengePlatforms/{challengePlatformId}`\n",
-        "parameters": {
-          "challengePlatformId": "$response.body#/challengeId"
-        }
-      },
-      "DeleteChallengePlatformById": {
-        "operationId": "deleteChallengePlatform",
-        "description": "The `id` value returned in the response can be used as the `challengePlatformId` parameter in `DELETE /challengePlatforms/{challengePlatformId}`\n",
-        "parameters": {
-          "challengePlatformId": "$response.body#/challengePlatformId"
         }
       },
       "GetGrantById": {
