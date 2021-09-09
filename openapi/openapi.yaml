@@ -28,6 +28,8 @@ tags:
     description: Operations about grants
   - name: Organization
     description: Operations about organizations
+  - name: OrgMembership
+    description: Operations about org memberships
   - name: Person
     description: Operations about persons
   - name: Tag
@@ -65,6 +67,10 @@ paths:
     $ref: paths/organizations.yaml
   /organizations/{organizationId}:
     $ref: paths/organizations@{organizationId}.yaml
+  /orgMemberships:
+    $ref: paths/orgMemberships.yaml
+  /orgMemberships/{orgMembershipId}:
+    $ref: paths/orgMemberships@{orgMembershipId}.yaml
   /persons:
     $ref: paths/persons.yaml
   /persons/{personId}:
