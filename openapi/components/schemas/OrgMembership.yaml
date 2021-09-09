@@ -29,8 +29,8 @@ properties:
 required:
   - state
   - role
-  - organization_id
-  - user_id
+  - organizationId
+  - userId
   - permissions
 example:
   state: active
