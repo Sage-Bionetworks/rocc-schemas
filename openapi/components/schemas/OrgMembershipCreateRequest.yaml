@@ -19,23 +19,23 @@ properties:
     $ref: ../parameters/OrgId.yaml
   userId:
     $ref: ../parameters/UserId.yaml
-  permissions:
-    type: object
-    properties:
-      canCreateRepository:
-        type: boolean
-    required:
-      - can_create_repository
+  # permissions:
+  #   type: object
+  #   properties:
+  #     canCreateRepository:
+  #       type: boolean
+  #   required:
+  #     - can_create_repository
 required:
   - state
   - role
   - organizationId
   - userId
-  - permissions
+  # - permissions
 example:
   state: active
   role: admin
   organizationId: 507f1f77bcf86cd799439011
   userId: 507f1f77bcf86cd799439012
-  permissions:
-    canCreateRepository: true
+  # permissions:
+  #   canCreateRepository: true
