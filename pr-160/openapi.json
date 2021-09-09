@@ -39,6 +39,10 @@
       "description": "Operations about organizations"
     },
     {
+      "name": "OrgMembership",
+      "description": "Operations about org memberships"
+    },
+    {
       "name": "Person",
       "description": "Operations about persons"
     },
@@ -808,6 +812,169 @@
         "summary": "Delete an organization",
         "description": "Deletes the organization specified",
         "operationId": "deleteOrganization",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/orgMemberships": {
+      "post": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Create an org membership",
+        "description": "Create an org membership",
+        "operationId": "createOrgMembership",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgMembershipCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgMembershipCreateResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Get all org memberships",
+        "description": "Returns the org memberships",
+        "operationId": "listOrgMemberships",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfOrgMemberships"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Delete all org memberships",
+        "description": "Delete all org memberships",
+        "operationId": "deleteAllOrgMemberships",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/orgMemberships/{orgMembershipId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "orgMembershipId",
+          "description": "The unique identifier of the org membership",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/OrgMembershipId"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Get an org membership",
+        "description": "Returns the org membership specified",
+        "operationId": "getOrgMembership",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgMembership"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Delete an org membership",
+        "description": "Deletes the org membership specified",
+        "operationId": "deleteOrgMembership",
         "responses": {
           "200": {
             "description": "Success",
@@ -1974,6 +2141,128 @@
             },
             "required": [
               "organizations"
+            ]
+          }
+        ]
+      },
+      "OrgMembershipId": {
+        "description": "The unique identifier of the org membership",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "OrgMembershipCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the org membership",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/OrgMembershipId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "OrgId": {
+        "description": "The unique identifier of an organization",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "UserId": {
+        "description": "The unique identifier of a user",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "OrgMembershipCreateRequest": {
+        "type": "object",
+        "description": "The information used to create an org membership",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.",
+            "example": "active",
+            "enum": [
+              "active",
+              "pending"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "description": "The user's membership type in the organization.",
+            "enum": [
+              "admin",
+              "member"
+            ]
+          },
+          "organizationId": {
+            "$ref": "#/components/schemas/OrgId"
+          },
+          "userId": {
+            "$ref": "#/components/schemas/UserId"
+          },
+          "permissions": {
+            "type": "object",
+            "properties": {
+              "canCreateRepository": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "can_create_repository"
+            ]
+          }
+        },
+        "required": [
+          "state",
+          "role",
+          "organizationId",
+          "userId",
+          "permissions"
+        ],
+        "example": {
+          "state": "active",
+          "role": "admin",
+          "organizationId": "507f1f77bcf86cd799439011",
+          "userId": "507f1f77bcf86cd799439012",
+          "permissions": {
+            "canCreateRepository": true
+          }
+        }
+      },
+      "OrgMembership": {
+        "type": "object",
+        "description": "Information about an org membership",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OrgMembershipCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/OrgMembershipCreateRequest"
+          }
+        ]
+      },
+      "PageOfOrgMemberships": {
+        "type": "object",
+        "description": "A page of org memberships",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "orgMemberships": {
+                "description": "An array of org memberships",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OrgMembership"
+                }
+              }
+            },
+            "required": [
+              "orgMemberships"
             ]
           }
         ]
