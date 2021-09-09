@@ -1436,26 +1436,16 @@ components:
           $ref: '#/components/schemas/OrgId'
         userId:
           $ref: '#/components/schemas/UserId'
-        permissions:
-          type: object
-          properties:
-            canCreateRepository:
-              type: boolean
-          required:
-            - can_create_repository
       required:
         - state
         - role
         - organizationId
         - userId
-        - permissions
       example:
         state: active
         role: admin
         organizationId: 507f1f77bcf86cd799439011
         userId: 507f1f77bcf86cd799439012
-        permissions:
-          canCreateRepository: true
     OrgMembership:
       type: object
       description: Information about an org membership
