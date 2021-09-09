@@ -1025,7 +1025,6 @@ components:
           nullable: true
         doi:
           type: string
-          pattern: '^10.\d{4,9}/[-._;()/:A-Z0-9]+$'
           nullable: true
       required:
         - name
