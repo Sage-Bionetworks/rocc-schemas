@@ -876,7 +876,7 @@
         "tags": [
           "OrgMembership"
         ],
-        "summary": "Get all org memberships",
+        "summary": "List all the org memberships",
         "description": "Returns the org memberships",
         "operationId": "listOrgMemberships",
         "parameters": [
@@ -885,6 +885,12 @@
           },
           {
             "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
           }
         ],
         "responses": {
@@ -2145,6 +2151,16 @@
           }
         ]
       },
+      "OrgId": {
+        "description": "The unique identifier of an organization",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "UserId": {
+        "description": "The unique identifier of a user",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "OrgMembershipId": {
         "description": "The unique identifier of the org membership",
         "type": "string",
@@ -2164,16 +2180,6 @@
         "example": {
           "id": "507f1f77bcf86cd799439011"
         }
-      },
-      "OrgId": {
-        "description": "The unique identifier of an organization",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "UserId": {
-        "description": "The unique identifier of a user",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
       },
       "OrgMembershipCreateRequest": {
         "type": "object",
@@ -2688,6 +2694,24 @@
         "explode": true,
         "schema": {
           "$ref": "#/components/schemas/DateRange"
+        }
+      },
+      "orgId": {
+        "name": "orgId",
+        "description": "An organization identifier used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/OrgId"
+        }
+      },
+      "userId": {
+        "name": "userId",
+        "description": "A user identifier used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/UserId"
         }
       }
     },
