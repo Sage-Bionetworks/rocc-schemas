@@ -15,7 +15,7 @@ TBA
 
 ## Specification
 
-- ROCC schemas version: 0.3.0
+- ROCC schemas version: 0.4.0
 
 
 ## Requirements
