@@ -26,12 +26,14 @@ post:
 get:
   tags:
     - OrgMembership
-  summary: Get all org memberships
+  summary: List all the org memberships
   description: Returns the org memberships
   operationId: listOrgMemberships
   parameters:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
+    - $ref: parameters/orgId.yaml
+    - $ref: parameters/userId.yaml
   responses:
     '200':
       content:
