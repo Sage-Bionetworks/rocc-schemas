@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.3.0",
+    "version": "0.4.0",
     "title": "Registry of Open Community Challenge API",
     "contact": {
       "name": "The ROCC Team",
@@ -37,6 +37,10 @@
     {
       "name": "Organization",
       "description": "Operations about organizations"
+    },
+    {
+      "name": "OrgMembership",
+      "description": "Operations about org memberships"
     },
     {
       "name": "Person",
@@ -828,6 +832,175 @@
         }
       }
     },
+    "/orgMemberships": {
+      "post": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Create an org membership",
+        "description": "Create an org membership",
+        "operationId": "createOrgMembership",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgMembershipCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgMembershipCreateResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "List all the org memberships",
+        "description": "Returns the org memberships",
+        "operationId": "listOrgMemberships",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
+            "$ref": "#/components/parameters/userId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfOrgMemberships"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Delete all org memberships",
+        "description": "Delete all org memberships",
+        "operationId": "deleteAllOrgMemberships",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/orgMemberships/{orgMembershipId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "orgMembershipId",
+          "description": "The unique identifier of the org membership",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/OrgMembershipId"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Get an org membership",
+        "description": "Returns the org membership specified",
+        "operationId": "getOrgMembership",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgMembership"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OrgMembership"
+        ],
+        "summary": "Delete an org membership",
+        "description": "Deletes the org membership specified",
+        "operationId": "deleteOrgMembership",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/persons": {
       "post": {
         "tags": [
@@ -1580,6 +1753,10 @@
           "platformId": {
             "$ref": "#/components/schemas/ChallengePlatformId",
             "nullable": true
+          },
+          "doi": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -1594,7 +1771,8 @@
           "status": "active",
           "startDate": "2020-11-10",
           "endDate": "2020-12-31",
-          "platformId": "507f1f77bcf86cd799439011"
+          "platformId": "507f1f77bcf86cd799439011",
+          "doi": "http://doi.org/10.5281/zenodo.3714971"
         }
       },
       "Challenge": {
@@ -1973,6 +2151,113 @@
           }
         ]
       },
+      "OrgId": {
+        "description": "The unique identifier of an organization",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "UserId": {
+        "description": "The unique identifier of a user",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "OrgMembershipId": {
+        "description": "The unique identifier of the org membership",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "OrgMembershipCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the org membership",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/OrgMembershipId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "OrgMembershipCreateRequest": {
+        "type": "object",
+        "description": "The information used to create an org membership",
+        "properties": {
+          "state": {
+            "type": "string",
+            "description": "The state of the member in the organization. The `pending` state indicates the user has not yet accepted an invitation.",
+            "example": "active",
+            "enum": [
+              "active",
+              "pending"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "description": "The user's membership type in the organization.",
+            "enum": [
+              "admin",
+              "member"
+            ]
+          },
+          "organizationId": {
+            "$ref": "#/components/schemas/OrgId"
+          },
+          "userId": {
+            "$ref": "#/components/schemas/UserId"
+          }
+        },
+        "required": [
+          "state",
+          "role",
+          "organizationId",
+          "userId"
+        ],
+        "example": {
+          "state": "active",
+          "role": "admin",
+          "organizationId": "507f1f77bcf86cd799439011",
+          "userId": "507f1f77bcf86cd799439012"
+        }
+      },
+      "OrgMembership": {
+        "type": "object",
+        "description": "Information about an org membership",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OrgMembershipCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/OrgMembershipCreateRequest"
+          }
+        ]
+      },
+      "PageOfOrgMemberships": {
+        "type": "object",
+        "description": "A page of org memberships",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "orgMemberships": {
+                "description": "An array of org memberships",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OrgMembership"
+                }
+              }
+            },
+            "required": [
+              "orgMemberships"
+            ]
+          }
+        ]
+      },
       "PersonId": {
         "description": "The unique identifier of a person",
         "type": "string",
@@ -2158,6 +2443,16 @@
           },
           "email": {
             "$ref": "#/components/schemas/Email"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatarUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/awesome-avatar.png",
+            "nullable": true
           }
         },
         "required": [
@@ -2166,7 +2461,9 @@
         ],
         "example": {
           "login": "awesome-user",
-          "email": "awesome-user@example.org"
+          "email": "awesome-user@example.org",
+          "name": "Awesome User",
+          "avatarUrl": "https://example.com/awesome-avatar.png"
         }
       },
       "User": {
@@ -2182,16 +2479,6 @@
           {
             "type": "object",
             "properties": {
-              "name": {
-                "type": "string",
-                "nullable": true
-              },
-              "avatarUrl": {
-                "type": "string",
-                "format": "uri",
-                "example": "https://example.com/awesome-avatar.png",
-                "nullable": true
-              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -2211,8 +2498,6 @@
               "type"
             ],
             "example": {
-              "name": "Awesome User",
-              "avatarUrl": "https://example.com/awesome-avatar.png",
               "createdAt": "2017-07-08T16:18:44-04:00",
               "updatedAt": "2017-07-08T16:18:44-04:00",
               "type": "User"
@@ -2409,6 +2694,24 @@
         "explode": true,
         "schema": {
           "$ref": "#/components/schemas/DateRange"
+        }
+      },
+      "orgId": {
+        "name": "orgId",
+        "description": "An organization identifier used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/OrgId"
+        }
+      },
+      "userId": {
+        "name": "userId",
+        "description": "A user identifier used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/UserId"
         }
       }
     },
