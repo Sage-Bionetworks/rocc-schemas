@@ -1580,6 +1580,10 @@
           "platformId": {
             "$ref": "#/components/schemas/ChallengePlatformId",
             "nullable": true
+          },
+          "doi": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -1594,7 +1598,8 @@
           "status": "active",
           "startDate": "2020-11-10",
           "endDate": "2020-12-31",
-          "platformId": "507f1f77bcf86cd799439011"
+          "platformId": "507f1f77bcf86cd799439011",
+          "doi": "http://doi.org/10.5281/zenodo.3714971"
         }
       },
       "Challenge": {
