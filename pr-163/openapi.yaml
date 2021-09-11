@@ -969,10 +969,11 @@ paths:
           $ref: '#/components/responses/InternalServerError'
 components:
   securitySchemes:
-    BearerAuth:
+    bearerAuth:
       type: http
       scheme: bearer
-    ApiKeyAuth:
+      bearerFormat: JWT
+    apiKeyAuth:
       type: apiKey
       in: header
       name: X-API-Key
@@ -1873,4 +1874,5 @@ components:
       parameters:
         userName: $response.body#/userName
 security:
-  - ApiKeyAuth: []
+  - bearerAuth: []
+  - apiKeyAuth: []

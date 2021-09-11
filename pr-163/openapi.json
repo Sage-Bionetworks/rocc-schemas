@@ -1545,11 +1545,12 @@
   },
   "components": {
     "securitySchemes": {
-      "BearerAuth": {
+      "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       },
-      "ApiKeyAuth": {
+      "apiKeyAuth": {
         "type": "apiKey",
         "in": "header",
         "name": "X-API-Key"
@@ -2815,7 +2816,10 @@
   },
   "security": [
     {
-      "ApiKeyAuth": []
+      "bearerAuth": []
+    },
+    {
+      "apiKeyAuth": []
     }
   ]
 }
