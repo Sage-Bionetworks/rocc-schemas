@@ -92,14 +92,6 @@ components:
       $ref: components/securitySchemes/BearerAuth.yaml
     apiKeyAuth:
       $ref: components/securitySchemes/ApiKeyAuth.yaml
-  #   oauth2:
-  #     $ref: components/securitySchemes/main_auth.yaml
-  #   http:
-  #     $ref: components/securitySchemes/bearer_auth.yaml
-  #   api_key:
-  #     $ref: components/securitySchemes/api_key.yaml
-  # /healthcheck:
-  #   $ref: paths/healthCheck.yaml
 
 security:
   - bearerAuth: []
