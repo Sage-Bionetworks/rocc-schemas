@@ -1,0 +1,13 @@
+type: object
+description: The response returned after the creation of the user
+properties:
+  id:
+    $ref: ../parameters/AccountId.yaml
+  token:
+    type: string
+required:
+  - id
+  - token
+example:
+  id: 507f1f77bcf86cd799439011
+  token: atoken
