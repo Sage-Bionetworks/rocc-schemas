@@ -986,6 +986,8 @@ paths:
       summary: Get health check information
       description: Get information about the health of the service
       operationId: getHealthCheck
+      security:
+        - BearerAuth: []
       responses:
         '200':
           description: Success
@@ -1075,7 +1077,15 @@ components:
         password: yourpassword
     LocalAuthResponse:
       type: object
-      description: The response to the successful authentication of a local account
+      description: The token returned after the authentication of a local account
+      properties:
+        token:
+          type: string
+      required:
+        - token
+      example:
+        token: >-
+          eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ
     TagId:
       description: The unique identifier of a tag
       type: string
@@ -1625,49 +1635,58 @@ components:
                 $ref: '#/components/schemas/Tag'
           required:
             - tags
-    User:
+    UserCreateResponse:
       type: object
-      description: A simple user
+      description: The response returned after the creation of the user
       properties:
         id:
           $ref: '#/components/schemas/AccountId'
-        login:
-          type: string
-        email:
-          $ref: '#/components/schemas/Email'
-        name:
-          type: string
-          nullable: true
-        avatarUrl:
-          type: string
-          format: uri
-          example: 'https://example.com/awesome-avatar.png'
-          nullable: true
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
-        type:
-          type: string
-          example: User
       required:
         - id
-        - login
-        - email
-        - createdAt
-        - updatedAt
-        - type
       example:
         id: 507f1f77bcf86cd799439011
-        login: awesome-user
-        email: awesome-user@example.org
-        name: Awesome User
-        avatarUrl: 'https://example.com/awesome-avatar.png'
-        createdAt: '2017-07-08T16:18:44-04:00'
-        updatedAt: '2017-07-08T16:18:44-04:00'
-        type: User
+    User:
+      type: object
+      description: A simple user
+      allOf:
+        - $ref: '#/components/schemas/UserCreateResponse'
+        - type: object
+          properties:
+            login:
+              type: string
+            email:
+              $ref: '#/components/schemas/Email'
+            name:
+              type: string
+              nullable: true
+            avatarUrl:
+              type: string
+              format: uri
+              example: 'https://example.com/awesome-avatar.png'
+              nullable: true
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            type:
+              type: string
+              example: User
+          required:
+            - login
+            - email
+            - createdAt
+            - updatedAt
+            - type
+          example:
+            login: awesome-user
+            email: awesome-user@example.org
+            name: Awesome User
+            avatarUrl: 'https://example.com/awesome-avatar.png'
+            createdAt: '2017-07-08T16:18:44-04:00'
+            updatedAt: '2017-07-08T16:18:44-04:00'
+            type: User
     PageOfUsers:
       type: object
       description: A page of Users
@@ -1711,21 +1730,6 @@ components:
         password: yourpassword
         name: Awesome User
         avatarUrl: 'https://example.com/awesome-avatar.png'
-    UserCreateResponse:
-      type: object
-      description: The response returned after the creation of the user
-      properties:
-        id:
-          $ref: '#/components/schemas/AccountId'
-        token:
-          type: string
-      required:
-        - id
-        - token
-      example:
-        id: 507f1f77bcf86cd799439011
-        token: >-
-          eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ
     HealthCheck:
       type: object
       description: Represents the health of a service
@@ -1952,5 +1956,3 @@ components:
         `userName` parameter in `DELETE /users/{userName}`
       parameters:
         userName: $response.body#/userName
-security:
-  - ApiKeyAuth: []
