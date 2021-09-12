@@ -1,38 +1,37 @@
 type: object
 description: A simple user
-properties:
-  id:
-    $ref: ../parameters/AccountId.yaml
-  login:
-    type: string
-  email:
-    $ref: ../parameters/Email.yaml
-  name:
-    type: string
-    nullable: true
-  avatarUrl:
-    type: string
-    format: uri
-    example: https://example.com/awesome-avatar.png
-    nullable: true
-  createdAt:
-    type: string
-    format: date-time
-  updatedAt:
-    type: string
-    format: date-time
-  type:
-    type: string
-    example: User
+allOf:
+  - $ref: UserCreateResponse.yaml
+  - type: object
+    properties:
+      login:
+        type: string
+      email:
+        $ref: ../parameters/Email.yaml
+      name:
+        type: string
+        nullable: true
+      avatarUrl:
+        type: string
+        format: uri
+        example: https://example.com/awesome-avatar.png
+        nullable: true
+      createdAt:
+        type: string
+        format: date-time
+      updatedAt:
+        type: string
+        format: date-time
+      type:
+        type: string
+        example: User
 required:
-  - id
   - login
   - email
   - createdAt
   - updatedAt
   - type
 example:
-  id: 507f1f77bcf86cd799439011
   login: awesome-user
   email: awesome-user@example.org
   name: Awesome User
