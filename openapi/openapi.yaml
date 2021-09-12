@@ -92,11 +92,11 @@ paths:
 
 components:
   securitySchemes:
-    bearerAuth:
+    BearerAuth:
       $ref: components/securitySchemes/BearerAuth.yaml
-    apiKeyAuth:
+    ApiKeyAuth:
       $ref: components/securitySchemes/ApiKeyAuth.yaml
 
 security:
-  - bearerAuth: []
-  - apiKeyAuth: []
+  # - bearerAuth: []
+  - ApiKeyAuth: []
