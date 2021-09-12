@@ -15,7 +15,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/UserCreateResponse.yaml
+            $ref: ../components/schemas/TokenResponse.yaml
       description: Success
       links:
         GetUserById:
