@@ -18,6 +18,8 @@ info:
 tags:
   - name: Account
     description: Operations about accounts
+  - name: Auth
+    description: Operations about authentication and authorization
   - name: Challenge
     description: Operations about challenges
   - name: ChallengePlatform
@@ -68,6 +70,32 @@ paths:
                 $ref: '#/components/schemas/Account'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /auth/local:
+    post:
+      tags:
+        - Auth
+      summary: Authentify a local account
+      description: Authentify a local account with the specified credential
+      operationId: authLocal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocalAuthRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocalAuthResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /challenges:
@@ -1031,6 +1059,23 @@ components:
       required:
         - title
         - status
+    LocalAuthRequest:
+      type: object
+      description: The information required to authentify a local account
+      properties:
+        login:
+          $ref: '#/components/schemas/AccountLogin'
+        password:
+          type: string
+      required:
+        - login
+        - password
+      example:
+        login: awesome-user
+        password: yourpassword
+    LocalAuthResponse:
+      type: object
+      description: The response to the successful authentication of a local account
     TagId:
       description: The unique identifier of a tag
       type: string
@@ -1681,6 +1726,12 @@ components:
             $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:
