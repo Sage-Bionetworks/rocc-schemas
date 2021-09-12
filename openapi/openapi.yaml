@@ -97,6 +97,6 @@ components:
     ApiKeyAuth:
       $ref: components/securitySchemes/ApiKeyAuth.yaml
 
-security:
-  # - bearerAuth: []
-  - ApiKeyAuth: []
+# security:
+#   # - bearerAuth: []
+#   - ApiKeyAuth: []
