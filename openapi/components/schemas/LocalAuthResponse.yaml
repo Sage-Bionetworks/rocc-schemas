@@ -1,0 +1,2 @@
+type: object
+description: The response to the successful authentication of a local account

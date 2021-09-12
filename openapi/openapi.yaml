@@ -20,6 +20,8 @@ info:
 tags:
   - name: Account
     description: Operations about accounts
+  - name: Auth
+    description: Operations about authentication and authorization
   - name: Challenge
     description: Operations about challenges
   - name: ChallengePlatform
@@ -49,6 +51,8 @@ servers:
 paths:
   /accounts/{login}:
     $ref: paths/accounts@{login}.yaml
+  /auth/local:
+    $ref: paths/authLocal.yaml
   /challenges:
     $ref: paths/challenges.yaml
   /challenges/{accountName}:
