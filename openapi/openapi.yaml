@@ -55,6 +55,8 @@ paths:
     $ref: paths/challenges@{accountName}.yaml
   /challenges/{accountName}/{challengeName}:
     $ref: paths/challenges@{accountName}@{challengeName}.yaml
+  /challenges/{accountName}/{challengeName}/stargazers:
+    $ref: paths/challenges@{accountName}@{challengeName}stargazers.yaml
   /challengePlatforms:
     $ref: paths/challengePlatforms.yaml
   /challengePlatforms/{challengePlatformId}:
