@@ -1,0 +1,24 @@
+parameters:
+  - in: path
+    name: userId
+    description: The unique identifier of the user, either the user account ID or login
+    required: true
+    schema:
+      $ref: ../components/parameters/AccountId.yaml
+get:
+  tags:
+    - User
+  summary: List repositories starred by a user
+  description: Lists repositories a user has starred.
+  operationId: getUserStarredChallenges
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PageOfChallenges.yaml
+    '404':
+      $ref: ../components/responses/NotFound.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
