@@ -97,6 +97,11 @@
         "summary": "Get an account",
         "description": "Returns the user or org account",
         "operationId": "getAccount",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1570,11 +1575,6 @@
         "summary": "Get health check information",
         "description": "Get information about the health of the service",
         "operationId": "getHealthCheck",
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ],
         "responses": {
           "200": {
             "description": "Success",
