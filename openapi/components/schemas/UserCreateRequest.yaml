@@ -5,6 +5,9 @@ properties:
     type: string
   email:
     $ref: ../parameters/Email.yaml
+  password:
+    type: string
+    format: password
   name:
     type: string
     nullable: true
@@ -16,8 +19,10 @@ properties:
 required:
   - login
   - email
+  - password
 example:
   login: awesome-user
   email: awesome-user@example.org
+  password: yourpassword
   name: Awesome User
   avatarUrl: https://example.com/awesome-avatar.png

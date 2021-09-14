@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   version: 0.4.0
-  title: Registry of Open Community Challenge API
+  title: Registry of Open Community Challenges API
   contact:
     name: The ROCC Team
     email: thomas.schaffter@sagebionetworks.org
@@ -20,6 +20,8 @@ info:
 tags:
   - name: Account
     description: Operations about accounts
+  - name: Auth
+    description: Operations about authentication and authorization
   - name: Challenge
     description: Operations about challenges
   - name: ChallengePlatform
@@ -49,6 +51,8 @@ servers:
 paths:
   /accounts/{login}:
     $ref: paths/accounts@{login}.yaml
+  /auth/local:
+    $ref: paths/authLocal.yaml
   /challenges:
     $ref: paths/challenges.yaml
   /challenges/{accountName}:
@@ -79,9 +83,22 @@ paths:
     $ref: paths/tags.yaml
   /tags/{tagId}:
     $ref: paths/tags@{tagId}.yaml
+  /user:
+    $ref: paths/user.yaml
   /users:
     $ref: paths/users.yaml
   /users/{userId}:
     $ref: paths/users@{userId}.yaml
   /healthcheck:
     $ref: paths/healthCheck.yaml
+
+components:
+  securitySchemes:
+    BearerAuth:
+      $ref: components/securitySchemes/BearerAuth.yaml
+    ApiKeyAuth:
+      $ref: components/securitySchemes/ApiKeyAuth.yaml
+
+# security:
+#   # - bearerAuth: []
+#   - ApiKeyAuth: []
