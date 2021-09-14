@@ -3,7 +3,7 @@ get:
     - User
   summary: Get the authenticated user
   description: Get the authenticated user
-  operationId: getUser
+  operationId: getAuthenticatedUser
   security:
     - BearerAuth: []
   responses:
