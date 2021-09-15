@@ -38,6 +38,8 @@ put:
   summary: Star a repository for the authenticated user
   description: Star a repository for the authenticated user
   operationId: starChallenge
+  security:
+    - BearerAuth: []
   responses:
     '200':
       description: Success
