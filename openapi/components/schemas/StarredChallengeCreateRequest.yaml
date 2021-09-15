@@ -1,5 +1,5 @@
 type: object
-description: The information used to create a challenge star
+description: The information used to star a challenge
 properties:
   challengeId:
     $ref: ../parameters/ChallengeId.yaml

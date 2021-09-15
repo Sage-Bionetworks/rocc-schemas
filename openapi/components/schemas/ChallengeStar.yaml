@@ -1,5 +1,0 @@
-type: object
-description: Information about a challenge star
-allOf:
-  - $ref: ChallengeStarCreateResponse.yaml
-  - $ref: ChallengeStarCreateRequest.yaml
