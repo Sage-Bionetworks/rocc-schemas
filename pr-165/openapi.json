@@ -405,6 +405,14 @@
         "summary": "List stargazers",
         "description": "Lists the people that have starred the repository.",
         "operationId": "listChallengeStargazers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1490,6 +1498,14 @@
             "BearerAuth": []
           }
         ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1599,6 +1615,40 @@
           },
           "409": {
             "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Unstar a repository for the authenticated user",
+        "description": "Unstar a repository for the authenticated user",
+        "operationId": "unstarChallenge",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -1799,6 +1849,14 @@
         "summary": "List repositories starred by a user",
         "description": "Lists repositories a user has starred.",
         "operationId": "getUserStarredChallenges",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
