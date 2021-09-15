@@ -87,6 +87,10 @@ paths:
     $ref: paths/tags@{tagId}.yaml
   /user:
     $ref: paths/user.yaml
+  /user/starred:
+    $ref: paths/user/starred.yaml
+  /user/starred/{accountName}/{challengeName}:
+    $ref: paths/user/starred@{accountName}@{challengeName}.yaml
   /users:
     $ref: paths/users.yaml
   /users/{userId}:
