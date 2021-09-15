@@ -59,6 +59,8 @@ paths:
     $ref: paths/challenges@{accountName}.yaml
   /challenges/{accountName}/{challengeName}:
     $ref: paths/challenges@{accountName}@{challengeName}.yaml
+  /challenges/{accountName}/{challengeName}/stargazers:
+    $ref: paths/challenges@{accountName}@{challengeName}stargazers.yaml
   /challengePlatforms:
     $ref: paths/challengePlatforms.yaml
   /challengePlatforms/{challengePlatformId}:
@@ -85,10 +87,16 @@ paths:
     $ref: paths/tags@{tagId}.yaml
   /user:
     $ref: paths/user.yaml
+  /user/starred:
+    $ref: paths/user/starred.yaml
+  /user/starred/{accountName}/{challengeName}:
+    $ref: paths/user/starred@{accountName}@{challengeName}.yaml
   /users:
     $ref: paths/users.yaml
   /users/{userId}:
     $ref: paths/users@{userId}.yaml
+  /users/{userId}/starred:
+    $ref: paths/users@{userId}starred.yaml
   /healthcheck:
     $ref: paths/healthCheck.yaml
 
