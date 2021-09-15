@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "version": "0.4.0",
-    "title": "Registry of Open Community Challenge API",
+    "title": "Registry of Open Community Challenges API",
     "contact": {
       "name": "The ROCC Team",
       "email": "thomas.schaffter@sagebionetworks.org",
@@ -21,6 +21,10 @@
     {
       "name": "Account",
       "description": "Operations about accounts"
+    },
+    {
+      "name": "Auth",
+      "description": "Operations about authentication and authorization"
     },
     {
       "name": "Challenge",
@@ -106,6 +110,47 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/auth/local": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Authentify a local account",
+        "description": "Authentify a local account with the specified credential",
+        "operationId": "authLocal",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalAuthRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalAuthResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -314,6 +359,62 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/challenges/{accountName}/{challengeName}/stargazers": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "List stargazers",
+        "description": "Lists the people that have starred the repository.",
+        "operationId": "listChallengeStargazers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfUsers"
                 }
               }
             }
@@ -1343,6 +1444,213 @@
         }
       }
     },
+    "/user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get the authenticated user",
+        "description": "Get the authenticated user",
+        "operationId": "getAuthenticatedUser",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/user/starred": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List challenges starred by the authenticated user",
+        "description": "Lists repositories the authenticated user has starred.",
+        "operationId": "listStarredChallenges",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfChallenges"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/user/starred/{accountName}/{challengeName}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Check if a repository is starred by the authenticated user",
+        "description": "Check if a repository is starred by the authenticated user",
+        "operationId": "isStarredChallenge",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response if this challenge is starred by you",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Star a repository for the authenticated user",
+        "description": "Star a repository for the authenticated user",
+        "operationId": "starChallenge",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Unstar a repository for the authenticated user",
+        "description": "Unstar a repository for the authenticated user",
+        "operationId": "unstarChallenge",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "tags": [
@@ -1517,6 +1825,53 @@
         }
       }
     },
+    "/users/{userId}/starred": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "userId",
+          "description": "The unique identifier of the user, either the user account ID or login",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountId"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List repositories starred by a user",
+        "description": "Lists repositories a user has starred.",
+        "operationId": "getUserStarredChallenges",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfChallenges"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/healthcheck": {
       "get": {
         "tags": [
@@ -1544,6 +1899,18 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
     "schemas": {
       "AccountLogin": {
         "description": "The user or organization account name",
@@ -1612,6 +1979,41 @@
           "title",
           "status"
         ]
+      },
+      "LocalAuthRequest": {
+        "type": "object",
+        "description": "The information required to authentify a local account",
+        "properties": {
+          "login": {
+            "$ref": "#/components/schemas/AccountLogin"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "login",
+          "password"
+        ],
+        "example": {
+          "login": "awesome-user",
+          "password": "yourpassword"
+        }
+      },
+      "LocalAuthResponse": {
+        "type": "object",
+        "description": "The token returned after the authentication of a local account",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ],
+        "example": {
+          "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ"
+        }
       },
       "TagId": {
         "description": "The unique identifier of a tag",
@@ -1684,7 +2086,8 @@
         "required": [
           "offset",
           "limit",
-          "paging"
+          "paging",
+          "totalResults"
         ]
       },
       "ChallengeId": {
@@ -1845,6 +2248,109 @@
       "EmptyObject": {
         "type": "object",
         "description": "Empty JSON object"
+      },
+      "UserCreateResponse": {
+        "type": "object",
+        "description": "The response returned after the creation of the user",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/AccountId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "Email": {
+        "description": "An email address",
+        "type": "string",
+        "format": "email",
+        "example": "john.smith@example.com"
+      },
+      "User": {
+        "type": "object",
+        "description": "A simple user",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UserCreateResponse"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "login": {
+                "type": "string"
+              },
+              "email": {
+                "$ref": "#/components/schemas/Email"
+              },
+              "name": {
+                "type": "string",
+                "nullable": true
+              },
+              "avatarUrl": {
+                "type": "string",
+                "format": "uri",
+                "example": "https://example.com/awesome-avatar.png",
+                "nullable": true
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "type": {
+                "type": "string",
+                "example": "User"
+              }
+            },
+            "required": [
+              "login",
+              "email",
+              "createdAt",
+              "updatedAt",
+              "type"
+            ],
+            "example": {
+              "login": "awesome-user",
+              "email": "awesome-user@example.org",
+              "name": "Awesome User",
+              "avatarUrl": "https://example.com/awesome-avatar.png",
+              "createdAt": "2017-07-08T16:18:44-04:00",
+              "updatedAt": "2017-07-08T16:18:44-04:00",
+              "type": "User"
+            }
+          }
+        ]
+      },
+      "PageOfUsers": {
+        "type": "object",
+        "description": "A page of Users",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "users": {
+                "description": "An array of Users",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "required": [
+              "users"
+            ]
+          }
+        ]
       },
       "ChallengePlatformCreateResponse": {
         "type": "object",
@@ -2044,12 +2550,6 @@
         "example": {
           "id": "507f1f77bcf86cd799439011"
         }
-      },
-      "Email": {
-        "description": "An email address",
-        "type": "string",
-        "format": "email",
-        "example": "john.smith@example.com"
       },
       "OrganizationCreateRequest": {
         "type": "object",
@@ -2419,21 +2919,6 @@
           }
         ]
       },
-      "UserCreateResponse": {
-        "type": "object",
-        "description": "The unique identifier of the user created",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/AccountId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "507f1f77bcf86cd799439011"
-        }
-      },
       "UserCreateRequest": {
         "type": "object",
         "description": "The information required to create a user account",
@@ -2443,6 +2928,10 @@
           },
           "email": {
             "$ref": "#/components/schemas/Email"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
           },
           "name": {
             "type": "string",
@@ -2457,77 +2946,16 @@
         },
         "required": [
           "login",
-          "email"
+          "email",
+          "password"
         ],
         "example": {
           "login": "awesome-user",
           "email": "awesome-user@example.org",
+          "password": "yourpassword",
           "name": "Awesome User",
           "avatarUrl": "https://example.com/awesome-avatar.png"
         }
-      },
-      "User": {
-        "type": "object",
-        "description": "A simple user",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/UserCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/UserCreateRequest"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "createdAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "updatedAt": {
-                "type": "string",
-                "format": "date-time"
-              },
-              "type": {
-                "type": "string",
-                "example": "User"
-              }
-            },
-            "required": [
-              "createdAt",
-              "updatedAt",
-              "type"
-            ],
-            "example": {
-              "createdAt": "2017-07-08T16:18:44-04:00",
-              "updatedAt": "2017-07-08T16:18:44-04:00",
-              "type": "User"
-            }
-          }
-        ]
-      },
-      "PageOfUsers": {
-        "type": "object",
-        "description": "A page of Users",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "users": {
-                "description": "An array of Users",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            },
-            "required": [
-              "users"
-            ]
-          }
-        ]
       },
       "HealthCheck": {
         "type": "object",
@@ -2571,6 +2999,16 @@
       },
       "BadRequest": {
         "description": "Invalid request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized",
         "content": {
           "application/json": {
             "schema": {
