@@ -11,6 +11,9 @@ get:
   summary: List repositories starred by a user
   description: Lists repositories a user has starred.
   operationId: getUserStarredChallenges
+  parameters:
+    - $ref: parameters/limit.yaml
+    - $ref: parameters/offset.yaml
   responses:
     '200':
       description: Success

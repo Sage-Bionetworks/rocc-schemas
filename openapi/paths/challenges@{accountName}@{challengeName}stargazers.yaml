@@ -17,6 +17,9 @@ get:
   summary: List stargazers
   description: Lists the people that have starred the repository.
   operationId: listChallengeStargazers
+  parameters:
+    - $ref: parameters/limit.yaml
+    - $ref: parameters/offset.yaml
   responses:
     '200':
       description: Success

@@ -6,6 +6,9 @@ get:
   operationId: listStarredChallenges
   security:
     - BearerAuth: []
+  parameters:
+    - $ref: ../parameters/limit.yaml
+    - $ref: ../parameters/offset.yaml
   responses:
     '200':
       description: Success
