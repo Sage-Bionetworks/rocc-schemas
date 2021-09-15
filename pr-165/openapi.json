@@ -1477,6 +1477,135 @@
         }
       }
     },
+    "/user/starred": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List challenges starred by the authenticated user",
+        "description": "Lists repositories the authenticated user has starred.",
+        "operationId": "listStarredChallenges",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfChallenges"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/user/starred/{accountName}/{challengeName}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Check if a repository is starred by the authenticated user",
+        "description": "Check if a repository is starred by the authenticated user",
+        "operationId": "isStarredChallenge",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response if this challenge is starred by you",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Star a repository for the authenticated user",
+        "description": "Star a repository for the authenticated user",
+        "operationId": "starChallenge",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "tags": [
