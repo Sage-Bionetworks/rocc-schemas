@@ -11,8 +11,6 @@ get:
   summary: Get an account
   description: Returns the user or org account
   operationId: getAccount
-  security:
-    - BearerAuth: []
   responses:
     '200':
       description: Success
