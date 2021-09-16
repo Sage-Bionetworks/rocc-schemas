@@ -1921,7 +1921,7 @@
         ],
         "summary": "List orgsnizations of a user",
         "description": "Lists organizations a user belongs to.",
-        "operationId": "getUserOrganizations",
+        "operationId": "listUserOrganizations",
         "parameters": [
           {
             "$ref": "#/components/parameters/limit"
@@ -1968,7 +1968,7 @@
         ],
         "summary": "List challenges starred by a user",
         "description": "Lists challenges a user has starred.",
-        "operationId": "getUserStarredChallenges",
+        "operationId": "listUserStarredChallenges",
         "parameters": [
           {
             "$ref": "#/components/parameters/limit"
