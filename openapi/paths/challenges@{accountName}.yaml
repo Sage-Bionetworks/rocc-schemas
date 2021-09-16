@@ -35,3 +35,23 @@ post:
       $ref: ../components/responses/Conflict.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml
+get:
+  tags:
+    - Challenge
+  summary: List all the challenges owned by the specified account
+  description: List all the challenges owned by the specified account
+  operationId: listAccountChallenges
+  parameters:
+    - $ref: parameters/limit.yaml
+    - $ref: parameters/offset.yaml
+  responses:
+    '200':
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/PageOfChallenges.yaml
+      description: Success
+    '400':
+      $ref: ../components/responses/BadRequest.yaml
+    '500':
+      $ref: ../components/responses/InternalServerError.yaml
