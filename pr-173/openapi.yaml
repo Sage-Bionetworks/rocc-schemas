@@ -1012,8 +1012,8 @@ paths:
     get:
       tags:
         - User
-      summary: Check if a repository is starred by the authenticated user
-      description: Check if a repository is starred by the authenticated user
+      summary: Check if a challenge is starred by the authenticated user
+      description: Check if a challenge is starred by the authenticated user
       operationId: isStarredChallenge
       security:
         - BearerAuth: []
@@ -1033,8 +1033,8 @@ paths:
     put:
       tags:
         - User
-      summary: Star a repository for the authenticated user
-      description: Star a repository for the authenticated user
+      summary: Star a challenge for the authenticated user
+      description: Star a challenge for the authenticated user
       operationId: starChallenge
       security:
         - BearerAuth: []
@@ -1056,8 +1056,8 @@ paths:
     delete:
       tags:
         - User
-      summary: Unstar a repository for the authenticated user
-      description: Unstar a repository for the authenticated user
+      summary: Unstar a challenge for the authenticated user
+      description: Unstar a challenge for the authenticated user
       operationId: unstarChallenge
       security:
         - BearerAuth: []
