@@ -8,9 +8,9 @@ parameters:
 get:
   tags:
     - User
-  summary: List challenges starred by a user
-  description: Lists challenges a user has starred.
-  operationId: listUserStarredChallenges
+  summary: List orgsnizations of a user
+  description: Lists organizations a user belongs to.
+  operationId: listUserOrganizations
   parameters:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
@@ -20,7 +20,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PageOfChallenges.yaml
+            $ref: ../components/schemas/PageOfOrganizations.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '500':
