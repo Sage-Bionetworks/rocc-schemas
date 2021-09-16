@@ -182,8 +182,8 @@ paths:
     get:
       tags:
         - Challenge
-      summary: List all the challenges owned by the account specified
-      description: List all the challenges owned by the account specified
+      summary: List all the challenges owned by the specified account
+      description: List all the challenges owned by the specified account
       operationId: listAccountChallenges
       parameters:
         - $ref: '#/components/parameters/limit'
