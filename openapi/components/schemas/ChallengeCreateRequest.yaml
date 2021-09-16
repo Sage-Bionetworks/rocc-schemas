@@ -12,8 +12,6 @@ properties:
     type: string
     nullable: true
     maxLength: 280
-  ownerId:
-    $ref: ../parameters/AccountId.yaml
   websiteUrl:
     type: string
     format: uri
@@ -37,12 +35,10 @@ properties:
 required:
   - name
   - description
-  - ownerId
 example:
   name: awesome-challenge
   displayName: Awesome Challenge
   description: This challenge is awesome.
-  ownerId: 507f1f77bcf86cd799439011
   websiteUrl: https://synapse.org/awesome-challenge
   status: active
   startDate: "2020-11-10"
