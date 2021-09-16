@@ -7,8 +7,6 @@ allOf:
     properties:
       fullName:
         type: string
-      ownerId:
-        $ref: ../parameters/AccountId.yaml
       createdAt:
         type: string
         format: date-time
@@ -17,11 +15,9 @@ allOf:
         format: date-time
     required:
       - fullName
-      - ownerId
       - createdAt
       - updatedAt
     example:
       fullName: dream/awesome-challenge
-      ownerId: 507f1f77bcf86cd799439011
       createdAt: '2017-07-08T16:18:44-04:00'
       updatedAt: '2017-07-08T16:18:44-04:00'
