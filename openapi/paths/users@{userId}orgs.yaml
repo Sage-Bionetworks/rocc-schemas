@@ -10,7 +10,7 @@ get:
     - User
   summary: List orgsnizations of a user
   description: Lists organizations a user belongs to.
-  operationId: getUserOrganizations
+  operationId: listUserOrganizations
   parameters:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml

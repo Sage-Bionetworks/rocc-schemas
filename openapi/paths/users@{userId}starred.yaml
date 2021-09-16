@@ -10,7 +10,7 @@ get:
     - User
   summary: List challenges starred by a user
   description: Lists challenges a user has starred.
-  operationId: getUserStarredChallenges
+  operationId: listUserStarredChallenges
   parameters:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
