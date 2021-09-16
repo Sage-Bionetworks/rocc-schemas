@@ -89,6 +89,8 @@ paths:
     $ref: paths/user.yaml
   /user/starred:
     $ref: paths/user/starred.yaml
+  /user/orgs:
+    $ref: paths/user/orgs.yaml
   /user/starred/{accountName}/{challengeName}:
     $ref: paths/user/starred@{accountName}@{challengeName}.yaml
   /users:
