@@ -97,6 +97,8 @@ paths:
     $ref: paths/users.yaml
   /users/{userId}:
     $ref: paths/users@{userId}.yaml
+  /users/{userId}/orgs:
+    $ref: paths/users@{userId}orgs.yaml
   /users/{userId}/starred:
     $ref: paths/users@{userId}starred.yaml
   /healthcheck:
