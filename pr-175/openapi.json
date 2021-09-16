@@ -2696,6 +2696,12 @@
             "example": "https://example.com/awesome-avatar.png",
             "nullable": true
           },
+          "websiteUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com",
+            "nullable": true
+          },
           "description": {
             "type": "string",
             "nullable": true
@@ -2710,6 +2716,7 @@
           "email": "contact@example.org",
           "name": "Awesome Org",
           "avatarUrl": "https://example.com/awesome-avatar.png",
+          "websiteUrl": "https://example.com",
           "description": "A great organization"
         }
       },
