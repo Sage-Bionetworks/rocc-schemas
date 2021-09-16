@@ -1184,6 +1184,34 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  '/users/{userId}/orgs':
+    parameters:
+      - in: path
+        name: userId
+        description: 'The unique identifier of the user, either the user account ID or login'
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountId'
+    get:
+      tags:
+        - User
+      summary: List orgsnizations of a user
+      description: Lists organizations a user belongs to.
+      operationId: getUserOrganizations
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfOrganizations'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/users/{userId}/starred':
     parameters:
       - in: path
@@ -1195,8 +1223,8 @@ paths:
     get:
       tags:
         - User
-      summary: List repositories starred by a user
-      description: Lists repositories a user has starred.
+      summary: List challenges starred by a user
+      description: Lists challenges a user has starred.
       operationId: getUserStarredChallenges
       parameters:
         - $ref: '#/components/parameters/limit'
