@@ -16,6 +16,9 @@ properties:
     format: uri
     example: https://example.com/awesome-avatar.png
     nullable: true
+  bio:
+    type: string
+    nullable: true
 required:
   - login
   - email
@@ -26,3 +29,4 @@ example:
   password: yourpassword
   name: Awesome User
   avatarUrl: https://example.com/awesome-avatar.png
+  bio: A great bio
