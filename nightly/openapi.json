@@ -296,6 +296,40 @@
             "$ref": "#/components/responses/InternalServerError"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "List all the challenges owned by the specified account",
+        "description": "List all the challenges owned by the specified account",
+        "operationId": "listAccountChallenges",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfChallenges"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
       }
     },
     "/challenges/{accountName}/{challengeName}": {
@@ -1486,7 +1520,7 @@
           "User"
         ],
         "summary": "List challenges starred by the authenticated user",
-        "description": "Lists repositories the authenticated user has starred.",
+        "description": "Lists challenges the authenticated user has starred.",
         "operationId": "listStarredChallenges",
         "security": [
           {
@@ -1508,6 +1542,50 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageOfChallenges"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/user/orgs": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List organizations of the authenticated user",
+        "description": "Lists organizations the authenticated user belongs to.",
+        "operationId": "listAuthenticatedUserOrganizations",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfOrganizations"
                 }
               }
             }
@@ -1549,8 +1627,8 @@
         "tags": [
           "User"
         ],
-        "summary": "Check if a repository is starred by the authenticated user",
-        "description": "Check if a repository is starred by the authenticated user",
+        "summary": "Check if a challenge is starred by the authenticated user",
+        "description": "Check if a challenge is starred by the authenticated user",
         "operationId": "isStarredChallenge",
         "security": [
           {
@@ -1583,8 +1661,8 @@
         "tags": [
           "User"
         ],
-        "summary": "Star a repository for the authenticated user",
-        "description": "Star a repository for the authenticated user",
+        "summary": "Star a challenge for the authenticated user",
+        "description": "Star a challenge for the authenticated user",
         "operationId": "starChallenge",
         "security": [
           {
@@ -1620,8 +1698,8 @@
         "tags": [
           "User"
         ],
-        "summary": "Unstar a repository for the authenticated user",
-        "description": "Unstar a repository for the authenticated user",
+        "summary": "Unstar a challenge for the authenticated user",
+        "description": "Unstar a challenge for the authenticated user",
         "operationId": "unstarChallenge",
         "security": [
           {
@@ -1825,6 +1903,53 @@
         }
       }
     },
+    "/users/{userId}/orgs": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "userId",
+          "description": "The unique identifier of the user, either the user account ID or login",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountId"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "List orgsnizations of a user",
+        "description": "Lists organizations a user belongs to.",
+        "operationId": "listUserOrganizations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/limit"
+          },
+          {
+            "$ref": "#/components/parameters/offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfOrganizations"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/users/{userId}/starred": {
       "parameters": [
         {
@@ -1841,9 +1966,9 @@
         "tags": [
           "User"
         ],
-        "summary": "List repositories starred by a user",
-        "description": "Lists repositories a user has starred.",
-        "operationId": "getUserStarredChallenges",
+        "summary": "List challenges starred by a user",
+        "description": "Lists challenges a user has starred.",
+        "operationId": "listUserStarredChallenges",
         "parameters": [
           {
             "$ref": "#/components/parameters/limit"
@@ -2136,9 +2261,6 @@
             "nullable": true,
             "maxLength": 280
           },
-          "ownerId": {
-            "$ref": "#/components/schemas/AccountId"
-          },
           "websiteUrl": {
             "type": "string",
             "format": "uri"
@@ -2167,14 +2289,12 @@
         },
         "required": [
           "name",
-          "description",
-          "ownerId"
+          "description"
         ],
         "example": {
           "name": "awesome-challenge",
           "displayName": "Awesome Challenge",
           "description": "This challenge is awesome.",
-          "ownerId": "507f1f77bcf86cd799439011",
           "websiteUrl": "https://synapse.org/awesome-challenge",
           "status": "active",
           "startDate": "2020-11-10",
@@ -2199,6 +2319,9 @@
               "fullName": {
                 "type": "string"
               },
+              "ownerId": {
+                "$ref": "#/components/schemas/AccountId"
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -2210,11 +2333,13 @@
             },
             "required": [
               "fullName",
+              "ownerId",
               "createdAt",
               "updatedAt"
             ],
             "example": {
               "fullName": "dream/awesome-challenge",
+              "ownerId": "507f1f77bcf86cd799439011",
               "createdAt": "2017-07-08T16:18:44-04:00",
               "updatedAt": "2017-07-08T16:18:44-04:00"
             }
@@ -2560,6 +2685,26 @@
           },
           "email": {
             "$ref": "#/components/schemas/Email"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "avatarUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/awesome-avatar.png",
+            "nullable": true
+          },
+          "websiteUrl": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -2568,7 +2713,11 @@
         ],
         "example": {
           "login": "awesome-org",
-          "email": "contact@example.org"
+          "email": "contact@example.org",
+          "name": "Awesome Org",
+          "avatarUrl": "https://example.com/awesome-avatar.png",
+          "websiteUrl": "https://example.com",
+          "description": "A great organization"
         }
       },
       "Organization": {
@@ -2584,20 +2733,6 @@
           {
             "type": "object",
             "properties": {
-              "name": {
-                "type": "string",
-                "nullable": true
-              },
-              "avatarUrl": {
-                "type": "string",
-                "format": "uri",
-                "example": "https://example.com/awesome-avatar.png",
-                "nullable": true
-              },
-              "description": {
-                "type": "string",
-                "nullable": true
-              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -2617,9 +2752,6 @@
               "type"
             ],
             "example": {
-              "name": "Awesome Org",
-              "avatarUrl": "https://example.com/awesome-avatar.png",
-              "description": "A great organization",
               "createdAt": "2017-07-08T16:18:44-04:00",
               "updatedAt": "2017-07-08T16:18:44-04:00",
               "type": "Organization"
