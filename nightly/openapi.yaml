@@ -1558,6 +1558,9 @@ components:
             type:
               type: string
               example: User
+            bio:
+              type: string
+              nullable: true
           required:
             - login
             - email
@@ -1569,6 +1572,7 @@ components:
             email: awesome-user@example.org
             name: Awesome User
             avatarUrl: 'https://example.com/awesome-avatar.png'
+            bio: A great bio
             createdAt: '2017-07-08T16:18:44-04:00'
             updatedAt: '2017-07-08T16:18:44-04:00'
             type: User
@@ -1986,6 +1990,9 @@ components:
           format: uri
           example: 'https://example.com/awesome-avatar.png'
           nullable: true
+        bio:
+          type: string
+          nullable: true
       required:
         - login
         - email
@@ -1996,6 +2003,7 @@ components:
         password: yourpassword
         name: Awesome User
         avatarUrl: 'https://example.com/awesome-avatar.png'
+        bio: A great bio
     HealthCheck:
       type: object
       description: Represents the health of a service
