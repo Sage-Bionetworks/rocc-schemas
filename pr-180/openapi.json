@@ -427,29 +427,29 @@
           }
         }
       ],
-      "post": {
+      "patch": {
         "tags": [
           "Challenge"
         ],
-        "summary": "Create a challenge README",
-        "description": "Create a challenge README",
-        "operationId": "createChallengeReadme",
+        "summary": "Update a challenge README",
+        "description": "Update a challenge README",
+        "operationId": "updateChallengeReadme",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChallengeReadmeCreateRequest"
+                "$ref": "#/components/schemas/ChallengeReadmeUpdateRequest"
               }
             }
           },
           "required": true
         },
         "responses": {
-          "201": {
+          "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChallengeReadmeCreateResponse"
+                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             },
@@ -480,32 +480,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ChallengeReadme"
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Challenge"
-        ],
-        "summary": "Delete a challenge README",
-        "description": "Deletes the challenge README specified",
-        "operationId": "deleteChallengeReadme",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EmptyObject"
                 }
               }
             }
@@ -2554,6 +2528,21 @@
             }
           }
         ]
+      },
+      "ChallengeReadmeUpdateRequest": {
+        "type": "object",
+        "description": "The new README content of a challenge",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "example": {
+          "text": "A great README text"
+        }
       },
       "UserCreateResponse": {
         "type": "object",
