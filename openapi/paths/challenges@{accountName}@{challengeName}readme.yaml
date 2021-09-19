@@ -11,24 +11,49 @@ parameters:
     required: true
     schema:
       $ref: ../components/parameters/ChallengeName.yaml
-post:
+# post:
+#   tags:
+#     - Challenge
+#   summary: Create a challenge README
+#   description: Create a challenge README
+#   operationId: createChallengeReadme
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/ChallengeReadmeCreateRequest.yaml
+#     required: true
+#   responses:
+#     '201':
+#       content:
+#         application/json:
+#           schema:
+#             $ref: ../components/schemas/ChallengeReadmeCreateResponse.yaml
+#       description: Success
+#     '400':
+#       $ref: ../components/responses/BadRequest.yaml
+#     '409':
+#       $ref: ../components/responses/Conflict.yaml
+#     '500':
+#       $ref: ../components/responses/InternalServerError.yaml
+patch:
   tags:
     - Challenge
-  summary: Create a challenge README
-  description: Create a challenge README
-  operationId: createChallengeReadme
+  summary: Update a challenge README
+  description: Update a challenge README
+  operationId: updateChallengeReadme
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/ChallengeReadmeCreateRequest.yaml
+          $ref: ../components/schemas/ChallengeReadmeUpdateRequest.yaml
     required: true
   responses:
-    '201':
+    '200':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ChallengeReadmeCreateResponse.yaml
+            $ref: ../components/schemas/EmptyObject.yaml
       description: Success
     '400':
       $ref: ../components/responses/BadRequest.yaml
@@ -53,20 +78,20 @@ get:
       $ref: ../components/responses/NotFound.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml
-delete:
-  tags:
-    - Challenge
-  summary: Delete a challenge README
-  description: Deletes the challenge README specified
-  operationId: deleteChallengeReadme
-  responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/EmptyObject.yaml
-    '404':
-      $ref: ../components/responses/NotFound.yaml
-    '500':
-      $ref: ../components/responses/InternalServerError.yaml
+# delete:
+#   tags:
+#     - Challenge
+#   summary: Delete a challenge README
+#   description: Deletes the challenge README specified
+#   operationId: deleteChallengeReadme
+#   responses:
+#     '200':
+#       description: Success
+#       content:
+#         application/json:
+#           schema:
+#             $ref: ../components/schemas/EmptyObject.yaml
+#     '404':
+#       $ref: ../components/responses/NotFound.yaml
+#     '500':
+#       $ref: ../components/responses/InternalServerError.yaml
