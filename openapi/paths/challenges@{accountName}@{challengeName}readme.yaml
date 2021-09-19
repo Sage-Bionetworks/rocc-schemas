@@ -11,31 +11,6 @@ parameters:
     required: true
     schema:
       $ref: ../components/parameters/ChallengeName.yaml
-# post:
-#   tags:
-#     - Challenge
-#   summary: Create a challenge README
-#   description: Create a challenge README
-#   operationId: createChallengeReadme
-#   requestBody:
-#     content:
-#       application/json:
-#         schema:
-#           $ref: ../components/schemas/ChallengeReadmeCreateRequest.yaml
-#     required: true
-#   responses:
-#     '201':
-#       content:
-#         application/json:
-#           schema:
-#             $ref: ../components/schemas/ChallengeReadmeCreateResponse.yaml
-#       description: Success
-#     '400':
-#       $ref: ../components/responses/BadRequest.yaml
-#     '409':
-#       $ref: ../components/responses/Conflict.yaml
-#     '500':
-#       $ref: ../components/responses/InternalServerError.yaml
 patch:
   tags:
     - Challenge
@@ -78,6 +53,31 @@ get:
       $ref: ../components/responses/NotFound.yaml
     '500':
       $ref: ../components/responses/InternalServerError.yaml
+# post:
+#   tags:
+#     - Challenge
+#   summary: Create a challenge README
+#   description: Create a challenge README
+#   operationId: createChallengeReadme
+#   requestBody:
+#     content:
+#       application/json:
+#         schema:
+#           $ref: ../components/schemas/ChallengeReadmeCreateRequest.yaml
+#     required: true
+#   responses:
+#     '201':
+#       content:
+#         application/json:
+#           schema:
+#             $ref: ../components/schemas/ChallengeReadmeCreateResponse.yaml
+#       description: Success
+#     '400':
+#       $ref: ../components/responses/BadRequest.yaml
+#     '409':
+#       $ref: ../components/responses/Conflict.yaml
+#     '500':
+#       $ref: ../components/responses/InternalServerError.yaml
 # delete:
 #   tags:
 #     - Challenge
