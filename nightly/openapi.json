@@ -406,6 +406,93 @@
         }
       }
     },
+    "/challenges/{accountName}/{challengeName}/readme": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
+          }
+        }
+      ],
+      "patch": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Update a challenge README",
+        "description": "Update a challenge README",
+        "operationId": "updateChallengeReadme",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChallengeReadmeUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Get a challenge README",
+        "description": "Returns the challenge README specified",
+        "operationId": "getChallengeReadme",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChallengeReadme"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/challenges/{accountName}/{challengeName}/stargazers": {
       "parameters": [
         {
@@ -2373,6 +2460,89 @@
       "EmptyObject": {
         "type": "object",
         "description": "Empty JSON object"
+      },
+      "ChallengeReadmeId": {
+        "description": "The unique identifier of a challenge README",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "ChallengeReadmeCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the challenge README created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ChallengeReadmeId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "ChallengeReadmeCreateRequest": {
+        "type": "object",
+        "description": "The information used to the README of a challenge",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "example": {
+          "text": "A great README text"
+        }
+      },
+      "ChallengeReadme": {
+        "type": "object",
+        "description": "A challenge README",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChallengeReadmeCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ChallengeReadmeCreateRequest"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "required": [
+              "createdAt",
+              "updatedAt"
+            ],
+            "example": {
+              "createdAt": "2017-07-08T16:18:44-04:00",
+              "updatedAt": "2017-07-08T16:18:44-04:00"
+            }
+          }
+        ]
+      },
+      "ChallengeReadmeUpdateRequest": {
+        "type": "object",
+        "description": "The new README content of a challenge",
+        "properties": {
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "example": {
+          "text": "A great README text"
+        }
       },
       "UserCreateResponse": {
         "type": "object",
