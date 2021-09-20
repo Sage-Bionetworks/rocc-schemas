@@ -357,16 +357,13 @@ paths:
       summary: List stargazers
       description: Lists the challenge topics.
       operationId: listChallengeTopics
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageOfTopics'
+                $ref: '#/components/schemas/ArrayOfTopics'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -1748,20 +1745,21 @@ components:
                 $ref: '#/components/schemas/User'
           required:
             - users
-    PageOfTopics:
+    ArrayOfTopics:
       type: object
-      description: A page of Topics
-      allOf:
-        - $ref: '#/components/schemas/ResponsePageMetadata'
-        - type: object
-          properties:
-            topics:
-              description: An array of Topics
-              type: array
-              items:
-                $ref: '#/components/schemas/Topic'
-          required:
-            - topics
+      description: An array of topics
+      properties:
+        topics:
+          description: An array of Topics
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+      required:
+        - topics
+      example:
+        topics:
+          - breast-cancer
+          - ehr
     ChallengePlatformCreateResponse:
       type: object
       description: The unique identifier of the challenge platform created
