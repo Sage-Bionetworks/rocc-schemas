@@ -1,0 +1,13 @@
+type: object
+description: A page of Topics
+allOf:
+  - $ref: ResponsePageMetadata.yaml
+  - type: object
+    properties:
+      topics:
+        description: An array of Topics
+        type: array
+        items:
+          $ref: Topic.yaml
+    required:
+      - topics

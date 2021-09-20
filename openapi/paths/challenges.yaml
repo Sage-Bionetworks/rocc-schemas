@@ -40,7 +40,8 @@ get:
     - $ref: parameters/sort.yaml
     - $ref: parameters/direction.yaml
     - $ref: parameters/searchTerms.yaml
-    - $ref: parameters/tagIds.yaml
+    # - $ref: parameters/tagIds.yaml
+    - $ref: parameters/topics.yaml
     - $ref: parameters/challenge/status.yaml
     - $ref: parameters/challenge/platformIds.yaml
     - $ref: parameters/challenge/startDateRange.yaml
