@@ -26,7 +26,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PageOfTopics.yaml
+            $ref: ../components/schemas/ArrayOfTopics.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '500':
