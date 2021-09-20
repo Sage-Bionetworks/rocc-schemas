@@ -17,9 +17,6 @@ get:
   summary: List stargazers
   description: Lists the challenge topics.
   operationId: listChallengeTopics
-  parameters:
-    - $ref: parameters/limit.yaml
-    - $ref: parameters/offset.yaml
   responses:
     '200':
       description: Success
