@@ -2428,7 +2428,6 @@
             "items": {
               "$ref": "#/components/schemas/Topic"
             },
-            "uniqueItems": true,
             "maxItems": 30
           },
           "doi": {
