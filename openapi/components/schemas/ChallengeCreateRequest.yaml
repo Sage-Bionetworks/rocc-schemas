@@ -32,7 +32,7 @@ properties:
     type: array
     items:
       $ref: Topic.yaml
-    uniqueItems: true
+    # uniqueItems: true
     maxItems: 30
   doi:
     type: string
