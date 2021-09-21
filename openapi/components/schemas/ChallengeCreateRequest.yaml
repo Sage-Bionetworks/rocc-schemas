@@ -28,6 +28,12 @@ properties:
   platformId:
     $ref: ../parameters/ChallengePlatformId.yaml
     nullable: true
+  topics:
+    type: array
+    items:
+      $ref: Topic.yaml
+    # uniqueItems: true
+    maxItems: 30
   doi:
     type: string
     # pattern: "^10.\d{4,9}/[-._;()/:A-Z0-9]+$"
@@ -44,4 +50,7 @@ example:
   startDate: "2020-11-10"
   endDate: "2020-12-31"
   platformId: 507f1f77bcf86cd799439011
+  topics:
+    - breast-cancer
+    - ehr
   doi: http://doi.org/10.5281/zenodo.3714971
