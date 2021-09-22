@@ -183,7 +183,7 @@
             "$ref": "#/components/parameters/searchTerms"
           },
           {
-            "$ref": "#/components/parameters/tagIds"
+            "$ref": "#/components/parameters/topics"
           },
           {
             "$ref": "#/components/parameters/status"
@@ -536,6 +536,54 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PageOfUsers"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/challenges/{accountName}/{challengeName}/topics": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "List stargazers",
+        "description": "Lists the challenge topics.",
+        "operationId": "listChallengeTopics",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfTopics"
                 }
               }
             }
@@ -2227,10 +2275,16 @@
           "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ"
         }
       },
-      "TagId": {
-        "description": "The unique identifier of a tag",
+      "Topic": {
+        "description": "The topic",
         "type": "string",
-        "example": "507f1f77bcf86cd799439011"
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": [
+          "breast-cancer",
+          "ehr"
+        ]
       },
       "ChallengeStatus": {
         "description": "The status of the challenge",
@@ -2369,6 +2423,13 @@
             "$ref": "#/components/schemas/ChallengePlatformId",
             "nullable": true
           },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Topic"
+            },
+            "maxItems": 30
+          },
           "doi": {
             "type": "string",
             "nullable": true
@@ -2387,6 +2448,10 @@
           "startDate": "2020-11-10",
           "endDate": "2020-12-31",
           "platformId": "507f1f77bcf86cd799439011",
+          "topics": [
+            "breast-cancer",
+            "ehr"
+          ],
           "doi": "http://doi.org/10.5281/zenodo.3714971"
         }
       },
@@ -2651,6 +2716,28 @@
             ]
           }
         ]
+      },
+      "ArrayOfTopics": {
+        "type": "object",
+        "description": "An array of topics",
+        "properties": {
+          "topics": {
+            "description": "An array of Topics",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Topic"
+            }
+          }
+        },
+        "required": [
+          "topics"
+        ],
+        "example": {
+          "topics": [
+            "breast-cancer",
+            "ehr"
+          ]
+        }
       },
       "ChallengePlatformCreateResponse": {
         "type": "object",
@@ -3152,6 +3239,11 @@
           }
         ]
       },
+      "TagId": {
+        "description": "The unique identifier of a tag",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "TagCreateResponse": {
         "type": "object",
         "description": "The unique identifier of the tag created",
@@ -3399,15 +3491,15 @@
           "type": "string"
         }
       },
-      "tagIds": {
-        "name": "tagIds",
-        "description": "Array of tag ids used to filter the results",
+      "topics": {
+        "name": "topics",
+        "description": "Array of topics used to filter the results",
         "in": "query",
         "required": false,
         "schema": {
           "type": "array",
           "items": {
-            "$ref": "#/components/schemas/TagId"
+            "$ref": "#/components/schemas/Topic"
           }
         }
       },
