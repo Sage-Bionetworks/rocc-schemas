@@ -12,16 +12,13 @@ TBA
 - https://sage-bionetworks.github.io/rocc-schemas/latest/openapi.yaml
 - https://sage-bionetworks.github.io/rocc-schemas/latest/openapi.json
 
-
 ## Specification
 
-- ROCC schemas version: 0.4.0
-
+- ROCC schemas version: 0.5.0
 
 ## Requirements
 
 - [Node] >=14
-
 
 ## Implementations
 
@@ -44,7 +41,6 @@ GitHub repository                               | Language
 [Sage-Bionetworks/rocc-client-angular]          | TypeScript-Angular
 [Sage-Bionetworks/rocc-client-python]           | Python
 
-
 ## Usage
 
 ### `npm start`
@@ -58,7 +54,6 @@ Bundles the definition to the dist folder.
 ### `npm test`
 
 Validates the OpenAPI specification.
-
 
 ## Versioning
 
@@ -87,12 +82,10 @@ The table below describes the schemas tags available.
 | `edge-<sha>`                    | Same as above with the reference to the git commit.    | No
 | `<major>.<minor>.<patch>`       | Latest stable patch release `<major>.<minor>.<patch>`. | No
 
-
 ## Contributing
 
 Thinking about contributing to this project? Get started by reading our
 [contribution guidelines].
-
 
 ## License
 
