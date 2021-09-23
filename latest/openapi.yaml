@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
-  version: 0.4.0
-  title: Registry of Open Community Challenge API
+  version: 0.5.0
+  title: Registry of Open Community Challenges API
   contact:
     name: The ROCC Team
     email: thomas.schaffter@sagebionetworks.org
@@ -18,6 +18,8 @@ info:
 tags:
   - name: Account
     description: Operations about accounts
+  - name: Auth
+    description: Operations about authentication and authorization
   - name: Challenge
     description: Operations about challenges
   - name: ChallengePlatform
@@ -70,6 +72,32 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /auth/local:
+    post:
+      tags:
+        - Auth
+      summary: Authentify a local account
+      description: Authentify a local account with the specified credential
+      operationId: authLocal
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocalAuthRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocalAuthResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /challenges:
     get:
       tags:
@@ -83,7 +111,7 @@ paths:
         - $ref: '#/components/parameters/sort'
         - $ref: '#/components/parameters/direction'
         - $ref: '#/components/parameters/searchTerms'
-        - $ref: '#/components/parameters/tagIds'
+        - $ref: '#/components/parameters/topics'
         - $ref: '#/components/parameters/status'
         - $ref: '#/components/parameters/platformIds'
         - $ref: '#/components/parameters/startDateRange'
@@ -151,6 +179,26 @@ paths:
           $ref: '#/components/responses/Conflict'
         '500':
           $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Challenge
+      summary: List all the challenges owned by the specified account
+      description: List all the challenges owned by the specified account
+      operationId: listAccountChallenges
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfChallenges'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/challenges/{accountName}/{challengeName}':
     parameters:
       - in: path
@@ -195,6 +243,127 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmptyObject'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/challenges/{accountName}/{challengeName}/readme':
+    parameters:
+      - in: path
+        name: accountName
+        description: The name of the account that owns the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
+    patch:
+      tags:
+        - Challenge
+      summary: Update a challenge README
+      description: Update a challenge README
+      operationId: updateChallengeReadme
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChallengeReadmeUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Challenge
+      summary: Get a challenge README
+      description: Returns the challenge README specified
+      operationId: getChallengeReadme
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChallengeReadme'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/challenges/{accountName}/{challengeName}/stargazers':
+    parameters:
+      - in: path
+        name: accountName
+        description: The name of the account that owns the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
+    get:
+      tags:
+        - Challenge
+      summary: List stargazers
+      description: Lists the people that have starred the repository.
+      operationId: listChallengeStargazers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfUsers'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/challenges/{accountName}/{challengeName}/topics':
+    parameters:
+      - in: path
+        name: accountName
+        description: The name of the account that owns the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
+    get:
+      tags:
+        - Challenge
+      summary: List stargazers
+      description: Lists the challenge topics.
+      operationId: listChallengeTopics
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArrayOfTopics'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -841,6 +1010,157 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  /user:
+    get:
+      tags:
+        - User
+      summary: Get the authenticated user
+      description: Get the authenticated user
+      operationId: getAuthenticatedUser
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /user/starred:
+    get:
+      tags:
+        - User
+      summary: List challenges starred by the authenticated user
+      description: Lists challenges the authenticated user has starred.
+      operationId: listStarredChallenges
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfChallenges'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /user/orgs:
+    get:
+      tags:
+        - User
+      summary: List organizations of the authenticated user
+      description: Lists organizations the authenticated user belongs to.
+      operationId: listAuthenticatedUserOrganizations
+      security:
+        - BearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfOrganizations'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/user/starred/{accountName}/{challengeName}':
+    parameters:
+      - in: path
+        name: accountName
+        description: The name of the account that owns the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
+    get:
+      tags:
+        - User
+      summary: Check if a challenge is starred by the authenticated user
+      description: Check if a challenge is starred by the authenticated user
+      operationId: isStarredChallenge
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Response if this challenge is starred by you
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - User
+      summary: Star a challenge for the authenticated user
+      description: Star a challenge for the authenticated user
+      operationId: starChallenge
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      tags:
+        - User
+      summary: Unstar a challenge for the authenticated user
+      description: Unstar a challenge for the authenticated user
+      operationId: unstarChallenge
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /users:
     post:
       tags:
@@ -951,6 +1271,62 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  '/users/{userId}/orgs':
+    parameters:
+      - in: path
+        name: userId
+        description: 'The unique identifier of the user, either the user account ID or login'
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountId'
+    get:
+      tags:
+        - User
+      summary: List orgsnizations of a user
+      description: Lists organizations a user belongs to.
+      operationId: listUserOrganizations
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfOrganizations'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/users/{userId}/starred':
+    parameters:
+      - in: path
+        name: userId
+        description: 'The unique identifier of the user, either the user account ID or login'
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountId'
+    get:
+      tags:
+        - User
+      summary: List challenges starred by a user
+      description: Lists challenges a user has starred.
+      operationId: listUserStarredChallenges
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfChallenges'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   /healthcheck:
     get:
       tags:
@@ -968,6 +1344,15 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
   schemas:
     AccountLogin:
       description: The user or organization account name
@@ -1022,10 +1407,40 @@ components:
       required:
         - title
         - status
-    TagId:
-      description: The unique identifier of a tag
+    LocalAuthRequest:
+      type: object
+      description: The information required to authentify a local account
+      properties:
+        login:
+          $ref: '#/components/schemas/AccountLogin'
+        password:
+          type: string
+      required:
+        - login
+        - password
+      example:
+        login: awesome-user
+        password: yourpassword
+    LocalAuthResponse:
+      type: object
+      description: The token returned after the authentication of a local account
+      properties:
+        token:
+          type: string
+      required:
+        - token
+      example:
+        token: >-
+          eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ
+    Topic:
+      description: The topic
       type: string
-      example: 507f1f77bcf86cd799439011
+      minLength: 3
+      maxLength: 30
+      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      example:
+        - breast-cancer
+        - ehr
     ChallengeStatus:
       description: The status of the challenge
       type: string
@@ -1078,6 +1493,7 @@ components:
         - offset
         - limit
         - paging
+        - totalResults
     ChallengeId:
       description: The unique identifier of the challenge
       type: string
@@ -1130,6 +1546,11 @@ components:
         platformId:
           $ref: '#/components/schemas/ChallengePlatformId'
           nullable: true
+        topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+          maxItems: 30
         doi:
           type: string
           nullable: true
@@ -1145,6 +1566,9 @@ components:
         startDate: '2020-11-10'
         endDate: '2020-12-31'
         platformId: 507f1f77bcf86cd799439011
+        topics:
+          - breast-cancer
+          - ehr
         doi: 'http://doi.org/10.5281/zenodo.3714971'
     Challenge:
       type: object
@@ -1191,6 +1615,150 @@ components:
     EmptyObject:
       type: object
       description: Empty JSON object
+    ChallengeReadmeId:
+      description: The unique identifier of a challenge README
+      type: string
+      example: 507f1f77bcf86cd799439011
+    ChallengeReadmeCreateResponse:
+      type: object
+      description: The unique identifier of the challenge README created
+      properties:
+        id:
+          $ref: '#/components/schemas/ChallengeReadmeId'
+      required:
+        - id
+      example:
+        id: 507f1f77bcf86cd799439011
+    ChallengeReadmeCreateRequest:
+      type: object
+      description: The information used to the README of a challenge
+      properties:
+        text:
+          type: string
+      required:
+        - text
+      example:
+        text: A great README text
+    ChallengeReadme:
+      type: object
+      description: A challenge README
+      allOf:
+        - $ref: '#/components/schemas/ChallengeReadmeCreateResponse'
+        - $ref: '#/components/schemas/ChallengeReadmeCreateRequest'
+        - type: object
+          properties:
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+          required:
+            - createdAt
+            - updatedAt
+          example:
+            createdAt: '2017-07-08T16:18:44-04:00'
+            updatedAt: '2017-07-08T16:18:44-04:00'
+    ChallengeReadmeUpdateRequest:
+      type: object
+      description: The new README content of a challenge
+      properties:
+        text:
+          type: string
+      required:
+        - text
+      example:
+        text: A great README text
+    UserCreateResponse:
+      type: object
+      description: The response returned after the creation of the user
+      properties:
+        id:
+          $ref: '#/components/schemas/AccountId'
+      required:
+        - id
+      example:
+        id: 507f1f77bcf86cd799439011
+    Email:
+      description: An email address
+      type: string
+      format: email
+      example: john.smith@example.com
+    User:
+      type: object
+      description: A simple user
+      allOf:
+        - $ref: '#/components/schemas/UserCreateResponse'
+        - type: object
+          properties:
+            login:
+              type: string
+            email:
+              $ref: '#/components/schemas/Email'
+            name:
+              type: string
+              nullable: true
+            avatarUrl:
+              type: string
+              format: uri
+              example: 'https://example.com/awesome-avatar.png'
+              nullable: true
+            createdAt:
+              type: string
+              format: date-time
+            updatedAt:
+              type: string
+              format: date-time
+            type:
+              type: string
+              example: User
+            bio:
+              type: string
+              nullable: true
+          required:
+            - login
+            - email
+            - createdAt
+            - updatedAt
+            - type
+          example:
+            login: awesome-user
+            email: awesome-user@example.org
+            name: Awesome User
+            avatarUrl: 'https://example.com/awesome-avatar.png'
+            bio: A great bio
+            createdAt: '2017-07-08T16:18:44-04:00'
+            updatedAt: '2017-07-08T16:18:44-04:00'
+            type: User
+    PageOfUsers:
+      type: object
+      description: A page of Users
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            users:
+              description: An array of Users
+              type: array
+              items:
+                $ref: '#/components/schemas/User'
+          required:
+            - users
+    ArrayOfTopics:
+      type: object
+      description: An array of topics
+      properties:
+        topics:
+          description: An array of Topics
+          type: array
+          items:
+            $ref: '#/components/schemas/Topic'
+      required:
+        - topics
+      example:
+        topics:
+          - breast-cancer
+          - ehr
     ChallengePlatformCreateResponse:
       type: object
       description: The unique identifier of the challenge platform created
@@ -1321,11 +1889,6 @@ components:
         - id
       example:
         id: 507f1f77bcf86cd799439011
-    Email:
-      description: An email address
-      type: string
-      format: email
-      example: john.smith@example.com
     OrganizationCreateRequest:
       type: object
       description: The information required to create an org account
@@ -1334,12 +1897,32 @@ components:
           type: string
         email:
           $ref: '#/components/schemas/Email'
+        name:
+          type: string
+          nullable: true
+        avatarUrl:
+          type: string
+          format: uri
+          example: 'https://example.com/awesome-avatar.png'
+          nullable: true
+        websiteUrl:
+          type: string
+          format: uri
+          example: 'https://example.com'
+          nullable: true
+        description:
+          type: string
+          nullable: true
       required:
         - login
         - email
       example:
         login: awesome-org
         email: contact@example.org
+        name: Awesome Org
+        avatarUrl: 'https://example.com/awesome-avatar.png'
+        websiteUrl: 'https://example.com'
+        description: A great organization
     Organization:
       type: object
       description: An organization
@@ -1348,17 +1931,6 @@ components:
         - $ref: '#/components/schemas/OrganizationCreateRequest'
         - type: object
           properties:
-            name:
-              type: string
-              nullable: true
-            avatarUrl:
-              type: string
-              format: uri
-              example: 'https://example.com/awesome-avatar.png'
-              nullable: true
-            description:
-              type: string
-              nullable: true
             createdAt:
               type: string
               format: date-time
@@ -1373,9 +1945,6 @@ components:
             - updatedAt
             - type
           example:
-            name: Awesome Org
-            avatarUrl: 'https://example.com/awesome-avatar.png'
-            description: A great organization
             createdAt: '2017-07-08T16:18:44-04:00'
             updatedAt: '2017-07-08T16:18:44-04:00'
             type: Organization
@@ -1524,6 +2093,10 @@ components:
                 $ref: '#/components/schemas/Person'
           required:
             - persons
+    TagId:
+      description: The unique identifier of a tag
+      type: string
+      example: 507f1f77bcf86cd799439011
     TagCreateResponse:
       type: object
       description: The unique identifier of the tag created
@@ -1571,16 +2144,6 @@ components:
                 $ref: '#/components/schemas/Tag'
           required:
             - tags
-    UserCreateResponse:
-      type: object
-      description: The unique identifier of the user created
-      properties:
-        id:
-          $ref: '#/components/schemas/AccountId'
-      required:
-        - id
-      example:
-        id: 507f1f77bcf86cd799439011
     UserCreateRequest:
       type: object
       description: The information required to create a user account
@@ -1589,6 +2152,9 @@ components:
           type: string
         email:
           $ref: '#/components/schemas/Email'
+        password:
+          type: string
+          format: password
         name:
           type: string
           nullable: true
@@ -1597,53 +2163,20 @@ components:
           format: uri
           example: 'https://example.com/awesome-avatar.png'
           nullable: true
+        bio:
+          type: string
+          nullable: true
       required:
         - login
         - email
+        - password
       example:
         login: awesome-user
         email: awesome-user@example.org
+        password: yourpassword
         name: Awesome User
         avatarUrl: 'https://example.com/awesome-avatar.png'
-    User:
-      type: object
-      description: A simple user
-      allOf:
-        - $ref: '#/components/schemas/UserCreateResponse'
-        - $ref: '#/components/schemas/UserCreateRequest'
-        - type: object
-          properties:
-            createdAt:
-              type: string
-              format: date-time
-            updatedAt:
-              type: string
-              format: date-time
-            type:
-              type: string
-              example: User
-          required:
-            - createdAt
-            - updatedAt
-            - type
-          example:
-            createdAt: '2017-07-08T16:18:44-04:00'
-            updatedAt: '2017-07-08T16:18:44-04:00'
-            type: User
-    PageOfUsers:
-      type: object
-      description: A page of Users
-      allOf:
-        - $ref: '#/components/schemas/ResponsePageMetadata'
-        - type: object
-          properties:
-            users:
-              description: An array of Users
-              type: array
-              items:
-                $ref: '#/components/schemas/User'
-          required:
-            - users
+        bio: A great bio
     HealthCheck:
       type: object
       description: Represents the health of a service
@@ -1672,6 +2205,12 @@ components:
             $ref: '#/components/schemas/Error'
     BadRequest:
       description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
       content:
         application/json:
           schema:
@@ -1729,15 +2268,15 @@ components:
       required: false
       schema:
         type: string
-    tagIds:
-      name: tagIds
-      description: Array of tag ids used to filter the results
+    topics:
+      name: topics
+      description: Array of topics used to filter the results
       in: query
       required: false
       schema:
         type: array
         items:
-          $ref: '#/components/schemas/TagId'
+          $ref: '#/components/schemas/Topic'
     status:
       name: status
       description: Array of challenge status used to filter the results
