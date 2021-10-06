@@ -1,0 +1,6 @@
+description: The status of the challenge
+type: string
+enum:
+  - challenge_lead
+  - infrastructure_lead
+example: active
