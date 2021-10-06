@@ -1613,7 +1613,7 @@ components:
       example:
         id: 507f1f77bcf86cd799439011
     ChallengeOrganizerRole:
-      description: The status of the challenge
+      description: The role of the challenge organizer
       type: string
       enum:
         - challenge_lead
