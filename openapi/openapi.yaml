@@ -58,15 +58,15 @@ paths:
   /challenges/{accountName}/{challengeName}:
     $ref: paths/challenges@{accountName}@{challengeName}.yaml
   /challenges/{accountName}/{challengeName}/organizers:
-    $ref: paths/challenges@{accountName}@{challengeName}organizers.yaml
+    $ref: paths/challenge/organizers.yaml
   /challenges/{accountName}/{challengeName}/organizers/{organizerId}:
     $ref: paths/challenge/organizers@{organizerId}.yaml
   /challenges/{accountName}/{challengeName}/readme:
-    $ref: paths/challenges@{accountName}@{challengeName}readme.yaml
+    $ref: paths/challenge/readme.yaml
   /challenges/{accountName}/{challengeName}/stargazers:
-    $ref: paths/challenges@{accountName}@{challengeName}stargazers.yaml
+    $ref: paths/challenge/stargazers.yaml
   /challenges/{accountName}/{challengeName}/topics:
-    $ref: paths/challenges@{accountName}@{challengeName}topics.yaml
+    $ref: paths/challenge/topics.yaml
   /challengePlatforms:
     $ref: paths/challengePlatforms.yaml
   /challengePlatforms/{challengePlatformId}:

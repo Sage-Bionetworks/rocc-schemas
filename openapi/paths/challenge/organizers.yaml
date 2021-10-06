@@ -4,13 +4,13 @@ parameters:
     description: The name of the account that owns the challenge
     required: true
     schema:
-      $ref: ../components/parameters/AccountLogin.yaml
+      $ref: ../../components/parameters/AccountLogin.yaml
   - in: path
     name: challengeName
     description: The name of the challenge
     required: true
     schema:
-      $ref: ../components/parameters/ChallengeName.yaml
+      $ref: ../../components/parameters/ChallengeName.yaml
 post:
   tags:
     - Challenge
@@ -21,21 +21,21 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/ChallengeOrganizerCreateRequest.yaml
+          $ref: ../../components/schemas/ChallengeOrganizerCreateRequest.yaml
     required: true
   responses:
     '201':
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/ChallengeOrganizerCreateResponse.yaml
+            $ref: ../../components/schemas/ChallengeOrganizerCreateResponse.yaml
       description: Success
     '400':
-      $ref: ../components/responses/BadRequest.yaml
+      $ref: ../../components/responses/BadRequest.yaml
     '409':
-      $ref: ../components/responses/Conflict.yaml
+      $ref: ../../components/responses/Conflict.yaml
     '500':
-      $ref: ../components/responses/InternalServerError.yaml
+      $ref: ../../components/responses/InternalServerError.yaml
 get:
   tags:
     - Challenge
@@ -48,9 +48,9 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PageOfChallengeOrganizers.yaml
+            $ref: ../../components/schemas/PageOfChallengeOrganizers.yaml
     '404':
-      $ref: ../components/responses/NotFound.yaml
+      $ref: ../../components/responses/NotFound.yaml
     '500':
-      $ref: ../components/responses/InternalServerError.yaml
+      $ref: ../../components/responses/InternalServerError.yaml
 
