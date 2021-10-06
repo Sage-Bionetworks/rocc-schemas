@@ -59,6 +59,8 @@ paths:
     $ref: paths/challenges@{accountName}@{challengeName}.yaml
   /challenges/{accountName}/{challengeName}/organizers:
     $ref: paths/challenges@{accountName}@{challengeName}organizers.yaml
+  /challenges/{accountName}/{challengeName}/organizers/{organizerId}:
+    $ref: paths/challenge/organizers@{organizerId}.yaml
   /challenges/{accountName}/{challengeName}/readme:
     $ref: paths/challenges@{accountName}@{challengeName}readme.yaml
   /challenges/{accountName}/{challengeName}/stargazers:
