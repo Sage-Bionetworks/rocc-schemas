@@ -3,4 +3,4 @@ type: string
 enum:
   - challenge_lead
   - infrastructure_lead
-example: active
+example: challenge_lead
