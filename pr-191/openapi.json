@@ -402,6 +402,54 @@
         }
       }
     },
+    "/challenges/{accountName}/{challengeName}/organizers": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
+          }
+        }
+      ],
+      "get": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "List organizers",
+        "description": "Lists the organizers of the challenge.",
+        "operationId": "listChallengeOrganizers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOfChallengeOrganizers"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/challenges/{accountName}/{challengeName}/readme": {
       "parameters": [
         {
@@ -515,7 +563,7 @@
           "Challenge"
         ],
         "summary": "List stargazers",
-        "description": "Lists the people that have starred the repository.",
+        "description": "Lists the people that have starred the challenge.",
         "operationId": "listChallengeStargazers",
         "parameters": [
           {
@@ -2350,6 +2398,101 @@
       "EmptyObject": {
         "type": "object",
         "description": "Empty JSON object"
+      },
+      "ChallengeOrganizerId": {
+        "description": "The unique identifier of a challenge organizer",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "ChallengeOrganizerCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of the challenge organizer created",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ChallengeOrganizerId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "ChallengeOrganizerRole": {
+        "description": "The status of the challenge",
+        "type": "string",
+        "enum": [
+          "challenge_lead",
+          "infrastructure_lead"
+        ],
+        "example": "active"
+      },
+      "ChallengeOrganizerCreateRequest": {
+        "type": "object",
+        "description": "The information used to create a challenge organizer",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "login": {
+            "$ref": "#/components/schemas/AccountLogin",
+            "nullable": true
+          },
+          "organizerRoles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengeOrganizerRole"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "example": {
+          "name": "John Smith",
+          "login": "jsmith",
+          "organizerRoles": [
+            "challenge_lead",
+            "infrastructure_lead"
+          ]
+        }
+      },
+      "ChallengeOrganizer": {
+        "type": "object",
+        "description": "A challenge organizer",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChallengeOrganizerCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ChallengeOrganizerCreateRequest"
+          }
+        ]
+      },
+      "PageOfChallengeOrganizers": {
+        "type": "object",
+        "description": "A page of challenge organizers",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResponsePageMetadata"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "users": {
+                "description": "An array of ChallengeOrganizers",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ChallengeOrganizer"
+                }
+              }
+            },
+            "required": [
+              "users"
+            ]
+          }
+        ]
       },
       "ChallengeReadmeId": {
         "description": "The unique identifier of a challenge README",
