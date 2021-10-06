@@ -14,7 +14,7 @@ required:
   - name
 example:
   name: John Smith
-  login: john.smith@example.com
+  login: jsmith
   organizerRoles:
     - challenge_lead
     - infrastructure_lead

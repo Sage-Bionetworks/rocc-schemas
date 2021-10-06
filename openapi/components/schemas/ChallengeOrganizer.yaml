@@ -1,5 +1,5 @@
 type: object
-description: A person
+description: A challenge organizer
 allOf:
-  - $ref: PersonCreateResponse.yaml
-  - $ref: PersonCreateRequest.yaml
+  - $ref: ChallengeOrganizerCreateResponse.yaml
+  - $ref: ChallengeOrganizerCreateRequest.yaml

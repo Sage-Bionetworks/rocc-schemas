@@ -14,19 +14,16 @@ parameters:
 get:
   tags:
     - Challenge
-  summary: List stargazers
-  description: Lists the people that have starred the challenge.
-  operationId: listChallengeStargazers
-  parameters:
-    - $ref: parameters/limit.yaml
-    - $ref: parameters/offset.yaml
+  summary: List organizers
+  description: Lists the organizers of the challenge.
+  operationId: listChallengeOrganizers
   responses:
     '200':
       description: Success
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/PageOfUsers.yaml
+            $ref: ../components/schemas/PageOfChallengeOrganizers.yaml
     '404':
       $ref: ../components/responses/NotFound.yaml
     '500':
