@@ -32,8 +32,6 @@ tags:
     description: Operations about organizations
   - name: OrgMembership
     description: Operations about org memberships
-  - name: Person
-    description: Operations about persons
   - name: Tag
     description: Operations about tags
   - name: User
@@ -81,10 +79,6 @@ paths:
     $ref: paths/orgMemberships.yaml
   /orgMemberships/{orgMembershipId}:
     $ref: paths/orgMemberships@{orgMembershipId}.yaml
-  /persons:
-    $ref: paths/persons.yaml
-  /persons/{personId}:
-    $ref: paths/persons@{personId}.yaml
   /tags:
     $ref: paths/tags.yaml
   /tags/{tagId}:
