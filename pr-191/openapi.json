@@ -2522,7 +2522,7 @@
           "challenge_lead",
           "infrastructure_lead"
         ],
-        "example": "active"
+        "example": "challenge_lead"
       },
       "ChallengeOrganizerCreateRequest": {
         "type": "object",
