@@ -30,8 +30,6 @@ tags:
     description: Operations about organizations
   - name: OrgMembership
     description: Operations about org memberships
-  - name: Person
-    description: Operations about persons
   - name: Tag
     description: Operations about tags
   - name: User
@@ -247,6 +245,99 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
+  '/challenges/{accountName}/{challengeName}/organizers':
+    parameters:
+      - in: path
+        name: accountName
+        description: The name of the account that owns the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
+    post:
+      tags:
+        - Challenge
+      summary: Create a challenge organizer
+      description: Create a challenge organizer
+      operationId: createChallengeOrganizer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChallengeOrganizerCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChallengeOrganizerCreateResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Challenge
+      summary: List organizers
+      description: Lists the organizers of the challenge.
+      operationId: listChallengeOrganizers
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageOfChallengeOrganizers'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/challenges/{accountName}/{challengeName}/organizers/{organizerId}':
+    parameters:
+      - in: path
+        name: accountName
+        description: The name of the account that owns the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
+      - in: path
+        name: organizerId
+        description: The identifier of the challenge organizer
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeOrganizerId'
+    delete:
+      tags:
+        - Challenge
+      summary: Delete a challenge organizer
+      description: Deletes the challenge organizer specified
+      operationId: deleteChallengeOrganizer
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
   '/challenges/{accountName}/{challengeName}/readme':
     parameters:
       - in: path
@@ -321,7 +412,7 @@ paths:
       tags:
         - Challenge
       summary: List stargazers
-      description: Lists the people that have starred the repository.
+      description: Lists the people that have starred the challenge.
       operationId: listChallengeStargazers
       parameters:
         - $ref: '#/components/parameters/limit'
@@ -783,114 +874,6 @@ paths:
       summary: Delete an org membership
       description: Deletes the org membership specified
       operationId: deleteOrgMembership
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmptyObject'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /persons:
-    post:
-      tags:
-        - Person
-      summary: Create a person
-      description: Create a person with the specified name
-      operationId: createPerson
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PersonCreateRequest'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PersonCreateResponse'
-          description: Success
-          links:
-            GetPersonById:
-              $ref: '#/components/links/GetPersonById'
-            DeletePersonById:
-              $ref: '#/components/links/DeletePersonById'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    get:
-      tags:
-        - Person
-      summary: Get all persons
-      description: Returns the persons
-      operationId: listPersons
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PageOfPersons'
-          description: Success
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    delete:
-      tags:
-        - Person
-      summary: Delete all persons
-      description: Delete all persons
-      operationId: deleteAllPersons
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmptyObject'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  '/persons/{personId}':
-    parameters:
-      - in: path
-        name: personId
-        description: The unique identifier of the person
-        required: true
-        schema:
-          $ref: '#/components/schemas/PersonId'
-    get:
-      tags:
-        - Person
-      summary: Get a person
-      description: Returns the person specified
-      operationId: getPerson
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Person'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    delete:
-      tags:
-        - Person
-      summary: Delete a person
-      description: Deletes the person specified
-      operationId: deletePerson
       responses:
         '200':
           description: Success
@@ -1615,6 +1598,68 @@ components:
     EmptyObject:
       type: object
       description: Empty JSON object
+    ChallengeOrganizerId:
+      description: The unique identifier of a challenge organizer
+      type: string
+      example: 507f1f77bcf86cd799439011
+    ChallengeOrganizerCreateResponse:
+      type: object
+      description: The unique identifier of the challenge organizer created
+      properties:
+        id:
+          $ref: '#/components/schemas/ChallengeOrganizerId'
+      required:
+        - id
+      example:
+        id: 507f1f77bcf86cd799439011
+    ChallengeOrganizerRole:
+      description: The role of the challenge organizer
+      type: string
+      enum:
+        - challenge_lead
+        - infrastructure_lead
+      example: challenge_lead
+    ChallengeOrganizerCreateRequest:
+      type: object
+      description: The information used to create a challenge organizer
+      properties:
+        name:
+          type: string
+        login:
+          $ref: '#/components/schemas/AccountLogin'
+          nullable: true
+        organizerRoles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeOrganizerRole'
+      required:
+        - name
+      example:
+        name: John Smith
+        login: jsmith
+        organizerRoles:
+          - challenge_lead
+          - infrastructure_lead
+    ChallengeOrganizer:
+      type: object
+      description: A challenge organizer
+      allOf:
+        - $ref: '#/components/schemas/ChallengeOrganizerCreateResponse'
+        - $ref: '#/components/schemas/ChallengeOrganizerCreateRequest'
+    PageOfChallengeOrganizers:
+      type: object
+      description: A page of challenge organizers
+      allOf:
+        - $ref: '#/components/schemas/ResponsePageMetadata'
+        - type: object
+          properties:
+            users:
+              description: An array of ChallengeOrganizers
+              type: array
+              items:
+                $ref: '#/components/schemas/ChallengeOrganizer'
+          required:
+            - users
     ChallengeReadmeId:
       description: The unique identifier of a challenge README
       type: string
@@ -2037,62 +2082,6 @@ components:
                 $ref: '#/components/schemas/OrgMembership'
           required:
             - orgMemberships
-    PersonId:
-      description: The unique identifier of a person
-      type: string
-      example: 507f1f77bcf86cd799439011
-    PersonCreateResponse:
-      type: object
-      description: The unique identifier of the person created
-      properties:
-        id:
-          $ref: '#/components/schemas/PersonId'
-      required:
-        - id
-      example:
-        id: 507f1f77bcf86cd799439011
-    PersonCreateRequest:
-      type: object
-      description: The information used to create a person
-      properties:
-        name:
-          type: string
-        email:
-          $ref: '#/components/schemas/Email'
-          nullable: true
-        organizationIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountId'
-      required:
-        - name
-        - organizationIds
-      example:
-        name: John Smith
-        email: john.smith@example.com
-        organizationIds:
-          - 507f1f77bcf86cd799439011
-          - 507f1f77bcf86cd799439012
-    Person:
-      type: object
-      description: A person
-      allOf:
-        - $ref: '#/components/schemas/PersonCreateResponse'
-        - $ref: '#/components/schemas/PersonCreateRequest'
-    PageOfPersons:
-      type: object
-      description: A page of Persons
-      allOf:
-        - $ref: '#/components/schemas/ResponsePageMetadata'
-        - type: object
-          properties:
-            persons:
-              description: An array of Persons
-              type: array
-              items:
-                $ref: '#/components/schemas/Person'
-          required:
-            - persons
     TagId:
       description: The unique identifier of a tag
       type: string
@@ -2361,20 +2350,6 @@ components:
         `organizationId` parameter in `DELETE /organizations/{organizationId}`
       parameters:
         organizationId: $response.body#/organizationId
-    GetPersonById:
-      operationId: getPerson
-      description: >
-        The `id` value returned in the response can be used as the `personId`
-        parameter in `GET /persons/{personId}`
-      parameters:
-        personId: $response.body#/personId
-    DeletePersonById:
-      operationId: deletePerson
-      description: >
-        The `id` value returned in the response can be used as the `personId`
-        parameter in `DELETE /persons/{personId}`
-      parameters:
-        personId: $response.body#/personId
     GetTagById:
       operationId: getTag
       description: >
