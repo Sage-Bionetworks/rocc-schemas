@@ -16,5 +16,5 @@ example:
   name: John Smith
   login: jsmith
   roles:
-    - challenge_lead
-    - infrastructure_lead
+    - ChallengeLead
+    - InfrastructureLead
