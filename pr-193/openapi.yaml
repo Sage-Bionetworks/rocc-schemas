@@ -1616,9 +1616,9 @@ components:
       description: The role of the challenge organizer
       type: string
       enum:
-        - challenge_lead
-        - infrastructure_lead
-      example: challenge_lead
+        - ChallengeLead
+        - InfrastructureLead
+      example: ChallengeLead
     ChallengeOrganizerCreateRequest:
       type: object
       description: The information used to create a challenge organizer
@@ -1638,8 +1638,8 @@ components:
         name: John Smith
         login: jsmith
         roles:
-          - challenge_lead
-          - infrastructure_lead
+          - ChallengeLead
+          - InfrastructureLead
     ChallengeOrganizer:
       type: object
       description: A challenge organizer

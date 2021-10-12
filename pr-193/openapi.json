@@ -2519,10 +2519,10 @@
         "description": "The role of the challenge organizer",
         "type": "string",
         "enum": [
-          "challenge_lead",
-          "infrastructure_lead"
+          "ChallengeLead",
+          "InfrastructureLead"
         ],
-        "example": "challenge_lead"
+        "example": "ChallengeLead"
       },
       "ChallengeOrganizerCreateRequest": {
         "type": "object",
@@ -2549,8 +2549,8 @@
           "name": "John Smith",
           "login": "jsmith",
           "roles": [
-            "challenge_lead",
-            "infrastructure_lead"
+            "ChallengeLead",
+            "InfrastructureLead"
           ]
         }
       },
