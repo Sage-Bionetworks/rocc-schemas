@@ -475,7 +475,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageOfChallengeOrganizers"
+                  "$ref": "#/components/schemas/ChallengeOrganizerList"
                 }
               }
             }
@@ -2566,28 +2566,20 @@
           }
         ]
       },
-      "PageOfChallengeOrganizers": {
+      "ChallengeOrganizerList": {
         "type": "object",
-        "description": "A page of challenge organizers",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "users": {
-                "description": "An array of ChallengeOrganizers",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ChallengeOrganizer"
-                }
-              }
-            },
-            "required": [
-              "users"
-            ]
+        "description": "A list of challenge organizers",
+        "properties": {
+          "challengeOrganizers": {
+            "description": "A list of ChallengeOrganizers",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengeOrganizer"
+            }
           }
+        },
+        "required": [
+          "challengeOrganizers"
         ]
       },
       "ChallengeReadmeId": {
