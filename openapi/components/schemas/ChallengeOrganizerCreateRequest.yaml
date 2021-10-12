@@ -6,7 +6,7 @@ properties:
   login:
     $ref: ../parameters/AccountLogin.yaml
     nullable: true
-  organizerRoles:
+  roles:
     type: array
     items:
       $ref: ../parameters/ChallengeOrganizerRole.yaml
@@ -15,6 +15,6 @@ required:
 example:
   name: John Smith
   login: jsmith
-  organizerRoles:
+  roles:
     - challenge_lead
     - infrastructure_lead
