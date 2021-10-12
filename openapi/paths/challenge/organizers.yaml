@@ -48,7 +48,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../components/schemas/PageOfChallengeOrganizers.yaml
+            $ref: ../../components/schemas/ChallengeOrganizerList.yaml
     '404':
       $ref: ../../components/responses/NotFound.yaml
     '500':
