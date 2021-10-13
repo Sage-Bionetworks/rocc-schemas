@@ -475,7 +475,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PageOfChallengeOrganizers"
+                  "$ref": "#/components/schemas/ChallengeOrganizerList"
                 }
               }
             }
@@ -2519,10 +2519,10 @@
         "description": "The role of the challenge organizer",
         "type": "string",
         "enum": [
-          "challenge_lead",
-          "infrastructure_lead"
+          "ChallengeLead",
+          "InfrastructureLead"
         ],
-        "example": "challenge_lead"
+        "example": "ChallengeLead"
       },
       "ChallengeOrganizerCreateRequest": {
         "type": "object",
@@ -2535,7 +2535,7 @@
             "$ref": "#/components/schemas/AccountLogin",
             "nullable": true
           },
-          "organizerRoles": {
+          "roles": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ChallengeOrganizerRole"
@@ -2548,9 +2548,9 @@
         "example": {
           "name": "John Smith",
           "login": "jsmith",
-          "organizerRoles": [
-            "challenge_lead",
-            "infrastructure_lead"
+          "roles": [
+            "ChallengeLead",
+            "InfrastructureLead"
           ]
         }
       },
@@ -2566,28 +2566,20 @@
           }
         ]
       },
-      "PageOfChallengeOrganizers": {
+      "ChallengeOrganizerList": {
         "type": "object",
-        "description": "A page of challenge organizers",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "users": {
-                "description": "An array of ChallengeOrganizers",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ChallengeOrganizer"
-                }
-              }
-            },
-            "required": [
-              "users"
-            ]
+        "description": "A list of challenge organizers",
+        "properties": {
+          "challengeOrganizers": {
+            "description": "A list of ChallengeOrganizers",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengeOrganizer"
+            }
           }
+        },
+        "required": [
+          "challengeOrganizers"
         ]
       },
       "ChallengeReadmeId": {

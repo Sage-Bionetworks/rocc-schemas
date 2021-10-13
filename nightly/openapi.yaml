@@ -296,7 +296,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PageOfChallengeOrganizers'
+                $ref: '#/components/schemas/ChallengeOrganizerList'
         '404':
           $ref: '#/components/responses/NotFound'
         '500':
@@ -1616,9 +1616,9 @@ components:
       description: The role of the challenge organizer
       type: string
       enum:
-        - challenge_lead
-        - infrastructure_lead
-      example: challenge_lead
+        - ChallengeLead
+        - InfrastructureLead
+      example: ChallengeLead
     ChallengeOrganizerCreateRequest:
       type: object
       description: The information used to create a challenge organizer
@@ -1628,7 +1628,7 @@ components:
         login:
           $ref: '#/components/schemas/AccountLogin'
           nullable: true
-        organizerRoles:
+        roles:
           type: array
           items:
             $ref: '#/components/schemas/ChallengeOrganizerRole'
@@ -1637,29 +1637,26 @@ components:
       example:
         name: John Smith
         login: jsmith
-        organizerRoles:
-          - challenge_lead
-          - infrastructure_lead
+        roles:
+          - ChallengeLead
+          - InfrastructureLead
     ChallengeOrganizer:
       type: object
       description: A challenge organizer
       allOf:
         - $ref: '#/components/schemas/ChallengeOrganizerCreateResponse'
         - $ref: '#/components/schemas/ChallengeOrganizerCreateRequest'
-    PageOfChallengeOrganizers:
+    ChallengeOrganizerList:
       type: object
-      description: A page of challenge organizers
-      allOf:
-        - $ref: '#/components/schemas/ResponsePageMetadata'
-        - type: object
-          properties:
-            users:
-              description: An array of ChallengeOrganizers
-              type: array
-              items:
-                $ref: '#/components/schemas/ChallengeOrganizer'
-          required:
-            - users
+      description: A list of challenge organizers
+      properties:
+        challengeOrganizers:
+          description: A list of ChallengeOrganizers
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeOrganizer'
+      required:
+        - challengeOrganizers
     ChallengeReadmeId:
       description: The unique identifier of a challenge README
       type: string
