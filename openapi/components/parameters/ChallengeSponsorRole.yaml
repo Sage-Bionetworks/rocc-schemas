@@ -1,0 +1,9 @@
+description: The role of a challenge sponsor
+type: string
+enum:
+  - ChallengeOrganizer
+  - CloudProvider
+  - DataProvider
+  - Funder
+  - Other
+example: DataProvider
