@@ -16,5 +16,5 @@ example:
   name: IBM
   login: ibm
   roles:
-    - CloudProvider
+    - ComputeProvider
     - DataProvider

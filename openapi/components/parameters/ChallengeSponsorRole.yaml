@@ -2,7 +2,7 @@ description: The role of a challenge sponsor
 type: string
 enum:
   - ChallengeOrganizer
-  - CloudProvider
+  - ComputeProvider
   - DataProvider
   - Funder
   - Other
