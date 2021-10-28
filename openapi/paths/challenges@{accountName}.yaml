@@ -44,6 +44,7 @@ get:
   parameters:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
+    - $ref: parameters/searchTerms.yaml
   responses:
     '200':
       content:
