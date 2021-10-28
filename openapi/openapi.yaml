@@ -63,6 +63,10 @@ paths:
     $ref: paths/challenge/organizers@{organizerId}.yaml
   /challenges/{accountName}/{challengeName}/readme:
     $ref: paths/challenge/readme.yaml
+  /challenges/{accountName}/{challengeName}/sponsors:
+    $ref: paths/challenge/sponsors.yaml
+  /challenges/{accountName}/{challengeName}/sponsors/{sponsorId}:
+    $ref: paths/challenge/sponsors@{sponsorId}.yaml
   /challenges/{accountName}/{challengeName}/stargazers:
     $ref: paths/challenge/stargazers.yaml
   /challenges/{accountName}/{challengeName}/topics:
@@ -75,6 +79,8 @@ paths:
     $ref: paths/grants.yaml
   /grants/{grantId}:
     $ref: paths/grants@{grantId}.yaml
+  /healthcheck:
+    $ref: paths/healthCheck.yaml
   /organizations:
     $ref: paths/organizations.yaml
   /organizations/{organizationId}:
@@ -83,10 +89,6 @@ paths:
     $ref: paths/orgMemberships.yaml
   /orgMemberships/{orgMembershipId}:
     $ref: paths/orgMemberships@{orgMembershipId}.yaml
-  /tags:
-    $ref: paths/tags.yaml
-  /tags/{tagId}:
-    $ref: paths/tags@{tagId}.yaml
   /user:
     $ref: paths/user.yaml
   /user/starred:
@@ -103,8 +105,6 @@ paths:
     $ref: paths/users@{userId}orgs.yaml
   /users/{userId}/starred:
     $ref: paths/users@{userId}starred.yaml
-  /healthcheck:
-    $ref: paths/healthCheck.yaml
 
 components:
   securitySchemes:
