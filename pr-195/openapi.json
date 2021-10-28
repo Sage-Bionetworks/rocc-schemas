@@ -2663,7 +2663,7 @@
         "type": "string",
         "enum": [
           "ChallengeOrganizer",
-          "CloudProvider",
+          "ComputeProvider",
           "DataProvider",
           "Funder",
           "Other"
@@ -2695,7 +2695,7 @@
           "name": "IBM",
           "login": "ibm",
           "roles": [
-            "CloudProvider",
+            "ComputeProvider",
             "DataProvider"
           ]
         }

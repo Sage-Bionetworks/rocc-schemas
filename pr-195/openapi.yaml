@@ -1715,7 +1715,7 @@ components:
       type: string
       enum:
         - ChallengeOrganizer
-        - CloudProvider
+        - ComputeProvider
         - DataProvider
         - Funder
         - Other
@@ -1739,7 +1739,7 @@ components:
         name: IBM
         login: ibm
         roles:
-          - CloudProvider
+          - ComputeProvider
           - DataProvider
     ChallengeSponsor:
       type: object
