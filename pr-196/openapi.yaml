@@ -5,12 +5,12 @@ info:
   contact:
     name: The ROCC Team
     email: thomas.schaffter@sagebionetworks.org
-    url: 'https://Sage-Bionetworks.github.io/rocc-schemas'
+    url: https://Sage-Bionetworks.github.io/rocc-schemas
   license:
     name: Apache 2.0
-    url: 'https://Sage-Bionetworks.github.io/rocc-schemas'
+    url: https://Sage-Bionetworks.github.io/rocc-schemas
   x-logo:
-    url: 'https://Sage-Bionetworks.github.io/rocc-schemas/logo.png'
+    url: https://Sage-Bionetworks.github.io/rocc-schemas/logo.png
   description: |
     The OpenAPI specification implemented by the Challenge Registries.
     # Introduction
@@ -45,7 +45,7 @@ servers:
           - https
         default: https
 paths:
-  '/accounts/{login}':
+  /accounts/{login}:
     parameters:
       - in: path
         name: login
@@ -139,7 +139,7 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challenges/{accountName}':
+  /challenges/{accountName}:
     parameters:
       - in: path
         name: accountName
@@ -198,7 +198,7 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challenges/{accountName}/{challengeName}':
+  /challenges/{accountName}/{challengeName}:
     parameters:
       - in: path
         name: accountName
@@ -246,7 +246,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challenges/{accountName}/{challengeName}/organizers':
+  /challenges/{accountName}/{challengeName}/organizers:
     parameters:
       - in: path
         name: accountName
@@ -302,7 +302,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challenges/{accountName}/{challengeName}/organizers/{organizerId}':
+  /challenges/{accountName}/{challengeName}/organizers/{organizerId}:
     parameters:
       - in: path
         name: accountName
@@ -339,7 +339,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challenges/{accountName}/{challengeName}/readme':
+  /challenges/{accountName}/{challengeName}/readme:
     parameters:
       - in: path
         name: accountName
@@ -395,7 +395,100 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challenges/{accountName}/{challengeName}/stargazers':
+  /challenges/{accountName}/{challengeName}/sponsors:
+    parameters:
+      - in: path
+        name: accountName
+        description: The name of the account that owns the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
+    post:
+      tags:
+        - Challenge
+      summary: Create a challenge sponsor
+      description: Create a challenge sponsor
+      operationId: createChallengeSponsor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChallengeSponsorCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChallengeSponsorCreateResponse'
+          description: Success
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    get:
+      tags:
+        - Challenge
+      summary: List sponsors
+      description: Lists the sponsors of the challenge.
+      operationId: listChallengeSponsors
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChallengeSponsorList'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /challenges/{accountName}/{challengeName}/sponsors/{sponsorId}:
+    parameters:
+      - in: path
+        name: accountName
+        description: The name of the account that owns the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountLogin'
+      - in: path
+        name: challengeName
+        description: The name of the challenge
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeName'
+      - in: path
+        name: sponsorId
+        description: The identifier of the challenge sponsor
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChallengeSponsorId'
+    delete:
+      tags:
+        - Challenge
+      summary: Delete a challenge sponsor
+      description: Deletes the challenge sponsor specified
+      operationId: deleteChallengeSponsor
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmptyObject'
+        '400':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /challenges/{accountName}/{challengeName}/stargazers:
     parameters:
       - in: path
         name: accountName
@@ -429,7 +522,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challenges/{accountName}/{challengeName}/topics':
+  /challenges/{accountName}/{challengeName}/topics:
     parameters:
       - in: path
         name: accountName
@@ -521,7 +614,7 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/challengePlatforms/{challengePlatformId}':
+  /challengePlatforms/{challengePlatformId}:
     parameters:
       - in: path
         name: challengePlatformId
@@ -629,7 +722,7 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/grants/{grantId}':
+  /grants/{grantId}:
     parameters:
       - in: path
         name: grantId
@@ -669,6 +762,22 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /healthcheck:
+    get:
+      tags:
+        - HealthCheck
+      summary: Get health check information
+      description: Get information about the health of the service
+      operationId: getHealthCheck
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthCheck'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /organizations:
@@ -737,7 +846,7 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/organizations/{organizationId}':
+  /organizations/{organizationId}:
     parameters:
       - in: path
         name: organizationId
@@ -844,7 +953,7 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/orgMemberships/{orgMembershipId}':
+  /orgMemberships/{orgMembershipId}:
     parameters:
       - in: path
         name: orgMembershipId
@@ -875,114 +984,6 @@ paths:
       summary: Delete an org membership
       description: Deletes the org membership specified
       operationId: deleteOrgMembership
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmptyObject'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  /tags:
-    post:
-      tags:
-        - Tag
-      summary: Create a tag
-      description: Create a tag with the specified name
-      operationId: createTag
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TagCreateRequest'
-        required: true
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TagCreateResponse'
-          description: Success
-          links:
-            GetTagById:
-              $ref: '#/components/links/GetTagById'
-            DeleteTagById:
-              $ref: '#/components/links/DeleteTagById'
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '409':
-          $ref: '#/components/responses/Conflict'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    get:
-      tags:
-        - Tag
-      summary: Get all tags
-      description: Returns the tags
-      operationId: listTags
-      parameters:
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/offset'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PageOfTags'
-          description: Success
-        '400':
-          $ref: '#/components/responses/BadRequest'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    delete:
-      tags:
-        - Tag
-      summary: Delete all tags
-      description: Delete all tags
-      operationId: deleteAllTags
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EmptyObject'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-  '/tags/{tagId}':
-    parameters:
-      - in: path
-        name: tagId
-        description: The unique identifier of the tag
-        required: true
-        schema:
-          $ref: '#/components/schemas/TagId'
-    get:
-      tags:
-        - Tag
-      summary: Get a tag
-      description: Returns the tag specified
-      operationId: getTag
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Tag'
-        '404':
-          $ref: '#/components/responses/NotFound'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
-    delete:
-      tags:
-        - Tag
-      summary: Delete a tag
-      description: Deletes the tag specified
-      operationId: deleteTag
       responses:
         '200':
           description: Success
@@ -1066,7 +1067,7 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/user/starred/{accountName}/{challengeName}':
+  /user/starred/{accountName}/{challengeName}:
     parameters:
       - in: path
         name: accountName
@@ -1213,11 +1214,11 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/users/{userId}':
+  /users/{userId}:
     parameters:
       - in: path
         name: userId
-        description: 'The unique identifier of the user, either the user account ID or login'
+        description: The unique identifier of the user, either the user account ID or login
         required: true
         schema:
           $ref: '#/components/schemas/AccountId'
@@ -1255,11 +1256,11 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/users/{userId}/orgs':
+  /users/{userId}/orgs:
     parameters:
       - in: path
         name: userId
-        description: 'The unique identifier of the user, either the user account ID or login'
+        description: The unique identifier of the user, either the user account ID or login
         required: true
         schema:
           $ref: '#/components/schemas/AccountId'
@@ -1283,11 +1284,11 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  '/users/{userId}/starred':
+  /users/{userId}/starred:
     parameters:
       - in: path
         name: userId
-        description: 'The unique identifier of the user, either the user account ID or login'
+        description: The unique identifier of the user, either the user account ID or login
         required: true
         schema:
           $ref: '#/components/schemas/AccountId'
@@ -1311,22 +1312,6 @@ paths:
           $ref: '#/components/responses/NotFound'
         '500':
           $ref: '#/components/responses/InternalServerError'
-  /healthcheck:
-    get:
-      tags:
-        - HealthCheck
-      summary: Get health check information
-      description: Get information about the health of the service
-      operationId: getHealthCheck
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HealthCheck'
-        '500':
-          $ref: '#/components/responses/InternalServerError'
 components:
   securitySchemes:
     BearerAuth:
@@ -1343,7 +1328,7 @@ components:
       type: string
       minLength: 3
       maxLength: 25
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
       example: awesome-user
     AccountId:
       description: The unique identifier of an account
@@ -1421,7 +1406,7 @@ components:
       type: string
       minLength: 3
       maxLength: 30
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
       example:
         - breast-cancer
         - ehr
@@ -1450,8 +1435,8 @@ components:
           type: string
           format: date
       example:
-        start: '2021-07-17'
-        end: '2021-07-17'
+        start: 2021-07-17
+        end: 2021-07-17
     ResponsePageMetadata:
       type: object
       description: A page of results
@@ -1497,7 +1482,7 @@ components:
       type: string
       minLength: 3
       maxLength: 60
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
       example: awesome-challenge
     ChallengeCreateRequest:
       type: object
@@ -1545,15 +1530,15 @@ components:
         name: awesome-challenge
         displayName: Awesome Challenge
         description: This challenge is awesome.
-        websiteUrl: 'https://synapse.org/awesome-challenge'
+        websiteUrl: https://synapse.org/awesome-challenge
         status: active
-        startDate: '2020-11-10'
-        endDate: '2020-12-31'
+        startDate: 2020-11-10
+        endDate: 2020-12-31
         platformId: 507f1f77bcf86cd799439011
         topics:
           - breast-cancer
           - ehr
-        doi: 'http://doi.org/10.5281/zenodo.3714971'
+        doi: http://doi.org/10.5281/zenodo.3714971
     Challenge:
       type: object
       description: A challenge
@@ -1580,8 +1565,8 @@ components:
           example:
             fullName: dream/awesome-challenge
             ownerId: 507f1f77bcf86cd799439011
-            createdAt: '2017-07-08T16:18:44-04:00'
-            updatedAt: '2017-07-08T16:18:44-04:00'
+            createdAt: 2017-07-08T16:18:44-04:00
+            updatedAt: 2017-07-08T16:18:44-04:00
     PageOfChallenges:
       type: object
       description: A page of Challenges
@@ -1700,8 +1685,8 @@ components:
             - createdAt
             - updatedAt
           example:
-            createdAt: '2017-07-08T16:18:44-04:00'
-            updatedAt: '2017-07-08T16:18:44-04:00'
+            createdAt: 2017-07-08T16:18:44-04:00
+            updatedAt: 2017-07-08T16:18:44-04:00
     ChallengeReadmeUpdateRequest:
       type: object
       description: The new README content of a challenge
@@ -1712,6 +1697,68 @@ components:
         - text
       example:
         text: A great README text
+    ChallengeSponsorId:
+      description: The unique identifier of a challenge sponsor
+      type: string
+      example: 507f1f77bcf86cd799439011
+    ChallengeSponsorCreateResponse:
+      type: object
+      description: The unique identifier of a challenge sponsor
+      properties:
+        id:
+          $ref: '#/components/schemas/ChallengeSponsorId'
+      required:
+        - id
+      example:
+        id: 507f1f77bcf86cd799439011
+    ChallengeSponsorRole:
+      description: The role of a challenge sponsor
+      type: string
+      enum:
+        - ChallengeOrganizer
+        - ComputeProvider
+        - DataProvider
+        - Funder
+        - Other
+      example: DataProvider
+    ChallengeSponsorCreateRequest:
+      type: object
+      description: The information used to create a challenge sponsor
+      properties:
+        name:
+          type: string
+        login:
+          $ref: '#/components/schemas/AccountLogin'
+          nullable: true
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeSponsorRole'
+      required:
+        - name
+      example:
+        name: IBM
+        login: ibm
+        roles:
+          - ComputeProvider
+          - DataProvider
+    ChallengeSponsor:
+      type: object
+      description: A challenge sponsor
+      allOf:
+        - $ref: '#/components/schemas/ChallengeSponsorCreateResponse'
+        - $ref: '#/components/schemas/ChallengeSponsorCreateRequest'
+    ChallengeSponsorList:
+      type: object
+      description: A list of challenge sponsors
+      properties:
+        challengeSponsors:
+          description: A list of ChallengeSponsors
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeSponsor'
+      required:
+        - challengeSponsors
     UserCreateResponse:
       type: object
       description: The response returned after the creation of the user
@@ -1744,7 +1791,7 @@ components:
             avatarUrl:
               type: string
               format: uri
-              example: 'https://example.com/awesome-avatar.png'
+              example: https://example.com/awesome-avatar.png
               nullable: true
             createdAt:
               type: string
@@ -1768,10 +1815,10 @@ components:
             login: awesome-user
             email: awesome-user@example.org
             name: Awesome User
-            avatarUrl: 'https://example.com/awesome-avatar.png'
+            avatarUrl: https://example.com/awesome-avatar.png
             bio: A great bio
-            createdAt: '2017-07-08T16:18:44-04:00'
-            updatedAt: '2017-07-08T16:18:44-04:00'
+            createdAt: 2017-07-08T16:18:44-04:00
+            updatedAt: 2017-07-08T16:18:44-04:00
             type: User
     PageOfUsers:
       type: object
@@ -1817,7 +1864,7 @@ components:
       type: string
       minLength: 3
       maxLength: 30
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
       example: awesome-challenge-platform
     ChallengePlatformCreateRequest:
       type: object
@@ -1841,8 +1888,8 @@ components:
       example:
         name: awesome-challenge-platform
         displayName: Awesome Challenge Platform
-        websiteUrl: 'https://awesome-challenge-platform.io'
-        avatarUrl: 'https://awesome-challenge-platform.io/logo.png'
+        websiteUrl: https://awesome-challenge-platform.io
+        avatarUrl: https://awesome-challenge-platform.io/logo.png
     ChallengePlatform:
       type: object
       description: A challenge platform
@@ -1861,8 +1908,8 @@ components:
             - createdAt
             - updatedAt
           example:
-            createdAt: '2017-07-08T16:18:44-04:00'
-            updatedAt: '2017-07-08T16:18:44-04:00'
+            createdAt: 2017-07-08T16:18:44-04:00
+            updatedAt: 2017-07-08T16:18:44-04:00
     PageOfChallengePlatforms:
       type: object
       description: A page of ChallengePlatforms
@@ -1922,6 +1969,19 @@ components:
                 $ref: '#/components/schemas/Grant'
           required:
             - grants
+    HealthCheck:
+      type: object
+      description: Represents the health of a service
+      properties:
+        status:
+          description: Indicates whether the service status is acceptable or not
+          type: string
+          enum:
+            - pass
+            - fail
+            - warn
+      required:
+        - status
     OrganizationCreateResponse:
       type: object
       description: The unique identifier of the org created
@@ -1946,12 +2006,12 @@ components:
         avatarUrl:
           type: string
           format: uri
-          example: 'https://example.com/awesome-avatar.png'
+          example: https://example.com/awesome-avatar.png
           nullable: true
         websiteUrl:
           type: string
           format: uri
-          example: 'https://example.com'
+          example: https://example.com
           nullable: true
         description:
           type: string
@@ -1963,8 +2023,8 @@ components:
         login: awesome-org
         email: contact@example.org
         name: Awesome Org
-        avatarUrl: 'https://example.com/awesome-avatar.png'
-        websiteUrl: 'https://example.com'
+        avatarUrl: https://example.com/awesome-avatar.png
+        websiteUrl: https://example.com
         description: A great organization
     Organization:
       type: object
@@ -1988,8 +2048,8 @@ components:
             - updatedAt
             - type
           example:
-            createdAt: '2017-07-08T16:18:44-04:00'
-            updatedAt: '2017-07-08T16:18:44-04:00'
+            createdAt: 2017-07-08T16:18:44-04:00
+            updatedAt: 2017-07-08T16:18:44-04:00
             type: Organization
     PageOfOrganizations:
       type: object
@@ -2080,57 +2140,6 @@ components:
                 $ref: '#/components/schemas/OrgMembership'
           required:
             - orgMemberships
-    TagId:
-      description: The unique identifier of a tag
-      type: string
-      example: 507f1f77bcf86cd799439011
-    TagCreateResponse:
-      type: object
-      description: The unique identifier of the tag created
-      properties:
-        id:
-          $ref: '#/components/schemas/TagId'
-      required:
-        - id
-      example:
-        id: 507f1f77bcf86cd799439011
-    TagName:
-      description: The name of a tag
-      type: string
-      minLength: 3
-      maxLength: 30
-      pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
-      example: awesome-tag
-    TagCreateRequest:
-      type: object
-      description: The information required to create a tag
-      properties:
-        name:
-          $ref: '#/components/schemas/TagName'
-      required:
-        - name
-      example:
-        name: awesome-tag
-    Tag:
-      type: object
-      description: A tag that can be assigned to a resource
-      allOf:
-        - $ref: '#/components/schemas/TagCreateResponse'
-        - $ref: '#/components/schemas/TagCreateRequest'
-    PageOfTags:
-      type: object
-      description: A page of Tags
-      allOf:
-        - $ref: '#/components/schemas/ResponsePageMetadata'
-        - type: object
-          properties:
-            tags:
-              description: An array of Tags
-              type: array
-              items:
-                $ref: '#/components/schemas/Tag'
-          required:
-            - tags
     UserCreateRequest:
       type: object
       description: The information required to create a user account
@@ -2148,7 +2157,7 @@ components:
         avatarUrl:
           type: string
           format: uri
-          example: 'https://example.com/awesome-avatar.png'
+          example: https://example.com/awesome-avatar.png
           nullable: true
         bio:
           type: string
@@ -2162,21 +2171,8 @@ components:
         email: awesome-user@example.org
         password: yourpassword
         name: Awesome User
-        avatarUrl: 'https://example.com/awesome-avatar.png'
+        avatarUrl: https://example.com/awesome-avatar.png
         bio: A great bio
-    HealthCheck:
-      type: object
-      description: Represents the health of a service
-      properties:
-        status:
-          description: Indicates whether the service status is acceptable or not
-          type: string
-          enum:
-            - pass
-            - fail
-            - warn
-      required:
-        - status
   responses:
     NotFound:
       description: The specified resource was not found
@@ -2348,20 +2344,6 @@ components:
         `organizationId` parameter in `DELETE /organizations/{organizationId}`
       parameters:
         organizationId: $response.body#/organizationId
-    GetTagById:
-      operationId: getTag
-      description: >
-        The `id` value returned in the response can be used as the `tagId`
-        parameter in `GET /tags/{tagId}`
-      parameters:
-        tagId: $response.body#/tagId
-    DeleteTagById:
-      operationId: deleteTag
-      description: >
-        The `id` value returned in the response can be used as the `tagId`
-        parameter in `DELETE /tags/{tagId}`
-      parameters:
-        tagId: $response.body#/tagId
     GetUserById:
       operationId: getUser
       description: >
