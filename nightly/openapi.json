@@ -633,6 +633,150 @@
         }
       }
     },
+    "/challenges/{accountName}/{challengeName}/sponsors": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
+          }
+        }
+      ],
+      "post": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Create a challenge sponsor",
+        "description": "Create a challenge sponsor",
+        "operationId": "createChallengeSponsor",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChallengeSponsorCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChallengeSponsorCreateResponse"
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "List sponsors",
+        "description": "Lists the sponsors of the challenge.",
+        "operationId": "listChallengeSponsors",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChallengeSponsorList"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/challenges/{accountName}/{challengeName}/sponsors/{sponsorId}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "accountName",
+          "description": "The name of the account that owns the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/AccountLogin"
+          }
+        },
+        {
+          "in": "path",
+          "name": "challengeName",
+          "description": "The name of the challenge",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeName"
+          }
+        },
+        {
+          "in": "path",
+          "name": "sponsorId",
+          "description": "The identifier of the challenge sponsor",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChallengeSponsorId"
+          }
+        }
+      ],
+      "delete": {
+        "tags": [
+          "Challenge"
+        ],
+        "summary": "Delete a challenge sponsor",
+        "description": "Deletes the challenge sponsor specified",
+        "operationId": "deleteChallengeSponsor",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/challenges/{accountName}/{challengeName}/stargazers": {
       "parameters": [
         {
@@ -1071,6 +1215,31 @@
         }
       }
     },
+    "/healthcheck": {
+      "get": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Get health check information",
+        "description": "Get information about the health of the service",
+        "operationId": "getHealthCheck",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheck"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/organizations": {
       "post": {
         "tags": [
@@ -1391,177 +1560,6 @@
         "summary": "Delete an org membership",
         "description": "Deletes the org membership specified",
         "operationId": "deleteOrgMembership",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EmptyObject"
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/tags": {
-      "post": {
-        "tags": [
-          "Tag"
-        ],
-        "summary": "Create a tag",
-        "description": "Create a tag with the specified name",
-        "operationId": "createTag",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TagCreateRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TagCreateResponse"
-                }
-              }
-            },
-            "description": "Success",
-            "links": {
-              "GetTagById": {
-                "$ref": "#/components/links/GetTagById"
-              },
-              "DeleteTagById": {
-                "$ref": "#/components/links/DeleteTagById"
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Tag"
-        ],
-        "summary": "Get all tags",
-        "description": "Returns the tags",
-        "operationId": "listTags",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/limit"
-          },
-          {
-            "$ref": "#/components/parameters/offset"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PageOfTags"
-                }
-              }
-            },
-            "description": "Success"
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Tag"
-        ],
-        "summary": "Delete all tags",
-        "description": "Delete all tags",
-        "operationId": "deleteAllTags",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EmptyObject"
-                }
-              }
-            }
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/tags/{tagId}": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "tagId",
-          "description": "The unique identifier of the tag",
-          "required": true,
-          "schema": {
-            "$ref": "#/components/schemas/TagId"
-          }
-        }
-      ],
-      "get": {
-        "tags": [
-          "Tag"
-        ],
-        "summary": "Get a tag",
-        "description": "Returns the tag specified",
-        "operationId": "getTag",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Tag"
-                }
-              }
-            }
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Tag"
-        ],
-        "summary": "Delete a tag",
-        "description": "Deletes the tag specified",
-        "operationId": "deleteTag",
         "responses": {
           "200": {
             "description": "Success",
@@ -2094,31 +2092,6 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalServerError"
-          }
-        }
-      }
-    },
-    "/healthcheck": {
-      "get": {
-        "tags": [
-          "HealthCheck"
-        ],
-        "summary": "Get health check information",
-        "description": "Get information about the health of the service",
-        "operationId": "getHealthCheck",
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HealthCheck"
-                }
-              }
-            }
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -2665,6 +2638,96 @@
           "text": "A great README text"
         }
       },
+      "ChallengeSponsorId": {
+        "description": "The unique identifier of a challenge sponsor",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
+      "ChallengeSponsorCreateResponse": {
+        "type": "object",
+        "description": "The unique identifier of a challenge sponsor",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ChallengeSponsorId"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "example": {
+          "id": "507f1f77bcf86cd799439011"
+        }
+      },
+      "ChallengeSponsorRole": {
+        "description": "The role of a challenge sponsor",
+        "type": "string",
+        "enum": [
+          "ChallengeOrganizer",
+          "ComputeProvider",
+          "DataProvider",
+          "Funder",
+          "Other"
+        ],
+        "example": "DataProvider"
+      },
+      "ChallengeSponsorCreateRequest": {
+        "type": "object",
+        "description": "The information used to create a challenge sponsor",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "login": {
+            "$ref": "#/components/schemas/AccountLogin",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengeSponsorRole"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "example": {
+          "name": "IBM",
+          "login": "ibm",
+          "roles": [
+            "ComputeProvider",
+            "DataProvider"
+          ]
+        }
+      },
+      "ChallengeSponsor": {
+        "type": "object",
+        "description": "A challenge sponsor",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ChallengeSponsorCreateResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ChallengeSponsorCreateRequest"
+          }
+        ]
+      },
+      "ChallengeSponsorList": {
+        "type": "object",
+        "description": "A list of challenge sponsors",
+        "properties": {
+          "challengeSponsors": {
+            "description": "A list of ChallengeSponsors",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengeSponsor"
+            }
+          }
+        },
+        "required": [
+          "challengeSponsors"
+        ]
+      },
       "UserCreateResponse": {
         "type": "object",
         "description": "The response returned after the creation of the user",
@@ -2979,6 +3042,24 @@
           }
         ]
       },
+      "HealthCheck": {
+        "type": "object",
+        "description": "Represents the health of a service",
+        "properties": {
+          "status": {
+            "description": "Indicates whether the service status is acceptable or not",
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "warn"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
       "OrganizationCreateResponse": {
         "type": "object",
         "description": "The unique identifier of the org created",
@@ -3208,85 +3289,6 @@
           }
         ]
       },
-      "TagId": {
-        "description": "The unique identifier of a tag",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "TagCreateResponse": {
-        "type": "object",
-        "description": "The unique identifier of the tag created",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/TagId"
-          }
-        },
-        "required": [
-          "id"
-        ],
-        "example": {
-          "id": "507f1f77bcf86cd799439011"
-        }
-      },
-      "TagName": {
-        "description": "The name of a tag",
-        "type": "string",
-        "minLength": 3,
-        "maxLength": 30,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": "awesome-tag"
-      },
-      "TagCreateRequest": {
-        "type": "object",
-        "description": "The information required to create a tag",
-        "properties": {
-          "name": {
-            "$ref": "#/components/schemas/TagName"
-          }
-        },
-        "required": [
-          "name"
-        ],
-        "example": {
-          "name": "awesome-tag"
-        }
-      },
-      "Tag": {
-        "type": "object",
-        "description": "A tag that can be assigned to a resource",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/TagCreateResponse"
-          },
-          {
-            "$ref": "#/components/schemas/TagCreateRequest"
-          }
-        ]
-      },
-      "PageOfTags": {
-        "type": "object",
-        "description": "A page of Tags",
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResponsePageMetadata"
-          },
-          {
-            "type": "object",
-            "properties": {
-              "tags": {
-                "description": "An array of Tags",
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Tag"
-                }
-              }
-            },
-            "required": [
-              "tags"
-            ]
-          }
-        ]
-      },
       "UserCreateRequest": {
         "type": "object",
         "description": "The information required to create a user account",
@@ -3329,24 +3331,6 @@
           "avatarUrl": "https://example.com/awesome-avatar.png",
           "bio": "A great bio"
         }
-      },
-      "HealthCheck": {
-        "type": "object",
-        "description": "Represents the health of a service",
-        "properties": {
-          "status": {
-            "description": "Indicates whether the service status is acceptable or not",
-            "type": "string",
-            "enum": [
-              "pass",
-              "fail",
-              "warn"
-            ]
-          }
-        },
-        "required": [
-          "status"
-        ]
       }
     },
     "responses": {
@@ -3567,20 +3551,6 @@
         "description": "The `id` value returned in the response can be used as the `organizationId` parameter in `DELETE /organizations/{organizationId}`\n",
         "parameters": {
           "organizationId": "$response.body#/organizationId"
-        }
-      },
-      "GetTagById": {
-        "operationId": "getTag",
-        "description": "The `id` value returned in the response can be used as the `tagId` parameter in `GET /tags/{tagId}`\n",
-        "parameters": {
-          "tagId": "$response.body#/tagId"
-        }
-      },
-      "DeleteTagById": {
-        "operationId": "deleteTag",
-        "description": "The `id` value returned in the response can be used as the `tagId` parameter in `DELETE /tags/{tagId}`\n",
-        "parameters": {
-          "tagId": "$response.body#/tagId"
         }
       },
       "GetUserById": {
