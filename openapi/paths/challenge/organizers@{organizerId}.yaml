@@ -23,6 +23,8 @@ delete:
   summary: Delete a challenge organizer
   description: Deletes the challenge organizer specified
   operationId: deleteChallengeOrganizer
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success

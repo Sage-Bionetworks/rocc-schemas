@@ -62,6 +62,8 @@ delete:
   summary: Delete all challenges
   description: Delete all challenges
   operationId: deleteAllChallenges
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success

@@ -54,6 +54,8 @@ delete:
   summary: Delete all grants
   description: Delete all grants
   operationId: deleteAllGrants
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success

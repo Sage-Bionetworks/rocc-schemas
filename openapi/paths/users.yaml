@@ -54,6 +54,8 @@ delete:
   summary: Delete all users
   description: Delete all users
   operationId: deleteAllUsers
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success

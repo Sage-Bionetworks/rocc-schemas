@@ -51,6 +51,8 @@ delete:
   summary: Delete all org memberships
   description: Delete all org memberships
   operationId: deleteAllOrgMemberships
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success
