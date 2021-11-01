@@ -17,6 +17,8 @@ patch:
   summary: Update a challenge README
   description: Update a challenge README
   operationId: updateChallengeReadme
+  security:
+    - BearerAuth: []
   requestBody:
     content:
       application/json:
