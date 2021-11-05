@@ -9,6 +9,8 @@ allOf:
         type: string
       ownerId:
         $ref: ../parameters/AccountId.yaml
+      readmeId:
+        $ref: ../parameters/ChallengeReadmeId.yaml
       createdAt:
         type: string
         format: date-time
@@ -18,6 +20,7 @@ allOf:
     required:
       - fullName
       - ownerId
+      - readmeId
       - createdAt
       - updatedAt
     example:
