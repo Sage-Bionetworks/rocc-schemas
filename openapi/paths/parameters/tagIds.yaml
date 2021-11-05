@@ -1,8 +1,0 @@
-name: tagIds
-description: Array of tag ids used to filter the results
-in: query
-required: false
-schema:
-  type: array
-  items:
-    $ref: ../../components/parameters/TagId.yaml
