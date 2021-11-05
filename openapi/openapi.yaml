@@ -32,6 +32,8 @@ tags:
     description: Operations about organizations
   - name: OrgMembership
     description: Operations about org memberships
+  - name: Registry
+    description: Operations about the registry
   - name: Tag
     description: Operations about tags
   - name: User
@@ -89,6 +91,8 @@ paths:
     $ref: paths/orgMemberships.yaml
   /orgMemberships/{orgMembershipId}:
     $ref: paths/orgMemberships@{orgMembershipId}.yaml
+  /registry:
+    $ref: paths/registry.yaml
   /user:
     $ref: paths/user.yaml
   /user/starred:
