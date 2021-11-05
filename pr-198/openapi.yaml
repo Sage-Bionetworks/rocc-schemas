@@ -30,6 +30,10 @@ tags:
     description: Operations about organizations
   - name: OrgMembership
     description: Operations about org memberships
+  - name: Registry
+    description: Operations about the registry
+  - name: Tag
+    description: Operations about tags
   - name: User
     description: Operations about users
   - name: HealthCheck
@@ -1029,6 +1033,22 @@ paths:
                 $ref: '#/components/schemas/EmptyObject'
         '404':
           $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /registry:
+    get:
+      tags:
+        - Registry
+      summary: Get registry information
+      description: Get information about the registry
+      operationId: getRegistry
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registry'
         '500':
           $ref: '#/components/responses/InternalServerError'
   /user:
@@ -2180,6 +2200,32 @@ components:
                 $ref: '#/components/schemas/OrgMembership'
           required:
             - orgMemberships
+    Registry:
+      type: object
+      description: The Challenge Registry
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        userCount:
+          type: integer
+        orgCount:
+          type: integer
+        challengeCount:
+          type: integer
+      required:
+        - name
+        - description
+        - userCount
+        - orgCount
+        - challengeCount
+      example:
+        name: Challenge Registry
+        description: A great challenge registry
+        userCount: 1000
+        orgCount: 1000
+        challengeCound: 1000
     UserCreateRequest:
       type: object
       description: The information required to create a user account
