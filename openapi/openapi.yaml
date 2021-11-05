@@ -34,8 +34,6 @@ tags:
     description: Operations about org memberships
   - name: Registry
     description: Operations about the registry
-  - name: Tag
-    description: Operations about tags
   - name: User
     description: Operations about users
   - name: HealthCheck
