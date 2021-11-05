@@ -2534,6 +2534,11 @@
           "doi": "http://doi.org/10.5281/zenodo.3714971"
         }
       },
+      "ChallengeReadmeId": {
+        "description": "The unique identifier of a challenge README",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "Challenge": {
         "type": "object",
         "description": "A challenge",
@@ -2553,6 +2558,9 @@
               "ownerId": {
                 "$ref": "#/components/schemas/AccountId"
               },
+              "readmeId": {
+                "$ref": "#/components/schemas/ChallengeReadmeId"
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -2565,6 +2573,7 @@
             "required": [
               "fullName",
               "ownerId",
+              "readmeId",
               "createdAt",
               "updatedAt"
             ],
@@ -2691,11 +2700,6 @@
         "required": [
           "challengeOrganizers"
         ]
-      },
-      "ChallengeReadmeId": {
-        "description": "The unique identifier of a challenge README",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
       },
       "ChallengeReadmeCreateResponse": {
         "type": "object",

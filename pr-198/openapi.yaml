@@ -1599,6 +1599,10 @@ components:
           - breast-cancer
           - ehr
         doi: http://doi.org/10.5281/zenodo.3714971
+    ChallengeReadmeId:
+      description: The unique identifier of a challenge README
+      type: string
+      example: 507f1f77bcf86cd799439011
     Challenge:
       type: object
       description: A challenge
@@ -1611,6 +1615,8 @@ components:
               type: string
             ownerId:
               $ref: '#/components/schemas/AccountId'
+            readmeId:
+              $ref: '#/components/schemas/ChallengeReadmeId'
             createdAt:
               type: string
               format: date-time
@@ -1620,6 +1626,7 @@ components:
           required:
             - fullName
             - ownerId
+            - readmeId
             - createdAt
             - updatedAt
           example:
@@ -1703,10 +1710,6 @@ components:
             $ref: '#/components/schemas/ChallengeOrganizer'
       required:
         - challengeOrganizers
-    ChallengeReadmeId:
-      description: The unique identifier of a challenge README
-      type: string
-      example: 507f1f77bcf86cd799439011
     ChallengeReadmeCreateResponse:
       type: object
       description: The unique identifier of the challenge README created
