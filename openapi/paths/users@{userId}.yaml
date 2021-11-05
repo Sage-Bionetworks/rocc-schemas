@@ -28,6 +28,8 @@ delete:
   summary: Delete a user
   description: Deletes the user specified
   operationId: deleteUser
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success

@@ -28,6 +28,8 @@ delete:
   summary: Delete a challenge platform
   description: Deletes the challenge platform specified
   operationId: deleteChallengePlatform
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success

@@ -1,5 +1,0 @@
-type: object
-description: A tag that can be assigned to a resource
-allOf:
-  - $ref: TagCreateResponse.yaml
-  - $ref: TagCreateRequest.yaml

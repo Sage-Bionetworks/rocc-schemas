@@ -28,6 +28,8 @@ delete:
   summary: Delete an org membership
   description: Deletes the org membership specified
   operationId: deleteOrgMembership
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success

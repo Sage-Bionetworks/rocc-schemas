@@ -23,6 +23,8 @@ delete:
   summary: Delete a challenge sponsor
   description: Deletes the challenge sponsor specified
   operationId: deleteChallengeSponsor
+  security:
+    - ApiKeyAuth: []
   responses:
     '200':
       description: Success
