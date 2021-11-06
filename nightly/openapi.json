@@ -47,8 +47,8 @@
       "description": "Operations about org memberships"
     },
     {
-      "name": "Tag",
-      "description": "Operations about tags"
+      "name": "Registry",
+      "description": "Operations about the registry"
     },
     {
       "name": "User",
@@ -217,6 +217,11 @@
         "summary": "Delete all challenges",
         "description": "Delete all challenges",
         "operationId": "deleteAllChallenges",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -253,6 +258,11 @@
         "summary": "Add a challenge",
         "description": "Adds a challenge",
         "operationId": "createChallenge",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -385,6 +395,11 @@
         "summary": "Delete a challenge",
         "description": "Deletes the challenge specified",
         "operationId": "deleteChallenge",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -433,6 +448,11 @@
         "summary": "Create a challenge organizer",
         "description": "Create a challenge organizer",
         "operationId": "createChallengeOrganizer",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -529,6 +549,11 @@
         "summary": "Delete a challenge organizer",
         "description": "Deletes the challenge organizer specified",
         "operationId": "deleteChallengeOrganizer",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -577,6 +602,11 @@
         "summary": "Update a challenge README",
         "description": "Update a challenge README",
         "operationId": "updateChallengeReadme",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -664,6 +694,11 @@
         "summary": "Create a challenge sponsor",
         "description": "Create a challenge sponsor",
         "operationId": "createChallengeSponsor",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -760,6 +795,11 @@
         "summary": "Delete a challenge sponsor",
         "description": "Deletes the challenge sponsor specified",
         "operationId": "deleteChallengeSponsor",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -892,6 +932,11 @@
         "summary": "Create a challenge platform",
         "description": "Create a challenge platform with the specified ID",
         "operationId": "createChallengePlatform",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -965,6 +1010,11 @@
         "summary": "Delete all challenge platforms",
         "description": "Delete all challenge platforms",
         "operationId": "deleteAllChallengePlatforms",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1027,6 +1077,11 @@
         "summary": "Delete a challenge platform",
         "description": "Deletes the challenge platform specified",
         "operationId": "deleteChallengePlatform",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1055,6 +1110,11 @@
         "summary": "Create a grant",
         "description": "Create a grant with the specified name",
         "operationId": "createGrant",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1136,6 +1196,11 @@
         "summary": "Delete all grants",
         "description": "Delete all grants",
         "operationId": "deleteAllGrants",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1198,6 +1263,11 @@
         "summary": "Delete a grant",
         "description": "Deletes the grant specified",
         "operationId": "deleteGrant",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1251,6 +1321,11 @@
         "summary": "Create an organization",
         "description": "Create an organization with the specified account name",
         "operationId": "createOrganization",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -1332,6 +1407,11 @@
         "summary": "Delete all organizations",
         "description": "Delete all organizations",
         "operationId": "deleteAllOrganizations",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1394,6 +1474,11 @@
         "summary": "Delete an organization",
         "description": "Deletes the organization specified",
         "operationId": "deleteOrganization",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1501,6 +1586,11 @@
         "summary": "Delete all org memberships",
         "description": "Delete all org memberships",
         "operationId": "deleteAllOrgMemberships",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1563,6 +1653,11 @@
         "summary": "Delete an org membership",
         "description": "Deletes the org membership specified",
         "operationId": "deleteOrgMembership",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1576,6 +1671,31 @@
           },
           "404": {
             "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/registry": {
+      "get": {
+        "tags": [
+          "Registry"
+        ],
+        "summary": "Get registry information",
+        "description": "Get information about the registry",
+        "operationId": "getRegistry",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Registry"
+                }
+              }
+            }
           },
           "500": {
             "$ref": "#/components/responses/InternalServerError"
@@ -1923,6 +2043,11 @@
         "summary": "Delete all users",
         "description": "Delete all users",
         "operationId": "deleteAllUsers",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -1988,6 +2113,11 @@
         "summary": "Delete a user",
         "description": "Deletes the user specified",
         "operationId": "deleteUser",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -2400,6 +2530,11 @@
           "doi": "http://doi.org/10.5281/zenodo.3714971"
         }
       },
+      "ChallengeReadmeId": {
+        "description": "The unique identifier of a challenge README",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "Challenge": {
         "type": "object",
         "description": "A challenge",
@@ -2419,6 +2554,9 @@
               "ownerId": {
                 "$ref": "#/components/schemas/AccountId"
               },
+              "readmeId": {
+                "$ref": "#/components/schemas/ChallengeReadmeId"
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -2431,6 +2569,7 @@
             "required": [
               "fullName",
               "ownerId",
+              "readmeId",
               "createdAt",
               "updatedAt"
             ],
@@ -2557,11 +2696,6 @@
         "required": [
           "challengeOrganizers"
         ]
-      },
-      "ChallengeReadmeId": {
-        "description": "The unique identifier of a challenge README",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
       },
       "ChallengeReadmeCreateResponse": {
         "type": "object",
@@ -3291,6 +3425,41 @@
             ]
           }
         ]
+      },
+      "Registry": {
+        "type": "object",
+        "description": "The Challenge Registry",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "userCount": {
+            "type": "integer"
+          },
+          "orgCount": {
+            "type": "integer"
+          },
+          "challengeCount": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "description",
+          "userCount",
+          "orgCount",
+          "challengeCount"
+        ],
+        "example": {
+          "name": "Challenge Registry",
+          "description": "A great challenge registry",
+          "userCount": 1000,
+          "orgCount": 1000,
+          "challengeCound": 1000
+        }
       },
       "UserCreateRequest": {
         "type": "object",
