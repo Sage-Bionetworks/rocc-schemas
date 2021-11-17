@@ -26,7 +26,12 @@ properties:
     format: date
     nullable: true
   platformId:
-    $ref: ../parameters/ChallengePlatformId.yaml
+    type: array
+    nullable: true
+  submissionTypes:
+    type: array
+    items:
+      $ref: ../parameters/ChallengeSubmissionType.yaml
     nullable: true
   topics:
     type: array
@@ -47,9 +52,12 @@ example:
   description: This challenge is awesome.
   websiteUrl: https://synapse.org/awesome-challenge
   status: active
-  startDate: "2020-11-10"
-  endDate: "2020-12-31"
+  startDate: '2020-11-10'
+  endDate: '2020-12-31'
   platformId: 507f1f77bcf86cd799439011
+  submissionTypes:
+    - Prediction files
+    - Docker images
   topics:
     - breast-cancer
     - ehr
