@@ -2383,11 +2383,11 @@
         "description": "The submission type of the challenge",
         "type": "string",
         "enum": [
-          "Docker image",
-          "Prediction file",
+          "DockerImage",
+          "PredictionFile",
           "Other"
         ],
-        "example": "Docker image"
+        "example": "DockerImage"
       },
       "DateRange": {
         "type": "object",
