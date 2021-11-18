@@ -1487,7 +1487,7 @@ components:
       enum:
         - Docker image
         - Prediction file
-        - Research paper
+        - Other
       example: Docker image
     DateRange:
       type: object
