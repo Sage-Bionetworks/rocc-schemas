@@ -46,7 +46,6 @@ get:
     - $ref: parameters/challenge/platformIds.yaml
     - $ref: parameters/challenge/submissionTypes.yaml
     - $ref: parameters/challenge/startDateRange.yaml
-    - $ref: parameters/challenge/startDateRange.yaml
   responses:
     '200':
       content:
