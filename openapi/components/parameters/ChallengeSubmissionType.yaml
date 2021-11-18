@@ -1,6 +1,7 @@
 description: The submission type of the challenge
 type: string
 enum:
-  - Prediction file
   - Docker image
+  - Prediction file
+  - Research paper
 example: Docker image
