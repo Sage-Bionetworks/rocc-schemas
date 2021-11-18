@@ -1,4 +1,4 @@
-name: Data Types
+name: dataTypes
 description: Array of data types used to filter the results
 in: query
 required: false
