@@ -1,0 +1,8 @@
+name: Data Types
+description: Array of data types used to filter the results
+in: query
+required: false
+schema:
+  type: array
+  items:
+    $ref: ../../components/schemas/DataType.yaml
