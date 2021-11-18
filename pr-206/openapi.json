@@ -2383,8 +2383,9 @@
         "description": "The submission type of the challenge",
         "type": "string",
         "enum": [
+          "Docker image",
           "Prediction file",
-          "Docker image"
+          "Research paper"
         ],
         "example": "Docker image"
       },
