@@ -34,6 +34,12 @@ properties:
       $ref: Topic.yaml
     # uniqueItems: true
     maxItems: 30
+  dataTypes:
+    type: array
+    items:
+      $ref: DataType.yaml
+    maxItems: 10
+    nullable: true
   doi:
     type: string
     # pattern: "^10.\d{4,9}/[-._;()/:A-Z0-9]+$"
@@ -52,5 +58,8 @@ example:
   platformId: 507f1f77bcf86cd799439011
   topics:
     - breast-cancer
+    - covid
+  dataTypes:
+    - genomic
     - ehr
   doi: http://doi.org/10.5281/zenodo.3714971
