@@ -3,5 +3,5 @@ type: string
 enum:
   - Docker image
   - Prediction file
-  - Research paper
+  - Other
 example: Docker image
