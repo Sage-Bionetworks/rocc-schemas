@@ -173,6 +173,9 @@
             "$ref": "#/components/parameters/sort"
           },
           {
+            "$ref": "#/components/parameters/inputDataTypes"
+          },
+          {
             "$ref": "#/components/parameters/direction"
           },
           {
@@ -189,6 +192,9 @@
           },
           {
             "$ref": "#/components/parameters/difficulty"
+          },
+          {
+            "$ref": "#/components/parameters/incentiveTypes"
           },
           {
             "$ref": "#/components/parameters/startDateRange"
@@ -2353,6 +2359,17 @@
           "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ"
         }
       },
+      "inputDataType": {
+        "description": "The Input Data Type",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": [
+          "genomic",
+          "clinical"
+        ]
+      },
       "Topic": {
         "description": "The topic",
         "type": "string",
@@ -2388,6 +2405,17 @@
           "Advanced"
         ],
         "example": "Intermediate"
+      },
+      "ChallengeIncentiveType": {
+        "description": "The incentive type of the challenge",
+        "type": "string",
+        "enum": [
+          "Monetary",
+          "Publication",
+          "SpeakingEngagement",
+          "Other"
+        ],
+        "example": "Monetary"
       },
       "DateRange": {
         "type": "object",
@@ -2507,6 +2535,13 @@
             "format": "date",
             "nullable": true
           },
+          "incentiveTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengeIncentiveType"
+            },
+            "nullable": true
+          },
           "platformId": {
             "$ref": "#/components/schemas/ChallengePlatformId",
             "nullable": true
@@ -2521,6 +2556,14 @@
               "$ref": "#/components/schemas/Topic"
             },
             "maxItems": 30
+          },
+          "inputDataTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputDataType"
+            },
+            "maxItems": 10,
+            "nullable": true
           },
           "doi": {
             "type": "string",
@@ -2540,8 +2583,16 @@
           "startDate": "2020-11-10",
           "endDate": "2020-12-31",
           "platformId": "507f1f77bcf86cd799439011",
+          "incentiveTypes": [
+            "Monetary",
+            "Publication"
+          ],
           "topics": [
             "breast-cancer",
+            "covid"
+          ],
+          "dataTypes": [
+            "genomic",
             "ehr"
           ],
           "doi": "http://doi.org/10.5281/zenodo.3714971"
@@ -3611,6 +3662,18 @@
           ]
         }
       },
+      "inputDataTypes": {
+        "name": "inputDataTypes",
+        "description": "Array of input data types used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/inputDataType"
+          }
+        }
+      },
       "direction": {
         "name": "direction",
         "description": "Can be either `asc` or `desc`. Ignored without `sort` parameter.",
@@ -3678,6 +3741,18 @@
           "type": "array",
           "items": {
             "$ref": "#/components/schemas/ChallengeDifficulty"
+          }
+        }
+      },
+      "incentiveTypes": {
+        "name": "incentiveTypes",
+        "description": "Array of challenge incentive types used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengeIncentiveType"
           }
         }
       },
