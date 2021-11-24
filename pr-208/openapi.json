@@ -173,6 +173,9 @@
             "$ref": "#/components/parameters/sort"
           },
           {
+            "$ref": "#/components/parameters/inputDataTypes"
+          },
+          {
             "$ref": "#/components/parameters/direction"
           },
           {
@@ -2353,6 +2356,17 @@
           "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ"
         }
       },
+      "inputDataType": {
+        "description": "The Input Data Type",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": [
+          "genomic",
+          "clinical"
+        ]
+      },
       "Topic": {
         "description": "The topic",
         "type": "string",
@@ -2526,6 +2540,14 @@
             },
             "maxItems": 30
           },
+          "inputDataTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputDataType"
+            },
+            "maxItems": 10,
+            "nullable": true
+          },
           "doi": {
             "type": "string",
             "nullable": true
@@ -2550,6 +2572,10 @@
           ],
           "topics": [
             "breast-cancer",
+            "covid"
+          ],
+          "dataTypes": [
+            "genomic",
             "ehr"
           ],
           "doi": "http://doi.org/10.5281/zenodo.3714971"
@@ -3617,6 +3643,18 @@
             "createdAt",
             "updatedAt"
           ]
+        }
+      },
+      "inputDataTypes": {
+        "name": "inputDataTypes",
+        "description": "Array of input data types used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/inputDataType"
+          }
         }
       },
       "direction": {
