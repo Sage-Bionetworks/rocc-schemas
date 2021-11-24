@@ -44,7 +44,9 @@ get:
     - $ref: parameters/topics.yaml
     - $ref: parameters/challenge/status.yaml
     - $ref: parameters/challenge/platformIds.yaml
+    - $ref: parameters/inputDataTypes.yaml
     - $ref: parameters/challenge/submissionTypes.yaml
+    - $ref: parameters/challenge/incentiveTypes.yaml
     - $ref: parameters/challenge/startDateRange.yaml
   responses:
     '200':
