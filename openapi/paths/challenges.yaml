@@ -47,15 +47,15 @@ get:
     - $ref: parameters/challenge/difficulty.yaml
     - $ref: parameters/challenge/startDateRange.yaml
   responses:
-    "200":
+    '200':
       content:
         application/json:
           schema:
             $ref: ../components/schemas/PageOfChallenges.yaml
       description: Success
-    "400":
+    '400':
       $ref: ../components/responses/BadRequest.yaml
-    "500":
+    '500':
       $ref: ../components/responses/InternalServerError.yaml
 delete:
   tags:
@@ -66,11 +66,11 @@ delete:
   security:
     - ApiKeyAuth: []
   responses:
-    "200":
+    '200':
       description: Success
       content:
         application/json:
           schema:
             $ref: ../components/schemas/EmptyObject.yaml
-    "500":
+    '500':
       $ref: ../components/responses/InternalServerError.yaml
