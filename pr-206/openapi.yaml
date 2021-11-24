@@ -112,7 +112,9 @@ paths:
         - $ref: '#/components/parameters/topics'
         - $ref: '#/components/parameters/status'
         - $ref: '#/components/parameters/platformIds'
+        - $ref: '#/components/parameters/inputDataTypes'
         - $ref: '#/components/parameters/submissionTypes'
+        - $ref: '#/components/parameters/incentiveTypes'
         - $ref: '#/components/parameters/startDateRange'
       responses:
         '200':
@@ -1481,6 +1483,15 @@ components:
       description: The unique identifier of a challenge platform
       type: string
       example: 507f1f77bcf86cd799439011
+    inputDataType:
+      description: The Input Data Type
+      type: string
+      minLength: 3
+      maxLength: 30
+      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+      example:
+        - genomic
+        - clinical
     ChallengeSubmissionType:
       description: The submission type of the challenge
       type: string
@@ -1489,6 +1500,15 @@ components:
         - PredictionFile
         - Other
       example: DockerImage
+    ChallengeIncentiveType:
+      description: The incentive type of the challenge
+      type: string
+      enum:
+        - Monetary
+        - Publication
+        - SpeakingEngagement
+        - Other
+      example: Monetary
     DateRange:
       type: object
       description: A date range
@@ -1579,6 +1599,11 @@ components:
           type: string
           format: date
           nullable: true
+        incentiveTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeIncentiveType'
+          nullable: true
         platformId:
           $ref: '#/components/schemas/ChallengePlatformId'
           nullable: true
@@ -1592,6 +1617,12 @@ components:
           items:
             $ref: '#/components/schemas/Topic'
           maxItems: 30
+        inputDataTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/inputDataType'
+          maxItems: 10
+          nullable: true
         doi:
           type: string
           nullable: true
@@ -1610,8 +1641,14 @@ components:
         submissionTypes:
           - PredictionFile
           - DockerImage
+        incentiveTypes:
+          - Monetary
+          - Publication
         topics:
           - breast-cancer
+          - covid
+        dataTypes:
+          - genomic
           - ehr
         doi: http://doi.org/10.5281/zenodo.3714971
     ChallengeReadmeId:
@@ -2382,6 +2419,15 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/ChallengePlatformId'
+    inputDataTypes:
+      name: inputDataTypes
+      description: Array of input data types used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/inputDataType'
     submissionTypes:
       name: submissionTypes
       description: Array of challenge submission types used to filter the results
@@ -2391,6 +2437,15 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/ChallengeSubmissionType'
+    incentiveTypes:
+      name: incentiveTypes
+      description: Array of challenge incentive types used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ChallengeIncentiveType'
     startDateRange:
       name: startDateRange
       description: Return challenges that start during the date range specified

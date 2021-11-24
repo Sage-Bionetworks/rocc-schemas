@@ -188,7 +188,13 @@
             "$ref": "#/components/parameters/platformIds"
           },
           {
+            "$ref": "#/components/parameters/inputDataTypes"
+          },
+          {
             "$ref": "#/components/parameters/submissionTypes"
+          },
+          {
+            "$ref": "#/components/parameters/incentiveTypes"
           },
           {
             "$ref": "#/components/parameters/startDateRange"
@@ -2379,6 +2385,17 @@
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
       },
+      "inputDataType": {
+        "description": "The Input Data Type",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": [
+          "genomic",
+          "clinical"
+        ]
+      },
       "ChallengeSubmissionType": {
         "description": "The submission type of the challenge",
         "type": "string",
@@ -2388,6 +2405,17 @@
           "Other"
         ],
         "example": "DockerImage"
+      },
+      "ChallengeIncentiveType": {
+        "description": "The incentive type of the challenge",
+        "type": "string",
+        "enum": [
+          "Monetary",
+          "Publication",
+          "SpeakingEngagement",
+          "Other"
+        ],
+        "example": "Monetary"
       },
       "DateRange": {
         "type": "object",
@@ -2507,6 +2535,13 @@
             "format": "date",
             "nullable": true
           },
+          "incentiveTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengeIncentiveType"
+            },
+            "nullable": true
+          },
           "platformId": {
             "$ref": "#/components/schemas/ChallengePlatformId",
             "nullable": true
@@ -2524,6 +2559,14 @@
               "$ref": "#/components/schemas/Topic"
             },
             "maxItems": 30
+          },
+          "inputDataTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/inputDataType"
+            },
+            "maxItems": 10,
+            "nullable": true
           },
           "doi": {
             "type": "string",
@@ -2547,8 +2590,16 @@
             "PredictionFile",
             "DockerImage"
           ],
+          "incentiveTypes": [
+            "Monetary",
+            "Publication"
+          ],
           "topics": [
             "breast-cancer",
+            "covid"
+          ],
+          "dataTypes": [
+            "genomic",
             "ehr"
           ],
           "doi": "http://doi.org/10.5281/zenodo.3714971"
@@ -3676,6 +3727,18 @@
           }
         }
       },
+      "inputDataTypes": {
+        "name": "inputDataTypes",
+        "description": "Array of input data types used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/inputDataType"
+          }
+        }
+      },
       "submissionTypes": {
         "name": "submissionTypes",
         "description": "Array of challenge submission types used to filter the results",
@@ -3685,6 +3748,18 @@
           "type": "array",
           "items": {
             "$ref": "#/components/schemas/ChallengeSubmissionType"
+          }
+        }
+      },
+      "incentiveTypes": {
+        "name": "incentiveTypes",
+        "description": "Array of challenge incentive types used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengeIncentiveType"
           }
         }
       },
