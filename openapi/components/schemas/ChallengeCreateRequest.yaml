@@ -58,3 +58,4 @@ example:
     - breast-cancer
     - ehr
   doi: http://doi.org/10.5281/zenodo.3714971
+  numberOfParticipants: 100

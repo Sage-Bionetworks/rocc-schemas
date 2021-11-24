@@ -6,5 +6,6 @@ schema:
   type: string
   enum:
     - numberOfParticipants
+    - startDate
     - createdAt
     - updatedAt
