@@ -107,13 +107,14 @@ paths:
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/offset'
         - $ref: '#/components/parameters/sort'
-        - $ref: '#/components/parameters/inputDataTypes'
         - $ref: '#/components/parameters/direction'
         - $ref: '#/components/parameters/searchTerms'
         - $ref: '#/components/parameters/topics'
         - $ref: '#/components/parameters/status'
         - $ref: '#/components/parameters/platformIds'
         - $ref: '#/components/parameters/difficulty'
+        - $ref: '#/components/parameters/inputDataTypes'
+        - $ref: '#/components/parameters/submissionTypes'
         - $ref: '#/components/parameters/incentiveTypes'
         - $ref: '#/components/parameters/startDateRange'
       responses:
@@ -1462,15 +1463,6 @@ components:
       example:
         token: >-
           eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ
-    inputDataType:
-      description: The Input Data Type
-      type: string
-      minLength: 3
-      maxLength: 30
-      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
-      example:
-        - genomic
-        - clinical
     Topic:
       description: The topic
       type: string
@@ -1500,6 +1492,23 @@ components:
         - Intermediate
         - Advanced
       example: Intermediate
+    inputDataType:
+      description: The Input Data Type
+      type: string
+      minLength: 3
+      maxLength: 30
+      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+      example:
+        - genomic
+        - clinical
+    ChallengeSubmissionType:
+      description: The submission type of the challenge
+      type: string
+      enum:
+        - DockerImage
+        - PredictionFile
+        - Other
+      example: DockerImage
     ChallengeIncentiveType:
       description: The incentive type of the challenge
       type: string
@@ -1609,6 +1618,10 @@ components:
           nullable: true
         difficulty:
           $ref: '#/components/schemas/ChallengeDifficulty'
+        submissionTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeSubmissionType'
           nullable: true
         topics:
           type: array
@@ -1636,6 +1649,9 @@ components:
         startDate: 2020-11-10
         endDate: 2020-12-31
         platformId: 507f1f77bcf86cd799439011
+        submissionTypes:
+          - PredictionFile
+          - DockerImage
         incentiveTypes:
           - Monetary
           - Publication
@@ -2370,15 +2386,6 @@ components:
         enum:
           - createdAt
           - updatedAt
-    inputDataTypes:
-      name: inputDataTypes
-      description: Array of input data types used to filter the results
-      in: query
-      required: false
-      schema:
-        type: array
-        items:
-          $ref: '#/components/schemas/inputDataType'
     direction:
       name: direction
       description: Can be either `asc` or `desc`. Ignored without `sort` parameter.
@@ -2432,6 +2439,24 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/ChallengeDifficulty'
+    inputDataTypes:
+      name: inputDataTypes
+      description: Array of input data types used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/inputDataType'
+    submissionTypes:
+      name: submissionTypes
+      description: Array of challenge submission types used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ChallengeSubmissionType'
     incentiveTypes:
       name: incentiveTypes
       description: Array of challenge incentive types used to filter the results
