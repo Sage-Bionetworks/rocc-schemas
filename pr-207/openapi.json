@@ -173,7 +173,7 @@
             "$ref": "#/components/parameters/sort"
           },
           {
-            "$ref": "#/components/parameters/dataTypes"
+            "$ref": "#/components/parameters/inputDataTypes"
           },
           {
             "$ref": "#/components/parameters/direction"
@@ -2353,8 +2353,8 @@
           "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ"
         }
       },
-      "DataType": {
-        "description": "The Data Type",
+      "inputDataType": {
+        "description": "The Input Data Type",
         "type": "string",
         "minLength": 3,
         "maxLength": 30,
@@ -2519,10 +2519,10 @@
             },
             "maxItems": 30
           },
-          "dataTypes": {
+          "inputDataTypes": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/DataType"
+              "$ref": "#/components/schemas/inputDataType"
             },
             "maxItems": 10,
             "nullable": true
@@ -3620,15 +3620,15 @@
           ]
         }
       },
-      "dataTypes": {
-        "name": "dataTypes",
-        "description": "Array of data types used to filter the results",
+      "inputDataTypes": {
+        "name": "inputDataTypes",
+        "description": "Array of input data types used to filter the results",
         "in": "query",
         "required": false,
         "schema": {
           "type": "array",
           "items": {
-            "$ref": "#/components/schemas/DataType"
+            "$ref": "#/components/schemas/inputDataType"
           }
         }
       },
