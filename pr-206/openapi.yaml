@@ -1608,8 +1608,8 @@ components:
         endDate: 2020-12-31
         platformId: 507f1f77bcf86cd799439011
         submissionTypes:
-          - Prediction files
-          - Docker images
+          - PredictionFile
+          - DockerImage
         topics:
           - breast-cancer
           - ehr
