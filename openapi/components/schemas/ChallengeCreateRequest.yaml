@@ -38,6 +38,10 @@ properties:
     type: string
     # pattern: "^10.\d{4,9}/[-._;()/:A-Z0-9]+$"
     nullable: true
+  numberOfParticipants:
+    type: integer
+    minimum: 0
+    nullable: true
 required:
   - name
   - description
@@ -47,8 +51,8 @@ example:
   description: This challenge is awesome.
   websiteUrl: https://synapse.org/awesome-challenge
   status: active
-  startDate: "2020-11-10"
-  endDate: "2020-12-31"
+  startDate: '2020-11-10'
+  endDate: '2020-12-31'
   platformId: 507f1f77bcf86cd799439011
   topics:
     - breast-cancer

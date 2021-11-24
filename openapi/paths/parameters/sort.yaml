@@ -5,5 +5,6 @@ required: false
 schema:
   type: string
   enum:
-  - createdAt
-  - updatedAt
+    - numberOfParticipants
+    - createdAt
+    - updatedAt
