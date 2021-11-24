@@ -2324,7 +2324,11 @@ components:
       schema:
         type: string
         enum:
+          - featured
           - numberOfParticipants
+          - numberOfViews
+          - numberOfStargazers
+          - alphabetical
           - startDate
           - createdAt
           - updatedAt
