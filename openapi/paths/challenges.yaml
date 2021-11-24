@@ -38,6 +38,7 @@ get:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
     - $ref: parameters/sort.yaml
+    - $ref: parameters/inputDataTypes.yaml
     - $ref: parameters/direction.yaml
     - $ref: parameters/searchTerms.yaml
     # - $ref: parameters/tagIds.yaml
@@ -45,6 +46,7 @@ get:
     - $ref: parameters/challenge/status.yaml
     - $ref: parameters/challenge/platformIds.yaml
     - $ref: parameters/challenge/difficulty.yaml
+    - $ref: parameters/challenge/incentiveTypes.yaml
     - $ref: parameters/challenge/startDateRange.yaml
   responses:
     '200':

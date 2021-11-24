@@ -25,6 +25,11 @@ properties:
     type: string
     format: date
     nullable: true
+  incentiveTypes:
+    type: array
+    items:
+      $ref: ../parameters/ChallengeIncentiveType.yaml
+    nullable: true
   platformId:
     $ref: ../parameters/ChallengePlatformId.yaml
     nullable: true
@@ -37,6 +42,12 @@ properties:
       $ref: Topic.yaml
     # uniqueItems: true
     maxItems: 30
+  inputDataTypes:
+    type: array
+    items:
+      $ref: inputDataType.yaml
+    maxItems: 10
+    nullable: true
   doi:
     type: string
     # pattern: "^10.\d{4,9}/[-._;()/:A-Z0-9]+$"
@@ -50,10 +61,16 @@ example:
   description: This challenge is awesome.
   websiteUrl: https://synapse.org/awesome-challenge
   status: active
-  startDate: "2020-11-10"
-  endDate: "2020-12-31"
+  startDate: '2020-11-10'
+  endDate: '2020-12-31'
   platformId: 507f1f77bcf86cd799439011
+  incentiveTypes:
+    - Monetary
+    - Publication
   topics:
     - breast-cancer
+    - covid
+  dataTypes:
+    - genomic
     - ehr
   doi: http://doi.org/10.5281/zenodo.3714971
