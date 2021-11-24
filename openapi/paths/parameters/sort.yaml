@@ -5,7 +5,10 @@ required: false
 schema:
   type: string
   enum:
+    - featured
     - numberOfParticipants
+    - numberOfViews
+    - numberOfStargazers
     - startDate
     - createdAt
     - updatedAt
