@@ -33,6 +33,8 @@ properties:
   platformId:
     $ref: ../parameters/ChallengePlatformId.yaml
     nullable: true
+  difficulty:
+    $ref: ../parameters/ChallengeDifficulty.yaml
   submissionTypes:
     type: array
     items:
