@@ -38,6 +38,7 @@ get:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
     - $ref: parameters/sort.yaml
+    - $ref: parameters/inputDataTypes.yaml
     - $ref: parameters/direction.yaml
     - $ref: parameters/searchTerms.yaml
     # - $ref: parameters/tagIds.yaml
