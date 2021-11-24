@@ -9,6 +9,7 @@ schema:
     - numberOfParticipants
     - numberOfViews
     - numberOfStargazers
+    - alphabetical
     - startDate
     - createdAt
     - updatedAt
