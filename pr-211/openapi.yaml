@@ -1493,11 +1493,11 @@ components:
         - Advanced
       example: Intermediate
     ChallengeInputDataType:
-      description: A challenge input data type
+      description: The challenge input data type
       type: string
-      minLength: 3
-      maxLength: 30
-      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+      enum:
+        - genomic
+        - clinical
       example:
         - genomic
         - clinical
