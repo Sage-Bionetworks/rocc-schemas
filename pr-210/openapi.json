@@ -173,9 +173,6 @@
             "$ref": "#/components/parameters/sort"
           },
           {
-            "$ref": "#/components/parameters/inputDataTypes"
-          },
-          {
             "$ref": "#/components/parameters/direction"
           },
           {
@@ -189,6 +186,15 @@
           },
           {
             "$ref": "#/components/parameters/platformIds"
+          },
+          {
+            "$ref": "#/components/parameters/difficulty"
+          },
+          {
+            "$ref": "#/components/parameters/inputDataTypes"
+          },
+          {
+            "$ref": "#/components/parameters/submissionTypes"
           },
           {
             "$ref": "#/components/parameters/incentiveTypes"
@@ -2356,17 +2362,6 @@
           "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ"
         }
       },
-      "inputDataType": {
-        "description": "The Input Data Type",
-        "type": "string",
-        "minLength": 3,
-        "maxLength": 30,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": [
-          "genomic",
-          "clinical"
-        ]
-      },
       "Topic": {
         "description": "The topic",
         "type": "string",
@@ -2392,6 +2387,37 @@
         "description": "The unique identifier of a challenge platform",
         "type": "string",
         "example": "507f1f77bcf86cd799439011"
+      },
+      "ChallengeDifficulty": {
+        "description": "The difficulty level of a challenge",
+        "type": "string",
+        "enum": [
+          "GoodForBeginners",
+          "Intermediate",
+          "Advanced"
+        ],
+        "example": "Intermediate"
+      },
+      "inputDataType": {
+        "description": "The Input Data Type",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": [
+          "genomic",
+          "clinical"
+        ]
+      },
+      "ChallengeSubmissionType": {
+        "description": "The submission type of the challenge",
+        "type": "string",
+        "enum": [
+          "DockerImage",
+          "PredictionFile",
+          "Other"
+        ],
+        "example": "DockerImage"
       },
       "ChallengeIncentiveType": {
         "description": "The incentive type of the challenge",
@@ -2533,6 +2559,16 @@
             "$ref": "#/components/schemas/ChallengePlatformId",
             "nullable": true
           },
+          "difficulty": {
+            "$ref": "#/components/schemas/ChallengeDifficulty"
+          },
+          "submissionTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChallengeSubmissionType"
+            },
+            "nullable": true
+          },
           "topics": {
             "type": "array",
             "items": {
@@ -2552,7 +2588,7 @@
             "type": "string",
             "nullable": true
           },
-          "numberOfParticipants": {
+          "participantCount": {
             "type": "integer",
             "minimum": 0,
             "nullable": true
@@ -2571,6 +2607,10 @@
           "startDate": "2020-11-10",
           "endDate": "2020-12-31",
           "platformId": "507f1f77bcf86cd799439011",
+          "submissionTypes": [
+            "PredictionFile",
+            "DockerImage"
+          ],
           "incentiveTypes": [
             "Monetary",
             "Publication"
@@ -2584,7 +2624,7 @@
             "ehr"
           ],
           "doi": "http://doi.org/10.5281/zenodo.3714971",
-          "numberOfParticipants": 100
+          "participantCount": 100
         }
       },
       "ChallengeReadmeId": {
@@ -3640,34 +3680,22 @@
       },
       "sort": {
         "name": "sort",
-        "description": "Property used to sort the results that must be returned",
         "in": "query",
         "required": false,
         "schema": {
           "type": "string",
           "enum": [
             "featured",
-            "numberOfParticipants",
-            "numberOfViews",
-            "numberOfStargazers",
-            "alphabetical",
             "startDate",
+            "participantCount",
+            "viewCount",
+            "favoriteCount",
+            "alphabetical",
             "createdAt",
             "updatedAt"
           ]
-        }
-      },
-      "inputDataTypes": {
-        "name": "inputDataTypes",
-        "description": "Array of input data types used to filter the results",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/inputDataType"
-          }
-        }
+        },
+        "description": "Properties used to sort the results that must be returned:\n  * featured - featured challenge, from featured to non-featured.\n  * startDate - start date of a challenge, from latest to oldest.\n  * participantCount - number of participants of a challenge, from latest to oldest\n  * viewCount - number of views of a challenge, from latest to oldest\n  * favoriteCount - number of stargazers of a challenge, from latest to oldest\n  * alphabetical - name of a challenge, from A to Z\n  * createdAt - when a challenge is created, from latest to oldest\n  * updatedAt - when a challenge is updated, from latest to oldest\n"
       },
       "direction": {
         "name": "direction",
@@ -3724,6 +3752,42 @@
           "type": "array",
           "items": {
             "$ref": "#/components/schemas/ChallengePlatformId"
+          }
+        }
+      },
+      "difficulty": {
+        "name": "difficulty",
+        "description": "Array of challenge difficulty levels used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengeDifficulty"
+          }
+        }
+      },
+      "inputDataTypes": {
+        "name": "inputDataTypes",
+        "description": "Array of input data types used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/inputDataType"
+          }
+        }
+      },
+      "submissionTypes": {
+        "name": "submissionTypes",
+        "description": "Array of challenge submission types used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengeSubmissionType"
           }
         }
       },
