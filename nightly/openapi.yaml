@@ -112,6 +112,10 @@ paths:
         - $ref: '#/components/parameters/topics'
         - $ref: '#/components/parameters/status'
         - $ref: '#/components/parameters/platformIds'
+        - $ref: '#/components/parameters/difficulty'
+        - $ref: '#/components/parameters/inputDataTypes'
+        - $ref: '#/components/parameters/submissionTypes'
+        - $ref: '#/components/parameters/incentiveTypes'
         - $ref: '#/components/parameters/startDateRange'
       responses:
         '200':
@@ -1480,6 +1484,40 @@ components:
       description: The unique identifier of a challenge platform
       type: string
       example: 507f1f77bcf86cd799439011
+    ChallengeDifficulty:
+      description: The difficulty level of a challenge
+      type: string
+      enum:
+        - GoodForBeginners
+        - Intermediate
+        - Advanced
+      example: Intermediate
+    inputDataType:
+      description: The Input Data Type
+      type: string
+      minLength: 3
+      maxLength: 30
+      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+      example:
+        - genomic
+        - clinical
+    ChallengeSubmissionType:
+      description: The submission type of the challenge
+      type: string
+      enum:
+        - DockerImage
+        - PredictionFile
+        - Other
+      example: DockerImage
+    ChallengeIncentiveType:
+      description: The incentive type of the challenge
+      type: string
+      enum:
+        - Monetary
+        - Publication
+        - SpeakingEngagement
+        - Other
+      example: Monetary
     DateRange:
       type: object
       description: A date range
@@ -1570,16 +1608,38 @@ components:
           type: string
           format: date
           nullable: true
+        incentiveTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeIncentiveType'
+          nullable: true
         platformId:
           $ref: '#/components/schemas/ChallengePlatformId'
+          nullable: true
+        difficulty:
+          $ref: '#/components/schemas/ChallengeDifficulty'
+        submissionTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeSubmissionType'
           nullable: true
         topics:
           type: array
           items:
             $ref: '#/components/schemas/Topic'
           maxItems: 30
+        inputDataTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/inputDataType'
+          maxItems: 10
+          nullable: true
         doi:
           type: string
+          nullable: true
+        participantCount:
+          type: integer
+          minimum: 0
           nullable: true
       required:
         - name
@@ -1593,10 +1653,20 @@ components:
         startDate: 2020-11-10
         endDate: 2020-12-31
         platformId: 507f1f77bcf86cd799439011
+        submissionTypes:
+          - PredictionFile
+          - DockerImage
+        incentiveTypes:
+          - Monetary
+          - Publication
         topics:
           - breast-cancer
+          - covid
+        dataTypes:
+          - genomic
           - ehr
         doi: http://doi.org/10.5281/zenodo.3714971
+        participantCount: 100
     ChallengeReadmeId:
       description: The unique identifier of a challenge README
       type: string
@@ -2313,14 +2383,29 @@ components:
         minimum: 0
     sort:
       name: sort
-      description: Property used to sort the results that must be returned
       in: query
       required: false
       schema:
         type: string
         enum:
+          - featured
+          - startDate
+          - participantCount
+          - viewCount
+          - favoriteCount
+          - alphabetical
           - createdAt
           - updatedAt
+      description: |
+        Properties used to sort the results that must be returned:
+          * featured - featured challenge, from featured to non-featured.
+          * startDate - start date of a challenge, from latest to oldest.
+          * participantCount - number of participants of a challenge, from latest to oldest
+          * viewCount - number of views of a challenge, from latest to oldest
+          * favoriteCount - number of stargazers of a challenge, from latest to oldest
+          * alphabetical - name of a challenge, from A to Z
+          * createdAt - when a challenge is created, from latest to oldest
+          * updatedAt - when a challenge is updated, from latest to oldest
     direction:
       name: direction
       description: Can be either `asc` or `desc`. Ignored without `sort` parameter.
@@ -2365,6 +2450,42 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/ChallengePlatformId'
+    difficulty:
+      name: difficulty
+      description: Array of challenge difficulty levels used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ChallengeDifficulty'
+    inputDataTypes:
+      name: inputDataTypes
+      description: Array of input data types used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/inputDataType'
+    submissionTypes:
+      name: submissionTypes
+      description: Array of challenge submission types used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ChallengeSubmissionType'
+    incentiveTypes:
+      name: incentiveTypes
+      description: Array of challenge incentive types used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ChallengeIncentiveType'
     startDateRange:
       name: startDateRange
       description: Return challenges that start during the date range specified
