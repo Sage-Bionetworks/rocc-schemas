@@ -56,6 +56,10 @@ properties:
     type: string
     # pattern: "^10.\d{4,9}/[-._;()/:A-Z0-9]+$"
     nullable: true
+  participantCount:
+    type: integer
+    minimum: 0
+    nullable: true
 required:
   - name
   - description
@@ -81,3 +85,4 @@ example:
     - genomic
     - ehr
   doi: http://doi.org/10.5281/zenodo.3714971
+  participantCount: 100
