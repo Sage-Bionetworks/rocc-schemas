@@ -33,6 +33,13 @@ properties:
   platformId:
     $ref: ../parameters/ChallengePlatformId.yaml
     nullable: true
+  difficulty:
+    $ref: ../parameters/ChallengeDifficulty.yaml
+  submissionTypes:
+    type: array
+    items:
+      $ref: ../parameters/ChallengeSubmissionType.yaml
+    nullable: true
   topics:
     type: array
     items:
@@ -65,6 +72,9 @@ example:
   startDate: '2020-11-10'
   endDate: '2020-12-31'
   platformId: 507f1f77bcf86cd799439011
+  submissionTypes:
+    - PredictionFile
+    - DockerImage
   incentiveTypes:
     - Monetary
     - Publication

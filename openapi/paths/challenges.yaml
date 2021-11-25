@@ -38,13 +38,15 @@ get:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
     - $ref: parameters/sort.yaml
-    - $ref: parameters/inputDataTypes.yaml
     - $ref: parameters/direction.yaml
     - $ref: parameters/searchTerms.yaml
     # - $ref: parameters/tagIds.yaml
     - $ref: parameters/topics.yaml
     - $ref: parameters/challenge/status.yaml
     - $ref: parameters/challenge/platformIds.yaml
+    - $ref: parameters/challenge/difficulty.yaml
+    - $ref: parameters/inputDataTypes.yaml
+    - $ref: parameters/challenge/submissionTypes.yaml
     - $ref: parameters/challenge/incentiveTypes.yaml
     - $ref: parameters/challenge/startDateRange.yaml
   responses:
