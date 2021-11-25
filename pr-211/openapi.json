@@ -2654,6 +2654,26 @@
               "readmeId": {
                 "$ref": "#/components/schemas/ChallengeReadmeId"
               },
+              "featured": {
+                "description": "Whether the challenge is featured",
+                "type": "boolean",
+                "default": false
+              },
+              "participantCount": {
+                "description": "Number of challenge participants",
+                "type": "integer",
+                "default": 0
+              },
+              "viewCount": {
+                "description": "Number of challenge views",
+                "type": "integer",
+                "default": 0
+              },
+              "starredCount": {
+                "description": "Number of times the challenge has been starred by users",
+                "type": "integer",
+                "default": 0
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -3689,13 +3709,13 @@
             "startDate",
             "participantCount",
             "viewCount",
-            "favoriteCount",
-            "alphabetical",
+            "starredCount",
+            "name",
             "createdAt",
             "updatedAt"
           ]
         },
-        "description": "Properties used to sort the results that must be returned:\n  * featured - featured challenge, from featured to non-featured.\n  * startDate - start date of a challenge, from latest to oldest.\n  * participantCount - number of participants of a challenge, from latest to oldest\n  * viewCount - number of views of a challenge, from latest to oldest\n  * favoriteCount - number of stargazers of a challenge, from latest to oldest\n  * alphabetical - name of a challenge, from A to Z\n  * createdAt - when a challenge is created, from latest to oldest\n  * updatedAt - when a challenge is updated, from latest to oldest\n"
+        "description": "Properties used to sort the results that must be returned:\n  * featured - featured challenge, from featured to non-featured.\n  * startDate - start date of a challenge, from latest to oldest.\n  * participantCount - number of participants of a challenge, from most to least.\n  * viewCount - number of views of a challenge, from most to least.\n  * starredCount - number of stargazers of a challenge, from most to least.\n  * name - name of a challenge, from A to Z.\n  * createdAt - when a challenge is created, from latest to oldest.\n  * updatedAt - when a challenge is updated, from latest to oldest.\n"
       },
       "direction": {
         "name": "direction",

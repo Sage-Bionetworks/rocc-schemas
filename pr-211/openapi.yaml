@@ -1685,6 +1685,22 @@ components:
               $ref: '#/components/schemas/AccountId'
             readmeId:
               $ref: '#/components/schemas/ChallengeReadmeId'
+            featured:
+              description: Whether the challenge is featured
+              type: boolean
+              default: false
+            participantCount:
+              description: Number of challenge participants
+              type: integer
+              default: 0
+            viewCount:
+              description: Number of challenge views
+              type: integer
+              default: 0
+            starredCount:
+              description: Number of times the challenge has been starred by users
+              type: integer
+              default: 0
             createdAt:
               type: string
               format: date-time
@@ -2392,20 +2408,20 @@ components:
           - startDate
           - participantCount
           - viewCount
-          - favoriteCount
-          - alphabetical
+          - starredCount
+          - name
           - createdAt
           - updatedAt
       description: |
         Properties used to sort the results that must be returned:
           * featured - featured challenge, from featured to non-featured.
           * startDate - start date of a challenge, from latest to oldest.
-          * participantCount - number of participants of a challenge, from latest to oldest
-          * viewCount - number of views of a challenge, from latest to oldest
-          * favoriteCount - number of stargazers of a challenge, from latest to oldest
-          * alphabetical - name of a challenge, from A to Z
-          * createdAt - when a challenge is created, from latest to oldest
-          * updatedAt - when a challenge is updated, from latest to oldest
+          * participantCount - number of participants of a challenge, from most to least.
+          * viewCount - number of views of a challenge, from most to least.
+          * starredCount - number of stargazers of a challenge, from most to least.
+          * name - name of a challenge, from A to Z.
+          * createdAt - when a challenge is created, from latest to oldest.
+          * updatedAt - when a challenge is updated, from latest to oldest.
     direction:
       name: direction
       description: Can be either `asc` or `desc`. Ignored without `sort` parameter.
