@@ -182,6 +182,12 @@
             "$ref": "#/components/parameters/topics"
           },
           {
+            "$ref": "#/components/parameters/inputDataTypes"
+          },
+          {
+            "$ref": "#/components/parameters/orgId"
+          },
+          {
             "$ref": "#/components/parameters/status"
           },
           {
@@ -191,9 +197,6 @@
             "$ref": "#/components/parameters/difficulty"
           },
           {
-            "$ref": "#/components/parameters/inputDataTypes"
-          },
-          {
             "$ref": "#/components/parameters/submissionTypes"
           },
           {
@@ -201,6 +204,12 @@
           },
           {
             "$ref": "#/components/parameters/startDateRange"
+          },
+          {
+            "$ref": "#/components/parameters/organizerIds"
+          },
+          {
+            "$ref": "#/components/parameters/sponsorIds"
           }
         ],
         "responses": {
@@ -2373,6 +2382,22 @@
           "ehr"
         ]
       },
+      "ChallengeInputDataType": {
+        "description": "A challenge input data type",
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+        "example": [
+          "genomic",
+          "clinical"
+        ]
+      },
+      "OrgId": {
+        "description": "The unique identifier of an organization",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
+      },
       "ChallengeStatus": {
         "description": "The status of the challenge",
         "type": "string",
@@ -2397,17 +2422,6 @@
           "Advanced"
         ],
         "example": "Intermediate"
-      },
-      "ChallengeInputDataType": {
-        "description": "A challenge input data type",
-        "type": "string",
-        "minLength": 3,
-        "maxLength": 30,
-        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-        "example": [
-          "genomic",
-          "clinical"
-        ]
       },
       "ChallengeSubmissionType": {
         "description": "The submission type of the challenge",
@@ -2449,6 +2463,11 @@
           "start": "2021-07-17",
           "end": "2021-07-17"
         }
+      },
+      "UserId": {
+        "description": "The unique identifier of a user",
+        "type": "string",
+        "example": "507f1f77bcf86cd799439011"
       },
       "ResponsePageMetadata": {
         "type": "object",
@@ -3436,16 +3455,6 @@
           }
         ]
       },
-      "OrgId": {
-        "description": "The unique identifier of an organization",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
-      "UserId": {
-        "description": "The unique identifier of a user",
-        "type": "string",
-        "example": "507f1f77bcf86cd799439011"
-      },
       "OrgMembershipId": {
         "description": "The unique identifier of the org membership",
         "type": "string",
@@ -3751,6 +3760,27 @@
           }
         }
       },
+      "inputDataTypes": {
+        "name": "inputDataTypes",
+        "description": "Array of input data types used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/ChallengeInputDataType"
+          }
+        }
+      },
+      "orgId": {
+        "name": "orgId",
+        "description": "An organization identifier used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/OrgId"
+        }
+      },
       "status": {
         "name": "status",
         "description": "Array of challenge status used to filter the results",
@@ -3784,18 +3814,6 @@
           "type": "array",
           "items": {
             "$ref": "#/components/schemas/ChallengeDifficulty"
-          }
-        }
-      },
-      "inputDataTypes": {
-        "name": "inputDataTypes",
-        "description": "Array of input data types used to filter the results",
-        "in": "query",
-        "required": false,
-        "schema": {
-          "type": "array",
-          "items": {
-            "$ref": "#/components/schemas/ChallengeInputDataType"
           }
         }
       },
@@ -3834,13 +3852,28 @@
           "$ref": "#/components/schemas/DateRange"
         }
       },
-      "orgId": {
-        "name": "orgId",
-        "description": "An organization identifier used to filter the results",
+      "organizerIds": {
+        "name": "organizerIds",
+        "description": "Array of organizer identifiers used to filter the results",
         "in": "query",
         "required": false,
         "schema": {
-          "$ref": "#/components/schemas/OrgId"
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/UserId"
+          }
+        }
+      },
+      "sponsorIds": {
+        "name": "sponsorIds",
+        "description": "Array of sponsor org identifiers used to filter the results",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/OrgId"
+          }
         }
       },
       "userId": {
