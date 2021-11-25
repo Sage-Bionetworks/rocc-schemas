@@ -1,8 +1,8 @@
-description: The challenge input data type
+description: A challenge input data type
 type: string
-enum:
-  - genomic
-  - clinical
+minLength: 3
+maxLength: 30
+pattern: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
 example:
   - genomic
   - clinical
