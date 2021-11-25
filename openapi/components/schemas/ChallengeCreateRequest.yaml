@@ -49,7 +49,7 @@ properties:
   inputDataTypes:
     type: array
     items:
-      $ref: inputDataType.yaml
+      $ref: ../parameters/ChallengeInputDataType.yaml
     maxItems: 10
     nullable: true
   doi:
