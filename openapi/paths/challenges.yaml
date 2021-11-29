@@ -40,15 +40,17 @@ get:
     - $ref: parameters/sort.yaml
     - $ref: parameters/direction.yaml
     - $ref: parameters/searchTerms.yaml
-    # - $ref: parameters/tagIds.yaml
     - $ref: parameters/topics.yaml
+    - $ref: parameters/inputDataTypes.yaml
     - $ref: parameters/challenge/status.yaml
     - $ref: parameters/challenge/platformIds.yaml
     - $ref: parameters/challenge/difficulty.yaml
-    - $ref: parameters/inputDataTypes.yaml
     - $ref: parameters/challenge/submissionTypes.yaml
     - $ref: parameters/challenge/incentiveTypes.yaml
     - $ref: parameters/challenge/startDateRange.yaml
+    - $ref: parameters/challenge/orgIds.yaml
+    - $ref: parameters/challenge/organizerIds.yaml
+    - $ref: parameters/challenge/sponsorIds.yaml
   responses:
     '200':
       content:
