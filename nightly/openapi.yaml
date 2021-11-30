@@ -110,13 +110,16 @@ paths:
         - $ref: '#/components/parameters/direction'
         - $ref: '#/components/parameters/searchTerms'
         - $ref: '#/components/parameters/topics'
+        - $ref: '#/components/parameters/inputDataTypes'
         - $ref: '#/components/parameters/status'
         - $ref: '#/components/parameters/platformIds'
         - $ref: '#/components/parameters/difficulty'
-        - $ref: '#/components/parameters/inputDataTypes'
         - $ref: '#/components/parameters/submissionTypes'
         - $ref: '#/components/parameters/incentiveTypes'
         - $ref: '#/components/parameters/startDateRange'
+        - $ref: '#/components/parameters/orgIds'
+        - $ref: '#/components/parameters/organizerIds'
+        - $ref: '#/components/parameters/sponsorIds'
       responses:
         '200':
           content:
@@ -1472,6 +1475,15 @@ components:
       example:
         - breast-cancer
         - ehr
+    ChallengeInputDataType:
+      description: A challenge input data type
+      type: string
+      minLength: 3
+      maxLength: 30
+      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
+      example:
+        - genomic
+        - clinical
     ChallengeStatus:
       description: The status of the challenge
       type: string
@@ -1492,15 +1504,6 @@ components:
         - Intermediate
         - Advanced
       example: Intermediate
-    inputDataType:
-      description: The Input Data Type
-      type: string
-      minLength: 3
-      maxLength: 30
-      pattern: ^[a-z0-9]+(?:-[a-z0-9]+)*$
-      example:
-        - genomic
-        - clinical
     ChallengeSubmissionType:
       description: The submission type of the challenge
       type: string
@@ -1533,6 +1536,14 @@ components:
       example:
         start: 2021-07-17
         end: 2021-07-17
+    OrgId:
+      description: The unique identifier of an organization
+      type: string
+      example: 507f1f77bcf86cd799439011
+    UserId:
+      description: The unique identifier of a user
+      type: string
+      example: 507f1f77bcf86cd799439011
     ResponsePageMetadata:
       type: object
       description: A page of results
@@ -1631,7 +1642,7 @@ components:
         inputDataTypes:
           type: array
           items:
-            $ref: '#/components/schemas/inputDataType'
+            $ref: '#/components/schemas/ChallengeInputDataType'
           maxItems: 10
           nullable: true
         doi:
@@ -1685,6 +1696,22 @@ components:
               $ref: '#/components/schemas/AccountId'
             readmeId:
               $ref: '#/components/schemas/ChallengeReadmeId'
+            featured:
+              description: Whether the challenge is featured
+              type: boolean
+              default: false
+            participantCount:
+              description: Number of challenge participants
+              type: integer
+              default: 0
+            viewCount:
+              description: Number of challenge views
+              type: integer
+              default: 0
+            starredCount:
+              description: Number of times the challenge has been starred by users
+              type: integer
+              default: 0
             createdAt:
               type: string
               format: date-time
@@ -2196,14 +2223,6 @@ components:
                 $ref: '#/components/schemas/Organization'
           required:
             - organizations
-    OrgId:
-      description: The unique identifier of an organization
-      type: string
-      example: 507f1f77bcf86cd799439011
-    UserId:
-      description: The unique identifier of a user
-      type: string
-      example: 507f1f77bcf86cd799439011
     OrgMembershipId:
       description: The unique identifier of the org membership
       type: string
@@ -2392,20 +2411,20 @@ components:
           - startDate
           - participantCount
           - viewCount
-          - favoriteCount
-          - alphabetical
+          - starredCount
+          - name
           - createdAt
           - updatedAt
       description: |
         Properties used to sort the results that must be returned:
           * featured - featured challenge, from featured to non-featured.
           * startDate - start date of a challenge, from latest to oldest.
-          * participantCount - number of participants of a challenge, from latest to oldest
-          * viewCount - number of views of a challenge, from latest to oldest
-          * favoriteCount - number of stargazers of a challenge, from latest to oldest
-          * alphabetical - name of a challenge, from A to Z
-          * createdAt - when a challenge is created, from latest to oldest
-          * updatedAt - when a challenge is updated, from latest to oldest
+          * participantCount - number of participants of a challenge, from most to least.
+          * viewCount - number of views of a challenge, from most to least.
+          * starredCount - number of stargazers of a challenge, from most to least.
+          * name - name of a challenge, from A to Z.
+          * createdAt - when a challenge is created, from latest to oldest.
+          * updatedAt - when a challenge is updated, from latest to oldest.
     direction:
       name: direction
       description: Can be either `asc` or `desc`. Ignored without `sort` parameter.
@@ -2432,6 +2451,15 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/Topic'
+    inputDataTypes:
+      name: inputDataTypes
+      description: Array of input data types used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ChallengeInputDataType'
     status:
       name: status
       description: Array of challenge status used to filter the results
@@ -2459,15 +2487,6 @@ components:
         type: array
         items:
           $ref: '#/components/schemas/ChallengeDifficulty'
-    inputDataTypes:
-      name: inputDataTypes
-      description: Array of input data types used to filter the results
-      in: query
-      required: false
-      schema:
-        type: array
-        items:
-          $ref: '#/components/schemas/inputDataType'
     submissionTypes:
       name: submissionTypes
       description: Array of challenge submission types used to filter the results
@@ -2495,6 +2514,33 @@ components:
       explode: true
       schema:
         $ref: '#/components/schemas/DateRange'
+    orgIds:
+      name: orgIds
+      description: Array of organization ids used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/OrgId'
+    organizerIds:
+      name: organizerIds
+      description: Array of organizer identifiers used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/UserId'
+    sponsorIds:
+      name: sponsorIds
+      description: Array of sponsor org identifiers used to filter the results
+      in: query
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/OrgId'
     orgId:
       name: orgId
       description: An organization identifier used to filter the results
