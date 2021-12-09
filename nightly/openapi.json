@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "version": "0.5.0",
+    "version": "0.6.0",
     "title": "Registry of Open Community Challenges API",
     "contact": {
       "name": "The ROCC Team",
