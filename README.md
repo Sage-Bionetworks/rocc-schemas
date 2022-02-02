@@ -8,9 +8,17 @@
 
 TBA
 
+### Latest
+
 - https://sage-bionetworks.github.io/rocc-schemas/latest/docs/
 - https://sage-bionetworks.github.io/rocc-schemas/latest/openapi.yaml
 - https://sage-bionetworks.github.io/rocc-schemas/latest/openapi.json
+
+### Edge
+
+- https://sage-bionetworks.github.io/rocc-schemas/edge/docs/
+- https://sage-bionetworks.github.io/rocc-schemas/edge/openapi.yaml
+- https://sage-bionetworks.github.io/rocc-schemas/edge/openapi.json
 
 ## Specification
 
