@@ -34,6 +34,9 @@ get:
   summary: Get all users
   description: Returns the users
   operationId: listUsers
+  security:
+    - BearerAuth: []
+    - OAuth: []
   parameters:
     - $ref: parameters/limit.yaml
     - $ref: parameters/offset.yaml
