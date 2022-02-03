@@ -154,6 +154,28 @@
         }
       }
     },
+    "/auth/google": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Authentify a local account with Google OAuth 2.1",
+        "description": "Authentify a local account with Google OAuth 2.1",
+        "operationId": "authGoogle",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmptyObject"
+                }
+              }
+            },
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/challenges": {
       "get": {
         "tags": [
@@ -2392,6 +2414,10 @@
           "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MTNlM2RiNWNhYzdjZDcwNmNjZDBjNDEiLCJpYXQiOjE2MzE0Njg5ODEsImV4cCI6MTYzMTQ2ODk4Nn0.shJH6Tp19nzjU8Bnlov55hqtkwwu6E_5ZTrhOZu8dyQ"
         }
       },
+      "EmptyObject": {
+        "type": "object",
+        "description": "Empty JSON object"
+      },
       "Topic": {
         "description": "The topic",
         "type": "string",
@@ -2762,10 +2788,6 @@
             ]
           }
         ]
-      },
-      "EmptyObject": {
-        "type": "object",
-        "description": "Empty JSON object"
       },
       "ChallengeOrganizerId": {
         "description": "The unique identifier of a challenge organizer",
