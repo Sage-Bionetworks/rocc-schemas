@@ -54,6 +54,8 @@ paths:
     $ref: paths/accounts@{login}.yaml
   /auth/local:
     $ref: paths/authLocal.yaml
+  /auth/google:
+    $ref: paths/authGoogle.yaml
   /challenges:
     $ref: paths/challenges.yaml
   /challenges/{accountName}:
