@@ -17,6 +17,7 @@ info:
     # Introduction
 
     TBA
+
 tags:
   - name: Account
     description: Operations about accounts
@@ -38,6 +39,7 @@ tags:
     description: Operations about users
   - name: HealthCheck
     description: Operations about health checks
+
 servers:
   - url: "{protocol}://rocc.org/api/v1"
     variables:
@@ -46,11 +48,14 @@ servers:
           - http
           - https
         default: https
+
 paths:
   /accounts/{login}:
     $ref: paths/accounts@{login}.yaml
   /auth/local:
     $ref: paths/authLocal.yaml
+  /auth/google:
+    $ref: paths/authGoogle.yaml
   /challenges:
     $ref: paths/challenges.yaml
   /challenges/{accountName}:
@@ -114,3 +119,5 @@ components:
       $ref: components/securitySchemes/BearerAuth.yaml
     ApiKeyAuth:
       $ref: components/securitySchemes/ApiKeyAuth.yaml
+    OAuth:
+      $ref: components/securitySchemes/OAuth.yaml
